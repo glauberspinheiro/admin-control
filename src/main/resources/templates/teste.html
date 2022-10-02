@@ -5,17 +5,15 @@
     <title>teste</title>
 </head>
 <body>
-<h2>Num é possivel</h2>
-
 <div class="card-body">
-    <div th:block th:each = "user:${usuario}"></br>
+    <div th:each = "user:${usuario}"></br>
         <div   th:text = "${user.cpf}"></div></br>
         <div   th:text = "${user.nome}"></div></br>
         <div   th:text = "${user.email}"></div></br>
-        <div   th:text = "${user.dt_cadastro}"></div></br>
+        <div   th:text = "${#dates.format(user.dt_cadastro, 'dd-MMM-yyyy')}"></div></br>
         <div><a href="#" class="btn btn-warning"></a>Alterar<a href="#" class="btn btn-danger"></a>Excluir</div>
     </div>
-</div>
-
+</div></br>
+<span><div   th:text = "${user.email}"></div></span>
 </body>
 </html>
