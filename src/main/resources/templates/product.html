@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Revitalize SIS | Empresa</title>
+  <title>Revitalize SIS | Produto</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -198,21 +198,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Cadastro de Empresas
+                Cadastro de Produtos
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/company" class="nav-link active">
+                <a href="/product" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Empresas Cadastradas</p>
+                  <p>Produtos Cadastradas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/addcompany" class="nav-link">
+                <a href="/addproduct" class="nav-link">
                   <i class="nav-icon far fa-plus-square"></i>
-                  <p>Registrar Empresas</p>
+                  <p>Registrar Produtos</p>
                 </a>
               </li>
             </ul>
@@ -237,11 +237,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Empresas Cadastradas</h1>
+            <h1 class="m-0">Produtos Cadastrados</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li><a href="/addcompany">
+              <li><a href="/addproduct">
                 <button type="button" class="btn btn-block btn-primary">+ NOVO</button>
               </a></li>
             </ol>
@@ -258,43 +258,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Relação de Empresas Cadastradas</h3>
+                <h3 class="card-title">Relação de Produtos Cadastradas</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>CNPJ</th>
-                    <th>Nome Razão Social</th>
-                    <th>Nome Fanstasia</th>
-                    <th>Contato</th>
-                    <th>E-mail Contato</th>
-                    <th>Telefone Contato</th>
-                    <th>Mensalista</th>
+                    <th>Tipo</th>
+                    <th>Nome Produto</th>
+                    <th>Tipo Medição</th>
                     <th>Ativo</th>
                     <th>Data do Cadastro</th>
                     <th>Ação</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each = "company:${empresas}">
-                    <td th:text = "${company.cnpj}"></td>
-                    <td th:text = "${company.nomeempresa}"></td>
-                    <td th:text = "${company.nomefantasia}"></td>
-                    <td th:text = "${company.contato}"></td>
-                    <td th:text = "${company.telefone}"></td>
-                    <td th:text = "${company.email}"></td>
-                    <td th:switch="${company.mensalista}">
-                      <p th:case="1">SIM</p>
-                      <p th:case="0">NÃO</p>
-                    </td>
-                    <td th:switch="${company.status}">
-                      <p th:case="1">SIM</p>
-                      <p th:case="0">NÃO</p>
-                    </td>
-                    <td th:text="${#dates.format(new java.util.Date(company.dt_cadastro), 'dd-MM-yyyy')}"></td>
-                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/company/{id}(id=${company.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
+                  <tr th:each = "product:${produtos}">
+                    <td th:text = "${product.tipo}"></td>
+                    <td th:text = "${product.produto}"></td>
+                    <td th:text = "${product.medicao}"></td>
+                    <td th:text = "${product.status}"></td>
+                    <td th:text="${#dates.format(new java.util.Date(product.dt_cadastro), 'dd-MM-yyyy')}"></td>
+                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/product/{id}(id=${product.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
                     </td>
                   </tr>
                   </tbody>

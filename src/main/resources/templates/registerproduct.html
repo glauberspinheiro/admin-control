@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Revitalize SIS | Usuários</title>
+  <title>Revitalize SIS | Produto</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -192,21 +192,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Cadastro de Usuários
+                Cadastro de Produto
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview active">
               <li class="nav-item">
-                <a href="/users" class="nav-link ">
+                <a href="/product" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Usuários Cadastrados</p>
+                  <p>Produtos Cadastrados</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/adduser" class="nav-link active">
+                <a href="/addproduct" class="nav-link active">
                   <i class="nav-icon far fa-plus-square"></i>
-                  <p>Registrar Usuários</p>
+                  <p>Registrar Produto</p>
                 </a>
               </li>
             </ul>
@@ -231,11 +231,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Cadastro de Usuários</h1>
+            <h1 class="m-0">Cadastro de Produtos</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="/index">Home</a></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -252,32 +252,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Registro <small>| Usuário</small></h3>
+                <h3 class="card-title">Registro <small>| Produtos</small></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form id="quickForm" method="post" onsubmit="return confirm('Deseja realmente salvar?')">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>CPF</label>
-                    <input type="text" name="cpf" required value="" class="form-control" placeholder="Insira o CPF">
+                    <label>Tipo</label>
+                    <input type="text" name="tipo" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label>Nome Completo</label>
-                    <input type="text" name="nome" required value="" class="form-control" placeholder="Insira o Nome Completo">
+                    <label>Nome do Produto</label>
+                    <input type="text" name="produto" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">E-mail</label>
-                    <input type="email" name="email" required value="" class="form-control" id="exampleInputEmail1" placeholder="Insira o e-mail">
+                    <label>Tipo Medição</label>
+                    <input type="text" name="medicao" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="senha" required value="" class="form-control" id="exampleInputPassword1" placeholder="Insira a Senha">
+                    <label>Ativo</label>
+                    <select class="form-control select2" style="width: 100%;" name="status">
+                      <option selected="selected" value="1">Sim</option>
+                      <option value="0">Não</option>
+                    </select>
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Salvar</button> <button type="submit" class="btn btn-success">Salvar e Voltar</button>
+                  <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
               </form>
             </div>

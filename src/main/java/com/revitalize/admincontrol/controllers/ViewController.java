@@ -42,4 +42,18 @@ public class ViewController {
         mvEmpresaCad.setViewName("/registercompany.html");
         return mvEmpresaCad;
     }
+
+    @RequestMapping("/addproduct")
+    public ModelAndView produtoCad() {
+        ModelAndView mvProdutoCad = new ModelAndView();
+        mvProdutoCad.setViewName("/registerproduct.html");
+        return mvProdutoCad;
+    }
+
+    @RequestMapping("/product")
+    public ModelAndView produtoList() {
+        ModelAndView mvProdutoList = new ModelAndView();
+        mvProdutoList.setViewName("/product.html");
+        return mvProdutoList;
+    }
 }
