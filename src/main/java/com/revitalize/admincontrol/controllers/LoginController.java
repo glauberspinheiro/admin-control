@@ -5,9 +5,12 @@ import com.revitalize.admincontrol.repository.AdmUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-    @Controller
+import java.util.UUID;
+
+@Controller
     public class LoginController {
 
         @Autowired
@@ -19,8 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
             if(admobsuserlogin != null){
               return "redirect:/index";
             }
-            model.addAttribute("erro", "ATENÇÃO: Usuario ou Senha inválido");
+            model.addAttribute("erro", "Usuario ou Senha inválido");
             return "/login";
         }
-    }
+}
 
