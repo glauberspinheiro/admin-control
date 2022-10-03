@@ -1,29 +1,28 @@
 package com.revitalize.admincontrol.services;
 
-import com.revitalize.admincontrol.models.AdmUsuarioModel;
-import com.revitalize.admincontrol.repository.AdmUsuarioRepository;
+import com.revitalize.admincontrol.models.AdmTipoProdutoModel;
+import com.revitalize.admincontrol.repository.AdmTipoProdutoRepository;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Service
-public class AdmUsuarioService {
+public class AdmTiipoProdutoService {
 
-    final AdmUsuarioRepository admUsuarioRepository;
+    final AdmTipoProdutoRepository admTipoProdutoRepository;
 
-    public AdmUsuarioService(AdmUsuarioRepository admUsuarioRepository){
-        this.admUsuarioRepository = admUsuarioRepository;
+    public AdmTiipoProdutoService(AdmTipoProdutoRepository admTipoProdutoRepository){
+        this.admTipoProdutoRepository = admTipoProdutoRepository;
     }
 
     @Transactional
-    public AdmUsuarioModel saveUsuario(AdmUsuarioModel admUsuarioModel){
-        return admUsuarioRepository.save(admUsuarioModel);
+    public AdmTipoProdutoModel saveTipoProduto(AdmTipoProdutoModel admTipoProdutoModel){
+        return admTipoProdutoRepository.save(admTipoProdutoModel);
     }
 
-    public List<AdmUsuarioModel>findAll(){
-        return (List<AdmUsuarioModel>)admUsuarioRepository.findAll();
+    public List<AdmTipoProdutoModel>findAll(){
+
+        return (List<AdmTipoProdutoModel>)admTipoProdutoRepository.findAll();
     }
 
 }

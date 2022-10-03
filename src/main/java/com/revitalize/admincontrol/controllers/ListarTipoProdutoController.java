@@ -1,7 +1,7 @@
 package com.revitalize.admincontrol.controllers;
 
-import com.revitalize.admincontrol.models.AdmUsuarioModel;
-import com.revitalize.admincontrol.repository.AdmUsuarioRepository;
+import com.revitalize.admincontrol.models.AdmTipoProdutoModel;
+import com.revitalize.admincontrol.repository.AdmTipoProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,22 +11,24 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.UUID;
 
 @Controller
-public class ListarCadastroController {
+public class ListarTipoProdutoController {
 
     @Autowired
-    private AdmUsuarioRepository admUsuarioRepository;
+    private AdmTipoProdutoRepository admTipoProdutoRepository;
 
-        @RequestMapping("/users")
-        public ModelAndView listaUsuario() {
-            ModelAndView mvListaUser = new ModelAndView("users.html");
-            Iterable<AdmUsuarioModel> listaUsuario = admUsuarioRepository.findAll();
-            mvListaUser.addObject("usuarios", listaUsuario);
-        return mvListaUser;
-        }
 
-        @GetMapping("/users/{id}/delete")
-        public String deleteUser(@PathVariable UUID id) {
-            admUsuarioRepository.deleteById(id);
-        return "redirect:/users";
+    @RequestMapping("/typeproduct")
+    public ModelAndView formtypeproductList(){
+        ModelAndView mvListaTipoProduto = new ModelAndView("registertypeproduct.html");
+        Iterable<AdmTipoProdutoModel> TipoProduto = admTipoProdutoRepository.findAll();
+        mvListaTipoProduto.addObject("tipoproduto", TipoProduto);
+        return mvListaTipoProduto;
+    }
+
+
+        @GetMapping("/typeproduct/{id}/delete")
+        public String deleteTypeProduct(@PathVariable UUID id) {
+            admTipoProdutoRepository.deleteById(id);
+        return "redirect:/typeproduct";
         }
 }

@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -204,9 +200,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/addproduct" class="nav-link active">
+                <a href="/addproduct" class="nav-link ">
                   <i class="nav-icon far fa-plus-square"></i>
                   <p>Registrar Produto</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/typeproduct" class="nav-link active">
+                  <i class="nav-icon far fa-plus-square"></i>
+                  <p>Registrar Tipo Produto</p>
                 </a>
               </li>
             </ul>
@@ -252,23 +254,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Registro <small>| Produtos</small></h3>
+                <h3 class="card-title">Registro <small>| Tipos de Produtos</small></h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form id="quickForm" method="post" onsubmit="return confirm('Deseja realmente salvar?')">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Tipo</label>
-                    <input type="text" name="tipo" required value="" class="form-control" placeholder="">
+                    <label>Descrição</label>
+                    <input type="text" name="nome" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label>Nome do Produto</label>
-                    <input type="text" name="produto" required value="" class="form-control" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <label>Tipo Medição</label>
-                    <input type="text" name="medicao" required value="" class="form-control" placeholder="">
+                    <label>Classe</label>
+                    <input type="text" name="classe" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
                     <label>Ativo</label>
@@ -286,19 +284,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.card -->
           </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
-          </div>
-          <!--/.col (right) -->
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
+      <!-- ------------------------------------------------------------------------------>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Relação de Tipos de Produtos Cadastrados</h3>
+              </div>
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Descrição</th>
+                    <th>Classe</th>
+                    <th>Ativo</th>
+                    <th>Data do Cadastro</th>
+                    <th>Ação</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each = "typeproduct:${tipoproduto}">
+                    <td th:text = "${typeproduct.nome}"></td>
+                    <td th:text = "${typeproduct.classe}"></td>
+                    <td th:switch="${typeproduct.status}">
+                      <p th:case="1">SIM</p>
+                      <p th:case="0">NÃO</p>
+                    </td>
+                    <td th:text="${#dates.format(new java.util.Date(typeproduct.dt_cadastro), 'dd-MM-yyyy')}"></td>
+                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Confirma?\')){window.location.href = \'' + @{/typeproduct/{id}(id=${typeproduct.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- ./wrapper -->
+
 
   <!-- REQUIRED SCRIPTS -->
   <!-- Main Footer -->
