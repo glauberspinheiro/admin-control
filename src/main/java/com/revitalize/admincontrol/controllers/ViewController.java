@@ -1,7 +1,6 @@
 package com.revitalize.admincontrol.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,12 +43,6 @@ public class ViewController {
         return mvEmpresaCad;
     }
 
-    @RequestMapping("/addproduct")
-    public ModelAndView produtoCad() {
-        ModelAndView mvProdutoCad = new ModelAndView();
-        mvProdutoCad.setViewName("/registerproduct.html");
-        return mvProdutoCad;
-    }
 
     @RequestMapping("/product")
     public ModelAndView produtoList() {
@@ -58,5 +51,11 @@ public class ViewController {
         return mvProdutoList;
     }
 
+    @RequestMapping("/client")
+    public ModelAndView clientProduct() {
+        ModelAndView mvClientProduct = new ModelAndView();
+        mvClientProduct.setViewName("/clienteproduto.html");
+        return mvClientProduct;
+    }
 
 }

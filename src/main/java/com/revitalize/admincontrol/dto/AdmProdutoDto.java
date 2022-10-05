@@ -1,18 +1,16 @@
 package com.revitalize.admincontrol.dto;
 
-import com.revitalize.admincontrol.models.AdmProdutoModel;
-
+import com.revitalize.admincontrol.models.AdmTipoProdutoModel;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
-public class AdmTipoProdutoDto {
-
+public class AdmProdutoDto {
     @NotBlank
-    private AdmProdutoModel id_produto;
+    private AdmTipoProdutoModel id_tipo_produto;
     @NotBlank
-    private String nome;
+    private String nome_produto;
     @NotBlank
-    private String classe;
+    private String medicao;
     @NotBlank
     private String status;
     @NotBlank
@@ -20,28 +18,28 @@ public class AdmTipoProdutoDto {
     @NotBlank
     private LocalDateTime dt_alteracao_cadastro;
 
-    public AdmProdutoModel getId_produto() {
-        return id_produto;
+    public AdmTipoProdutoModel getId_tipo_produto() {
+        return id_tipo_produto;
     }
 
-    public void setId_produto(AdmProdutoModel id_produto) {
-        this.id_produto = id_produto;
+    public void setId_tipo_produto(AdmTipoProdutoModel id_tipo_produto) {
+        this.id_tipo_produto = id_tipo_produto;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNome_produto() {
+        return nome_produto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome_produto(String nome_produto) {
+        this.nome_produto = nome_produto;
     }
 
-    public String getClasse() {
-        return classe;
+    public String getMedicao() {
+        return medicao;
     }
 
-    public void setClasse(String classe) {
-        this.classe = classe;
+    public void setMedicao(String medicao) {
+        this.medicao = medicao;
     }
 
     public String getStatus() {

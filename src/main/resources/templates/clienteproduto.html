@@ -247,6 +247,23 @@
 
     <!-- Main content -->
     <section class="content">
+      <form>
+      <ul class="nav nav-tabs">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" href="/client#" >Usuário</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" href="/client#">Produtos | Resíduos</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" href="/client#">Empresa</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link disabled" href="/client#">Cadastro</a>
+        </li>
+      </ul>
+      </form>
+      <br>
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
@@ -261,12 +278,12 @@
               <form id="quickForm" method="post" onsubmit="return confirm('Deseja realmente salvar?')">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Classe</label>
-                    <input type="text" name="Tipo" required value="" class="form-control" placeholder="">
-                  </div>
-                  <div class="form-group">
                     <label>Descrição</label>
                     <input type="text" name="nome" required value="" class="form-control" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <label>Classe</label>
+                    <input type="text" name="classe" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
                     <label>Ativo</label>
