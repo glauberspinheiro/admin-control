@@ -31,6 +31,7 @@ public class AdmTipoProdutoModel implements Serializable {
         @Column(nullable = false)
         private LocalDateTime dt_alteracao_cadastro;
 
+
     public LocalDateTime getDt_cadastro() {
         return dt_cadastro;
     }
