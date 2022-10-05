@@ -24,5 +24,4 @@ public class AdmProdutoService {
     public List<AdmProdutoModel>findAll(){
         return (List<AdmProdutoModel>)admProdutoRepository.findAll();
     }
-
 }

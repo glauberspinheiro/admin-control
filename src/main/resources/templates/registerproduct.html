@@ -251,7 +251,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
+       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
           <div class="col-md-12">
@@ -262,12 +262,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" method="post" onsubmit="return confirm('Deseja realmente salvar?')">
+              <div th:if="${mensagemsalvarproduto}" th:text="${mensagemsalvarproduto}" class="alert alert-danger" role="alert"></div>
+              <form id="quickForm" method="post" action="/addproduct" onsubmit="return confirm('Deseja realmente salvar?')">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Tipo de Produto</label>
                     <select class="form-control select2" style="width: 10%;" name="id_tipo_produto">
-                      <option th:each ="tipoproduto : ${tipoproduto}" th:value="tipoproduto.id" th:text ="tipoproduto.nome">
+                      <option th:each ="tproduto : ${tipoproduto}"
+                              selected="selected" th:value="tproduto.id"
+                              th:text ="tproduto.nome">
                       </option>
                     </select>
                   </div>
@@ -304,6 +307,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
+
     </section>
     <!-- /.content -->
   </div>

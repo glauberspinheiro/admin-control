@@ -15,11 +15,9 @@ import java.util.List;
 
 @Controller
 public class SalvaTipoProdutoController {
+
     @Autowired
     private AdmTipoProdutoRepository admTipoProdutoRepository;
-
-
-
 
     @RequestMapping(value="/typeproduct", method=RequestMethod.POST)
     public String formtypeproduct(AdmTipoProdutoModel admTipoProdutoModel) {
@@ -27,19 +25,6 @@ public class SalvaTipoProdutoController {
         admTipoProdutoModel.setDt_alteracao_cadastro(LocalDateTime.now(ZoneId.of("-03:00")));
         admTipoProdutoRepository.save(admTipoProdutoModel);
         return "redirect:/typeproduct";
-    }
-
-
-    @Autowired
-    private AdmTipoProdutoService admTipoProdutoService;
-
-    public ModelAndView tProductList(){
-
-        ModelAndView ListaTipoProduto = new ModelAndView("registerproduct.html");
-        List<AdmTipoProdutoModel> tipoProdutoLista = this.admTipoProdutoService.getListaTipoProduto();
-        ListaTipoProduto.addObject("tipoproduto", tipoProdutoLista);
-        return ListaTipoProduto;
-
     }
 
 }

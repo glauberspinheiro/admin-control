@@ -16,6 +16,7 @@ public class AdmTipoProdutoModel implements Serializable {
         @Column(nullable = false, unique = true, length = 20)
         private UUID id;
 
+
         @Column(nullable = false, length = 100)
         private String nome;
 

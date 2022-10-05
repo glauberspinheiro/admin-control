@@ -1,2 +1,11 @@
-package com.revitalize.admincontrol.controllers;public class JoinController {
+package com.revitalize.admincontrol.controllers;
+
+
+import org.springframework.stereotype.Controller;
+
+
+import java.util.List;
+@Controller
+public class JoinController {
+
 }
