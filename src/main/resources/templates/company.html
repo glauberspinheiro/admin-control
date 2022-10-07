@@ -294,7 +294,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p th:case="0">NÃO</p>
                     </td>
                     <td th:text="${#dates.format(new java.util.Date(company.dt_cadastro), 'dd-MM-yyyy')}"></td>
-                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/company/{id}(id=${company.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
+                    <td><a href="#" class="btn btn-warning">Alterar</a><div> </div><a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/company/{id}(id=${company.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
                     </td>
                   </tr>
                   </tbody>

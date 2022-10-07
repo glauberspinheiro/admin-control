@@ -9,5 +9,4 @@ import java.util.UUID;
 @Repository
 public interface AdmTipoProdutoRepository extends CrudRepository<AdmTipoProdutoModel, UUID> {
 
-
 }

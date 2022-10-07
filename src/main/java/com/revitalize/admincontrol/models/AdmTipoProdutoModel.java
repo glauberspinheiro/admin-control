@@ -17,11 +17,11 @@ public class AdmTipoProdutoModel implements Serializable {
         private UUID id;
 
 
-        @Column(nullable = false, length = 100)
-        private String nome;
+        @Column(nullable = false, length = 255)
+        private String descricao;
 
         @Column(nullable = false, length = 80)
-        private String classe;
+        private String tipo;
 
         @Column(nullable = false, length = 1)
         private String status;
@@ -32,6 +32,37 @@ public class AdmTipoProdutoModel implements Serializable {
         @Column(nullable = false)
         private LocalDateTime dt_alteracao_cadastro;
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public LocalDateTime getDt_cadastro() {
         return dt_cadastro;
@@ -47,37 +78,5 @@ public class AdmTipoProdutoModel implements Serializable {
 
     public void setDt_alteracao_cadastro(LocalDateTime dt_alteracao_cadastro) {
         this.dt_alteracao_cadastro = dt_alteracao_cadastro;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getClasse() {
-        return classe;
-    }
-
-    public void setClasse(String classe) {
-        this.classe = classe;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

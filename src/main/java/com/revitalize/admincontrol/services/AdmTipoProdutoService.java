@@ -20,9 +20,4 @@ public class AdmTipoProdutoService {
     public AdmTipoProdutoModel saveTipoProduto(AdmTipoProdutoModel admTipoProdutoModel){
         return admTipoProdutoRepository.save(admTipoProdutoModel);
     }
-
-    public List<AdmTipoProdutoModel> getListaTipoProduto() {
-        Iterable<AdmTipoProdutoModel>tipoProdutolistaIterable = this.admTipoProdutoRepository.findAll();
-        return Streamable.of(tipoProdutolistaIterable).toList();
-    }
 }

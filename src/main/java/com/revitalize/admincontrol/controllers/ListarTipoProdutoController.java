@@ -17,11 +17,12 @@ public class ListarTipoProdutoController {
     private AdmTipoProdutoRepository admTipoProdutoRepository;
 
 
+
     @RequestMapping("/typeproduct")
     public ModelAndView formtypeproductList(){
         ModelAndView mvListaTipoProduto = new ModelAndView("registertypeproduct.html");
         Iterable<AdmTipoProdutoModel> TipoProduto = admTipoProdutoRepository.findAll();
-        mvListaTipoProduto.addObject("tipoproduto", TipoProduto);
+        mvListaTipoProduto.addObject("tpproduto", TipoProduto);
         return mvListaTipoProduto;
     }
 

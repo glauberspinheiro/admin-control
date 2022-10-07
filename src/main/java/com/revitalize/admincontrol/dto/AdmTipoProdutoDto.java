@@ -1,18 +1,15 @@
 package com.revitalize.admincontrol.dto;
 
-import com.revitalize.admincontrol.models.AdmProdutoModel;
-
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public class AdmTipoProdutoDto {
 
+
     @NotBlank
-    private AdmProdutoModel id_produto;
+    private String descricao;
     @NotBlank
-    private String nome;
-    @NotBlank
-    private String classe;
+    private String tipo;
     @NotBlank
     private String status;
     @NotBlank
@@ -20,28 +17,20 @@ public class AdmTipoProdutoDto {
     @NotBlank
     private LocalDateTime dt_alteracao_cadastro;
 
-    public AdmProdutoModel getId_produto() {
-        return id_produto;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setId_produto(AdmProdutoModel id_produto) {
-        this.id_produto = id_produto;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getNome() {
-        return nome;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getClasse() {
-        return classe;
-    }
-
-    public void setClasse(String classe) {
-        this.classe = classe;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getStatus() {
