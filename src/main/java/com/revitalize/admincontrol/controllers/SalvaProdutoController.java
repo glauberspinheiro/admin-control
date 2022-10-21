@@ -7,7 +7,6 @@ import com.revitalize.admincontrol.repository.AdmTipoProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,22 +24,14 @@ public class SalvaProdutoController {
     @Autowired
     private AdmProdutoRepository admProdutoRepository;
 
+    @Autowired
+    private AdmTipoProdutoRepository admTipoProdutoRepository;
 
     @RequestMapping(value="/addproduct", method= RequestMethod.GET)
     public String formProduct(){
+
         return "registerproduct";
     }
-
-    /*@RequestMapping("/addproduct")
-    public ModelAndView listaSelecttProduto() {
-        ModelAndView mvListaSelecttproduto = new ModelAndView("registerproduct");
-        List<AdmTipoProdutoModel> listatipoproduto = (List<AdmTipoProdutoModel>) admTipoProdutoRepository.findAll();
-        mvListaSelecttproduto.addObject("listatproduto", listatipoproduto);
-        return mvListaSelecttproduto;
-    }
-
-     */
-
     @RequestMapping("/addproduct")
     public String saveProduct(@Valid AdmProdutoModel admProdutoModel, BindingResult result, RedirectAttributes redirect) {
         admProdutoModel.setDt_cadastro(LocalDateTime.now(ZoneId.of("-03:00")));
@@ -51,5 +42,12 @@ public class SalvaProdutoController {
         }
         admProdutoRepository.save(admProdutoModel);
         return "redirect:/product";
+    }
+
+    public ModelAndView listaSelecttProduto() {
+        ModelAndView mvListaSelecttproduto = new ModelAndView("registerproduct");
+        List<AdmTipoProdutoModel> listatipoproduto = (List<AdmTipoProdutoModel>) admTipoProdutoRepository.findAll();
+        mvListaSelecttproduto.addObject("listatproduto", listatipoproduto);
+        return mvListaSelecttproduto;
     }
 }

@@ -263,7 +263,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.card-header -->
               <!-- form start -->
               <div th:if="${mensagemsalvarproduto}" th:text="${mensagemsalvarproduto}" class="alert alert-danger" role="alert"></div>
-              <form id="quickForm" method="post" action="/addproduct/save" onsubmit="return confirm('Deseja realmente salvar?')">
+              <form id="quickForm" method="post" action="/addproduct" onsubmit="return confirm('Deseja realmente salvar?')">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Tipo de Produto</label>

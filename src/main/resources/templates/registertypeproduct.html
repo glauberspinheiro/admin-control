@@ -299,8 +299,8 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Descrição</th>
                     <th>Tipo</th>
+                    <th>Descrição</th>
                     <th>Ativo</th>
                     <th>Data do Cadastro</th>
                     <th>Ação</th>
@@ -308,14 +308,14 @@
                   </thead>
                   <tbody>
                   <tr th:each = "typroduct : ${tpproduto}">
-                    <td th:text = "${typroduct.descricao}"></td>
                     <td th:text = "${typroduct.tipo}"></td>
+                    <td th:text = "${typroduct.descricao}"></td>
                     <td th:switch="${typroduct.status}">
                       <p th:case="1">SIM</p>
                       <p th:case="0">NÃO</p>
                     </td>
                     <td th:text="${#dates.format(new java.util.Date(typroduct.dt_cadastro), 'dd-MM-yyyy')}"></td>
-                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Confirma?\')){window.location.href = \'' + @{/typroduct/{id}(id=${typroduct.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
+                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Confirma?\')){window.location.href = \'' + @{/typeproduct/{id}(id=${typroduct.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
                     </td>
                   </tr>
                   </tbody>

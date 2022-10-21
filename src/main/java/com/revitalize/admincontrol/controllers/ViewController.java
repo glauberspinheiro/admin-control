@@ -44,13 +44,6 @@ public class ViewController {
     }
 
 
-    @RequestMapping("/product")
-    public ModelAndView produtoList() {
-        ModelAndView mvProdutoList = new ModelAndView();
-        mvProdutoList.setViewName("/product.html");
-        return mvProdutoList;
-    }
-
     @RequestMapping("/client")
     public ModelAndView clientProduct() {
         ModelAndView mvClientProduct = new ModelAndView();
