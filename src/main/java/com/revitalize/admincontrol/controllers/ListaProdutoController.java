@@ -36,7 +36,5 @@ public class ListaProdutoController {
         ModelAndView mvEditProduct = new ModelAndView("product.html");
         mvEditProduct.setViewName("/product");
         return mvEditProduct;
-
-
     }
 }
