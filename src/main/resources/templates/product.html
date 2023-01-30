@@ -271,7 +271,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Tipo</th>
                     <th>Nome Produto</th>
                     <th>Tipo Medição</th>
                     <th>Ativo</th>
@@ -280,14 +279,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each = "product:${produtos}">
-                    <td th:text = "${product.tipo}"></td>
-                    <td th:text = "${product.produto}"></td>
+                  <tr th:each = "product:${produto}">
+                    <td th:text = "${product.nome_produto}"></td>
                     <td th:text = "${product.medicao}"></td>
-                    <td th:text = "${product.status}"></td>
-                    <td th:text="${#dates.format(new java.util.Date(product.dt_cadastro), 'dd-MM-yyyy')}"></td>
-                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/product/{id}(id=${product.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
+                    <td th:switch = "${product.status}">
+                      <p th:case="1">SIM</p>
+                      <p th:case="0">NÃO</p>
                     </td>
+                    <td th:text="${#dates.format(new java.util.Date(product.dt_cadastro), 'dd-MM-yyyy')}"></td>
+                    <td><a href="#" class="btn btn-warning">Alterar</a><div> </div><a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/product/{id}(id=${product.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a></td>
                   </tr>
                   </tbody>
                 </table>

@@ -247,6 +247,23 @@
 
     <!-- Main content -->
     <section class="content">
+      <form>
+      <ul class="nav nav-tabs">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" href="/client#" >Usuário</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" href="/client#">Produtos | Resíduos</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" href="/client#">Empresa</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link disabled" href="/client#">Cadastro</a>
+        </li>
+      </ul>
+      </form>
+      <br>
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
@@ -261,16 +278,16 @@
               <form id="quickForm" method="post" onsubmit="return confirm('Deseja realmente salvar?')">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Tipo</label>
-                    <input type="text" name="tipo" required value="" class="form-control" placeholder="">
+                    <label>Descrição</label>
+                    <input type="text" name="nome" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
-                    <label>Descrição</label>
-                    <input type="text" name="descricao" required value="" class="form-control" placeholder="">
+                    <label>Classe</label>
+                    <input type="text" name="classe" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
                     <label>Ativo</label>
-                    <select class="form-control select2" style="width: 6%;" name="status">
+                    <select class="form-control select2" style="width: 100%;" name="status">
                       <option selected="selected" value="1">Sim</option>
                       <option value="0">Não</option>
                     </select>
@@ -299,23 +316,23 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>Tipo</th>
                     <th>Descrição</th>
+                    <th>Classe</th>
                     <th>Ativo</th>
                     <th>Data do Cadastro</th>
                     <th>Ação</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr th:each = "typroduct : ${tpproduto}">
-                    <td th:text = "${typroduct.tipo}"></td>
-                    <td th:text = "${typroduct.descricao}"></td>
-                    <td th:switch="${typroduct.status}">
+                  <tr th:each = "typeproduct:${tipoproduto}">
+                    <td th:text = "${typeproduct.nome}"></td>
+                    <td th:text = "${typeproduct.classe}"></td>
+                    <td th:switch="${typeproduct.status}">
                       <p th:case="1">SIM</p>
                       <p th:case="0">NÃO</p>
                     </td>
-                    <td th:text="${#dates.format(new java.util.Date(typroduct.dt_cadastro), 'dd-MM-yyyy')}"></td>
-                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Confirma?\')){window.location.href = \'' + @{/typeproduct/{id}(id=${typroduct.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
+                    <td th:text="${#dates.format(new java.util.Date(typeproduct.dt_cadastro), 'dd-MM-yyyy')}"></td>
+                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Confirma?\')){window.location.href = \'' + @{/typeproduct/{id}(id=${typeproduct.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
                     </td>
                   </tr>
                   </tbody>
@@ -336,6 +353,9 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
+    <div class="float-right d-none d-sm-inline">
+      Version 1.0.0
+    </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2022 Revitalize SIS All rights reserved.</strong>
   </footer>

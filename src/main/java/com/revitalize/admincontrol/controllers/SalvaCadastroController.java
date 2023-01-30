@@ -20,6 +20,8 @@ public class SalvaCadastroController {
             return "register";
     }
 
+
+
     @RequestMapping(value="/adduser", method=RequestMethod.POST)
     public String formUser(AdmUsuarioModel admUsuarioModel) {
         admUsuarioModel.setDt_cadastro(LocalDateTime.now(ZoneId.of("-03:00")));

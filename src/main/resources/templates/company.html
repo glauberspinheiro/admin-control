@@ -283,8 +283,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <td th:text = "${company.nomeempresa}"></td>
                     <td th:text = "${company.nomefantasia}"></td>
                     <td th:text = "${company.contato}"></td>
-                    <td th:text = "${company.telefone}"></td>
                     <td th:text = "${company.email}"></td>
+                    <td th:text = "${company.telefone}"></td>
                     <td th:switch="${company.mensalista}">
                       <p th:case="1">SIM</p>
                       <p th:case="0">NÃO</p>
@@ -294,7 +294,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <p th:case="0">NÃO</p>
                     </td>
                     <td th:text="${#dates.format(new java.util.Date(company.dt_cadastro), 'dd-MM-yyyy')}"></td>
-                    <td><a href="#" class="btn btn-warning">Alterar</a><a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/company/{id}(id=${company.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
+                    <td><a href="#" class="btn btn-warning">Alterar</a><div> </div>
+                        <a href="#" th:onclick="'if(confirm(\'Tem certeza?\')){window.location.href = \'' + @{/company/{id}(id=${company.id})} + '/delete\'}'" class="btn btn-danger">Excluir</a>
                     </td>
                   </tr>
                   </tbody>
