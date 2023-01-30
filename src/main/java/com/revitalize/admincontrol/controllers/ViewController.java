@@ -40,8 +40,7 @@ public class ViewController {
     public ModelAndView empresaCad() {
         ModelAndView mvEmpresaCad = new ModelAndView();
         mvEmpresaCad.setViewName("/registercompany.html");
-        return mvEmpresaCad;
-    }
+        return mvEmpresaCad;    }
 
 
     @RequestMapping("/client")
@@ -49,6 +48,26 @@ public class ViewController {
         ModelAndView mvClientProduct = new ModelAndView();
         mvClientProduct.setViewName("/clienteproduto.html");
         return mvClientProduct;
+    }
+    @RequestMapping("/register")
+    public ModelAndView registerUser() {
+        ModelAndView mvRegisterUsert = new ModelAndView();
+        mvRegisterUsert.setViewName("/register.html");
+        return mvRegisterUsert;
+    }
+
+    @RequestMapping("/new-password")
+    public ModelAndView newPassword() {
+        ModelAndView mvNewPassword = new ModelAndView();
+        mvNewPassword.setViewName("/forgot-password.html");
+        return mvNewPassword;
+    }
+
+    @RequestMapping("/registernewuser")
+    public ModelAndView newUser() {
+        ModelAndView mvnewUser = new ModelAndView();
+        mvnewUser.setViewName("/registernewuser.html");
+        return mvnewUser;
     }
 
 }
