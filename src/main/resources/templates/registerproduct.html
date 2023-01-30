@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <a href="/addproduct" class="nav-link active">
                   <i class="nav-icon far fa-plus-square"></i>
-                  <p>Registrar Produtos</p>
+                  <p>Registrar Produto</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -251,7 +251,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Main content -->
     <section class="content">
-       <div class="container-fluid">
+      <div class="container-fluid">
         <div class="row">
           <!-- left column -->
           <div class="col-md-12">
@@ -262,21 +262,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <div th:if="${mensagemsalvarproduto}" th:text="${mensagemsalvarproduto}" class="alert alert-danger" role="alert"></div>
-              <form id="quickForm" method="post" action="/addproduct" onsubmit="return confirm('Deseja realmente salvar?')">
+              <form id="quickForm" method="post" onsubmit="return confirm('Deseja realmente salvar?')">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Tipo de Produto</label>
-                    <select class="form-control select2" style="width: 10%;" name="id_tipo_produto">
-                      <option th:each ="tproduto :  ${listatproduto}"
-                      th:value="tproduto.id"
-                      th:text ="tproduto.tipo">
-                      </option>
+                    <select class="form-control select2" style="width: 100%;" name="tipo">
+                      <option th:each="tipoproduto : ${variaveltp}" value="id"
+                              th:value="tipoproduto.id"
+                              th:text="tipoproduto.tipoproduto"/>
+
                     </select>
                   </div>
                   <div class="form-group">
                     <label>Nome do Produto</label>
-                    <input type="text" name="nome_produto" required value="" class="form-control" placeholder="">
+                    <input type="text" name="produto" required value="" class="form-control" placeholder="">
                   </div>
                   <div class="form-group">
                     <label>Tipo Medição</label>
@@ -284,7 +283,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                   <div class="form-group">
                     <label>Ativo</label>
-                    <select class="form-control select2" style="width: 6%;" name="status">
+                    <select class="form-control select2" style="width: 100%;" name="status">
                       <option selected="selected" value="1">Sim</option>
                       <option value="0">Não</option>
                     </select>
@@ -307,7 +306,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
-
     </section>
     <!-- /.content -->
   </div>

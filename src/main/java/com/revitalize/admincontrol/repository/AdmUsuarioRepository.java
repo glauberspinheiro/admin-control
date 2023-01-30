@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface AdmUsuarioRepository extends CrudRepository<AdmUsuarioModel, UUID> {
-
+   //Consulta SQL para buscar os dados de e-mail e senha
     @Query(value = "select * from tb_usuario where email = :email and senha = :senha", nativeQuery = true)
     public AdmUsuarioModel Login(String email, String senha);
 
