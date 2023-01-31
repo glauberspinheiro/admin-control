@@ -70,4 +70,11 @@ public class ViewController {
         return mvnewUser;
     }
 
+    @RequestMapping("/editregister")
+    public ModelAndView editRegister() {
+        ModelAndView mvEditRegister = new ModelAndView();
+        mvEditRegister.setViewName("/editregister.html");
+        return mvEditRegister;
+    }
+
 }
