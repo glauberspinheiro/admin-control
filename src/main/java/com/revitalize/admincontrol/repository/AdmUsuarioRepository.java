@@ -16,4 +16,5 @@ public interface AdmUsuarioRepository extends CrudRepository<AdmUsuarioModel, UU
 
     Optional<AdmUsuarioModel> findById(UUID id);
 
+    boolean findAllById(UUID id);
 }
