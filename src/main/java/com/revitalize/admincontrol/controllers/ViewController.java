@@ -1,7 +1,6 @@
 package com.revitalize.admincontrol.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,12 +49,6 @@ public class ViewController {
         ModelAndView mvClientProduct = new ModelAndView();
         mvClientProduct.setViewName("/clienteproduto.html");
         return mvClientProduct;
-    }
-    @RequestMapping("/change-users")
-    public ModelAndView pageChangeUser() {
-        ModelAndView mvPageChangeUser = new ModelAndView();
-        mvPageChangeUser.setViewName("/register-change.html");
-        return mvPageChangeUser;
     }
 
 }
