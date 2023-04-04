@@ -45,9 +45,4 @@ public class ListarCadastroController {
         }
         return "/register-change";
     }
-
-    @PostMapping("/users/{id}/alterar")
-    public String alterarUsers(@PathVariable UUID id, AdmUsuarioModel admUsuarioModel){
-            if (admUsuarioRepository.findAllById(id));
-    }
 }
