@@ -17,4 +17,10 @@ public interface AdmUsuarioRepository extends CrudRepository<AdmUsuarioModel, UU
     Optional<AdmUsuarioModel> findById(UUID id);
 
     boolean findAllById(UUID id);
+
+    Optional<AdmUsuarioModel> findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByEmailAndIdNot(String email, UUID id);
 }

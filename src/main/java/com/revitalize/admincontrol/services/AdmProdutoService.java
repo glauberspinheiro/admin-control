@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AdmProdutoService {
@@ -23,5 +25,14 @@ public class AdmProdutoService {
 
     public List<AdmProdutoModel>findAll(){
         return (List<AdmProdutoModel>)admProdutoRepository.findAll();
+    }
+
+    public Optional<AdmProdutoModel> findById(UUID id) {
+        return admProdutoRepository.findById(id);
+    }
+
+    @Transactional
+    public void deleteById(UUID id) {
+        admProdutoRepository.deleteById(id);
     }
 }

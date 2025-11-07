@@ -1,5 +1,7 @@
 package com.revitalize.admincontrol.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,7 +18,7 @@ public class AdmUsuarioModel implements Serializable {
     @Column(nullable = false, unique = true, length = 20)
     private UUID id;
 
-    @Column(nullable = false, length = 11)
+    @Column(nullable = true, length = 11)
     private String cpf;
 
     @Column(nullable = false, length = 100)
@@ -27,6 +29,10 @@ public class AdmUsuarioModel implements Serializable {
 
     @Column(nullable = false, length = 100)
     private String senha;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private UserPreferenceModel preference;
 
     @Column(nullable = false)
     private LocalDateTime dt_cadastro;
@@ -88,5 +94,13 @@ public class AdmUsuarioModel implements Serializable {
 
     public void setDt_alteracao_cadastro(LocalDateTime dt_alteracao_cadastro) {
         this.dt_alteracao_cadastro = dt_alteracao_cadastro;
+    }
+
+    public UserPreferenceModel getPreference() {
+        return preference;
+    }
+
+    public void setPreference(UserPreferenceModel preference) {
+        this.preference = preference;
     }
 }

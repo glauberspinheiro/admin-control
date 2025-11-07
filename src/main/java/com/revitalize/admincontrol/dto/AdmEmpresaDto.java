@@ -1,14 +1,13 @@
 package com.revitalize.admincontrol.dto;
 
-import org.hibernate.validator.constraints.br.CNPJ;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 
 public class AdmEmpresaDto {
 
-    @Size(max=11)
-    @CNPJ
+    @Size(max=14)
+    @Pattern(regexp = "\\d{14}", message = "CNPJ deve conter 14 dígitos numéricos")
     @NotBlank
     private String cnpj;
     @NotBlank
@@ -25,10 +24,6 @@ public class AdmEmpresaDto {
     private String mensalista;
     @NotBlank
     private String status;
-    @NotBlank
-    private LocalDateTime dt_cadastro;
-    @NotBlank
-    private LocalDateTime dt_alteracao_cadastro;
 
     public String getContato() {
         return contato;
@@ -94,19 +89,4 @@ public class AdmEmpresaDto {
         this.status = status;
     }
 
-    public LocalDateTime getDt_cadastro() {
-        return dt_cadastro;
-    }
-
-    public void setDt_cadastro(LocalDateTime dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
-    }
-
-    public LocalDateTime getDt_alteracao_cadastro() {
-        return dt_alteracao_cadastro;
-    }
-
-    public void setDt_alteracao_cadastro(LocalDateTime dt_alteracao_cadastro) {
-        this.dt_alteracao_cadastro = dt_alteracao_cadastro;
-    }
 }
