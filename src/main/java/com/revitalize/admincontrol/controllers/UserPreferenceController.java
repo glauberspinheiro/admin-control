@@ -27,7 +27,7 @@ public class UserPreferenceController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> get(@PathVariable UUID userId) {
+    public ResponseEntity<?> get(@PathVariable("userId") UUID userId) {
         return userPreferenceService.findByUsuarioId(userId)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());

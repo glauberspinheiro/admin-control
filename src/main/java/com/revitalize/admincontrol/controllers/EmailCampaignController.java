@@ -39,7 +39,7 @@ public class EmailCampaignController {
     }
 
     @GetMapping("/history/{userId}")
-    public ResponseEntity<List<EmailJobModel>> history(@PathVariable UUID userId) {
+    public ResponseEntity<List<EmailJobModel>> history(@PathVariable("userId") UUID userId) {
         return ResponseEntity.ok(emailCampaignService.findByUsuario(userId));
     }
 

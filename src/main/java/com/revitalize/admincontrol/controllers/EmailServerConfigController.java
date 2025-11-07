@@ -28,7 +28,7 @@ public class EmailServerConfigController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getByUser(@PathVariable UUID userId) {
+    public ResponseEntity<?> getByUser(@PathVariable("userId") UUID userId) {
         return emailServerConfigService.findByUsuarioId(userId)
                 .map(config -> ResponseEntity.ok(mapToDto(config)))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());

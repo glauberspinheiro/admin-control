@@ -43,7 +43,7 @@ public class AdmUsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdmUsuarioModel> getOne(@PathVariable UUID id) {
+    public ResponseEntity<AdmUsuarioModel> getOne(@PathVariable("id") UUID id) {
         return admUsuarioService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -66,7 +66,7 @@ public class AdmUsuarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody @Valid AdmUsuarioDto dto) {
+    public ResponseEntity<?> update(@PathVariable("id") UUID id, @RequestBody @Valid AdmUsuarioDto dto) {
         return admUsuarioService.findById(id)
                 .map(existing -> {
                     if (admUsuarioService.emailInUseByOther(dto.getEmail(), existing.getId())) {
@@ -91,7 +91,7 @@ public class AdmUsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         return admUsuarioService.findById(id)
                 .map(existing -> {
                     admUsuarioService.deleteById(existing.getId());

@@ -45,7 +45,7 @@ public class AdmProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdmProdutoModel> getOne(@PathVariable UUID id) {
+    public ResponseEntity<AdmProdutoModel> getOne(@PathVariable("id") UUID id) {
         return admProdutoService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -66,7 +66,7 @@ public class AdmProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody @Valid AdmProdutoDto dto) {
+    public ResponseEntity<?> update(@PathVariable("id") UUID id, @RequestBody @Valid AdmProdutoDto dto) {
         var tipoProduto = admTipoProdutoService.findById(dto.getTipoProdutoId());
         if (tipoProduto.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Tipo de produto não encontrado"));
@@ -82,7 +82,7 @@ public class AdmProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         return admProdutoService.findById(id)
                 .map(existing -> {
                     admProdutoService.deleteById(existing.getId());

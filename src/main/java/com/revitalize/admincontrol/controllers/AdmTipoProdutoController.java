@@ -40,7 +40,7 @@ public class AdmTipoProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdmTipoProdutoModel> getOne(@PathVariable UUID id) {
+    public ResponseEntity<AdmTipoProdutoModel> getOne(@PathVariable("id") UUID id) {
         return admTipoProdutoService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -56,7 +56,7 @@ public class AdmTipoProdutoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AdmTipoProdutoModel> update(@PathVariable UUID id, @RequestBody @Valid AdmTipoProdutoDto dto) {
+    public ResponseEntity<AdmTipoProdutoModel> update(@PathVariable("id") UUID id, @RequestBody @Valid AdmTipoProdutoDto dto) {
         return admTipoProdutoService.findById(id)
                 .map(existing -> {
                     BeanUtils.copyProperties(dto, existing, "id", "dt_cadastro", "dt_alteracao_cadastro");
@@ -67,7 +67,7 @@ public class AdmTipoProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         return admTipoProdutoService.findById(id)
                 .map(existing -> {
                     admTipoProdutoService.deleteById(existing.getId());

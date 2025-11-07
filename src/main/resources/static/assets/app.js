@@ -16,6 +16,7 @@ const translations = {
         'header.loginPrompt': 'Faça login para realizar ações críticas.',
         'header.loginShortcut': 'Ir para login',
         'dashboard.metricsTitle': 'Indicadores rápidos',
+        'dashboard.metricsDescription': 'Resumo atualizado das principais entidades.',
         'dashboard.users': 'Usuários',
         'dashboard.companies': 'Empresas',
         'dashboard.productTypes': 'Tipos de produto',
@@ -95,6 +96,7 @@ const translations = {
         'settings.themeOptions.bluelight': 'Azul (padrão)',
         'settings.themeOptions.dark': 'Escuro',
         'settings.themeOptions.redlight': 'Vermelho claro',
+        'settings.themeOptions.greenlight': 'Verde suave',
         'settings.languageOptions.pt': 'Português (pt-BR)',
         'settings.languageOptions.en': 'Inglês (en-US)',
         'settings.emailServerTitle': 'Servidor de e-mail (SMTP/POP/IMAP)',
@@ -167,6 +169,7 @@ const translations = {
         'header.loginPrompt': 'Sign in to perform critical actions.',
         'header.loginShortcut': 'Go to login',
         'dashboard.metricsTitle': 'Quick metrics',
+        'dashboard.metricsDescription': 'Up-to-date snapshot of your main entities.',
         'dashboard.users': 'Users',
         'dashboard.companies': 'Companies',
         'dashboard.productTypes': 'Product types',
@@ -246,6 +249,7 @@ const translations = {
         'settings.themeOptions.bluelight': 'Blue (default)',
         'settings.themeOptions.dark': 'Dark',
         'settings.themeOptions.redlight': 'Red light',
+        'settings.themeOptions.greenlight': 'Soft green',
         'settings.languageOptions.pt': 'Portuguese (pt-BR)',
         'settings.languageOptions.en': 'English (en-US)',
         'settings.emailServerTitle': 'Email server (SMTP/POP/IMAP)',
@@ -316,6 +320,13 @@ const sections = [
     { id: 'emailSingle', labelKey: 'nav.emailSingle' },
     { id: 'emailBulk', labelKey: 'nav.emailBulk' },
     { id: 'settings', labelKey: 'nav.settings' }
+];
+
+const quickMetricVisuals = [
+    { id: 'users', labelKey: 'dashboard.users', className: 'stat-card--users' },
+    { id: 'companies', labelKey: 'dashboard.companies', className: 'stat-card--companies' },
+    { id: 'productTypes', labelKey: 'dashboard.productTypes', className: 'stat-card--productTypes' },
+    { id: 'products', labelKey: 'dashboard.products', className: 'stat-card--products' }
 ];
 
 const endpoints = {
@@ -1343,12 +1354,12 @@ const App = {
         const emailStatusClass = (status) => {
             switch ((status || '').toUpperCase()) {
                 case 'ENVIADO':
-                    return 'status-chip status-sent';
+                    return 'status-pill status-email-sent';
                 case 'FALHOU':
-                    return 'status-chip status-failed';
+                    return 'status-pill status-email-failed';
                 case 'PENDENTE':
                 default:
-                    return 'status-chip status-pending';
+                    return 'status-pill status-email-pending';
             }
         };
 
@@ -1364,6 +1375,11 @@ const App = {
             productTypes: state.productTypes.length,
             products: state.products.length
         }));
+
+        const quickMetrics = computed(() => quickMetricVisuals.map((item) => ({
+            ...item,
+            value: statistics.value?.[item.id] ?? 0
+        })));
 
         const bulkPreviewRows = computed(() => state.bulkFileRows.slice(0, 25));
 
@@ -1491,7 +1507,8 @@ const App = {
             resetForm,
             pushNotification,
             navigate,
-            loadTemplates
+            loadTemplates,
+            quickMetrics
         };
     },
     template: `
@@ -1502,111 +1519,123 @@ const App = {
             </div>
         </div>
 
-        <div v-if="currentRoute === 'login'" class="auth-wrapper">
-            <div class="auth-card">
-                <h1>{{ t('login.title') }}</h1>
-                <p>{{ t('login.subtitle') }}</p>
-                <div v-if="state.loading" class="loading-indicator">{{ t('common.loading') }}</div>
-                <form @submit.prevent="login">
-                    <label>{{ t('login.email') }}
-                        <input type="email" v-model="state.loginForm.email" required />
-                    </label>
-                    <label>{{ t('login.password') }}
-                        <input type="password" v-model="state.loginForm.senha" required />
-                    </label>
-                    <button class="primary" type="submit">{{ t('login.submit') }}</button>
-                </form>
-                <div class="auth-links">
-                    <button type="button" class="link-button" @click="navigate('forgot')">{{ t('login.goToForgot') }}</button>
-                    <button type="button" class="link-button" @click="navigate('main')">{{ t('login.backToApp') }}</button>
-                </div>
+        <div v-if="state.loading" class="loading-overlay" role="status" aria-live="polite">
+            <div class="loading-modal">
+                <div class="loading-spinner"></div>
             </div>
+            <span class="visually-hidden">{{ t('common.loading') }}</span>
         </div>
 
-        <div v-else-if="currentRoute === 'forgot'" class="auth-wrapper">
-            <div class="auth-card">
-                <h1>{{ t('forgot.title') }}</h1>
-                <p>{{ t('forgot.subtitle') }}</p>
-                <div v-if="state.loading" class="loading-indicator">{{ t('common.loading') }}</div>
-                <form @submit.prevent="recoverPassword">
-                    <label>{{ t('forgot.email') }}
-                        <input type="email" v-model="state.recoverForm.email" required />
-                    </label>
-                    <button class="primary" type="submit">{{ t('forgot.submit') }}</button>
-                </form>
-                <div class="auth-links">
-                    <button type="button" class="link-button" @click="navigate('login')">{{ t('forgot.backToLogin') }}</button>
-                    <button type="button" class="link-button" @click="navigate('main')">{{ t('login.backToApp') }}</button>
-                </div>
-            </div>
-        </div>
-
-        <div v-else>
-            <header>
-                <div class="header-main">
-                    <div>
-                        <h1>Revitalize</h1>
-                        <p v-if="state.loggedUser">{{ t('header.logged', { name: state.loggedUser.nome }) }}</p>
-                        <p v-else>{{ t('header.loginPrompt') }}</p>
-                    </div>
-                    <div class="header-actions">
-                        <button class="link-button" type="button" @click="navigate('login')">🔐 {{ t('header.loginShortcut') }}</button>
-                    </div>
-                </div>
-            </header>
-            <div class="main-container">
-                <nav>
-                    <button v-for="section in sections"
-                            :key="section.id"
-                            :class="{ active: activeSection === section.id }"
-                            @click="setSection(section.id)">
-                        {{ t(section.labelKey) }}
-                    </button>
-                </nav>
-                <section>
-                    <div v-if="state.loading" class="loading-indicator">{{ t('common.loading') }}</div>
-
-                    <div v-if="activeSection === 'dashboard'">
-                        <div class="card">
-                            <h2>{{ t('dashboard.metricsTitle') }}</h2>
-                            <p>{{ t('dashboard.users') }}: <strong>{{ statistics.users }}</strong></p>
-                            <p>{{ t('dashboard.companies') }}: <strong>{{ statistics.companies }}</strong></p>
-                            <p>{{ t('dashboard.productTypes') }}: <strong>{{ statistics.productTypes }}</strong></p>
-                            <p>{{ t('dashboard.products') }}: <strong>{{ statistics.products }}</strong></p>
+        <transition name="view-fade" mode="out-in">
+            <div :key="currentRoute">
+                <div v-if="currentRoute === 'login'" class="auth-wrapper">
+                    <div class="auth-card">
+                        <h1>{{ t('login.title') }}</h1>
+                        <p>{{ t('login.subtitle') }}</p>
+                        <form @submit.prevent="login">
+                            <label>{{ t('login.email') }}
+                                <input type="email" v-model="state.loginForm.email" required />
+                            </label>
+                            <label>{{ t('login.password') }}
+                                <input type="password" v-model="state.loginForm.senha" required />
+                            </label>
+                            <button class="primary" type="submit">{{ t('login.submit') }}</button>
+                        </form>
+                        <div class="auth-links">
+                            <button type="button" class="link-button" @click="navigate('forgot')">{{ t('login.goToForgot') }}</button>
+                            <button type="button" class="link-button" @click="navigate('main')">{{ t('login.backToApp') }}</button>
                         </div>
-                        <div class="card" v-if="state.emailHistory.length">
-                            <h2>{{ t('email.history') }}</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>{{ t('email.subject') }}</th>
-                                        <th>Status</th>
-                                        <th>Destinatários</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="job in paginatedEmailHistory" :key="job.id">
-                                        <td>{{ job.assunto }}</td>
-                                        <td>
-                                            <span :class="emailStatusClass(job.status)">{{ job.status }}</span>
-                                        </td>
-                                        <td>{{ job.destinatarios }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="history-pagination" v-if="emailHistoryTotalPages > 1">
-                                <button class="secondary" type="button" @click="changeEmailHistoryPage(-1)" :disabled="state.emailHistoryPage === 1">
-                                    ‹ Anterior
-                                </button>
-                                <span>Página {{ state.emailHistoryPage }} / {{ emailHistoryTotalPages }}</span>
-                                <button class="secondary" type="button" @click="changeEmailHistoryPage(1)" :disabled="state.emailHistoryPage === emailHistoryTotalPages">
-                                    Próxima ›
-                                </button>
+                    </div>
+                </div>
+
+                <div v-else-if="currentRoute === 'forgot'" class="auth-wrapper">
+                    <div class="auth-card">
+                        <h1>{{ t('forgot.title') }}</h1>
+                        <p>{{ t('forgot.subtitle') }}</p>
+                        <form @submit.prevent="recoverPassword">
+                            <label>{{ t('forgot.email') }}
+                                <input type="email" v-model="state.recoverForm.email" required />
+                            </label>
+                            <button class="primary" type="submit">{{ t('forgot.submit') }}</button>
+                        </form>
+                        <div class="auth-links">
+                            <button type="button" class="link-button" @click="navigate('login')">{{ t('forgot.backToLogin') }}</button>
+                            <button type="button" class="link-button" @click="navigate('main')">{{ t('login.backToApp') }}</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-else>
+                    <header>
+                        <div class="header-main">
+                            <div>
+                                <h1>Revitalize</h1>
+                                <p v-if="state.loggedUser">{{ t('header.logged', { name: state.loggedUser.nome }) }}</p>
+                                <p v-else>{{ t('header.loginPrompt') }}</p>
+                            </div>
+                            <div class="header-actions">
+                                <button class="link-button" type="button" @click="navigate('login')">🔐 {{ t('header.loginShortcut') }}</button>
                             </div>
                         </div>
-                    </div>
+                    </header>
+                    <div class="main-container">
+                        <nav>
+                            <button v-for="section in sections"
+                                    :key="section.id"
+                                    :class="{ active: activeSection === section.id }"
+                                    @click="setSection(section.id)">
+                                {{ t(section.labelKey) }}
+                            </button>
+                        </nav>
+                        <section>
+                            <div v-if="activeSection === 'dashboard'">
+                                <div class="card quick-metrics-card">
+                                    <div class="card-header">
+                                        <div>
+                                            <h2>{{ t('dashboard.metricsTitle') }}</h2>
+                                            <p class="card-subtitle">{{ t('dashboard.metricsDescription') }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="stat-grid">
+                                        <article class="stat-card" v-for="metric in quickMetrics" :key="metric.id" :class="metric.className">
+                                            <span class="stat-label">{{ t(metric.labelKey) }}</span>
+                                            <span class="stat-value">{{ metric.value }}</span>
+                                        </article>
+                                    </div>
+                                </div>
+                                <div class="card" v-if="state.emailHistory.length">
+                                    <h2>{{ t('email.history') }}</h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{{ t('email.subject') }}</th>
+                                                <th>Status</th>
+                                                <th>Destinatários</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="job in paginatedEmailHistory" :key="job.id">
+                                                <td>{{ job.assunto }}</td>
+                                                <td>
+                                                    <span :class="emailStatusClass(job.status)">{{ job.status }}</span>
+                                                </td>
+                                                <td>{{ job.destinatarios }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="history-pagination" v-if="emailHistoryTotalPages > 1">
+                                        <button class="secondary" type="button" @click="changeEmailHistoryPage(-1)" :disabled="state.emailHistoryPage === 1">
+                                            ‹ Anterior
+                                        </button>
+                                        <span>Página {{ state.emailHistoryPage }} / {{ emailHistoryTotalPages }}</span>
+                                        <button class="secondary" type="button" @click="changeEmailHistoryPage(1)" :disabled="state.emailHistoryPage === emailHistoryTotalPages">
+                                            Próxima ›
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div v-else-if="activeSection === 'users'" class="grid">
+                            <div v-else-if="activeSection === 'users'" class="grid">
                         <div class="card">
                             <h2>{{ state.userForm.id ? t('users.formTitleEdit') : t('users.formTitleCreate') }}</h2>
                             <form @submit.prevent="saveUser">
@@ -1988,6 +2017,7 @@ const App = {
                                         <option value="bluelight">{{ t('settings.themeOptions.bluelight') }}</option>
                                         <option value="dark">{{ t('settings.themeOptions.dark') }}</option>
                                         <option value="redlight">{{ t('settings.themeOptions.redlight') }}</option>
+                                        <option value="greenlight">{{ t('settings.themeOptions.greenlight') }}</option>
                                     </select>
                                 </label>
                                 <label>{{ t('settings.languageLabel') }}
@@ -2052,6 +2082,8 @@ const App = {
                 </section>
             </div>
         </div>
+            </div>
+        </transition>
     </div>
     `
 };

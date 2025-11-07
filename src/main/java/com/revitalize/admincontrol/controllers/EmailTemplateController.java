@@ -30,7 +30,7 @@ public class EmailTemplateController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<EmailTemplateModel>> list(@PathVariable UUID userId) {
+    public ResponseEntity<List<EmailTemplateModel>> list(@PathVariable("userId") UUID userId) {
         return ResponseEntity.ok(emailTemplateService.findByUsuario(userId));
     }
 
@@ -48,7 +48,7 @@ public class EmailTemplateController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody @Valid EmailTemplateDto dto) {
+    public ResponseEntity<?> update(@PathVariable("id") UUID id, @RequestBody @Valid EmailTemplateDto dto) {
         return emailTemplateService.findById(id)
                 .map(existing -> {
                     if (!existing.getUsuario().getId().equals(dto.getUsuarioId())) {
@@ -64,7 +64,7 @@ public class EmailTemplateController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id) {
+    public ResponseEntity<?> delete(@PathVariable("id") UUID id) {
         return emailTemplateService.findById(id)
                 .map(existing -> {
                     emailTemplateService.delete(existing.getId());

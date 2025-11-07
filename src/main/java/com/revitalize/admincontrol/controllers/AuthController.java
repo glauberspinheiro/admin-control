@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -38,11 +39,15 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginRequest request) {
-        AdmUsuarioModel usuario = admUsuarioRepository.Login(request.getEmail(), request.getSenha());
-        if (usuario == null) {
+        Optional<AdmUsuarioModel> usuarioOpt = admUsuarioRepository.findByEmailAndSenha(
+                request.getEmail(),
+                request.getSenha()
+        );
+        if (usuarioOpt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(Map.of("message", "Usuário ou senha inválidos"));
         }
+        AdmUsuarioModel usuario = usuarioOpt.get();
         UserPreferenceModel preference = userPreferenceService.getOrCreate(usuario);
         boolean hasEmailConfig = emailServerConfigService.hasConfig(usuario.getId());
         return ResponseEntity.ok(new LoginResponse(
