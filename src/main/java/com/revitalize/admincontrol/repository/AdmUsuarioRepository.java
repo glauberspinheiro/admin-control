@@ -9,8 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface AdmUsuarioRepository extends CrudRepository<AdmUsuarioModel, UUID> {
-    Optional<AdmUsuarioModel> findByEmailAndSenha(String email, String senha);
-
     Optional<AdmUsuarioModel> findById(UUID id);
 
     boolean findAllById(UUID id);

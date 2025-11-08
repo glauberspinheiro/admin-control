@@ -1,10 +1,14 @@
 package com.revitalize.admincontrol.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.revitalize.admincontrol.security.EnvironmentAccess;
+import com.revitalize.admincontrol.security.UserRole;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.EnumSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -34,11 +38,24 @@ public class AdmUsuarioModel implements Serializable {
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserPreferenceModel preference;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private UserRole role = UserRole.OPERATOR;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "tb_usuario_environments", joinColumns = @JoinColumn(name = "usuario_id"))
+    @Column(name = "environment", nullable = false, length = 20)
+    private Set<EnvironmentAccess> allowedEnvironments = EnumSet.allOf(EnvironmentAccess.class);
+
     @Column(nullable = false)
     private LocalDateTime dt_cadastro;
 
     @Column(nullable = false)
     private LocalDateTime dt_alteracao_cadastro;
+
+    @Column(nullable = false)
+    private boolean active = true;
 
     public UUID getId() {
         return id;
@@ -102,5 +119,29 @@ public class AdmUsuarioModel implements Serializable {
 
     public void setPreference(UserPreferenceModel preference) {
         this.preference = preference;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Set<EnvironmentAccess> getAllowedEnvironments() {
+        return allowedEnvironments;
+    }
+
+    public void setAllowedEnvironments(Set<EnvironmentAccess> allowedEnvironments) {
+        this.allowedEnvironments = allowedEnvironments;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

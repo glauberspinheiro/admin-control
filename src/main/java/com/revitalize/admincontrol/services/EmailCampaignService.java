@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.util.ByteArrayDataSource;
 import javax.transaction.Transactional;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,6 +33,9 @@ import java.util.stream.Collectors;
 public class EmailCampaignService {
 
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("@([A-Z0-9_]+)");
+    private static final Pattern INLINE_IMAGE_PATTERN = Pattern.compile(
+            "<img\\s+[^>]*src=(['\"])(data:(image/[^;\"']+);base64,([^'\"<>]+))\\1[^>]*>",
+            Pattern.CASE_INSENSITIVE);
 
     private final EmailJobRepository emailJobRepository;
     private static final Logger logger = LoggerFactory.getLogger(EmailCampaignService.class);
@@ -121,7 +125,9 @@ public class EmailCampaignService {
                 Map<String, String> vars = personalizationMap.get(recipient.toLowerCase());
                 String contentToSend = applyPlaceholders(htmlContent, vars);
                 contentToSend = appendSignatureIfNeeded(contentToSend, includeSignature, config.getSignatureHtml());
-                helper.setText(contentToSend, true);
+                InlineImageProcessingResult inlineResult = processInlineImages(contentToSend);
+                helper.setText(inlineResult.getHtml(), true);
+                attachInlineImages(helper, inlineResult.getInlineImages());
                 attachFiles(helper, attachments);
                 sender.send(message);
             } catch (Exception e) {
@@ -225,6 +231,15 @@ public class EmailCampaignService {
         }
     }
 
+    private void attachInlineImages(MimeMessageHelper helper, List<InlineImageAttachment> inlineImages) throws Exception {
+        if (inlineImages == null || inlineImages.isEmpty()) {
+            return;
+        }
+        for (InlineImageAttachment inlineImage : inlineImages) {
+            helper.addInline(inlineImage.getCid(), new ByteArrayDataSource(inlineImage.getData(), inlineImage.getContentType()));
+        }
+    }
+
     private String resolveProtocol(boolean useSsl, String configuredProtocol) {
         if (useSsl) {
             return "smtps";
@@ -241,5 +256,84 @@ public class EmailCampaignService {
             return false;
         }
         return port == 465;
+    }
+
+    private InlineImageProcessingResult processInlineImages(String html) {
+        if (html == null || html.isBlank()) {
+            return new InlineImageProcessingResult(html, Collections.emptyList());
+        }
+        Matcher matcher = INLINE_IMAGE_PATTERN.matcher(html);
+        StringBuffer buffer = new StringBuffer();
+        List<InlineImageAttachment> inlineImages = new ArrayList<>();
+        boolean replaced = false;
+        while (matcher.find()) {
+            String dataUri = matcher.group(2);
+            String contentType = matcher.group(3);
+            String base64Data = matcher.group(4);
+            String cid = "inline-" + UUID.randomUUID();
+            byte[] data;
+            try {
+                data = Base64.getDecoder().decode(base64Data.replaceAll("\\s+", ""));
+            } catch (IllegalArgumentException ex) {
+                logger.warn("Imagem inline ignorada: payload inválido ({})", ex.getMessage());
+                matcher.appendReplacement(buffer, matcher.group(0));
+                continue;
+            }
+            inlineImages.add(new InlineImageAttachment(
+                    cid,
+                    (contentType == null || contentType.isBlank()) ? "image/png" : contentType,
+                    data
+            ));
+            String replacementTag = matcher.group(0).replace(dataUri, "cid:" + cid);
+            matcher.appendReplacement(buffer, Matcher.quoteReplacement(replacementTag));
+            replaced = true;
+        }
+        matcher.appendTail(buffer);
+        return new InlineImageProcessingResult(
+                replaced ? buffer.toString() : html,
+                inlineImages
+        );
+    }
+
+    private static class InlineImageAttachment {
+        private final String cid;
+        private final String contentType;
+        private final byte[] data;
+
+        InlineImageAttachment(String cid, String contentType, byte[] data) {
+            this.cid = cid;
+            this.contentType = contentType;
+            this.data = data;
+        }
+
+        public String getCid() {
+            return cid;
+        }
+
+        public String getContentType() {
+            return contentType;
+        }
+
+        public byte[] getData() {
+            return data;
+        }
+    }
+
+    private static class InlineImageProcessingResult {
+        private final String html;
+        private final List<InlineImageAttachment> inlineImages;
+
+        InlineImageProcessingResult(String html, List<InlineImageAttachment> inlineImages) {
+            this.html = html;
+            this.inlineImages = inlineImages;
+        }
+
+        public String getHtml() {
+            return html;
+        }
+
+        public List<InlineImageAttachment> getInlineImages() {
+            return inlineImages;
+        }
     }
 }

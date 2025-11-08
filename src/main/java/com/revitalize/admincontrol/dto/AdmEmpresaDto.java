@@ -1,29 +1,52 @@
 package com.revitalize.admincontrol.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class AdmEmpresaDto {
 
-    @Size(max=14)
-    @Pattern(regexp = "\\d{14}", message = "CNPJ deve conter 14 dígitos numéricos")
+    @Size(min = 14, max = 20)
     @NotBlank
     private String cnpj;
+
     @NotBlank
     private String nomeempresa;
-    @NotBlank
+
     private String nomefantasia;
-    @NotBlank
+
     private String email;
-    @NotBlank
+
     private String contato;
-    @NotBlank
+
     private String telefone;
-    @NotBlank
+
     private String mensalista;
-    @NotBlank
+
     private String status;
+
+    @Size(max = 9)
+    private String cep;
+
+    private String logradouro;
+
+    private String numero;
+
+    private String complemento;
+
+    private String bairro;
+
+    private String municipio;
+
+    @Size(max = 2)
+    private String uf;
+
+    private String regimeTributario;
+
+    private String atividadePrincipal;
+
+    private String atividadesSecundarias;
+
+    private String socios;
 
     public String getContato() {
         return contato;
@@ -87,6 +110,94 @@ public class AdmEmpresaDto {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getRegimeTributario() {
+        return regimeTributario;
+    }
+
+    public void setRegimeTributario(String regimeTributario) {
+        this.regimeTributario = regimeTributario;
+    }
+
+    public String getAtividadePrincipal() {
+        return atividadePrincipal;
+    }
+
+    public void setAtividadePrincipal(String atividadePrincipal) {
+        this.atividadePrincipal = atividadePrincipal;
+    }
+
+    public String getAtividadesSecundarias() {
+        return atividadesSecundarias;
+    }
+
+    public void setAtividadesSecundarias(String atividadesSecundarias) {
+        this.atividadesSecundarias = atividadesSecundarias;
+    }
+
+    public String getSocios() {
+        return socios;
+    }
+
+    public void setSocios(String socios) {
+        this.socios = socios;
     }
 
 }

@@ -1,0 +1,30 @@
+ALTER TABLE tb_empresa
+    ALTER COLUMN nomefantasia DROP NOT NULL,
+    ALTER COLUMN email DROP NOT NULL,
+    ALTER COLUMN telefone DROP NOT NULL,
+    ALTER COLUMN contato DROP NOT NULL,
+    ALTER COLUMN mensalista DROP NOT NULL,
+    ALTER COLUMN telefone TYPE VARCHAR(20);
+
+ALTER TABLE tb_empresa
+    ADD COLUMN IF NOT EXISTS cep VARCHAR(9),
+    ADD COLUMN IF NOT EXISTS logradouro VARCHAR(150),
+    ADD COLUMN IF NOT EXISTS numero VARCHAR(20),
+    ADD COLUMN IF NOT EXISTS complemento VARCHAR(150),
+    ADD COLUMN IF NOT EXISTS bairro VARCHAR(150),
+    ADD COLUMN IF NOT EXISTS municipio VARCHAR(150),
+    ADD COLUMN IF NOT EXISTS uf VARCHAR(2),
+    ADD COLUMN IF NOT EXISTS regime_tributario VARCHAR(160),
+    ADD COLUMN IF NOT EXISTS atividade_principal VARCHAR(255),
+    ADD COLUMN IF NOT EXISTS atividades_secundarias TEXT,
+    ADD COLUMN IF NOT EXISTS socios TEXT;
+
+UPDATE tb_empresa
+SET mensalista = COALESCE(mensalista, 'N');
+
+UPDATE tb_empresa
+SET status = COALESCE(status, 'A');
+
+ALTER TABLE tb_empresa
+    ALTER COLUMN mensalista SET DEFAULT 'N',
+    ALTER COLUMN status SET DEFAULT 'A';

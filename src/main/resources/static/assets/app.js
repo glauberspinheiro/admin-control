@@ -15,6 +15,11 @@ const translations = {
         'header.logged': 'Bem-vindo, {name}.',
         'header.loginPrompt': 'Faça login para realizar ações críticas.',
         'header.loginShortcut': 'Ir para login',
+        'header.menu.accessHistory': 'Histórico de acesso',
+        'header.menu.changePassword': 'Trocar senha',
+        'header.menu.logout': 'Sair',
+        'header.menu.loginRequired': 'Faça login para acessar esta opção.',
+        'header.menu.accessHistoryInfo': 'Histórico de acesso em breve disponível.',
         'dashboard.metricsTitle': 'Indicadores rápidos',
         'dashboard.metricsDescription': 'Resumo atualizado das principais entidades.',
         'dashboard.users': 'Usuários',
@@ -45,6 +50,38 @@ const translations = {
         'companies.tableFantasy': 'Nome fantasia',
         'companies.tableCnpj': 'CNPJ',
         'companies.tableStatus': 'Status',
+        'companies.tableRegime': 'Regime',
+        'companies.lookupTitle': 'Consultar CNPJ',
+        'companies.lookupDescription': 'Informe o CNPJ para buscar dados oficiais automaticamente.',
+        'companies.lookupPlaceholder': '00.000.000/0000-00',
+        'companies.lookupButton': 'Consultar',
+        'companies.manualButton': 'Cadastro manual',
+        'companies.newManualButton': 'Novo cadastro manual',
+        'companies.latestTitle': 'Últimas empresas cadastradas',
+        'companies.empty': 'Nenhuma empresa cadastrada ainda.',
+        'companies.fieldRegime': 'Regime tributário',
+        'companies.fieldCep': 'CEP',
+        'companies.fieldStreet': 'Logradouro',
+        'companies.fieldNumber': 'Número',
+        'companies.fieldComplement': 'Complemento',
+        'companies.fieldNeighborhood': 'Bairro',
+        'companies.fieldCity': 'Cidade',
+        'companies.fieldState': 'UF',
+        'companies.fieldMainActivity': 'Atividade principal',
+        'companies.fieldSecondaryActivities': 'Atividades secundárias',
+        'companies.fieldPartners': 'Sócios',
+        'companies.partnersPlaceholder': 'Nome do sócio - Qualificação',
+        'companies.tabs.general': 'Cadastro',
+        'companies.tabs.address': 'Endereço',
+        'companies.tabs.activities': 'Atividades',
+        'companies.tabs.partners': 'Sócios',
+        'companies.regimes.simple': 'Simples Nacional',
+        'companies.regimes.mei': 'Microempreendedor Individual',
+        'companies.regimes.lucro': 'Lucro presumido',
+        'companies.regimes.unknown': 'Não informado',
+        'companies.lookupNotFound': 'CNPJ não encontrado. Complete os dados manualmente.',
+        'companies.lookupRateLimit': 'Limite de consultas atingido. Aguarde e tente novamente.',
+        'companies.invalidCnpj': 'Informe um CNPJ válido com 14 dígitos.',
         'productTypes.formTitleCreate': 'Novo tipo de produto',
         'productTypes.formTitleEdit': 'Editar tipo de produto',
         'productTypes.fieldDescription': 'Descrição',
@@ -132,6 +169,8 @@ const translations = {
         'common.edit': 'Editar',
         'common.delete': 'Excluir',
         'common.actions': 'Ações',
+        'common.cancel': 'Cancelar',
+        'common.close': 'Fechar',
         'common.select': 'Selecione',
         'common.loading': 'Carregando...',
         'common.yes': 'Sim',
@@ -168,6 +207,11 @@ const translations = {
         'header.logged': 'Welcome, {name}.',
         'header.loginPrompt': 'Sign in to perform critical actions.',
         'header.loginShortcut': 'Go to login',
+        'header.menu.accessHistory': 'Access history',
+        'header.menu.changePassword': 'Change password',
+        'header.menu.logout': 'Sign out',
+        'header.menu.loginRequired': 'Please sign in to use this option.',
+        'header.menu.accessHistoryInfo': 'Access logs available soon.',
         'dashboard.metricsTitle': 'Quick metrics',
         'dashboard.metricsDescription': 'Up-to-date snapshot of your main entities.',
         'dashboard.users': 'Users',
@@ -198,6 +242,38 @@ const translations = {
         'companies.tableFantasy': 'Trade name',
         'companies.tableCnpj': 'Tax ID',
         'companies.tableStatus': 'Status',
+        'companies.tableRegime': 'Regime',
+        'companies.lookupTitle': 'Consult CNPJ',
+        'companies.lookupDescription': 'Enter the tax ID to fetch official data automatically.',
+        'companies.lookupPlaceholder': '00.000.000/0000-00',
+        'companies.lookupButton': 'Search',
+        'companies.manualButton': 'Manual entry',
+        'companies.newManualButton': 'New manual entry',
+        'companies.latestTitle': 'Last registered companies',
+        'companies.empty': 'No companies registered yet.',
+        'companies.fieldRegime': 'Tax regime',
+        'companies.fieldCep': 'Postal code',
+        'companies.fieldStreet': 'Street',
+        'companies.fieldNumber': 'Number',
+        'companies.fieldComplement': 'Complement',
+        'companies.fieldNeighborhood': 'District',
+        'companies.fieldCity': 'City',
+        'companies.fieldState': 'State',
+        'companies.fieldMainActivity': 'Main activity',
+        'companies.fieldSecondaryActivities': 'Secondary activities',
+        'companies.fieldPartners': 'Partners',
+        'companies.partnersPlaceholder': 'Partner name - Role',
+        'companies.tabs.general': 'Registration',
+        'companies.tabs.address': 'Address',
+        'companies.tabs.activities': 'Activities',
+        'companies.tabs.partners': 'Partners',
+        'companies.regimes.simple': 'Simples Nacional',
+        'companies.regimes.mei': 'MEI',
+        'companies.regimes.lucro': 'Presumed profit',
+        'companies.regimes.unknown': 'Not informed',
+        'companies.lookupNotFound': 'CNPJ not found. Please fill the form manually.',
+        'companies.lookupRateLimit': 'Lookup limit reached. Please wait and try again.',
+        'companies.invalidCnpj': 'Provide a valid 14-digit CNPJ.',
         'productTypes.formTitleCreate': 'New product type',
         'productTypes.formTitleEdit': 'Edit product type',
         'productTypes.fieldDescription': 'Description',
@@ -285,6 +361,8 @@ const translations = {
         'common.edit': 'Edit',
         'common.delete': 'Delete',
         'common.actions': 'Actions',
+        'common.cancel': 'Cancel',
+        'common.close': 'Close',
         'common.select': 'Select',
         'common.loading': 'Loading...',
         'common.yes': 'Yes',
@@ -322,6 +400,13 @@ const sections = [
     { id: 'settings', labelKey: 'nav.settings' }
 ];
 
+const companyTabs = [
+    { id: 'general', labelKey: 'companies.tabs.general' },
+    { id: 'address', labelKey: 'companies.tabs.address' },
+    { id: 'activities', labelKey: 'companies.tabs.activities' },
+    { id: 'partners', labelKey: 'companies.tabs.partners' }
+];
+
 const quickMetricVisuals = [
     { id: 'users', labelKey: 'dashboard.users', className: 'stat-card--users' },
     { id: 'companies', labelKey: 'dashboard.companies', className: 'stat-card--companies' },
@@ -345,7 +430,28 @@ const SESSION_KEY = 'revitalizeSession';
 const SESSION_DURATION_MS = 30 * 60 * 1000;
 
 const emptyUser = () => ({ id: null, cpf: '', nome: '', email: '', senha: '' });
-const emptyCompany = () => ({ id: null, cnpj: '', nomeempresa: '', nomefantasia: '', email: '', contato: '', telefone: '', mensalista: 'S', status: 'A' });
+const emptyCompany = () => ({
+    id: null,
+    cnpj: '',
+    nomeempresa: '',
+    nomefantasia: '',
+    email: '',
+    contato: '',
+    telefone: '',
+    mensalista: 'N',
+    status: 'A',
+    regimeTributario: '',
+    atividadePrincipal: '',
+    atividadesSecundarias: '',
+    socios: '',
+    cep: '',
+    logradouro: '',
+    numero: '',
+    complemento: '',
+    bairro: '',
+    municipio: '',
+    uf: ''
+});
 const emptyProductType = () => ({ id: null, descricao: '', tipo: '', status: 'A' });
 const emptyProduct = () => ({ id: null, tipoProdutoId: '', nome_produto: '', medicao: '', status: 'A' });
 const defaultServerConfig = () => ({
@@ -374,6 +480,13 @@ const quillToolbarOptions = [
     ['link', 'image'],
     ['clean']
 ];
+const quillFormats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike',
+    'list', 'bullet',
+    'align',
+    'link', 'image'
+];
 
 const normalizePlaceholderKey = (value = '') => value
     .normalize('NFD')
@@ -382,7 +495,149 @@ const normalizePlaceholderKey = (value = '') => value
     .replace(/^_+|_+$/g, '')
     .toUpperCase();
 
+const digitsOnly = (value = '') => String(value || '').replace(/\D/g, '');
+
+const isValidCnpj = (value = '') => {
+    const cnpj = digitsOnly(value);
+    if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) {
+        return false;
+    }
+    const calculate = (length) => {
+        const weights = length === 12
+            ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+            : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        const slice = cnpj.slice(0, weights.length);
+        const total = slice.split('').reduce((sum, digit, index) => sum + Number(digit) * weights[index], 0);
+        const remainder = total % 11;
+        return remainder < 2 ? 0 : 11 - remainder;
+    };
+    const firstVerifier = calculate(12);
+    const secondVerifier = calculate(13);
+    return Number(cnpj[12]) === firstVerifier && Number(cnpj[13]) === secondVerifier;
+};
+
+const formatCnpj = (value = '') => {
+    const cnpj = digitsOnly(value);
+    if (cnpj.length !== 14) {
+        return value;
+    }
+    return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+};
+
 const stripHtml = (html = '') => html.replace(/<[^>]*>/g, '').trim();
+
+const companyFormTemplate = `
+    <div class="company-tabs" role="tablist">
+        <button
+            v-for="tab in companyTabs"
+            :key="tab.id"
+            type="button"
+            class="tab-button"
+            :class="{ 'tab-button--active': state.activeCompanyTab === tab.id }"
+            @click="state.activeCompanyTab = tab.id"
+        >
+            {{ t(tab.labelKey) }}
+        </button>
+    </div>
+    <form class="company-tab-panel" @submit.prevent="saveCompany">
+        <div v-show="state.activeCompanyTab === 'general'" class="company-tab">
+            <div class="form-grid">
+                <label>{{ t('companies.fieldCnpj') }}
+                    <input v-model="state.companyForm.cnpj" required />
+                </label>
+                <label>{{ t('companies.fieldCorporateName') }}
+                    <input v-model="state.companyForm.nomeempresa" required />
+                </label>
+                <label>{{ t('companies.fieldFantasyName') }}
+                    <input v-model="state.companyForm.nomefantasia" />
+                </label>
+                <label>{{ t('companies.fieldEmail') }}
+                    <input type="email" v-model="state.companyForm.email" />
+                </label>
+                <label>{{ t('companies.fieldPhone') }}
+                    <input v-model="state.companyForm.telefone" />
+                </label>
+                <label>{{ t('companies.fieldContact') }}
+                    <input v-model="state.companyForm.contato" />
+                </label>
+                <label>{{ t('companies.fieldRegime') }}
+                    <select v-model="state.companyForm.regimeTributario">
+                        <option value="">{{ t('common.select') }}</option>
+                        <option value="Simples Nacional">{{ t('companies.regimes.simple') }}</option>
+                        <option value="MEI">{{ t('companies.regimes.mei') }}</option>
+                        <option value="Lucro presumido">{{ t('companies.regimes.lucro') }}</option>
+                    </select>
+                </label>
+                <label>{{ t('companies.fieldMonthly') }}
+                    <select v-model="state.companyForm.mensalista">
+                        <option value="S">{{ t('common.yes') }}</option>
+                        <option value="N">{{ t('common.no') }}</option>
+                    </select>
+                </label>
+                <label>{{ t('companies.fieldStatus') }}
+                    <select v-model="state.companyForm.status">
+                        <option value="A">{{ t('status.active') }}</option>
+                        <option value="I">{{ t('status.inactive') }}</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div v-show="state.activeCompanyTab === 'address'" class="company-tab">
+            <div class="form-grid">
+                <label>{{ t('companies.fieldCep') }}
+                    <input v-model="state.companyForm.cep" />
+                </label>
+                <label>{{ t('companies.fieldStreet') }}
+                    <input v-model="state.companyForm.logradouro" />
+                </label>
+                <label>{{ t('companies.fieldNumber') }}
+                    <input v-model="state.companyForm.numero" />
+                </label>
+                <label>{{ t('companies.fieldComplement') }}
+                    <input v-model="state.companyForm.complemento" />
+                </label>
+                <label>{{ t('companies.fieldNeighborhood') }}
+                    <input v-model="state.companyForm.bairro" />
+                </label>
+                <label>{{ t('companies.fieldCity') }}
+                    <input v-model="state.companyForm.municipio" />
+                </label>
+                <label>{{ t('companies.fieldState') }}
+                    <input v-model="state.companyForm.uf" maxlength="2" />
+                </label>
+            </div>
+        </div>
+
+        <div v-show="state.activeCompanyTab === 'activities'" class="company-tab">
+            <label>{{ t('companies.fieldMainActivity') }}
+                <textarea rows="3" v-model="state.companyForm.atividadePrincipal"></textarea>
+            </label>
+            <label>{{ t('companies.fieldSecondaryActivities') }}
+                <textarea rows="4" v-model="state.companyForm.atividadesSecundarias"></textarea>
+            </label>
+        </div>
+
+        <div v-show="state.activeCompanyTab === 'partners'" class="company-tab">
+            <label>{{ t('companies.fieldPartners') }}
+                <textarea rows="5" v-model="state.companyForm.socios" :placeholder="t('companies.partnersPlaceholder')"></textarea>
+            </label>
+        </div>
+
+        <div class="action-buttons company-form-actions">
+            <button class="primary" type="submit">{{ t('common.save') }}</button>
+            <button class="secondary" type="button" @click="resetForm('company')">{{ t('common.clear') }}</button>
+            <button
+                v-if="state.showManualCompanyModal"
+                class="ghost"
+                type="button"
+                @click="closeManualCompanyModal"
+            >
+                {{ t('common.cancel') }}
+            </button>
+        </div>
+    </form>
+`;
 
 const renderTemplateWithVariables = (html = '', values = {}) => {
     if (!html || !values || Object.keys(values).length === 0) {
@@ -430,6 +685,11 @@ const App = {
             userForm: emptyUser(),
             companies: [],
             companyForm: emptyCompany(),
+            companyLookupInput: '',
+            companyLookupLoading: false,
+            companyLookupReady: false,
+            activeCompanyTab: 'general',
+            showManualCompanyModal: false,
             productTypes: [],
             productTypeForm: emptyProductType(),
             products: [],
@@ -449,7 +709,22 @@ const App = {
             signatureEditor: null,
             signatureEditorReady: false,
             emailHistory: [],
-            emailHistoryPage: 1
+            emailHistoryPage: 1,
+            userMenuOpen: false
+        });
+
+        const latestCompanies = computed(() => {
+            const resolveTime = (entity = {}) => {
+                const value = entity.dt_alteracao_cadastro
+                    || entity.dt_cadastro
+                    || entity.dtAlteracaoCadastro
+                    || entity.dtCadastro;
+                const timestamp = value ? new Date(value).getTime() : 0;
+                return Number.isNaN(timestamp) ? 0 : timestamp;
+            };
+            return [...state.companies]
+                .sort((a, b) => resolveTime(b) - resolveTime(a))
+                .slice(0, 10);
         });
 
         const translate = (key, params = {}) => {
@@ -488,6 +763,11 @@ const App = {
             }, type === 'error' ? 7000 : 4000);
         };
 
+        const authHeaders = () => {
+            const token = state.loggedUser?.token?.value;
+            return token ? { Authorization: `Bearer ${token}` } : {};
+        };
+
         let sessionIntervalId = null;
         let quillConstructor = null;
         let templateEditorChangeHandler = null;
@@ -502,6 +782,15 @@ const App = {
             return quillConstructor;
         };
 
+        const forceEditorDirection = (quill) => {
+            if (!quill) return;
+            const root = quill.root;
+            root.setAttribute('dir', 'ltr');
+            root.style.direction = 'ltr';
+            root.style.unicodeBidi = 'plaintext';
+            root.style.textAlign = 'left';
+        };
+
         const createQuill = async (selector, placeholder = '') => {
             const Quill = await loadQuill();
             const quill = new Quill(selector, {
@@ -509,9 +798,11 @@ const App = {
                 placeholder,
                 modules: {
                     toolbar: quillToolbarOptions
-                }
+                },
+                formats: quillFormats
             });
             addImageUploadHandler(quill);
+            forceEditorDirection(quill);
             return quill;
         };
 
@@ -552,6 +843,7 @@ const App = {
             if (!editor) return;
             const safeHtml = html || '';
             editor.clipboard.dangerouslyPasteHTML(safeHtml, 'silent');
+            forceEditorDirection(editor);
         };
 
         const destroyTemplateEditor = () => {
@@ -620,6 +912,7 @@ const App = {
             if (typeof window !== 'undefined' && window.localStorage) {
                 window.localStorage.removeItem(SESSION_KEY);
             }
+            apiClient.clearToken();
             if (state.loggedUser) {
                 state.loggedUser = null;
             }
@@ -695,6 +988,7 @@ const App = {
             const session = getActiveSession();
             if (!session) return;
             state.loggedUser = session.user;
+            apiClient.setToken(session.user?.token?.value || null);
             state.theme = session.user.theme || state.theme;
             state.language = session.user.language || state.language;
             state.serverConfig.usuarioId = session.user.id;
@@ -725,6 +1019,9 @@ const App = {
                 }
                 return result;
             } catch (error) {
+                if (error?.status === 401) {
+                    clearSession(true);
+                }
                 handleError(error);
                 throw error;
             } finally {
@@ -739,6 +1036,67 @@ const App = {
 
         const loadCompanies = async () => {
             state.companies = await apiClient.get(endpoints.companies);
+        };
+
+        const resetCompanyState = (preserveLookupInput = false) => {
+            Object.assign(state.companyForm, emptyCompany());
+            state.companyLookupReady = false;
+            state.activeCompanyTab = 'general';
+            if (!preserveLookupInput) {
+                state.companyLookupInput = '';
+            }
+        };
+
+        const openManualCompanyModal = (company = null) => {
+            if (company) {
+                Object.assign(state.companyForm, emptyCompany(), company);
+            } else if (!state.companyForm.cnpj && state.companyLookupInput) {
+                state.companyForm.cnpj = digitsOnly(state.companyLookupInput);
+            }
+            state.companyLookupReady = false;
+            state.activeCompanyTab = 'general';
+            state.showManualCompanyModal = true;
+        };
+
+        const closeManualCompanyModal = () => {
+            state.showManualCompanyModal = false;
+            resetCompanyState(true);
+        };
+
+        const lookupCompany = async () => {
+            const digits = digitsOnly(state.companyLookupInput);
+            if (!isValidCnpj(digits)) {
+                pushNotification('warning', translate('companies.invalidCnpj'));
+                return;
+            }
+            state.companyLookupLoading = true;
+            try {
+                const payload = await apiClient.get(`${endpoints.companies}/lookup/${digits}`);
+                Object.assign(state.companyForm, emptyCompany(), payload);
+                state.companyLookupReady = true;
+                state.activeCompanyTab = 'general';
+                state.showManualCompanyModal = false;
+            } catch (error) {
+                if (error.status === 404) {
+                    pushNotification('warning', translate('companies.lookupNotFound'));
+                    resetCompanyState(true);
+                    state.companyForm.cnpj = digits;
+                    openManualCompanyModal();
+                } else if (error.status === 429) {
+                    pushNotification('warning', translate('companies.lookupRateLimit'));
+                } else if (error.status === 400) {
+                    pushNotification('warning', translate('companies.invalidCnpj'));
+                } else {
+                    handleError(error);
+                }
+            } finally {
+                state.companyLookupLoading = false;
+            }
+        };
+
+        const startManualCompanyCreation = () => {
+            resetCompanyState(true);
+            openManualCompanyModal();
         };
 
         const loadProductTypes = async () => {
@@ -760,7 +1118,9 @@ const App = {
 
         const loadServerConfig = async () => {
             if (!state.loggedUser) return;
-            const response = await fetch(`${endpoints.serverConfig}/${state.loggedUser.id}`);
+            const response = await fetch(`${endpoints.serverConfig}/${state.loggedUser.id}`, {
+                headers: authHeaders()
+            });
             if (response.status === 200) {
                 const data = await response.json();
                 if (typeof data.signatureHtml !== 'string') {
@@ -794,7 +1154,9 @@ const App = {
 
         const loadPreferences = async () => {
             if (!state.loggedUser) return;
-            const response = await fetch(`${endpoints.preferences}/${state.loggedUser.id}`);
+            const response = await fetch(`${endpoints.preferences}/${state.loggedUser.id}`, {
+                headers: authHeaders()
+            });
             if (response.status === 200) {
                 const pref = await response.json();
                 state.theme = pref.theme;
@@ -856,25 +1218,44 @@ const App = {
         };
 
         const saveCompany = async () => {
+            const payload = { ...state.companyForm };
+            const sanitizedCnpj = digitsOnly(payload.cnpj);
+            if (!isValidCnpj(sanitizedCnpj)) {
+                pushNotification('warning', translate('companies.invalidCnpj'));
+                return;
+            }
+            Object.keys(payload).forEach((key) => {
+                if (typeof payload[key] === 'string') {
+                    payload[key] = payload[key].trim();
+                    if (payload[key] === '') {
+                        payload[key] = null;
+                    }
+                }
+            });
+            payload.cnpj = sanitizedCnpj;
             await perform(async () => {
-                const payload = { ...state.companyForm };
                 if (payload.id) {
                     await apiClient.put(`${endpoints.companies}/${payload.id}`, payload);
                 } else {
                     await apiClient.post(endpoints.companies, payload);
                 }
-                Object.assign(state.companyForm, emptyCompany());
                 await loadCompanies();
             }, 'feedback.companySaved');
+            state.showManualCompanyModal = false;
+            resetCompanyState();
         };
 
-        const editCompany = (company) => Object.assign(state.companyForm, company);
+        const editCompany = (company) => openManualCompanyModal(company);
 
         const deleteCompany = async (id) => {
             await perform(async () => {
                 await apiClient.delete(`${endpoints.companies}/${id}`);
                 await loadCompanies();
             }, 'feedback.companyDeleted');
+            if (state.companyForm.id === id) {
+                state.showManualCompanyModal = false;
+                resetCompanyState();
+            }
         };
 
         const saveProductType = async () => {
@@ -936,6 +1317,7 @@ const App = {
             try {
                 const response = await perform(async () => apiClient.post(endpoints.login, state.loginForm), 'feedback.loginSuccess');
                 state.loggedUser = response;
+                apiClient.setToken(response?.token?.value || null);
                 state.theme = response.theme;
                 state.language = response.language;
                 state.serverConfig.usuarioId = response.id;
@@ -994,12 +1376,21 @@ const App = {
                 return;
             }
             state.templateEditor = await createQuill('#template-editor');
-            setEditorContent(state.templateEditor, state.templateForm.conteudoHtml);
+            const initialHtml = sanitizeRichTextHtml(state.templateForm.conteudoHtml || '');
+            if (initialHtml) {
+                const delta = state.templateEditor.clipboard.convert(initialHtml);
+                state.templateEditor.setContents(delta, 'silent');
+            }
             templateEditorChangeHandler = () => {
-                state.templateForm.conteudoHtml = state.templateEditor.root.innerHTML;
+                const content = getEditorHtml(state.templateEditor);
+                if (content !== state.templateForm.conteudoHtml) {
+                    state.templateForm.conteudoHtml = content;
+                }
             };
             state.templateEditor.on('text-change', templateEditorChangeHandler);
             state.templateEditorReady = true;
+            await nextTick();
+            forceEditorDirection(state.templateEditor);
         };
 
         const ensureTemplateEditor = async () => {
@@ -1336,7 +1727,14 @@ const App = {
         const resetForm = (formName) => {
             const strategies = {
                 user: () => Object.assign(state.userForm, emptyUser()),
-                company: () => Object.assign(state.companyForm, emptyCompany()),
+                company: () => {
+                    if (state.showManualCompanyModal) {
+                        Object.assign(state.companyForm, emptyCompany());
+                        state.activeCompanyTab = 'general';
+                    } else {
+                        resetCompanyState();
+                    }
+                },
                 productType: () => Object.assign(state.productTypeForm, emptyProductType()),
                 product: () => Object.assign(state.productForm, emptyProduct()),
                 template: () => {
@@ -1347,6 +1745,48 @@ const App = {
                 }
             };
             strategies[formName]?.();
+        };
+
+        const clearAllForms = () => {
+            ['user', 'company', 'productType', 'product', 'template'].forEach((form) => resetForm(form));
+            Object.assign(state.loginForm, { email: '', senha: '' });
+            Object.assign(state.recoverForm, { email: '' });
+            Object.assign(state.emailSingleForm, emptyEmailSingleForm());
+            if (state.emailSingleEditor) {
+                setEditorContent(state.emailSingleEditor, '');
+            }
+            Object.assign(state.emailBulkForm, emptyEmailBulkForm());
+            clearBulkImport();
+        };
+
+        const requireLoggedOption = () => {
+            if (!state.loggedUser) {
+                pushNotification('warning', translate('header.menu.loginRequired'));
+                navigate('login');
+                state.userMenuOpen = false;
+                return false;
+            }
+            return true;
+        };
+
+        const viewAccessHistory = () => {
+            if (!requireLoggedOption()) return;
+            pushNotification('info', translate('header.menu.accessHistoryInfo'));
+            state.userMenuOpen = false;
+        };
+
+        const goToPasswordChange = () => {
+            state.userMenuOpen = false;
+            navigate('forgot');
+        };
+
+        const logoutUser = () => {
+            state.userMenuOpen = false;
+            clearSession(false);
+        };
+
+        const toggleUserMenu = () => {
+            state.userMenuOpen = !state.userMenuOpen;
         };
 
         const statusLabel = (status) => status === 'A' ? translate('status.active') : translate('status.inactive');
@@ -1420,6 +1860,9 @@ const App = {
         watch(() => state.language, (lang) => {
             document.documentElement.setAttribute('lang', lang);
         }, { immediate: true });
+        watch(currentRoute, () => {
+            state.userMenuOpen = false;
+        });
 
         watch(activeSection, async (section, previousSection) => {
             if (previousSection === 'emailTemplates' && section !== 'emailTemplates') {
@@ -1462,16 +1905,22 @@ const App = {
 
         return {
             sections,
+            companyTabs,
             currentRoute,
             activeSection,
             state,
             statistics,
+            latestCompanies,
             bulkPreviewRows,
             bulkRenderedTemplate,
             paginatedEmailHistory,
             emailHistoryTotalPages,
+            formatCnpj,
             t: translate,
             setSection: (id) => {
+                if (activeSection.value === id) return;
+                state.userMenuOpen = false;
+                clearAllForms();
                 activeSection.value = id;
             },
             saveUser,
@@ -1480,6 +1929,10 @@ const App = {
             saveCompany,
             editCompany,
             deleteCompany,
+            lookupCompany,
+            startManualCompanyCreation,
+            openManualCompanyModal,
+            closeManualCompanyModal,
             saveProductType,
             editProductType,
             deleteProductType,
@@ -1508,7 +1961,11 @@ const App = {
             pushNotification,
             navigate,
             loadTemplates,
-            quickMetrics
+            quickMetrics,
+            toggleUserMenu,
+            viewAccessHistory,
+            goToPasswordChange,
+            logoutUser
         };
     },
     template: `
@@ -1573,9 +2030,19 @@ const App = {
                                 <p v-if="state.loggedUser">{{ t('header.logged', { name: state.loggedUser.nome }) }}</p>
                                 <p v-else>{{ t('header.loginPrompt') }}</p>
                             </div>
-                            <div class="header-actions">
-                                <button class="link-button" type="button" @click="navigate('login')">🔐 {{ t('header.loginShortcut') }}</button>
+                    <div class="header-actions">
+                        <div class="user-menu">
+                            <button class="user-menu__trigger" type="button" @click="toggleUserMenu">
+                                <span>{{ state.loggedUser?.nome || t('header.loginShortcut') }}</span>
+                                <span class="user-menu__chevron" aria-hidden="true">▾</span>
+                            </button>
+                            <div v-if="state.userMenuOpen" class="user-menu__panel">
+                                <button type="button" @click="viewAccessHistory">{{ t('header.menu.accessHistory') }}</button>
+                                <button type="button" @click="goToPasswordChange">{{ t('header.menu.changePassword') }}</button>
+                                <button type="button" @click="logoutUser">{{ t('header.menu.logout') }}</button>
                             </div>
+                        </div>
+                    </div>
                         </div>
                     </header>
                     <div class="main-container">
@@ -1683,67 +2150,89 @@ const App = {
                         </div>
                     </div>
 
-                    <div v-else-if="activeSection === 'companies'" class="grid">
-                        <div class="card">
-                            <h2>{{ state.companyForm.id ? t('companies.formTitleEdit') : t('companies.formTitleCreate') }}</h2>
-                            <form @submit.prevent="saveCompany">
-                                <label>{{ t('companies.fieldCorporateName') }}
-                                    <input v-model="state.companyForm.nomeempresa" required />
-                                </label>
-                                <label>{{ t('companies.fieldFantasyName') }}
-                                    <input v-model="state.companyForm.nomefantasia" required />
-                                </label>
+                    <div v-else-if="activeSection === 'companies'" class="companies-layout">
+                        <div class="card company-lookup-card">
+                            <div class="card-header">
+                                <h2>{{ t('companies.lookupTitle') }}</h2>
+                                <p>{{ t('companies.lookupDescription') }}</p>
+                            </div>
+                            <form class="company-lookup-form" @submit.prevent="lookupCompany">
                                 <label>{{ t('companies.fieldCnpj') }}
-                                    <input v-model="state.companyForm.cnpj" required />
-                                </label>
-                                <label>{{ t('companies.fieldEmail') }}
-                                    <input type="email" v-model="state.companyForm.email" required />
-                                </label>
-                                <label>{{ t('companies.fieldContact') }}
-                                    <input v-model="state.companyForm.contato" required />
-                                </label>
-                                <label>{{ t('companies.fieldPhone') }}
-                                    <input v-model="state.companyForm.telefone" required />
-                                </label>
-                                <label>{{ t('companies.fieldMonthly') }}
-                                    <input v-model="state.companyForm.mensalista" maxlength="1" required />
-                                </label>
-                                <label>{{ t('companies.fieldStatus') }}
-                                    <input v-model="state.companyForm.status" maxlength="1" required />
+                                    <input
+                                        v-model="state.companyLookupInput"
+                                        :placeholder="t('companies.lookupPlaceholder')"
+                                        required
+                                    />
                                 </label>
                                 <div class="action-buttons">
-                                    <button class="primary" type="submit">{{ t('common.save') }}</button>
-                                    <button class="secondary" type="button" @click="resetForm('company')">{{ t('common.clear') }}</button>
+                                    <button class="primary" type="submit" :disabled="state.companyLookupLoading">
+                                        <span v-if="state.companyLookupLoading">{{ t('common.loading') }}</span>
+                                        <span v-else>{{ t('companies.lookupButton') }}</span>
+                                    </button>
+                                    <button class="secondary" type="button" @click="startManualCompanyCreation">
+                                        {{ t('companies.manualButton') }}
+                                    </button>
                                 </div>
                             </form>
                         </div>
-                        <div class="card">
-                            <h2>{{ t('companies.listTitle') }}</h2>
+                        <div v-if="state.companyLookupReady" class="card company-form-card">
+                            ${companyFormTemplate}
+                        </div>
+                        <div class="card company-list-card">
+                            <div class="card-header">
+                                <h2>{{ t('companies.latestTitle') }}</h2>
+                                <button class="secondary" type="button" @click="startManualCompanyCreation">
+                                    {{ t('companies.newManualButton') }}
+                                </button>
+                            </div>
                             <table>
                                 <thead>
                                     <tr>
                                         <th>{{ t('companies.tableFantasy') }}</th>
                                         <th>{{ t('companies.tableCnpj') }}</th>
+                                        <th>{{ t('companies.tableRegime') }}</th>
                                         <th>{{ t('companies.tableStatus') }}</th>
                                         <th>{{ t('common.actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="company in state.companies" :key="company.id">
-                                        <td>{{ company.nomefantasia }}</td>
-                                        <td>{{ company.cnpj }}</td>
+                                    <tr v-if="!latestCompanies.length">
+                                        <td colspan="5">{{ t('companies.empty') }}</td>
+                                    </tr>
+                                    <tr v-for="company in latestCompanies" :key="company.id">
+                                        <td>{{ company.nomefantasia || company.nomeempresa }}</td>
+                                        <td>{{ formatCnpj(company.cnpj) }}</td>
+                                        <td>{{ company.regimeTributario || t('companies.regimes.unknown') }}</td>
                                         <td>
                                             <span class="status-pill" :class="company.status === 'A' ? 'status-active' : 'status-inactive'">
                                                 {{ statusLabel(company.status) }}
                                             </span>
                                         </td>
                                         <td>
-                                            <button class="secondary" @click="editCompany(company)">{{ t('common.edit') }}</button>
-                                            <button class="secondary" @click="deleteCompany(company.id)">{{ t('common.delete') }}</button>
+                                            <button class="secondary" type="button" @click="editCompany(company)">{{ t('common.edit') }}</button>
+                                            <button class="secondary" type="button" @click="deleteCompany(company.id)">{{ t('common.delete') }}</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div v-if="state.showManualCompanyModal" class="modal-overlay" role="dialog" aria-modal="true">
+                            <div class="modal-card">
+                                <div class="modal-card__header">
+                                    <h2>{{ state.companyForm.id ? t('companies.formTitleEdit') : t('companies.formTitleCreate') }}</h2>
+                                    <button
+                                        class="ghost"
+                                        type="button"
+                                        @click="closeManualCompanyModal"
+                                        :aria-label="t('common.close')"
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-card__body">
+                                    ${companyFormTemplate}
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1758,7 +2247,10 @@ const App = {
                                     <input v-model="state.productTypeForm.tipo" required />
                                 </label>
                                 <label>{{ t('productTypes.fieldStatus') }}
-                                    <input v-model="state.productTypeForm.status" maxlength="1" required />
+                                    <select v-model="state.productTypeForm.status" required>
+                                        <option value="A">{{ t('status.active') }}</option>
+                                        <option value="I">{{ t('status.inactive') }}</option>
+                                    </select>
                                 </label>
                                 <div class="action-buttons">
                                     <button class="primary" type="submit">{{ t('common.save') }}</button>
@@ -1815,7 +2307,10 @@ const App = {
                                     <input v-model="state.productForm.medicao" required />
                                 </label>
                                 <label>{{ t('products.fieldStatus') }}
-                                    <input v-model="state.productForm.status" maxlength="1" required />
+                                    <select v-model="state.productForm.status" required>
+                                        <option value="A">{{ t('status.active') }}</option>
+                                        <option value="I">{{ t('status.inactive') }}</option>
+                                    </select>
                                 </label>
                                 <div class="action-buttons">
                                     <button class="primary" type="submit">{{ t('common.save') }}</button>

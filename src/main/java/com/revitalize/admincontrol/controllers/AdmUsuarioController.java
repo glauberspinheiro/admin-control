@@ -2,10 +2,13 @@ package com.revitalize.admincontrol.controllers;
 
 import com.revitalize.admincontrol.dto.AdmUsuarioDto;
 import com.revitalize.admincontrol.models.AdmUsuarioModel;
+import com.revitalize.admincontrol.security.EnvironmentAccess;
+import com.revitalize.admincontrol.security.UserRole;
 import com.revitalize.admincontrol.services.AdmUsuarioService;
-import org.springframework.beans.BeanUtils;
+import com.revitalize.admincontrol.services.PasswordService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +24,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -32,17 +37,21 @@ public class AdmUsuarioController {
 
     private static final ZoneId SAO_PAULO = ZoneId.of("-03:00");
     private final AdmUsuarioService admUsuarioService;
+    private final PasswordService passwordService;
 
-    public AdmUsuarioController(AdmUsuarioService admUsuarioService) {
+    public AdmUsuarioController(AdmUsuarioService admUsuarioService, PasswordService passwordService) {
         this.admUsuarioService = admUsuarioService;
+        this.passwordService = passwordService;
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     public ResponseEntity<List<AdmUsuarioModel>> getAll() {
         return ResponseEntity.ok(admUsuarioService.findAll());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     public ResponseEntity<AdmUsuarioModel> getOne(@PathVariable("id") UUID id) {
         return admUsuarioService.findById(id)
                 .map(ResponseEntity::ok)
@@ -50,22 +59,21 @@ public class AdmUsuarioController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     public ResponseEntity<?> create(@RequestBody @Valid AdmUsuarioDto dto) {
         if (admUsuarioService.emailAlreadyInUse(dto.getEmail())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Map.of("message", "E-mail já está em uso"));
         }
         var usuario = new AdmUsuarioModel();
-        BeanUtils.copyProperties(dto, usuario);
-        if (usuario.getCpf() != null && usuario.getCpf().isBlank()) {
-            usuario.setCpf(null);
-        }
+        applyDto(dto, usuario);
         usuario.setDt_cadastro(LocalDateTime.now(SAO_PAULO));
         usuario.setDt_alteracao_cadastro(LocalDateTime.now(SAO_PAULO));
         return ResponseEntity.status(HttpStatus.CREATED).body(admUsuarioService.saveUsuario(usuario));
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     public ResponseEntity<?> update(@PathVariable("id") UUID id, @RequestBody @Valid AdmUsuarioDto dto) {
         return admUsuarioService.findById(id)
                 .map(existing -> {
@@ -73,10 +81,7 @@ public class AdmUsuarioController {
                         return ResponseEntity.status(HttpStatus.CONFLICT)
                                 .body(Map.of("message", "E-mail já está em uso"));
                     }
-                    BeanUtils.copyProperties(dto, existing, "id", "dt_cadastro", "dt_alteracao_cadastro");
-                    if (existing.getCpf() != null && existing.getCpf().isBlank()) {
-                        existing.setCpf(null);
-                    }
+                    applyDto(dto, existing);
                     existing.setDt_alteracao_cadastro(LocalDateTime.now(SAO_PAULO));
                     return ResponseEntity.ok(admUsuarioService.saveUsuario(existing));
                 })
@@ -91,6 +96,7 @@ public class AdmUsuarioController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable("id") UUID id) {
         return admUsuarioService.findById(id)
                 .map(existing -> {
@@ -112,5 +118,29 @@ public class AdmUsuarioController {
         public void setEmail(String email) {
             this.email = email;
         }
+    }
+
+    private void applyDto(AdmUsuarioDto dto, AdmUsuarioModel target) {
+        target.setCpf(normalizeCpf(dto.getCpf()));
+        target.setNome(dto.getNome());
+        target.setEmail(dto.getEmail());
+        target.setSenha(passwordService.encode(dto.getSenha()));
+        target.setRole(dto.getRole() != null ? dto.getRole() : (target.getRole() == null ? UserRole.OPERATOR : target.getRole()));
+        target.setAllowedEnvironments(resolveEnvironments(dto.getEnvironments(), target.getAllowedEnvironments()));
+        target.setActive(dto.getActive() != null ? dto.getActive() : (target.isActive()));
+    }
+
+    private String normalizeCpf(String cpf) {
+        return (cpf == null || cpf.isBlank()) ? null : cpf;
+    }
+
+    private Set<EnvironmentAccess> resolveEnvironments(Set<EnvironmentAccess> requested, Set<EnvironmentAccess> current) {
+        if (requested == null || requested.isEmpty()) {
+            if (current == null || current.isEmpty()) {
+                return EnumSet.allOf(EnvironmentAccess.class);
+            }
+            return current;
+        }
+        return EnumSet.copyOf(requested);
     }
 }

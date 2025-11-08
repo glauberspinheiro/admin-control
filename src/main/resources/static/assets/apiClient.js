@@ -1,10 +1,18 @@
 const DEFAULT_HEADERS = { 'Content-Type': 'application/json' };
+let authToken = null;
 
 async function request(url, options = {}) {
     const config = { ...options };
+    const headers = { ...(config.headers || {}) };
     if (config.body && !(config.body instanceof FormData)) {
         config.body = typeof config.body === 'string' ? config.body : JSON.stringify(config.body);
-        config.headers = { ...DEFAULT_HEADERS, ...config.headers };
+        Object.assign(headers, DEFAULT_HEADERS);
+    }
+    if (authToken) {
+        headers.Authorization = `Bearer ${authToken}`;
+    }
+    if (Object.keys(headers).length > 0) {
+        config.headers = headers;
     }
 
     const response = await fetch(url, config);
@@ -23,6 +31,8 @@ async function request(url, options = {}) {
 }
 
 export const apiClient = {
+    setToken: (token) => { authToken = token || null; },
+    clearToken: () => { authToken = null; },
     get: (url) => request(url),
     post: (url, body) => request(url, { method: 'POST', body }),
     put: (url, body) => request(url, { method: 'PUT', body }),
