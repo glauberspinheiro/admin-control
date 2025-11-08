@@ -3,6 +3,8 @@ package com.revitalize.admincontrol.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.revitalize.admincontrol.security.EnvironmentAccess;
 import com.revitalize.admincontrol.security.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +13,7 @@ import java.util.EnumSet;
 import java.util.Set;
 import java.util.UUID;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "TB_USUARIO")
 //Tabela de usuário

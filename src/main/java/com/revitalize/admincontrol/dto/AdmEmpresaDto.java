@@ -10,9 +10,9 @@ public class AdmEmpresaDto {
     private String cnpj;
 
     @NotBlank
-    private String nomeempresa;
+    private String nomeEmpresa;
 
-    private String nomefantasia;
+    private String nomeFantasia;
 
     private String email;
 
@@ -72,20 +72,20 @@ public class AdmEmpresaDto {
         this.cnpj = cnpj;
     }
 
-    public String getNomeempresa() {
-        return nomeempresa;
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
     }
 
-    public void setNomeempresa(String nomeempresa) {
-        this.nomeempresa = nomeempresa;
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
     }
 
-    public String getNomefantasia() {
-        return nomefantasia;
+    public String getNomeFantasia() {
+        return nomeFantasia;
     }
 
-    public void setNomefantasia(String nomefantasia) {
-        this.nomefantasia = nomefantasia;
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     public String getEmail() {

@@ -71,8 +71,8 @@ public class AdmEmpresaController {
         var empresa = new AdmEmpresaModel();
         BeanUtils.copyProperties(dto, empresa);
         empresa.setCnpj(sanitizedCnpj);
-        empresa.setDt_cadastro(LocalDateTime.now(SAO_PAULO));
-        empresa.setDt_alteracao_cadastro(LocalDateTime.now(SAO_PAULO));
+        empresa.setDtCadastro(LocalDateTime.now(SAO_PAULO));
+        empresa.setDtAlteracaoCadastro(LocalDateTime.now(SAO_PAULO));
         applyDefaults(empresa);
         return ResponseEntity.status(HttpStatus.CREATED).body(admEmpresaService.saveEmpresa(empresa));
     }
@@ -86,9 +86,9 @@ public class AdmEmpresaController {
                             && admEmpresaService.findByCnpj(sanitizedCnpj).isPresent()) {
                         throw new ResponseStatusException(HttpStatus.CONFLICT, "CNPJ já cadastrado.");
                     }
-                    BeanUtils.copyProperties(dto, existing, "id", "dt_cadastro", "dt_alteracao_cadastro");
+                    BeanUtils.copyProperties(dto, existing, "id", "dtCadastro", "dtAlteracaoCadastro");
                     existing.setCnpj(sanitizedCnpj);
-                    existing.setDt_alteracao_cadastro(LocalDateTime.now(SAO_PAULO));
+                    existing.setDtAlteracaoCadastro(LocalDateTime.now(SAO_PAULO));
                     applyDefaults(existing);
                     return ResponseEntity.ok(admEmpresaService.saveEmpresa(existing));
                 })

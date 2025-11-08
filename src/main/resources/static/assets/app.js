@@ -8,6 +8,7 @@ const translations = {
         'nav.companies': 'Empresas',
         'nav.productTypes': 'Tipos de produto',
         'nav.products': 'Produtos',
+        'nav.kanban': 'Kanban',
         'nav.emailTemplates': 'Modelos de e-mail',
         'nav.emailSingle': 'Envio individual',
         'nav.emailBulk': 'Envio em massa',
@@ -50,6 +51,46 @@ const translations = {
         'companies.tableFantasy': 'Nome fantasia',
         'companies.tableCnpj': 'CNPJ',
         'companies.tableStatus': 'Status',
+        'kanban.title': 'Atividade',
+        'kanban.description': 'Organize etapas e cartões do seu fluxo.',
+        'kanban.boardFormTitle': 'Configuração da atividade',
+        'kanban.columnFormTitle': 'Etapas',
+        'kanban.cardFormTitle': 'Cartão',
+        'kanban.fieldBoardName': 'Nome do quadro',
+        'kanban.fieldBoardDescription': 'Descrição do quadro',
+        'kanban.fieldColumnName': 'Título da coluna',
+        'kanban.fieldColumnSlug': 'Slug/ID',
+        'kanban.fieldColumnColor': 'Cor',
+        'kanban.fieldColumnWip': 'Limite WIP',
+        'kanban.fieldCardTitle': 'Título do cartão',
+        'kanban.fieldCardDescription': 'Descrição',
+        'kanban.fieldCardTags': 'Tags (separadas por vírgula)',
+        'kanban.fieldCardAssignee': 'Responsável',
+        'kanban.fieldCardPriority': 'Prioridade',
+        'kanban.fieldCardDueDate': 'Data limite',
+        'kanban.fieldCardMetadata': 'Metadados do cartão',
+        'kanban.fieldCardResponsible': 'Responsável (usuário)',
+        'kanban.fieldCardCompany': 'Empresa associada (opcional)',
+        'kanban.selectBoard': 'Selecione um quadro',
+        'kanban.newColumn': 'Nova coluna',
+        'kanban.newCard': 'Novo cartão',
+        'kanban.tab.setup': 'Configurar quadro',
+        'kanban.tab.workspace': 'Workspace de cards',
+        'kanban.columnListTitle': 'Personalize etapas',
+        'kanban.cardModalTitleCreate': 'Novo cartão',
+        'kanban.cardModalTitleEdit': 'Editar cartão',
+        'kanban.noColumnsSetup': 'Nenhuma etapa cadastrada.',
+        'kanban.filters': 'Filtros rápidos',
+        'kanban.filterTag': 'Tag',
+        'kanban.filterAssignee': 'Responsável',
+        'kanban.filterPriority': 'Prioridade',
+        'kanban.filteredEmpty': 'Nenhum cartão com os filtros atuais.',
+        'kanban.columnActions': 'Ações da coluna',
+        'kanban.cardActions': 'Ações do cartão',
+        'kanban.moveCard': 'Mover para',
+        'kanban.duplicateCard': 'Duplicar cartão',
+        'kanban.duplicateSuffix': '(cópia)',
+        'kanban.noBoard': 'Nenhum quadro disponível. Utilize o formulário para criar o primeiro.',
         'companies.tableRegime': 'Regime',
         'companies.lookupTitle': 'Consultar CNPJ',
         'companies.lookupDescription': 'Informe o CNPJ para buscar dados oficiais automaticamente.',
@@ -191,6 +232,12 @@ const translations = {
         'feedback.templateDeleted': 'Modelo removido.',
         'feedback.emailSent': 'E-mails enviados para o servidor.',
         'feedback.serverConfigSaved': 'Configuração de e-mail salva.',
+        'feedback.kanbanBoardSaved': 'Quadro salvo.',
+        'feedback.kanbanBoardDeleted': 'Quadro removido.',
+        'feedback.kanbanColumnSaved': 'Coluna salva.',
+        'feedback.kanbanColumnDeleted': 'Coluna removida.',
+        'feedback.kanbanCardSaved': 'Cartão salvo.',
+        'feedback.kanbanCardDeleted': 'Cartão removido.',
         'errors.productTypeRequired': 'Selecione um tipo de produto antes de salvar.',
         'session.expired': 'Sua sessão expirou. Faça login novamente.'
     },
@@ -200,6 +247,7 @@ const translations = {
         'nav.companies': 'Companies',
         'nav.productTypes': 'Product types',
         'nav.products': 'Products',
+        'nav.kanban': 'Kanban',
         'nav.emailTemplates': 'Email templates',
         'nav.emailSingle': 'Single send',
         'nav.emailBulk': 'Bulk send',
@@ -242,6 +290,46 @@ const translations = {
         'companies.tableFantasy': 'Trade name',
         'companies.tableCnpj': 'Tax ID',
         'companies.tableStatus': 'Status',
+        'kanban.title': 'Activity',
+        'kanban.description': 'Organize steps and cards of your workflow.',
+        'kanban.boardFormTitle': 'Activity settings',
+        'kanban.columnFormTitle': 'Steps',
+        'kanban.cardFormTitle': 'Card',
+        'kanban.fieldBoardName': 'Board name',
+        'kanban.fieldBoardDescription': 'Board description',
+        'kanban.fieldColumnName': 'Column title',
+        'kanban.fieldColumnSlug': 'Slug/ID',
+        'kanban.fieldColumnColor': 'Color',
+        'kanban.fieldColumnWip': 'WIP limit',
+        'kanban.fieldCardTitle': 'Card title',
+        'kanban.fieldCardDescription': 'Description',
+        'kanban.fieldCardTags': 'Tags (comma separated)',
+        'kanban.fieldCardAssignee': 'Assignee',
+        'kanban.fieldCardPriority': 'Priority',
+        'kanban.fieldCardDueDate': 'Due date',
+        'kanban.fieldCardMetadata': 'Card metadata',
+        'kanban.fieldCardResponsible': 'Responsible (user)',
+        'kanban.fieldCardCompany': 'Associated company (optional)',
+        'kanban.selectBoard': 'Select a board',
+        'kanban.newColumn': 'New column',
+        'kanban.newCard': 'New card',
+        'kanban.tab.setup': 'Board setup',
+        'kanban.tab.workspace': 'Card workspace',
+        'kanban.columnListTitle': 'Customize steps',
+        'kanban.cardModalTitleCreate': 'New card',
+        'kanban.cardModalTitleEdit': 'Edit card',
+        'kanban.noColumnsSetup': 'No steps created yet.',
+        'kanban.filters': 'Quick filters',
+        'kanban.filterTag': 'Tag',
+        'kanban.filterAssignee': 'Assignee',
+        'kanban.filterPriority': 'Priority',
+        'kanban.filteredEmpty': 'No cards match the current filters.',
+        'kanban.columnActions': 'Column actions',
+        'kanban.cardActions': 'Card actions',
+        'kanban.moveCard': 'Move to',
+        'kanban.duplicateCard': 'Duplicate card',
+        'kanban.duplicateSuffix': '(copy)',
+        'kanban.noBoard': 'No board available. Use the form to create the first one.',
         'companies.tableRegime': 'Regime',
         'companies.lookupTitle': 'Consult CNPJ',
         'companies.lookupDescription': 'Enter the tax ID to fetch official data automatically.',
@@ -383,6 +471,12 @@ const translations = {
         'feedback.templateDeleted': 'Template removed.',
         'feedback.emailSent': 'E-mails submitted to the server.',
         'feedback.serverConfigSaved': 'Email configuration saved.',
+        'feedback.kanbanBoardSaved': 'Board saved.',
+        'feedback.kanbanBoardDeleted': 'Board removed.',
+        'feedback.kanbanColumnSaved': 'Column saved.',
+        'feedback.kanbanColumnDeleted': 'Column removed.',
+        'feedback.kanbanCardSaved': 'Card saved.',
+        'feedback.kanbanCardDeleted': 'Card removed.',
         'errors.productTypeRequired': 'Select a product type before saving.',
         'session.expired': 'Your session expired. Please sign in again.'
     }
@@ -392,6 +486,7 @@ const sections = [
     { id: 'dashboard', labelKey: 'nav.dashboard' },
     { id: 'users', labelKey: 'nav.users' },
     { id: 'companies', labelKey: 'nav.companies' },
+    { id: 'kanban', labelKey: 'nav.kanban' },
     { id: 'productTypes', labelKey: 'nav.productTypes' },
     { id: 'products', labelKey: 'nav.products' },
     { id: 'emailTemplates', labelKey: 'nav.emailTemplates' },
@@ -423,7 +518,10 @@ const endpoints = {
     templates: '/api/email/templates',
     serverConfig: '/api/email/server-config',
     emailCampaign: '/api/email/campaigns',
-    preferences: '/api/user/preferences'
+    preferences: '/api/user/preferences',
+    kanbanBoards: '/api/kanban/boards',
+    kanbanColumns: '/api/kanban/columns',
+    kanbanCards: '/api/kanban/cards'
 };
 
 const SESSION_KEY = 'revitalizeSession';
@@ -433,8 +531,8 @@ const emptyUser = () => ({ id: null, cpf: '', nome: '', email: '', senha: '' });
 const emptyCompany = () => ({
     id: null,
     cnpj: '',
-    nomeempresa: '',
-    nomefantasia: '',
+    nomeEmpresa: '',
+    nomeFantasia: '',
     email: '',
     contato: '',
     telefone: '',
@@ -454,6 +552,23 @@ const emptyCompany = () => ({
 });
 const emptyProductType = () => ({ id: null, descricao: '', tipo: '', status: 'A' });
 const emptyProduct = () => ({ id: null, tipoProdutoId: '', nome_produto: '', medicao: '', status: 'A' });
+const emptyKanbanBoard = () => ({ id: null, nome: '', descricao: '', configuracao: '' });
+const emptyKanbanColumn = () => ({ id: null, boardId: '', titulo: '', slug: '', wipLimit: '', sortOrder: 0, color: '#2563eb', metadata: '' });
+const emptyKanbanCard = () => ({
+    id: null,
+    boardId: '',
+    columnId: '',
+    titulo: '',
+    descricao: '',
+    tagsText: '',
+    assignee: '',
+    prioridade: 'NORMAL',
+    dueDate: '',
+    metadata: '',
+    sortOrder: 0,
+    responsavelId: '',
+    empresaId: ''
+});
 const defaultServerConfig = () => ({
     usuarioId: null,
     smtpHost: '',
@@ -546,10 +661,10 @@ const companyFormTemplate = `
                     <input v-model="state.companyForm.cnpj" required />
                 </label>
                 <label>{{ t('companies.fieldCorporateName') }}
-                    <input v-model="state.companyForm.nomeempresa" required />
+                    <input v-model="state.companyForm.nomeEmpresa" required />
                 </label>
                 <label>{{ t('companies.fieldFantasyName') }}
-                    <input v-model="state.companyForm.nomefantasia" />
+                    <input v-model="state.companyForm.nomeFantasia" />
                 </label>
                 <label>{{ t('companies.fieldEmail') }}
                     <input type="email" v-model="state.companyForm.email" />
@@ -690,6 +805,18 @@ const App = {
             companyLookupReady: false,
             activeCompanyTab: 'general',
             showManualCompanyModal: false,
+            kanbanSubView: 'setup',
+            kanbanBoards: [],
+            kanbanBoardForm: emptyKanbanBoard(),
+            kanbanColumnForm: emptyKanbanColumn(),
+            kanbanCardForm: emptyKanbanCard(),
+            kanbanActiveBoardId: '',
+            kanbanSnapshot: null,
+            kanbanFilters: { tag: '', assignee: '', priority: '' },
+            showKanbanCardModal: false,
+            kanbanModalColumnName: '',
+            kanbanDraggingCard: null,
+            kanbanDragOverColumnId: '',
             productTypes: [],
             productTypeForm: emptyProductType(),
             products: [],
@@ -710,15 +837,15 @@ const App = {
             signatureEditorReady: false,
             emailHistory: [],
             emailHistoryPage: 1,
-            userMenuOpen: false
+            userMenuOpen: false,
         });
 
         const latestCompanies = computed(() => {
             const resolveTime = (entity = {}) => {
-                const value = entity.dt_alteracao_cadastro
-                    || entity.dt_cadastro
-                    || entity.dtAlteracaoCadastro
-                    || entity.dtCadastro;
+                const value = entity.dtAlteracaoCadastro
+                    || entity.dtCadastro
+                    || entity.dt_alteracao_cadastro
+                    || entity.dt_cadastro;
                 const timestamp = value ? new Date(value).getTime() : 0;
                 return Number.isNaN(timestamp) ? 0 : timestamp;
             };
@@ -726,6 +853,13 @@ const App = {
                 .sort((a, b) => resolveTime(b) - resolveTime(a))
                 .slice(0, 10);
         });
+
+        const activeKanbanBoard = computed(() => state.kanbanBoards.find((board) => board.id === state.kanbanActiveBoardId) || null);
+        const kanbanColumns = computed(() => state.kanbanSnapshot?.columns || []);
+
+        const setKanbanSubView = (view) => {
+            state.kanbanSubView = view;
+        };
 
         const translate = (key, params = {}) => {
             const dictionary = translations[state.language] || translations['pt-BR'];
@@ -1038,6 +1172,34 @@ const App = {
             state.companies = await apiClient.get(endpoints.companies);
         };
 
+        const loadKanbanBoards = async () => {
+            state.kanbanBoards = await apiClient.get(endpoints.kanbanBoards);
+            if (!state.kanbanActiveBoardId && state.kanbanBoards.length) {
+                state.kanbanActiveBoardId = state.kanbanBoards[0].id;
+            } else if (state.kanbanActiveBoardId) {
+                const exists = state.kanbanBoards.some((board) => board.id === state.kanbanActiveBoardId);
+                if (!exists) {
+                    state.kanbanActiveBoardId = state.kanbanBoards[0]?.id || '';
+                }
+            }
+            if (!state.kanbanBoards.length) {
+                state.kanbanActiveBoardId = '';
+                state.kanbanSnapshot = null;
+                Object.assign(state.kanbanBoardForm, emptyKanbanBoard());
+                state.kanbanSubView = 'setup';
+                state.showKanbanCardModal = false;
+                resetKanbanCardForm(false);
+            }
+        };
+
+        const loadKanbanSnapshot = async (boardId) => {
+            if (!boardId) {
+                state.kanbanSnapshot = null;
+                return;
+            }
+            state.kanbanSnapshot = await apiClient.get(`${endpoints.kanbanBoards}/${boardId}/snapshot`);
+        };
+
         const resetCompanyState = (preserveLookupInput = false) => {
             Object.assign(state.companyForm, emptyCompany());
             state.companyLookupReady = false;
@@ -1171,8 +1333,12 @@ const App = {
                     loadUsers(),
                     loadCompanies(),
                     loadProductTypes(),
-                    loadProducts()
+                    loadProducts(),
+                    loadKanbanBoards()
                 ]);
+                if (state.kanbanActiveBoardId) {
+                    await loadKanbanSnapshot(state.kanbanActiveBoardId);
+                }
                 if (state.loggedUser) {
                     await Promise.all([loadTemplates(), loadServerConfig(), loadEmailHistory()]);
                 }
@@ -1256,6 +1422,258 @@ const App = {
                 state.showManualCompanyModal = false;
                 resetCompanyState();
             }
+        };
+
+        const saveKanbanBoard = async () => {
+            if (!state.kanbanBoardForm.nome?.trim()) {
+                pushNotification('warning', translate('kanban.fieldBoardName'));
+                return;
+            }
+            await perform(async () => {
+                const payload = { ...state.kanbanBoardForm };
+                let saved;
+                if (payload.id) {
+                    saved = await apiClient.put(`${endpoints.kanbanBoards}/${payload.id}`, payload);
+                } else {
+                    saved = await apiClient.post(endpoints.kanbanBoards, payload);
+                }
+                Object.assign(state.kanbanBoardForm, emptyKanbanBoard());
+                await loadKanbanBoards();
+                if (!payload.id && saved?.id) {
+                    state.kanbanActiveBoardId = saved.id;
+                }
+            }, 'feedback.kanbanBoardSaved');
+        };
+
+        const editKanbanBoard = (board) => Object.assign(state.kanbanBoardForm, board);
+
+        const deleteKanbanBoard = async (boardId) => {
+            await perform(async () => {
+                await apiClient.delete(`${endpoints.kanbanBoards}/${boardId}`);
+                await loadKanbanBoards();
+                if (state.kanbanActiveBoardId === boardId) {
+                    state.kanbanActiveBoardId = state.kanbanBoards[0]?.id || '';
+                    await loadKanbanSnapshot(state.kanbanActiveBoardId);
+                }
+                if (!state.kanbanBoards.length) {
+                    state.showKanbanCardModal = false;
+                    resetKanbanCardForm();
+                }
+            }, 'feedback.kanbanBoardDeleted');
+        };
+
+        const resetKanbanColumnForm = () => {
+            Object.assign(state.kanbanColumnForm, emptyKanbanColumn(), {
+                boardId: state.kanbanActiveBoardId || ''
+            });
+        };
+
+        const resetKanbanCardForm = (preserveColumn = true) => {
+            const currentColumnId = preserveColumn ? (state.kanbanCardForm.columnId || '') : '';
+            Object.assign(state.kanbanCardForm, emptyKanbanCard(), {
+                boardId: state.kanbanActiveBoardId || '',
+                columnId: currentColumnId
+            });
+        };
+
+        const editKanbanColumn = (column) => {
+            Object.assign(state.kanbanColumnForm, {
+                id: column.id,
+                boardId: state.kanbanActiveBoardId || '',
+                titulo: column.titulo,
+                slug: column.slug,
+                wipLimit: column.wipLimit,
+                sortOrder: column.sortOrder,
+                color: column.color || '#2563eb',
+                metadata: column.metadata || ''
+            });
+        };
+
+        const saveKanbanColumn = async () => {
+            if (!state.kanbanActiveBoardId) {
+                pushNotification('warning', translate('kanban.selectBoard'));
+                return;
+            }
+            const payload = { ...state.kanbanColumnForm };
+            payload.boardId = state.kanbanActiveBoardId;
+            payload.sortOrder = Number(payload.sortOrder || 0);
+            await perform(async () => {
+                if (payload.id) {
+                    await apiClient.put(`${endpoints.kanbanColumns}/${payload.id}`, payload);
+                } else {
+                    await apiClient.post(`${endpoints.kanbanBoards}/${payload.boardId}/columns`, payload);
+                }
+                resetKanbanColumnForm();
+                await loadKanbanSnapshot(state.kanbanActiveBoardId);
+            }, 'feedback.kanbanColumnSaved');
+        };
+
+        const deleteKanbanColumn = async (columnId) => {
+            await perform(async () => {
+                await apiClient.delete(`${endpoints.kanbanColumns}/${columnId}`);
+                await loadKanbanSnapshot(state.kanbanActiveBoardId);
+            }, 'feedback.kanbanColumnDeleted');
+        };
+
+        const openKanbanCardModal = (column, card = null) => {
+            if (!state.kanbanActiveBoardId) {
+                pushNotification('warning', translate('kanban.selectBoard'));
+                return;
+            }
+            state.kanbanModalColumnName = column?.titulo || '';
+            if (card) {
+                Object.assign(state.kanbanCardForm, {
+                    id: card.id,
+                    boardId: state.kanbanActiveBoardId,
+                    columnId: column.id,
+                    titulo: card.titulo,
+                    descricao: card.descricao || '',
+                    tagsText: (card.tags || []).join(', '),
+                    assignee: card.assignee || '',
+                    prioridade: card.prioridade || 'NORMAL',
+                    dueDate: card.dueDate || '',
+                    metadata: card.metadata || '',
+                    sortOrder: card.sortOrder || 0,
+                    responsavelId: card.responsavelId || '',
+                    empresaId: card.empresaId || ''
+                });
+            } else {
+                Object.assign(state.kanbanCardForm, emptyKanbanCard(), {
+                    boardId: state.kanbanActiveBoardId,
+                    columnId: column.id
+                });
+            }
+            state.showKanbanCardModal = true;
+        };
+
+        const closeKanbanCardModal = () => {
+            state.showKanbanCardModal = false;
+            resetKanbanCardForm(false);
+        };
+
+        const parseTags = (text = '') => text.split(',')
+            .map((tag) => tag.trim())
+            .filter((tag) => !!tag);
+
+        const saveKanbanCard = async () => {
+            if (!state.kanbanCardForm.columnId) {
+                pushNotification('warning', translate('kanban.fieldColumnName'));
+                return;
+            }
+            const payload = {
+                boardId: state.kanbanActiveBoardId,
+                columnId: state.kanbanCardForm.columnId,
+                titulo: state.kanbanCardForm.titulo,
+                descricao: state.kanbanCardForm.descricao,
+                tags: parseTags(state.kanbanCardForm.tagsText),
+                assignee: state.kanbanCardForm.assignee,
+                prioridade: state.kanbanCardForm.prioridade,
+                dueDate: state.kanbanCardForm.dueDate || null,
+                metadata: state.kanbanCardForm.metadata,
+                sortOrder: Number(state.kanbanCardForm.sortOrder || 0)
+            };
+            payload.responsavelId = state.kanbanCardForm.responsavelId || null;
+            payload.empresaId = state.kanbanCardForm.empresaId || null;
+            await perform(async () => {
+                if (state.kanbanCardForm.id) {
+                    await apiClient.put(`${endpoints.kanbanCards}/${state.kanbanCardForm.id}`, { ...payload, id: state.kanbanCardForm.id });
+                } else {
+                    await apiClient.post(`${endpoints.kanbanColumns}/${payload.columnId}/cards`, payload);
+                }
+                resetKanbanCardForm(false);
+                await loadKanbanSnapshot(state.kanbanActiveBoardId);
+            }, 'feedback.kanbanCardSaved');
+            closeKanbanCardModal();
+        };
+
+        const deleteKanbanCard = async (cardId) => {
+            await perform(async () => {
+                await apiClient.delete(`${endpoints.kanbanCards}/${cardId}`);
+                await loadKanbanSnapshot(state.kanbanActiveBoardId);
+            }, 'feedback.kanbanCardDeleted');
+            if (state.kanbanCardForm.id === cardId && state.showKanbanCardModal) {
+                closeKanbanCardModal();
+            }
+        };
+
+        const duplicateKanbanCard = async (card, column) => {
+            if (!card || !column || !state.kanbanActiveBoardId) return;
+            const payload = {
+                boardId: state.kanbanActiveBoardId,
+                columnId: column.id,
+                titulo: `${card.titulo} ${translate('kanban.duplicateSuffix')}`.trim(),
+                descricao: card.descricao,
+                tags: [...(card.tags || [])],
+                assignee: card.assignee,
+                prioridade: card.prioridade,
+                dueDate: card.dueDate || null,
+                metadata: card.metadata,
+                sortOrder: Number((card.sortOrder || 0) + 1),
+                responsavelId: card.responsavelId || null,
+                empresaId: card.empresaId || null
+            };
+            await perform(async () => {
+                await apiClient.post(`${endpoints.kanbanColumns}/${column.id}/cards`, payload);
+                await loadKanbanSnapshot(state.kanbanActiveBoardId);
+            }, 'feedback.kanbanCardSaved');
+        };
+
+        const moveKanbanCard = async (cardId, targetColumnId, currentColumnId = null) => {
+            if (!targetColumnId || targetColumnId === currentColumnId) {
+                state.kanbanDraggingCard = null;
+                state.kanbanDragOverColumnId = '';
+                return;
+            }
+            await perform(async () => {
+                await apiClient.post(`${endpoints.kanbanCards}/${cardId}/move`, {
+                    targetColumnId,
+                    targetIndex: 0
+                });
+                await loadKanbanSnapshot(state.kanbanActiveBoardId);
+            });
+        };
+
+        const handleKanbanDragStart = (card, columnId) => {
+            state.kanbanDraggingCard = { ...card, columnId };
+        };
+
+        const handleKanbanDragEnd = () => {
+            state.kanbanDraggingCard = null;
+            state.kanbanDragOverColumnId = '';
+        };
+
+        const handleKanbanDragEnter = (columnId) => {
+            if (!state.kanbanDraggingCard) return;
+            state.kanbanDragOverColumnId = columnId;
+        };
+
+        const handleKanbanDragLeave = (columnId) => {
+            if (state.kanbanDragOverColumnId === columnId) {
+                state.kanbanDragOverColumnId = '';
+            }
+        };
+
+        const handleKanbanDrop = async (columnId) => {
+            if (!state.kanbanDraggingCard) return;
+            const { id, columnId: currentColumnId } = state.kanbanDraggingCard;
+            await moveKanbanCard(id, columnId, currentColumnId);
+            handleKanbanDragEnd();
+        };
+
+        const kanbanCardsForColumn = (column) => {
+            const cards = column?.cards || [];
+            const filterTag = (state.kanbanFilters.tag || '').toLowerCase();
+            const filterAssignee = (state.kanbanFilters.assignee || '').toLowerCase();
+            const filterPriority = (state.kanbanFilters.priority || '').toLowerCase();
+            return cards.filter((card) => {
+                const matchesTag = !filterTag
+                    || (card.tags || []).some((tag) => tag.toLowerCase().includes(filterTag));
+                const matchesAssignee = !filterAssignee
+                    || (card.assignee || '').toLowerCase().includes(filterAssignee);
+                const matchesPriority = !filterPriority
+                    || (card.prioridade || '').toLowerCase() === filterPriority;
+                return matchesTag && matchesAssignee && matchesPriority;
+            });
         };
 
         const saveProductType = async () => {
@@ -1735,6 +2153,9 @@ const App = {
                         resetCompanyState();
                     }
                 },
+                kanbanBoard: () => Object.assign(state.kanbanBoardForm, emptyKanbanBoard()),
+                kanbanColumn: () => resetKanbanColumnForm(),
+                kanbanCard: () => resetKanbanCardForm(),
                 productType: () => Object.assign(state.productTypeForm, emptyProductType()),
                 product: () => Object.assign(state.productForm, emptyProduct()),
                 template: () => {
@@ -1748,7 +2169,7 @@ const App = {
         };
 
         const clearAllForms = () => {
-            ['user', 'company', 'productType', 'product', 'template'].forEach((form) => resetForm(form));
+            ['user', 'company', 'kanbanBoard', 'kanbanColumn', 'kanbanCard', 'productType', 'product', 'template'].forEach((form) => resetForm(form));
             Object.assign(state.loginForm, { email: '', senha: '' });
             Object.assign(state.recoverForm, { email: '' });
             Object.assign(state.emailSingleForm, emptyEmailSingleForm());
@@ -1757,6 +2178,7 @@ const App = {
             }
             Object.assign(state.emailBulkForm, emptyEmailBulkForm());
             clearBulkImport();
+            state.showKanbanCardModal = false;
         };
 
         const requireLoggedOption = () => {
@@ -1863,6 +2285,28 @@ const App = {
         watch(currentRoute, () => {
             state.userMenuOpen = false;
         });
+        watch(() => state.kanbanActiveBoardId, async (boardId) => {
+            if (!boardId) {
+                state.kanbanSnapshot = null;
+                resetKanbanColumnForm();
+                resetKanbanCardForm(false);
+                state.showKanbanCardModal = false;
+                Object.assign(state.kanbanBoardForm, emptyKanbanBoard());
+                return;
+            }
+            try {
+                const board = state.kanbanBoards.find((item) => item.id === boardId);
+                if (board) {
+                    Object.assign(state.kanbanBoardForm, board);
+                }
+                await loadKanbanSnapshot(boardId);
+                resetKanbanColumnForm();
+                resetKanbanCardForm(false);
+                state.showKanbanCardModal = false;
+            } catch (error) {
+                handleError(error);
+            }
+        });
 
         watch(activeSection, async (section, previousSection) => {
             if (previousSection === 'emailTemplates' && section !== 'emailTemplates') {
@@ -1911,6 +2355,8 @@ const App = {
             state,
             statistics,
             latestCompanies,
+            activeKanbanBoard,
+            kanbanColumns,
             bulkPreviewRows,
             bulkRenderedTemplate,
             paginatedEmailHistory,
@@ -1933,6 +2379,27 @@ const App = {
             startManualCompanyCreation,
             openManualCompanyModal,
             closeManualCompanyModal,
+            saveKanbanBoard,
+            editKanbanBoard,
+            deleteKanbanBoard,
+            saveKanbanColumn,
+            editKanbanColumn,
+            deleteKanbanColumn,
+            resetKanbanColumnForm,
+            setKanbanSubView,
+            openKanbanCardModal,
+            closeKanbanCardModal,
+            saveKanbanCard,
+            deleteKanbanCard,
+            duplicateKanbanCard,
+            moveKanbanCard,
+            kanbanCardsForColumn,
+            handleKanbanDragStart,
+            handleKanbanDragEnd,
+            handleKanbanDragEnter,
+            handleKanbanDragLeave,
+            handleKanbanDrop,
+            resetKanbanCardForm,
             saveProductType,
             editProductType,
             deleteProductType,
@@ -2200,7 +2667,7 @@ const App = {
                                         <td colspan="5">{{ t('companies.empty') }}</td>
                                     </tr>
                                     <tr v-for="company in latestCompanies" :key="company.id">
-                                        <td>{{ company.nomefantasia || company.nomeempresa }}</td>
+                                        <td>{{ company.nomeFantasia || company.nomeEmpresa }}</td>
                                         <td>{{ formatCnpj(company.cnpj) }}</td>
                                         <td>{{ company.regimeTributario || t('companies.regimes.unknown') }}</td>
                                         <td>
@@ -2231,6 +2698,294 @@ const App = {
                                 </div>
                                 <div class="modal-card__body">
                                     ${companyFormTemplate}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-else-if="activeSection === 'kanban'" class="kanban-layout">
+                        <div class="kanban-subnav">
+                            <button
+                                type="button"
+                                :class="{ active: state.kanbanSubView === 'setup' }"
+                                @click="setKanbanSubView('setup')"
+                            >
+                                {{ t('kanban.tab.setup') }}
+                            </button>
+                            <button
+                                type="button"
+                                :disabled="!state.kanbanBoards.length"
+                                :class="{ active: state.kanbanSubView === 'workspace' }"
+                                @click="setKanbanSubView('workspace')"
+                            >
+                                {{ t('kanban.tab.workspace') }}
+                            </button>
+                        </div>
+
+                        <div v-if="state.kanbanSubView === 'setup'" class="kanban-setup">
+                            <div class="kanban-forms-grid">
+                                <div class="card kanban-header-card">
+                                    <div class="kanban-header-bar">
+                                        <div>
+                                            <h2>{{ t('kanban.boardFormTitle') }}</h2>
+                                            <p class="card-subtitle">{{ t('kanban.description') }}</p>
+                                        </div>
+                                        <div class="kanban-board-selector">
+                                            <label>{{ t('kanban.selectBoard') }}
+                                                <select v-model="state.kanbanActiveBoardId">
+                                                    <option value="" disabled>{{ t('common.select') }}</option>
+                                                    <option v-for="board in state.kanbanBoards" :key="board.id" :value="board.id">
+                                                        {{ board.nome }}
+                                                    </option>
+                                                </select>
+                                            </label>
+                                            <div class="action-buttons">
+                                                <button class="ghost" v-if="state.kanbanBoardForm.id" type="button" @click="deleteKanbanBoard(state.kanbanBoardForm.id)">{{ t('common.delete') }}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="kanban-board-form" @submit.prevent="saveKanbanBoard">
+                                        <div class="form-grid">
+                                            <label>{{ t('kanban.fieldBoardName') }}
+                                                <input v-model="state.kanbanBoardForm.nome" required />
+                                            </label>
+                                            <label>{{ t('kanban.fieldBoardDescription') }}
+                                                <input v-model="state.kanbanBoardForm.descricao" />
+                                            </label>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="primary" type="submit">{{ t('common.save') }}</button>
+                                            <button class="secondary" type="button" @click="resetForm('kanbanBoard')">{{ t('common.clear') }}</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="card">
+                                    <h3>{{ t('kanban.columnFormTitle') }}</h3>
+                                    <form @submit.prevent="saveKanbanColumn">
+                                        <label>{{ t('kanban.fieldColumnName') }}
+                                            <input v-model="state.kanbanColumnForm.titulo" :disabled="!state.kanbanActiveBoardId" required />
+                                        </label>
+                                        <div class="form-grid">
+                                            <label>{{ t('kanban.fieldColumnSlug') }}
+                                                <input v-model="state.kanbanColumnForm.slug" />
+                                            </label>
+                                            <label>{{ t('kanban.fieldColumnWip') }}
+                                                <input type="number" min="0" v-model.number="state.kanbanColumnForm.wipLimit" />
+                                            </label>
+                                            <label>{{ t('kanban.fieldColumnColor') }}
+                                                <input type="color" v-model="state.kanbanColumnForm.color" />
+                                            </label>
+                                            <label>Sort
+                                                <input type="number" v-model.number="state.kanbanColumnForm.sortOrder" />
+                                            </label>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="primary" type="submit">{{ t('common.save') }}</button>
+                                            <button class="secondary" type="button" @click="resetForm('kanbanColumn')">{{ t('common.clear') }}</button>
+                                            <button class="ghost" v-if="state.kanbanColumnForm.id" type="button" @click="deleteKanbanColumn(state.kanbanColumnForm.id)">{{ t('common.delete') }}</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="card">
+                                    <h3>{{ t('kanban.columnListTitle') }}</h3>
+                                    <div v-if="kanbanColumns.length">
+                                        <ul class="kanban-column-list">
+                                            <li v-for="column in kanbanColumns" :key="column.id">
+                                                <span class="kanban-column-color" :style="{ background: column.color || '#2563eb' }"></span>
+                                                <div class="kanban-column-list__info">
+                                                    <strong>{{ column.titulo }}</strong>
+                                                </div>
+                                                <div class="kanban-column-actions">
+                                                    <button class="secondary" type="button" @click="editKanbanColumn(column)">{{ t('common.edit') }}</button>
+                                                    <button class="ghost" type="button" @click="deleteKanbanColumn(column.id)">{{ t('common.delete') }}</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <p v-else>{{ t('kanban.noColumnsSetup') }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-else class="kanban-workspace">
+                            <div class="card kanban-filters-card">
+                                <div class="kanban-header-bar">
+                                    <div>
+                                        <h2>{{ activeKanbanBoard?.nome || t('kanban.title') }}</h2>
+                                        <p class="card-subtitle">{{ activeKanbanBoard?.descricao || t('kanban.description') }}</p>
+                                    </div>
+                                    <div class="kanban-board-selector">
+                                        <label>{{ t('kanban.selectBoard') }}
+                                            <select v-model="state.kanbanActiveBoardId">
+                                                <option value="" disabled>{{ t('common.select') }}</option>
+                                                <option v-for="board in state.kanbanBoards" :key="board.id" :value="board.id">
+                                                    {{ board.nome }}
+                                                </option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-grid">
+                                    <label>{{ t('kanban.filterTag') }}
+                                        <input v-model="state.kanbanFilters.tag" :placeholder="t('kanban.filterTag')" />
+                                    </label>
+                                    <label>{{ t('kanban.filterAssignee') }}
+                                        <input v-model="state.kanbanFilters.assignee" :placeholder="t('kanban.filterAssignee')" />
+                                    </label>
+                                    <label>{{ t('kanban.filterPriority') }}
+                                        <select v-model="state.kanbanFilters.priority">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option value="low">LOW</option>
+                                            <option value="normal">NORMAL</option>
+                                            <option value="high">HIGH</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div v-if="state.kanbanActiveBoardId">
+                            <div class="kanban-columns" v-if="kanbanColumns.length">
+                                <div
+                                    class="kanban-column"
+                                    v-for="column in kanbanColumns"
+                                    :key="column.id"
+                                    :style="{ borderTopColor: column.color || '#2563eb' }"
+                                    :class="{ 'kanban-column--drag-over': state.kanbanDragOverColumnId === column.id }"
+                                    @dragover.prevent="handleKanbanDragEnter(column.id)"
+                                    @dragleave="handleKanbanDragLeave(column.id)"
+                                    @drop.prevent="handleKanbanDrop(column.id)"
+                                >
+                                    <div class="kanban-column-header">
+                                        <div>
+                                            <h3>{{ column.titulo }}</h3>
+                                            <small>{{ column.cards.length }} cards</small>
+                                        </div>
+                                    </div>
+                                    <div class="kanban-cards">
+                                        <div class="kanban-card kanban-card--empty" v-if="!kanbanCardsForColumn(column).length">
+                                            {{ t('kanban.filteredEmpty') }}
+                                        </div>
+                                        <article
+                                            class="kanban-card"
+                                            v-for="card in kanbanCardsForColumn(column)"
+                                            :key="card.id"
+                                            draggable="true"
+                                            :class="{ 'kanban-card--dragging': state.kanbanDraggingCard?.id === card.id }"
+                                            @dragstart="handleKanbanDragStart(card, column.id)"
+                                            @dragend="handleKanbanDragEnd"
+                                        >
+                                            <header class="kanban-card-header">
+                                                <div class="kanban-card-title">
+                                                    <h4>{{ card.titulo }}</h4>
+                                                    <span class="kanban-card-priority">{{ (card.prioridade || 'NORMAL') }}</span>
+                                                </div>
+                                            </header>
+                                            <p v-if="card.descricao">{{ card.descricao }}</p>
+                                            <div class="kanban-card-meta">
+                                                <span class="kanban-card-detail" v-if="card.tags?.length">
+                                                    <strong>{{ t('kanban.fieldCardTags') }}:</strong>
+                                                    {{ card.tags.join(', ') }}
+                                                </span>
+                                                <span class="kanban-card-detail" v-if="card.empresaNome">
+                                                    <strong>{{ t('kanban.fieldCardCompany') }}:</strong>
+                                                    {{ card.empresaNome }}
+                                                </span>
+                                                <span class="kanban-card-detail" v-if="card.dueDate">
+                                                    <strong>{{ t('kanban.fieldCardDueDate') }}:</strong>
+                                                    {{ card.dueDate }}
+                                                </span>
+                                                <span class="kanban-card-detail" v-if="card.responsavelNome">
+                                                    <strong>{{ t('kanban.fieldCardResponsible') }}:</strong>
+                                                    {{ card.responsavelNome }}
+                                                </span>
+                                            </div>
+                                            <label class="kanban-move-select">
+                                                {{ t('kanban.moveCard') }}
+                                                <select :value="column.id" @change="moveKanbanCard(card.id, $event.target.value, column.id)">
+                                                    <option v-for="option in kanbanColumns" :key="option.id" :value="option.id">
+                                                        {{ option.titulo }}
+                                                    </option>
+                                                </select>
+                                            </label>
+                                            <div class="kanban-card-actions">
+                                                <button class="secondary" type="button" @click="openKanbanCardModal(column, card)">{{ t('common.edit') }}</button>
+                                                <button class="secondary" type="button" @click="duplicateKanbanCard(card, column)">{{ t('kanban.duplicateCard') }}</button>
+                                                <button class="ghost" type="button" @click="deleteKanbanCard(card.id)">{{ t('common.delete') }}</button>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <button class="secondary full-width" type="button" @click="openKanbanCardModal(column)">{{ t('kanban.newCard') }}</button>
+                                </div>
+                            </div>
+                            <div v-else class="card">
+                                <p>{{ t('kanban.noColumnsSetup') }}</p>
+                            </div>
+                            </div>
+                            <div v-else class="card">
+                                <p>{{ t('kanban.noBoard') }}</p>
+                            </div>
+                        </div>
+
+                        <div v-if="state.showKanbanCardModal" class="modal-overlay" role="dialog" aria-modal="true">
+                            <div class="modal-card">
+                                <div class="modal-card__header">
+                                    <h2>
+                                        {{ state.kanbanCardForm.id ? t('kanban.cardModalTitleEdit') : t('kanban.cardModalTitleCreate') }}
+                                        <small v-if="state.kanbanModalColumnName">- {{ state.kanbanModalColumnName }}</small>
+                                    </h2>
+                                </div>
+                                <div class="modal-card__body">
+                                    <form @submit.prevent="saveKanbanCard">
+                                        <label>{{ t('kanban.fieldCardTitle') }}
+                                            <input v-model="state.kanbanCardForm.titulo" required />
+                                        </label>
+                                        <label>{{ t('kanban.fieldCardDescription') }}
+                                            <textarea rows="2" v-model="state.kanbanCardForm.descricao"></textarea>
+                                        </label>
+                                        <div class="form-grid">
+                                            <label>{{ t('kanban.fieldCardAssignee') }}
+                                                <input v-model="state.kanbanCardForm.assignee" placeholder="@responsavel" />
+                                            </label>
+                                            <label>{{ t('kanban.fieldCardPriority') }}
+                                                <select v-model="state.kanbanCardForm.prioridade">
+                                                    <option value="">{{ t('common.select') }}</option>
+                                                    <option value="LOW">LOW</option>
+                                                    <option value="NORMAL">NORMAL</option>
+                                                    <option value="HIGH">HIGH</option>
+                                                </select>
+                                            </label>
+                                            <label>{{ t('kanban.fieldCardDueDate') }}
+                                                <input type="date" v-model="state.kanbanCardForm.dueDate" />
+                                            </label>
+                                            <label>Sort
+                                                <input type="number" v-model.number="state.kanbanCardForm.sortOrder" />
+                                            </label>
+                                        </div>
+                                        <div class="form-grid">
+                                            <label>{{ t('kanban.fieldCardResponsible') }}
+                                                <select v-model="state.kanbanCardForm.responsavelId">
+                                                    <option value="">{{ t('common.select') }}</option>
+                                                    <option v-for="user in state.users" :key="user.id" :value="user.id">{{ user.nome }}</option>
+                                                </select>
+                                            </label>
+                                            <label>{{ t('kanban.fieldCardCompany') }}
+                                                <select v-model="state.kanbanCardForm.empresaId">
+                                                    <option value="">{{ t('common.select') }}</option>
+                                                    <option v-for="company in state.companies" :key="company.id" :value="company.id">
+                                                        {{ company.nomeEmpresa || company.nomeFantasia }}
+                                                    </option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="primary" type="submit">{{ t('common.save') }}</button>
+                                            <button class="secondary" type="button" @click="resetForm('kanbanCard')">{{ t('common.clear') }}</button>
+                                            <button class="ghost" v-if="state.kanbanCardForm.id" type="button" @click="deleteKanbanCard(state.kanbanCardForm.id)">{{ t('common.delete') }}</button>
+                                            <button class="ghost" type="button" @click="closeKanbanCardModal">{{ t('common.close') }}</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

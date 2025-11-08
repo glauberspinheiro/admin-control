@@ -42,6 +42,6 @@ public class AdmEmpresaService {
 
     public List<AdmEmpresaModel> findLatest(int limit) {
         int size = Math.min(Math.max(limit, 1), 50);
-        return admEmpresaRepository.findAll(PageRequest.of(0, size, Sort.by(Sort.Direction.DESC, "dt_cadastro"))).getContent();
+        return admEmpresaRepository.findAll(PageRequest.of(0, size, Sort.by(Sort.Direction.DESC, "dtCadastro"))).getContent();
     }
 }

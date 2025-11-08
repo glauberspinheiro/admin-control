@@ -1,5 +1,8 @@
 package com.revitalize.admincontrol.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +18,7 @@ import java.time.ZoneId;
 import java.util.UUID;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "TB_EMPRESA")
 public class AdmEmpresaModel implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -28,11 +32,11 @@ public class AdmEmpresaModel implements Serializable {
     @Column(nullable = false, length = 14)
     private String cnpj;
 
-    @Column(nullable = false, length = 150)
-    private String nomeempresa;
+    @Column(name = "nomeempresa", nullable = false, length = 150)
+    private String nomeEmpresa;
 
-    @Column(nullable = true, length = 150)
-    private String nomefantasia;
+    @Column(name = "nomefantasia", nullable = true, length = 150)
+    private String nomeFantasia;
 
     @Column(nullable = true, length = 150)
     private String email;
@@ -49,11 +53,11 @@ public class AdmEmpresaModel implements Serializable {
     @Column(nullable = false, length = 1)
     private String status;
 
-    @Column(nullable = false)
-    private LocalDateTime dt_cadastro;
+    @Column(name = "dt_cadastro", nullable = false)
+    private LocalDateTime dtCadastro;
 
-    @Column(nullable = false)
-    private LocalDateTime dt_alteracao_cadastro;
+    @Column(name = "dt_alteracao_cadastro", nullable = false)
+    private LocalDateTime dtAlteracaoCadastro;
 
     @Column(nullable = true, length = 9)
     private String cep;
@@ -92,18 +96,18 @@ public class AdmEmpresaModel implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        if (dt_cadastro == null) {
-            dt_cadastro = LocalDateTime.now(SAO_PAULO);
+        if (dtCadastro == null) {
+            dtCadastro = LocalDateTime.now(SAO_PAULO);
         }
-        if (dt_alteracao_cadastro == null) {
-            dt_alteracao_cadastro = dt_cadastro;
+        if (dtAlteracaoCadastro == null) {
+            dtAlteracaoCadastro = dtCadastro;
         }
         applyDefaults();
     }
 
     @PreUpdate
     public void preUpdate() {
-        dt_alteracao_cadastro = LocalDateTime.now(SAO_PAULO);
+        dtAlteracaoCadastro = LocalDateTime.now(SAO_PAULO);
         applyDefaults();
     }
 
@@ -148,20 +152,30 @@ public class AdmEmpresaModel implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public String getNomeempresa() {
-        return nomeempresa;
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
     }
 
-    public void setNomeempresa(String nomeempresa) {
-        this.nomeempresa = nomeempresa;
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
     }
 
-    public String getNomefantasia() {
-        return nomefantasia;
+    @JsonProperty("nome")
+    public String getNome() {
+        return nomeEmpresa;
     }
 
-    public void setNomefantasia(String nomefantasia) {
-        this.nomefantasia = nomefantasia;
+    @JsonProperty("nome")
+    public void setNome(String nome) {
+        this.nomeEmpresa = nome;
+    }
+
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     public String getEmail() {
@@ -188,20 +202,20 @@ public class AdmEmpresaModel implements Serializable {
         this.status = status;
     }
 
-    public LocalDateTime getDt_cadastro() {
-        return dt_cadastro;
+    public LocalDateTime getDtCadastro() {
+        return dtCadastro;
     }
 
-    public void setDt_cadastro(LocalDateTime dt_cadastro) {
-        this.dt_cadastro = dt_cadastro;
+    public void setDtCadastro(LocalDateTime dtCadastro) {
+        this.dtCadastro = dtCadastro;
     }
 
-    public LocalDateTime getDt_alteracao_cadastro() {
-        return dt_alteracao_cadastro;
+    public LocalDateTime getDtAlteracaoCadastro() {
+        return dtAlteracaoCadastro;
     }
 
-    public void setDt_alteracao_cadastro(LocalDateTime dt_alteracao_cadastro) {
-        this.dt_alteracao_cadastro = dt_alteracao_cadastro;
+    public void setDtAlteracaoCadastro(LocalDateTime dtAlteracaoCadastro) {
+        this.dtAlteracaoCadastro = dtAlteracaoCadastro;
     }
 
     public String getCep() {

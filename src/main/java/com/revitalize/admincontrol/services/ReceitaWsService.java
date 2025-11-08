@@ -49,8 +49,8 @@ public class ReceitaWsService {
 
             AdmEmpresaDto dto = new AdmEmpresaDto();
             dto.setCnpj(digits);
-            dto.setNomeempresa(root.path("nome").asText(""));
-            dto.setNomefantasia(nullIfBlank(root.path("fantasia").asText("")));
+            dto.setNomeEmpresa(root.path("nome").asText(""));
+            dto.setNomeFantasia(nullIfBlank(root.path("fantasia").asText("")));
             dto.setEmail(nullIfBlank(root.path("email").asText("")));
             dto.setTelefone(limitLength(onlyDigits(root.path("telefone").asText("")), 20));
             dto.setContato(extractFirstPartnerName(root));
