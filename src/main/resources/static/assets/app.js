@@ -45,37 +45,37 @@ const translations = {
         'companies.fieldEmail': 'E-mail',
         'companies.fieldContact': 'Contato principal',
         'companies.fieldPhone': 'Telefone',
-        'companies.fieldMonthly': 'Mensalista (S/N)',
-        'companies.fieldStatus': 'Status (A/I)',
+        'companies.fieldMonthly': 'Mensalista',
+        'companies.fieldStatus': 'Status',
         'companies.listTitle': 'Empresas',
         'companies.tableFantasy': 'Nome fantasia',
         'companies.tableCnpj': 'CNPJ',
         'companies.tableStatus': 'Status',
         'kanban.title': 'Atividade',
         'kanban.description': 'Organize etapas e cartões do seu fluxo.',
-        'kanban.boardFormTitle': 'Configuração da atividade',
+        'kanban.boardFormTitle': 'Criar Atividade',
         'kanban.columnFormTitle': 'Etapas',
         'kanban.cardFormTitle': 'Cartão',
-        'kanban.fieldBoardName': 'Nome do quadro',
-        'kanban.fieldBoardDescription': 'Descrição do quadro',
-        'kanban.fieldColumnName': 'Título da coluna',
-        'kanban.fieldColumnSlug': 'Slug/ID',
+        'kanban.fieldBoardName': 'Nome da Atividade',
+        'kanban.fieldBoardDescription': 'Descrição da Atividade',
+        'kanban.fieldColumnName': 'Título da Etapa',
+        'kanban.fieldColumnSlug': 'Ordenação',
         'kanban.fieldColumnColor': 'Cor',
-        'kanban.fieldColumnWip': 'Limite WIP',
+        'kanban.fieldColumnWip': 'Máx. Cartões Ativos Simultâneamente',
         'kanban.fieldCardTitle': 'Título do cartão',
         'kanban.fieldCardDescription': 'Descrição',
-        'kanban.fieldCardTags': 'Tags (separadas por vírgula)',
+        'kanban.fieldCardTags': 'Tags',
         'kanban.fieldCardAssignee': 'Responsável',
         'kanban.fieldCardPriority': 'Prioridade',
         'kanban.fieldCardDueDate': 'Data limite',
         'kanban.fieldCardMetadata': 'Metadados do cartão',
-        'kanban.fieldCardResponsible': 'Responsável (usuário)',
-        'kanban.fieldCardCompany': 'Empresa associada (opcional)',
-        'kanban.selectBoard': 'Selecione um quadro',
-        'kanban.newColumn': 'Nova coluna',
+        'kanban.fieldCardResponsible': 'Responsável',
+        'kanban.fieldCardCompany': 'Empresa',
+        'kanban.selectBoard': 'Selecione uma atividade',
+        'kanban.newColumn': 'Nova Etapa',
         'kanban.newCard': 'Novo cartão',
-        'kanban.tab.setup': 'Configurar quadro',
-        'kanban.tab.workspace': 'Workspace de cards',
+        'kanban.tab.setup': 'Configurar Atividades',
+        'kanban.tab.workspace': 'Área de Trabalho',
         'kanban.columnListTitle': 'Personalize etapas',
         'kanban.cardModalTitleCreate': 'Novo cartão',
         'kanban.cardModalTitleEdit': 'Editar cartão',
@@ -85,12 +85,12 @@ const translations = {
         'kanban.filterAssignee': 'Responsável',
         'kanban.filterPriority': 'Prioridade',
         'kanban.filteredEmpty': 'Nenhum cartão com os filtros atuais.',
-        'kanban.columnActions': 'Ações da coluna',
+        'kanban.columnActions': 'Ações da Etapa',
         'kanban.cardActions': 'Ações do cartão',
         'kanban.moveCard': 'Mover para',
         'kanban.duplicateCard': 'Duplicar cartão',
         'kanban.duplicateSuffix': '(cópia)',
-        'kanban.noBoard': 'Nenhum quadro disponível. Utilize o formulário para criar o primeiro.',
+        'kanban.noBoard': 'Nenhuma Atividade disponível. Utilize o formulário para criar o primeiro.',
         'companies.tableRegime': 'Regime',
         'companies.lookupTitle': 'Consultar CNPJ',
         'companies.lookupDescription': 'Informe o CNPJ para buscar dados oficiais automaticamente.',
@@ -127,7 +127,7 @@ const translations = {
         'productTypes.formTitleEdit': 'Editar tipo de produto',
         'productTypes.fieldDescription': 'Descrição',
         'productTypes.fieldType': 'Tipo',
-        'productTypes.fieldStatus': 'Status (A/I)',
+        'productTypes.fieldStatus': 'Status',
         'productTypes.listTitle': 'Tipos cadastrados',
         'productTypes.tableDescription': 'Descrição',
         'productTypes.tableType': 'Tipo',
@@ -137,7 +137,7 @@ const translations = {
         'products.fieldType': 'Tipo de produto',
         'products.fieldName': 'Nome',
         'products.fieldMeasurement': 'Medição',
-        'products.fieldStatus': 'Status (A/I)',
+        'products.fieldStatus': 'Status',
         'products.listTitle': 'Produtos',
         'products.tableName': 'Nome',
         'products.tableType': 'Tipo',
@@ -232,10 +232,10 @@ const translations = {
         'feedback.templateDeleted': 'Modelo removido.',
         'feedback.emailSent': 'E-mails enviados para o servidor.',
         'feedback.serverConfigSaved': 'Configuração de e-mail salva.',
-        'feedback.kanbanBoardSaved': 'Quadro salvo.',
-        'feedback.kanbanBoardDeleted': 'Quadro removido.',
-        'feedback.kanbanColumnSaved': 'Coluna salva.',
-        'feedback.kanbanColumnDeleted': 'Coluna removida.',
+        'feedback.kanbanBoardSaved': 'Atividade salvo.',
+        'feedback.kanbanBoardDeleted': 'Atividade removido.',
+        'feedback.kanbanColumnSaved': 'Etapa salva.',
+        'feedback.kanbanColumnDeleted': 'Etapa removida.',
         'feedback.kanbanCardSaved': 'Cartão salvo.',
         'feedback.kanbanCardDeleted': 'Cartão removido.',
         'errors.productTypeRequired': 'Selecione um tipo de produto antes de salvar.',
@@ -303,13 +303,13 @@ const translations = {
         'kanban.fieldColumnWip': 'WIP limit',
         'kanban.fieldCardTitle': 'Card title',
         'kanban.fieldCardDescription': 'Description',
-        'kanban.fieldCardTags': 'Tags (comma separated)',
+        'kanban.fieldCardTags': 'Tags',
         'kanban.fieldCardAssignee': 'Assignee',
         'kanban.fieldCardPriority': 'Priority',
         'kanban.fieldCardDueDate': 'Due date',
         'kanban.fieldCardMetadata': 'Card metadata',
-        'kanban.fieldCardResponsible': 'Responsible (user)',
-        'kanban.fieldCardCompany': 'Associated company (optional)',
+        'kanban.fieldCardResponsible': 'Responsible',
+        'kanban.fieldCardCompany': 'company',
         'kanban.selectBoard': 'Select a board',
         'kanban.newColumn': 'New column',
         'kanban.newCard': 'New card',
@@ -366,7 +366,7 @@ const translations = {
         'productTypes.formTitleEdit': 'Edit product type',
         'productTypes.fieldDescription': 'Description',
         'productTypes.fieldType': 'Type',
-        'productTypes.fieldStatus': 'Status (A/I)',
+        'productTypes.fieldStatus': 'Status',
         'productTypes.listTitle': 'Registered types',
         'productTypes.tableDescription': 'Description',
         'productTypes.tableType': 'Type',
@@ -376,7 +376,7 @@ const translations = {
         'products.fieldType': 'Product type',
         'products.fieldName': 'Name',
         'products.fieldMeasurement': 'Measurement',
-        'products.fieldStatus': 'Status (A/I)',
+        'products.fieldStatus': 'Status',
         'products.listTitle': 'Products',
         'products.tableName': 'Name',
         'products.tableType': 'Type',
@@ -1660,7 +1660,7 @@ const App = {
             handleKanbanDragEnd();
         };
 
-        const kanbanCardsForColumn = (column) => {
+        const kanbanCardsForColumn = (column) => { 
             const cards = column?.cards || [];
             const filterTag = (state.kanbanFilters.tag || '').toLowerCase();
             const filterAssignee = (state.kanbanFilters.assignee || '').toLowerCase();
@@ -2832,14 +2832,16 @@ const App = {
                                         <input v-model="state.kanbanFilters.tag" :placeholder="t('kanban.filterTag')" />
                                     </label>
                                     <label>{{ t('kanban.filterAssignee') }}
-                                        <input v-model="state.kanbanFilters.assignee" :placeholder="t('kanban.filterAssignee')" />
+                                        <select v-model="state.kanbanFilters.assignees">
+                                            <option v-for="user in state.users" :key="user.id" :value="user.nome">{{ user.nome }}</option>
+                                        </select>
                                     </label>
                                     <label>{{ t('kanban.filterPriority') }}
                                         <select v-model="state.kanbanFilters.priority">
                                             <option value="">{{ t('common.select') }}</option>
-                                            <option value="low">LOW</option>
+                                            <option value="low">BAIXO</option>
                                             <option value="normal">NORMAL</option>
-                                            <option value="high">HIGH</option>
+                                            <option value="high">ALTO</option>
                                         </select>
                                     </label>
                                 </div>
@@ -2951,9 +2953,9 @@ const App = {
                                             <label>{{ t('kanban.fieldCardPriority') }}
                                                 <select v-model="state.kanbanCardForm.prioridade">
                                                     <option value="">{{ t('common.select') }}</option>
-                                                    <option value="LOW">LOW</option>
+                                                    <option value="LOW">BAIXO</option>
                                                     <option value="NORMAL">NORMAL</option>
-                                                    <option value="HIGH">HIGH</option>
+                                                    <option value="HIGH">ALTO</option>
                                                 </select>
                                             </label>
                                             <label>{{ t('kanban.fieldCardDueDate') }}
