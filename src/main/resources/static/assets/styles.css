@@ -409,8 +409,10 @@ section {
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;
+    /*grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem*/
+    flex-direction: column;
     gap: 1.5rem;
 }
 

@@ -2609,7 +2609,7 @@ const App = {
                                         <td>{{ user.cpf || '-' }}</td>
                                         <td>
                                             <button class="secondary" @click="editUser(user)">{{ t('common.edit') }}</button>
-                                            <button class="secondary" @click="deleteUser(user.id)">{{ t('common.delete') }}</button>
+                                            <button class="ghost" @click="deleteUser(user.id)">{{ t('common.delete') }}</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -2677,7 +2677,7 @@ const App = {
                                         </td>
                                         <td>
                                             <button class="secondary" type="button" @click="editCompany(company)">{{ t('common.edit') }}</button>
-                                            <button class="secondary" type="button" @click="deleteCompany(company.id)">{{ t('common.delete') }}</button>
+                                            <button class="ghost" type="button" @click="deleteCompany(company.id)">{{ t('common.delete') }}</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -2884,7 +2884,6 @@ const App = {
                                                     <span class="kanban-card-priority">{{ (card.prioridade || 'NORMAL') }}</span>
                                                 </div>
                                             </header>
-                                            <p v-if="card.descricao">{{ card.descricao }}</p>
                                             <div class="kanban-card-meta">
                                                 <span class="kanban-card-detail" v-if="card.tags?.length">
                                                     <strong>{{ t('kanban.fieldCardTags') }}:</strong>
@@ -2898,9 +2897,9 @@ const App = {
                                                     <strong>{{ t('kanban.fieldCardDueDate') }}:</strong>
                                                     {{ card.dueDate }}
                                                 </span>
-                                                <span class="kanban-card-detail" v-if="card.responsavelNome">
+                                                <span class="kanban-card-detail" v-if="card.responsavelName">
                                                     <strong>{{ t('kanban.fieldCardResponsible') }}:</strong>
-                                                    {{ card.responsavelNome }}
+                                                    {{ card.responsavelName }}
                                                 </span>
                                             </div>
                                             <label class="kanban-move-select">
@@ -2953,9 +2952,9 @@ const App = {
                                             <label>{{ t('kanban.fieldCardPriority') }}
                                                 <select v-model="state.kanbanCardForm.prioridade">
                                                     <option value="">{{ t('common.select') }}</option>
-                                                    <option value="LOW">BAIXO</option>
+                                                    <option value="BAIXO">BAIXO</option>
                                                     <option value="NORMAL">NORMAL</option>
-                                                    <option value="HIGH">ALTO</option>
+                                                    <option value="ALTO">ALTO</option>
                                                 </select>
                                             </label>
                                             <label>{{ t('kanban.fieldCardDueDate') }}
@@ -3037,7 +3036,7 @@ const App = {
                                         </td>
                                         <td>
                                             <button class="secondary" @click="editProductType(type)">{{ t('common.edit') }}</button>
-                                            <button class="secondary" @click="deleteProductType(type.id)">{{ t('common.delete') }}</button>
+                                            <button class="ghost" @click="deleteProductType(type.id)">{{ t('common.delete') }}</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -3097,7 +3096,7 @@ const App = {
                                         </td>
                                         <td>
                                             <button class="secondary" @click="editProduct(product)">{{ t('common.edit') }}</button>
-                                            <button class="secondary" @click="deleteProduct(product.id)">{{ t('common.delete') }}</button>
+                                            <button class="ghost" @click="deleteProduct(product.id)">{{ t('common.delete') }}</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -3148,7 +3147,7 @@ const App = {
                                         <td>{{ template.usarAssinatura ? t('common.yes') : t('common.no') }}</td>
                                         <td>
                                             <button class="secondary" @click="editTemplate(template)">{{ t('common.edit') }}</button>
-                                            <button class="secondary" @click="deleteTemplate(template.id)">{{ t('common.delete') }}</button>
+                                            <button class="ghost" @click="deleteTemplate(template.id)">{{ t('common.delete') }}</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -3187,7 +3186,7 @@ const App = {
                                 <ul class="attachments-list" v-if="state.emailSingleForm.attachments.length">
                                     <li v-for="attachment in state.emailSingleForm.attachments" :key="attachment.id">
                                         <span>{{ attachment.nomeArquivo }} ({{ attachment.sizeLabel }})</span>
-                                        <button type="button" class="link-button" @click="removeSingleAttachment(attachment.id)">{{ t('common.delete') }}</button>
+                                        <button type="button" class="ghost" @click="removeSingleAttachment(attachment.id)">{{ t('common.delete') }}</button>
                                     </li>
                                 </ul>
                                 <label>{{ t('email.recipients') }}
