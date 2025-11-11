@@ -3520,16 +3520,20 @@ const App = {
                     <div v-else-if="activeSection === 'mapping'" class="grid gap-3" style="grid-template-columns: 1fr 340px;">
                     <div>
                         <div class="mb-2 flex gap-2">
-                        <select v-model="state.selectedCompanyId" class="border p-2">
-                            <option value="" disabled>Selecione a empresa</option>
-                            <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
-                        </select>
-                        <select v-model="state.providerType" class="border p-2">
-                            <option value="">Todos os tipos</option>
-                            <option value="logistica_reversa">Logística reversa</option>
-                            <option value="transporte_residuo">Transporte de resíduo</option>
-                        </select>
-                        <button class="border rounded px-3" @click="showNearby">Buscar próximos</button>
+                        <label>{{ t('mapping.selectCompany') }}
+                            <select v-model="state.selectedCompanyId" class="border p-2">
+                                <option value="" disabled>Selecione a empresa</option>
+                                <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
+                            </select>
+                        </label>
+                        <label>{{ t('mapping.typeAll') }}
+                            <select v-model="state.providerType" class="border p-2">
+                                <option value="">Parceiro</option>
+                                <option value="logistica_reversa">Logística reversa</option>
+                                <option value="transporte_residuo">Transporte de resíduo</option>
+                            </select>
+                        </label>
+                        <button class="primary" @click="showNearby">Consultar</button>
                         </div>
                         <div id="leaflet-map" style="height: 75vh; border-radius: 8px; overflow: hidden;"></div>
                     </div>

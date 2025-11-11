@@ -29,24 +29,25 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    TokenAuthenticationFilter tokenAuthenticationFilter) throws Exception {
         http
-                .csrf().disable()
-                .cors().and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                // Permite estáticos e login
+            .csrf().disable()
+            .cors().and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .exceptionHandling()
+                .authenticationEntryPoint(new JsonAuthenticationEntryPoint())
+                .accessDeniedHandler(new JsonAccessDeniedHandler())
+            .and()
+            .authorizeRequests()
                 .antMatchers("/assets/**", "/", "/index.html", "/webhook/**").permitAll()
                 .antMatchers("/api/auth/login").permitAll()
-                // IMPORTANTE: permitir preflight
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                // Demais rotas autenticadas
                 .anyRequest().authenticated()
-                .and()
-                .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            .and()
+            .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
-    // CORS liberal para DEV; ajuste conforme necessário
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
