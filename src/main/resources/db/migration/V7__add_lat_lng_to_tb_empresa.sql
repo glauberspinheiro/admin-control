@@ -1,0 +1,6 @@
+-- Add lat/lng to companies (clientes)
+ALTER TABLE TB_EMPRESA
+    ADD COLUMN IF NOT EXISTS lat DOUBLE PRECISION,
+    ADD COLUMN IF NOT EXISTS lng DOUBLE PRECISION;
+
+CREATE INDEX IF NOT EXISTS idx_tb_empresa_lat_lng ON TB_EMPRESA (lat, lng);

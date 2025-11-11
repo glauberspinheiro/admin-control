@@ -1,5 +1,18 @@
 import { createApp, ref, reactive, computed, onMounted, onBeforeUnmount, watch, nextTick } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js';
 import { apiClient } from './apiClient.js';
+// correto (ESM: usa namespace import)
+import * as L from 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet-src.esm.js';
+
+// injeta o CSS uma única vez
+(function(){
+  if (!document.getElementById('leaflet-css-link')) {
+    const l = document.createElement('link');
+    l.id = 'leaflet-css-link';
+    l.rel = 'stylesheet';
+    l.href = 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(l);
+  }
+})();
 
 const translations = {
     'pt-BR': {
@@ -239,7 +252,12 @@ const translations = {
         'feedback.kanbanCardSaved': 'Cartão salvo.',
         'feedback.kanbanCardDeleted': 'Cartão removido.',
         'errors.productTypeRequired': 'Selecione um tipo de produto antes de salvar.',
-        'session.expired': 'Sua sessão expirou. Faça login novamente.'
+        'session.expired': 'Sua sessão expirou. Faça login novamente.',
+        'nav.mapping': 'Mapeamento',
+        'mapping.title': 'Empresas & Prestadores',
+        'mapping.selectCompany': 'Selecione a empresa',
+        'mapping.typeAll': 'Todos os tipos',
+        'mapping.findNearby': 'Buscar próximos'
     },
     'en-US': {
         'nav.dashboard': 'Overview',
@@ -478,7 +496,12 @@ const translations = {
         'feedback.kanbanCardSaved': 'Card saved.',
         'feedback.kanbanCardDeleted': 'Card removed.',
         'errors.productTypeRequired': 'Select a product type before saving.',
-        'session.expired': 'Your session expired. Please sign in again.'
+        'session.expired': 'Your session expired. Please sign in again.',
+        'nav.mapping': 'Mapping',
+        'mapping.title': 'Companies And Providers',
+        'mapping.selectCompany': 'Select a company',
+        'mapping.typeAll': 'All Types',
+        'mapping.findNearby': 'Find Nearby'
     }
 };
 
@@ -487,6 +510,7 @@ const sections = [
     { id: 'users', labelKey: 'nav.users' },
     { id: 'companies', labelKey: 'nav.companies' },
     { id: 'kanban', labelKey: 'nav.kanban' },
+    { id: 'mapping', labelKey: 'nav.mapping' },
     { id: 'productTypes', labelKey: 'nav.productTypes' },
     { id: 'products', labelKey: 'nav.products' },
     { id: 'emailTemplates', labelKey: 'nav.emailTemplates' },
@@ -521,7 +545,8 @@ const endpoints = {
     preferences: '/api/user/preferences',
     kanbanBoards: '/api/kanban/boards',
     kanbanColumns: '/api/kanban/columns',
-    kanbanCards: '/api/kanban/cards'
+    kanbanCards: '/api/kanban/cards',
+    mapNearby: '/api/map/nearby'
 };
 
 const SESSION_KEY = 'revitalizeSession';
@@ -838,6 +863,13 @@ const App = {
             emailHistory: [],
             emailHistoryPage: 1,
             userMenuOpen: false,
+            mapRef: null,
+            mapLayers: new Map(),
+            companies: [],
+            selectedCompanyId: '',
+            providerType: '',
+            iconCache: new Map(),
+            nearby: null
         });
 
         const latestCompanies = computed(() => {
@@ -1169,8 +1201,10 @@ const App = {
         };
 
         const loadCompanies = async () => {
-            state.companies = await apiClient.get(endpoints.companies);
+            try { state.companies = await apiClient.get(endpoints.companies); }
+            catch (e) { console.error('[Dashboard] loadCompanies', e); }
         };
+      
 
         const loadKanbanBoards = async () => {
             state.kanbanBoards = await apiClient.get(endpoints.kanbanBoards);
@@ -1660,7 +1694,7 @@ const App = {
             handleKanbanDragEnd();
         };
 
-        const kanbanCardsForColumn = (column) => { 
+        const kanbanCardsForColumn = (column) => {
             const cards = column?.cards || [];
             const filterTag = (state.kanbanFilters.tag || '').toLowerCase();
             const filterAssignee = (state.kanbanFilters.assignee || '').toLowerCase();
@@ -2331,6 +2365,9 @@ const App = {
             if (section === 'settings') {
                 await ensureSignatureEditor();
             }
+            if (section === 'mapping') {
+                await nextTick(); await initMapIfNeeded(); await loadCompanies();
+            }
         });
 
         onMounted(async () => {
@@ -2346,6 +2383,101 @@ const App = {
             destroyEmailSingleEditor();
             destroySignatureEditor();
         });
+
+        // Helper: esperar elemento aparecer no DOM
+        const waitForElement = (selector, { timeout = 4000, interval = 50 } = {}) => {
+        return new Promise((resolve, reject) => {
+            const start = Date.now();
+            const timer = setInterval(() => {
+            const el = document.querySelector(selector);
+            if (el) {
+                clearInterval(timer);
+                resolve(el);
+            } else if (Date.now() - start > timeout) {
+                clearInterval(timer);
+                reject(new Error(`Elemento não encontrado: ${selector}`));
+            }
+            }, interval);
+        });
+        };
+
+        async function apiGet(path, params = {}) {
+            const qs = new URLSearchParams(params).toString();
+            const url = `${path}${qs ? `?${qs}` : ''}`;
+            return apiClient.get(url);
+        }      
+
+        function iconFor(kind) {
+            if (state.iconCache.has(kind)) return state.iconCache.get(kind);
+            const url = {
+                empresa: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                logistica_reversa: '/assets/icons/logistica.png',
+                transporte_residuo: '/assets/icons/residuo.png'
+            }[kind] || 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
+            const ic = L.icon({
+                iconUrl: url, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [0, -28],
+                shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+            });
+            state.iconCache.set(kind, ic);
+            return ic;
+        }
+
+        const initMapIfNeeded = async () => {
+        try {
+            if (state.mapRef) return;
+            await nextTick(); // aguarda render Vue
+            const el = await waitForElement('#leaflet-map', { timeout: 5000 });
+            el.innerHTML = ''; // limpa se reuso de container
+            state.mapRef = L.map(el, { zoomControl: true }).setView([-15.79, -47.88], 4);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(state.mapRef);
+        } catch (err) {
+            console.error('[Map] initMapIfNeeded', err);
+        }
+        };
+
+        const clearMapLayers = () => {
+        state.mapLayers.forEach(layer => {
+            try { layer.remove(); } catch {}
+        });
+        state.mapLayers.clear();
+        };
+
+        const showNearby = async () => {
+        if (!state.selectedCompanyId) {
+            console.warn('[Map] selecione uma empresa');
+            return;
+        }
+
+        try {
+            const data = await apiGet(endpoints.mapNearby, {
+            companyId: state.selectedCompanyId,
+            tipo: state.providerType || '',
+            limit: 10
+            });
+            state.nearby = data;
+            clearMapLayers();
+
+            const c = data.company;
+            const cm = L.marker([c.lat, c.lng], { icon: iconFor('empresa') })
+            .bindPopup(`<b>${c.nome}</b><br>Empresa`);
+            cm.addTo(state.mapRef);
+            state.mapLayers.set(`company:${c.id}`, cm);
+            state.mapRef.setView([c.lat, c.lng], 13);
+
+            for (const p of data.prestadores) {
+            const m = L.marker([p.lat, p.lng], { icon: iconFor(p.tipo) })
+                .bindPopup(`<b>${p.nome}</b><br>${p.tipo.replace('_',' ')}<br>${p.distanceKm.toFixed(2)} km`);
+            m.addTo(state.mapRef);
+            state.mapLayers.set(`prov:${p.id}`, m);
+            }
+        } catch (err) {
+            console.error('[Map] showNearby', err);
+        }
+        };
 
         return {
             sections,
@@ -2432,7 +2564,13 @@ const App = {
             toggleUserMenu,
             viewAccessHistory,
             goToPasswordChange,
-            logoutUser
+            logoutUser,
+            apiGet,
+            iconFor,
+            initMapIfNeeded,
+            showNearby,
+            loadCompanies,
+            clearMapLayers
         };
     },
     template: `
@@ -3329,6 +3467,38 @@ const App = {
                                 </div>
                             </form>
                         </div>
+                    </div>
+                    <div v-else-if="activeSection === 'mapping'" class="grid gap-3" style="grid-template-columns: 1fr 340px;">
+                    <div>
+                        <div class="mb-2 flex gap-2">
+                        <select v-model="state.selectedCompanyId" class="border p-2">
+                            <option value="" disabled>Selecione a empresa</option>
+                            <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
+                        </select>
+                        <select v-model="state.providerType" class="border p-2">
+                            <option value="">Todos os tipos</option>
+                            <option value="logistica_reversa">Logística reversa</option>
+                            <option value="transporte_residuo">Transporte de resíduo</option>
+                        </select>
+                        <button class="border rounded px-3" @click="showNearby">Buscar próximos</button>
+                        </div>
+                        <div id="leaflet-map" style="height: 75vh; border-radius: 8px; overflow: hidden;"></div>
+                    </div>
+
+                    <aside class="border rounded p-3 overflow-auto" style="max-height: 75vh;">
+                        <h3 class="font-bold mb-2">Mapa (Empresas & Prestadores)</h3>
+                        <ul class="space-y-2">
+                        <li v-if="!state.nearby || !state.nearby.prestadores?.length" class="text-sm opacity-70">
+                            Nenhuma marcação para exibir.
+                        </li>
+                        <li v-for="p in state.nearby?.prestadores || []" :key="p.id" class="border rounded p-2 flex items-center justify-between">
+                            <div>
+                            <div class="font-medium">{{ p.nome }}</div>
+                            <div class="text-xs opacity-70">{{ p.tipo }} — {{ p.distanceKm.toFixed(2) }} km</div>
+                            </div>
+                        </li>
+                        </ul>
+                    </aside>
                     </div>
                 </section>
             </div>
