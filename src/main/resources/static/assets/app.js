@@ -4,14 +4,14 @@ import { apiClient } from './apiClient.js';
 import * as L from 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet-src.esm.js';
 
 // injeta o CSS uma única vez
-(function(){
-  if (!document.getElementById('leaflet-css-link')) {
-    const l = document.createElement('link');
-    l.id = 'leaflet-css-link';
-    l.rel = 'stylesheet';
-    l.href = 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css';
-    document.head.appendChild(l);
-  }
+(function () {
+    if (!document.getElementById('leaflet-css-link')) {
+        const l = document.createElement('link');
+        l.id = 'leaflet-css-link';
+        l.rel = 'stylesheet';
+        l.href = 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(l);
+    }
 })();
 
 const translations = {
@@ -1204,7 +1204,7 @@ const App = {
             try { state.companies = await apiClient.get(endpoints.companies); }
             catch (e) { console.error('[Dashboard] loadCompanies', e); }
         };
-      
+
 
         const loadKanbanBoards = async () => {
             state.kanbanBoards = await apiClient.get(endpoints.kanbanBoards);
@@ -2386,26 +2386,26 @@ const App = {
 
         // Helper: esperar elemento aparecer no DOM
         const waitForElement = (selector, { timeout = 4000, interval = 50 } = {}) => {
-        return new Promise((resolve, reject) => {
-            const start = Date.now();
-            const timer = setInterval(() => {
-            const el = document.querySelector(selector);
-            if (el) {
-                clearInterval(timer);
-                resolve(el);
-            } else if (Date.now() - start > timeout) {
-                clearInterval(timer);
-                reject(new Error(`Elemento não encontrado: ${selector}`));
-            }
-            }, interval);
-        });
+            return new Promise((resolve, reject) => {
+                const start = Date.now();
+                const timer = setInterval(() => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        clearInterval(timer);
+                        resolve(el);
+                    } else if (Date.now() - start > timeout) {
+                        clearInterval(timer);
+                        reject(new Error(`Elemento não encontrado: ${selector}`));
+                    }
+                }, interval);
+            });
         };
 
         async function apiGet(path, params = {}) {
             const qs = new URLSearchParams(params).toString();
             const url = `${path}${qs ? `?${qs}` : ''}`;
             return apiClient.get(url);
-        }      
+        }
 
         function iconFor(kind) {
             if (state.iconCache.has(kind)) return state.iconCache.get(kind);
@@ -2423,61 +2423,110 @@ const App = {
         }
 
         const initMapIfNeeded = async () => {
-        try {
-            if (state.mapRef) return;
-            await nextTick(); // aguarda render Vue
-            const el = await waitForElement('#leaflet-map', { timeout: 5000 });
-            el.innerHTML = ''; // limpa se reuso de container
-            state.mapRef = L.map(el, { zoomControl: true }).setView([-15.79, -47.88], 4);
+            try {
+                if (state.mapRef) return;
+                await nextTick(); // aguarda render Vue
+                const el = await waitForElement('#leaflet-map', { timeout: 5000 });
+                el.innerHTML = ''; // limpa se reuso de container
+                state.mapRef = L.map(el, { zoomControl: true }).setView([-15.79, -47.88], 4);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(state.mapRef);
-        } catch (err) {
-            console.error('[Map] initMapIfNeeded', err);
-        }
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(state.mapRef);
+            } catch (err) {
+                console.error('[Map] initMapIfNeeded', err);
+            }
         };
 
         const clearMapLayers = () => {
-        state.mapLayers.forEach(layer => {
-            try { layer.remove(); } catch {}
-        });
-        state.mapLayers.clear();
+            state.mapLayers.forEach(layer => {
+                try { layer.remove(); } catch { }
+            });
+            state.mapLayers.clear();
         };
 
         const showNearby = async () => {
-        if (!state.selectedCompanyId) {
-            console.warn('[Map] selecione uma empresa');
-            return;
-        }
-
-        try {
-            const data = await apiGet(endpoints.mapNearby, {
-            companyId: state.selectedCompanyId,
-            tipo: state.providerType || '',
-            limit: 10
-            });
-            state.nearby = data;
-            clearMapLayers();
-
-            const c = data.company;
-            const cm = L.marker([c.lat, c.lng], { icon: iconFor('empresa') })
-            .bindPopup(`<b>${c.nome}</b><br>Empresa`);
-            cm.addTo(state.mapRef);
-            state.mapLayers.set(`company:${c.id}`, cm);
-            state.mapRef.setView([c.lat, c.lng], 13);
-
-            for (const p of data.prestadores) {
-            const m = L.marker([p.lat, p.lng], { icon: iconFor(p.tipo) })
-                .bindPopup(`<b>${p.nome}</b><br>${p.tipo.replace('_',' ')}<br>${p.distanceKm.toFixed(2)} km`);
-            m.addTo(state.mapRef);
-            state.mapLayers.set(`prov:${p.id}`, m);
+            if (!state.selectedCompanyId) {
+                console.warn('[Map] selecione uma empresa'); return;
             }
-        } catch (err) {
-            console.error('[Map] showNearby', err);
-        }
+            try {
+                // 1) sempre geocodifica a empresa antes de buscar (atualiza coords automaticamente)
+                await apiClient.post(`/api/companies/${state.selectedCompanyId}/geocode`);
+
+                // 2) busca próximos com limite (o back ainda capará em 5)
+                const data = await apiGet(endpoints.mapNearby, {
+                    companyId: state.selectedCompanyId,
+                    tipo: state.providerType || '',
+                    limit: 5
+                });
+                state.nearby = data;
+
+                // 3) marcador da empresa
+                const c = data.company;
+                upsertCompanyMarker({ id: c.id, lat: c.lat, lng: c.lng, nome: c.nome });
+
+                // 4) limpar prestadores anteriores
+                for (const [k, layer] of state.mapLayers.entries()) {
+                    if (k.startsWith('prov:')) {
+                        try { layer.remove(); } catch { }
+                        state.mapLayers.delete(k);
+                    }
+                }
+
+                // 5) adicionar prestadores (nome, telefone, site)
+                for (const p of data.prestadores) {
+                    const siteHtml = p.site ? `<br><a href="${p.site}" target="_blank" rel="noopener">site</a>` : '';
+                    const telHtml = p.telefone ? `<br>tel: ${p.telefone}` : '';
+                    const popup = `<b>${p.nome}</b><br>${p.tipo.replace('_', ' ')}<br>${p.distanceKm.toFixed(2)} km${telHtml}${siteHtml}`;
+                    const m = L.marker([p.lat, p.lng], { icon: iconFor(p.tipo) }).bindPopup(popup);
+                    m.addTo(state.mapRef);
+                    state.mapLayers.set(`prov:${p.id}`, m);
+                }
+            } catch (err) {
+                try {
+                    const text = await err.response?.text?.();
+                    console.error('[Map] showNearby', err.status || '', text || err);
+                } catch {
+                    console.error('[Map] showNearby', err);
+                }
+            }
         };
+
+
+        // cria/atualiza o marcador da empresa selecionada e centraliza o mapa
+        const upsertCompanyMarker = (company) => {
+            if (!company || !state.mapRef) return;
+            const key = `company:${company.id}`;
+            // remove o antigo se existir
+            const old = state.mapLayers.get(key);
+            if (old) {
+                try { old.remove(); } catch { }
+                state.mapLayers.delete(key);
+            }
+            const marker = L.marker([company.lat, company.lng], { icon: iconFor('empresa') })
+                .bindPopup(`<b>${company.nomeEmpresa || company.nomeFantasia || company.nome || 'Empresa'}</b>`);
+            marker.addTo(state.mapRef);
+            state.mapLayers.set(key, marker);
+            state.mapRef.setView([company.lat, company.lng], 15); // zoom mais próximo
+        };
+
+        // quando usuário troca a seleção, focamos e (opcional) buscamos próximos
+        watch(() => state.selectedCompanyId, async (id) => {
+            if (!id) return;
+            // procura a empresa no array já carregado
+            const company = state.companies.find(c => c.id === id);
+            if (company && company.lat != null && company.lng != null) {
+                upsertCompanyMarker(company);
+                // opcional: já puxa próximos automaticamente
+                await showNearby();
+            } else {
+                console.warn('[Map] empresa sem lat/lng — geocodifique antes');
+            }
+        });
+
+
+
 
         return {
             sections,
@@ -3488,15 +3537,17 @@ const App = {
                     <aside class="border rounded p-3 overflow-auto" style="max-height: 75vh;">
                         <h3 class="font-bold mb-2">Mapa (Empresas & Prestadores)</h3>
                         <ul class="space-y-2">
-                        <li v-if="!state.nearby || !state.nearby.prestadores?.length" class="text-sm opacity-70">
-                            Nenhuma marcação para exibir.
-                        </li>
-                        <li v-for="p in state.nearby?.prestadores || []" :key="p.id" class="border rounded p-2 flex items-center justify-between">
-                            <div>
-                            <div class="font-medium">{{ p.nome }}</div>
-                            <div class="text-xs opacity-70">{{ p.tipo }} — {{ p.distanceKm.toFixed(2) }} km</div>
-                            </div>
-                        </li>
+                            <li v-if="!state.nearby || !state.nearby.prestadores?.length" class="text-sm opacity-70">
+                                Nenhuma marcação para exibir.
+                            </li>
+                            <li v-for="p in state.nearby?.prestadores || []" :key="p.id" class="border rounded p-2">
+                                <div class="font-medium">{{ p.nome }}</div>
+                                <div class="text-xs opacity-70">
+                                    {{ p.tipo }} — {{ p.distanceKm.toFixed(2) }} km
+                                    <span v-if="p.telefone"> — {{ p.telefone }}</span>
+                                    <span v-if="p.site"> — <a :href="p.site" target="_blank" rel="noopener">site</a></span>
+                                </div>
+                            </li>
                         </ul>
                     </aside>
                     </div>

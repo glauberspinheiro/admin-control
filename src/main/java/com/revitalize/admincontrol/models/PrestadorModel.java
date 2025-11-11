@@ -14,13 +14,19 @@ public class PrestadorModel {
     private String nome;
 
     @Column(nullable=false, length=80)
-    private String tipo; // 'logistica_reversa' | 'transporte_residuo' | ...
+    private String tipo; // 'logistica_reversa' | 'transporte_residuo'
 
     @Column(nullable=false)
     private Double lat;
 
     @Column(nullable=false)
     private Double lng;
+
+    @Column(length = 30)
+    private String telefone;
+
+    @Column(length = 255)
+    private String site;
 
     @Column(name="dt_cadastro", nullable=false)
     private LocalDateTime dtCadastro = LocalDateTime.now();
@@ -36,9 +42,14 @@ public class PrestadorModel {
     public String getTipo() { return tipo; }
     public Double getLat() { return lat; }
     public Double getLng() { return lng; }
+    public String getTelefone() { return telefone; }
+    public String getSite() { return site; }
+
     public void setId(Long id) { this.id = id; }
     public void setNome(String nome) { this.nome = nome; }
     public void setTipo(String tipo) { this.tipo = tipo; }
     public void setLat(Double lat) { this.lat = lat; }
     public void setLng(Double lng) { this.lng = lng; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
+    public void setSite(String site) { this.site = site; }
 }

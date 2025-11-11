@@ -8,7 +8,9 @@ public class NearbyDTO {
         public UUID id; public String nome; public double lat; public double lng;
     }
     public static class PrestadorMin {
-        public Long id; public String nome; public String tipo; public double lat; public double lng; public double distanceKm;
+        public Long id; public String nome; public String tipo;
+        public double lat; public double lng; public double distanceKm;
+        public String telefone; public String site;
     }
     public CompanyMin company;
     public List<PrestadorMin> prestadores;
