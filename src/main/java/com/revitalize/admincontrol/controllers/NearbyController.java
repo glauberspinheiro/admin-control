@@ -1,7 +1,8 @@
 package com.revitalize.admincontrol.controllers;
 
 import com.revitalize.admincontrol.dto.NearbyDTO;
-import com.revitalize.admincontrol.service.NearbyService;
+import com.revitalize.admincontrol.services.NearbyService;
+
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 

@@ -27,7 +27,6 @@ public class GeocodingService {
 
     public GeocodingService(AdmEmpresaGeoRepository repo) {
         this.repo = repo;
-        // RestTemplate com timeouts
         SimpleClientHttpRequestFactory rf = new SimpleClientHttpRequestFactory();
         rf.setConnectTimeout(5000);
         rf.setReadTimeout(8000);
@@ -36,13 +35,17 @@ public class GeocodingService {
 
     @Transactional
     public Optional<AdmEmpresaModel> geocodeAndSave(UUID companyId) {
+        return geocodeAndSave(companyId, false);
+    }
+
+    @Transactional
+    public Optional<AdmEmpresaModel> geocodeAndSave(UUID companyId, boolean force) {
         Optional<AdmEmpresaModel> opt = repo.findById(companyId);
         if (opt.isEmpty()) return Optional.empty();
 
         AdmEmpresaModel emp = opt.get();
 
-        // Idempotente: se já tem lat/lng, não chama serviço externo
-        if (emp.getLat() != null && emp.getLng() != null) {
+        if (!force && emp.getLat() != null && emp.getLng() != null) {
             log.info("[GEO] Empresa {} já possui lat/lng: {}, {}", companyId, emp.getLat(), emp.getLng());
             return Optional.of(emp);
         }
@@ -72,6 +75,18 @@ public class GeocodingService {
     }
 
     @Transactional
+    public Optional<AdmEmpresaModel> updateCoords(UUID companyId, Double lat, Double lng) {
+        var opt = repo.findById(companyId);
+        if (opt.isEmpty()) return Optional.empty();
+        var emp = opt.get();
+        emp.setLat(lat);
+        emp.setLng(lng);
+        repo.save(emp);
+        log.info("[GEO] coords MANUAL: {} => lat={}, lng={}", safeName(emp), lat, lng);
+        return Optional.of(emp);
+    }
+
+    @Transactional
     public int geocodeMissing(int limit, long delayMs) {
         var page = repo.findByLatIsNullOrLngIsNull(org.springframework.data.domain.PageRequest.of(0, Math.max(1, limit)));
         int count = 0;
@@ -79,7 +94,7 @@ public class GeocodingService {
             try {
                 geocodeAndSave(emp.getId());
                 count++;
-                if (delayMs > 0) Thread.sleep(delayMs); // respeita ~1 req/s do Nominatim
+                if (delayMs > 0) Thread.sleep(delayMs);
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             } catch (Exception ex) {
@@ -89,10 +104,7 @@ public class GeocodingService {
         return count;
     }
 
-    // ---------------- helpers ----------------
-
     private Map<String,Object> queryNominatim(String query) {
-        // IMPORTANTE: usar build().encode() para encodar espaços e caracteres especiais
         URI uri = UriComponentsBuilder.fromHttpUrl(NOMINATIM)
                 .queryParam("format", "json")
                 .queryParam("addressdetails", "0")
@@ -100,7 +112,7 @@ public class GeocodingService {
                 .queryParam("countrycodes", "br")
                 .queryParam("q", query)
                 .build()
-                .encode()   // <-- corrige o erro "Invalid character ' ' for QUERY_PARAM"
+                .encode()
                 .toUri();
 
         HttpHeaders headers = new HttpHeaders();
@@ -113,15 +125,9 @@ public class GeocodingService {
             ResponseEntity<List<Map<String,Object>>> resp = http.exchange(
                     uri, HttpMethod.GET, req, new ParameterizedTypeReference<List<Map<String,Object>>>() {}
             );
-            if (!resp.getStatusCode().is2xxSuccessful()) {
-                log.warn("[GEO] HTTP {} na consulta", resp.getStatusCodeValue());
-                return null;
-            }
+            if (!resp.getStatusCode().is2xxSuccessful()) return null;
             List<Map<String,Object>> body = resp.getBody();
-            if (body == null || body.isEmpty()) {
-                log.warn("[GEO] body vazio para '{}'", query);
-                return null;
-            }
+            if (body == null || body.isEmpty()) return null;
             return body.get(0);
         } catch (HttpStatusCodeException e) {
             String payload = e.getResponseBodyAsString();

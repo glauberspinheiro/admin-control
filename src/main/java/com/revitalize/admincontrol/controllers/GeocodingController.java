@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,30 +22,31 @@ public class GeocodingController {
         this.geo = geo;
     }
 
-    /**
-     * Geocodifica UMA empresa.
-     * Requer: ROLE_SUPER_ADMIN ou ROLE_ADMIN ou ROLE_API ou ROLE_OPERATOR
-     * + alguma autoridade de ambiente (ENV_DEV/ENV_STAGING/ENV_PROD).
-     */
     @PostMapping("/{id}/geocode")
     @PreAuthorize("(hasRole('SUPER_ADMIN') or hasRole('ADMIN') or hasRole('API') or hasRole('OPERATOR')) and " +
                   "(hasAuthority('ENV_DEV') or hasAuthority('ENV_STAGING') or hasAuthority('ENV_PROD'))")
-    public ResponseEntity<AdmEmpresaModel> geocodeOne(@PathVariable("id") UUID id) {
-        Optional<AdmEmpresaModel> updated = geo.geocodeAndSave(id);
+    public ResponseEntity<AdmEmpresaModel> geocodeOne(@PathVariable("id") UUID id,
+                                                      @RequestParam(value = "force", defaultValue = "false") boolean force) {
+        Optional<AdmEmpresaModel> updated = geo.geocodeAndSave(id, force);
         return updated.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    /**
-     * Geocodifica N empresas sem lat/lng (batch helper).
-     * Requer: ROLE_SUPER_ADMIN ou ROLE_ADMIN
-     * + autoridade de environment.
-     */
-    @PostMapping("/geocode-missing")
-    @PreAuthorize("(hasRole('SUPER_ADMIN') or hasRole('ADMIN')) and " +
+    public static class CoordDTO { public Double lat; public Double lng; }
+
+    @PutMapping("/{id}/coords")
+    @PreAuthorize("(hasRole('SUPER_ADMIN') or hasRole('ADMIN') or hasRole('API') or hasRole('OPERATOR')) and " +
                   "(hasAuthority('ENV_DEV') or hasAuthority('ENV_STAGING') or hasAuthority('ENV_PROD'))")
-    public ResponseEntity<String> geocodeMissing(@RequestParam(defaultValue = "10") int limit,
-                                                 @RequestParam(defaultValue = "1200") long delayMs) {
-        int done = geo.geocodeMissing(limit, delayMs);
-        return ResponseEntity.ok("Geocodificadas: " + done);
+    public ResponseEntity<?> setCoords(@PathVariable("id") UUID id, @RequestBody CoordDTO dto) {
+        if (dto == null || dto.lat == null || dto.lng == null) {
+            return ResponseEntity.badRequest().body(Map.of("message", "lat e lng são obrigatórios."));
+        }
+        return geo.updateCoords(id, dto.lat, dto.lng)
+                .<ResponseEntity<?>>map(e -> ResponseEntity.ok(Map.of(
+                        "message", "Coordenadas atualizadas com sucesso.",
+                        "id", e.getId(),
+                        "lat", e.getLat(),
+                        "lng", e.getLng()
+                )))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

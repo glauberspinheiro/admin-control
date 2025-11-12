@@ -36,6 +36,8 @@ public class SecurityConfig {
             .exceptionHandling()
                 .authenticationEntryPoint(new JsonAuthenticationEntryPoint())
                 .accessDeniedHandler(new JsonAccessDeniedHandler())
+                .authenticationEntryPoint(new JsonAuthHandlers.EntryPoint())
+                .accessDeniedHandler(new JsonAuthHandlers.Denied())
             .and()
             .authorizeRequests()
                 .antMatchers("/assets/**", "/", "/index.html", "/webhook/**").permitAll()

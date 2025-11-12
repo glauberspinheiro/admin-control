@@ -2452,7 +2452,7 @@ const App = {
             }
             try {
                 // 1) sempre geocodifica a empresa antes de buscar (atualiza coords automaticamente)
-                await apiClient.post(`/api/companies/${state.selectedCompanyId}/geocode`);
+                await apiClient.post(`/api/companies/${state.selectedCompanyId}/geocode?force=true`);
 
                 // 2) busca próximos com limite (o back ainda capará em 5)
                 const data = await apiGet(endpoints.mapNearby, {
@@ -2473,6 +2473,14 @@ const App = {
                         state.mapLayers.delete(k);
                     }
                 }
+                // 5) limpar prestadores company
+                for (const [k, m] of state.mapLayers.entries()) {
+                if (k.startsWith('company:')) {
+                    try { m.remove(); } catch {}
+                    state.mapLayers.delete(k);
+                }
+                }
+
 
                 // 5) adicionar prestadores (nome, telefone, site)
                 for (const p of data.prestadores) {
@@ -2488,7 +2496,12 @@ const App = {
                     const text = await err.response?.text?.();
                     console.error('[Map] showNearby', err.status || '', text || err);
                 } catch {
-                    console.error('[Map] showNearby', err);
+                    if (err.status === 422) {
+                        pushNotification('warning', 'Endereço não encontrado. Marque manualmente no mapa.');
+                        state.showManualGeoModal = true;
+                    } else {
+                        console.error('[Map] showNearby', err);
+                    }
                 }
             }
         };
@@ -2522,6 +2535,15 @@ const App = {
                 await showNearby();
             } else {
                 console.warn('[Map] empresa sem lat/lng — geocodifique antes');
+            }
+        });
+
+        watch(() => state.currentSection, async (id) => {
+           if (prev === 'mapping' && mapRef.value) {
+                mapRef.value.remove();
+                mapRef.value = null;
+            } else {
+                console.warn('[Map] saindo da seção de mapa');
             }
         });
 

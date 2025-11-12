@@ -1,11 +1,11 @@
-package com.revitalize.admincontrol.service;
+package com.revitalize.admincontrol.services;
 
 import com.revitalize.admincontrol.dto.NearbyDTO;
 import com.revitalize.admincontrol.models.AdmEmpresaModel;
 import com.revitalize.admincontrol.models.PrestadorModel;
 import com.revitalize.admincontrol.repository.AdmEmpresaGeoRepository;
 import com.revitalize.admincontrol.repository.PrestadorRepository;
-import com.revitalize.admincontrol.services.GeocodingService;
+
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,11 +39,11 @@ public class NearbyService {
         // 2) Geocodifica automaticamente SE necessário
         if (c.getLat() == null || c.getLng() == null) {
             try {
-                geocodingService.geocodeAndSave(companyId)
+                geocodingService.geocodeAndSave(companyId, true)
                     .ifPresent(updated -> { c.setLat(updated.getLat()); c.setLng(updated.getLng()); });
-            } catch (Exception e) {
-                throw new IllegalStateException("Não foi possível obter coordenadas da empresa selecionada.");
-            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Falha ao atualizar coordenadas da empresa.");
+        }
         }
 
         if (c.getLat() == null || c.getLng() == null) {
