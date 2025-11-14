@@ -596,6 +596,7 @@ section {
 
 .kanban-card header {
     display: flex;
+    border-radius: 12px;
     justify-content: space-between;
     gap: 0.5rem;
     align-items: baseline;

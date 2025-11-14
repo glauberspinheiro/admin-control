@@ -3620,8 +3620,7 @@ const App = {
                     </div>
                     <div v-else-if="activeSection === 'mapping'" class="grid gap-3" style="grid-template-columns: 1fr 380px;">
                         <div class="card relative p-0" style="overflow: hidden;">
-                            <div id="leaflet-map" style="height: 70vh; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;"></div>
-                            <div class="card absolute top-3 left-1/2 -translate-x-1/2 z-[1000] w-96">
+                         <div class="card absolute top-3 left-1/2 -translate-x-1/2 z-[1000] w-96">
                                 <h3>Controles</h3>
                                 <label class="mt-2">{{ t('mapping.selectCompany') }}
                                     <select v-model="state.selectedCompanyId">
@@ -3636,8 +3635,8 @@ const App = {
                                         <option value="transporte_residuo">Transporte de resíduo</option>
                                     </select>
                                 </label>
-                                <button class="primary mt-2 w-full" @click="executeNearbySearch" :disabled="!state.selectedCompanyId">{{ t('mapping.findNearby') }}</button>
                             </div>
+                            <div id="leaflet-map" style="height: 70vh; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;"></div>                           
                         </div>
                         <aside class="card" style="max-height: calc(70vh + 2px); overflow-y: auto;">
                             <h3>{{ t('mapping.title') }}</h3>
