@@ -1,6 +1,8 @@
 package com.revitalize.admincontrol.controllers;
 
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,35 +12,44 @@ import java.util.List;
 @RestController
 public class webhookJson {
 
-    private final List<JSONObject> receivedPayloads = new ArrayList<>();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    private final List<JsonNode> receivedPayloads = new ArrayList<>();
 
     private String latestResponse = "{}"; // Initialize with an empty JSON object
 
     @PostMapping("/webhook")
     public ResponseEntity<String> handleWebhook(@RequestBody String payloadString) {
-        // Parse the JSON payload
-        JSONObject payload = new JSONObject(payloadString);
+        try {
+            // Parse the JSON payload using Jackson
+            JsonNode payload = objectMapper.readTree(payloadString);
 
-        // Extract required fields
-        JSONObject contact = payload.optJSONObject("contact");
-        String contactName = contact != null ? contact.optString("name") : "";
-        String phoneNumber = contact != null ? contact.optString("phone_number") : "";
+            // Optionally store received payloads
+            receivedPayloads.add(payload);
 
-        JSONObject invoice = payload.optJSONObject("subscription");
-        String invoiceStatus = invoice != null ? invoice.optString("last_status") : "";
+            // Extract required fields
+            JsonNode contact = payload.path("contact");
+            String contactName = contact.path("name").asText("");
+            String phoneNumber = contact.path("phone_number").asText("");
 
+            JsonNode invoice = payload.path("subscription");
+            String invoiceStatus = invoice.path("last_status").asText("");
 
-        // Create a response JSON object
-        JSONObject responseJson = new JSONObject();
-        responseJson.put("contact_name", contactName);
-        responseJson.put("phone_number", phoneNumber);
-        responseJson.put("invoice_status", invoiceStatus);
+            // Create a response JSON object using Jackson
+            ObjectNode responseJson = objectMapper.createObjectNode();
+            responseJson.put("contact_name", contactName);
+            responseJson.put("phone_number", phoneNumber);
+            responseJson.put("invoice_status", invoiceStatus);
 
-        // Store the latest response
-        latestResponse = responseJson.toString();
+            // Store the latest response
+            latestResponse = responseJson.toString();
 
-        // Respond with the extracted fields
-        return new ResponseEntity<>(latestResponse, HttpStatus.OK);
+            // Respond with the extracted fields
+            return new ResponseEntity<>(latestResponse, HttpStatus.OK);
+        } catch (Exception e) {
+            // Return Bad Request if parsing fails
+            return new ResponseEntity<>("{\"error\":\"invalid json\"}", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/webhook/list")

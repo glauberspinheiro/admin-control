@@ -864,6 +864,9 @@ const App = {
             emailHistoryPage: 1,
             userMenuOpen: false,
             mapRef: null,
+            templateEditorRef: null,
+            emailSingleEditorRef: null,
+            signatureEditorRef: null,
             mapLayers: new Map(),
             companies: [],
             selectedCompanyId: '',
@@ -911,7 +914,7 @@ const App = {
                 return 'Erro ao remover.';
             }
             if (message.includes('login') || message.includes('autent')) return 'Erro de autenticação.';
-            return 'Algo deu errado. Tente novamente.';
+            return rawMessage || 'Algo deu errado. Endereço não encontrado.';
         };
 
         const pushNotification = (type, message, options = {}) => {
@@ -981,18 +984,42 @@ const App = {
                 input.setAttribute('accept', 'image/*');
                 input.addEventListener('change', async () => {
                     const file = input.files?.[0];
-                    if (!file) return;
+                    if (!file || !file.type.startsWith('image/')) return;
+
                     try {
+                        // Redimensiona a imagem antes de inserir para evitar erros do Quill com imagens grandes.
+                        const MAX_WIDTH = 800;
+                        const MAX_HEIGHT = 800;
+
+                        const image = new Image();
                         const reader = new FileReader();
-                        reader.onload = () => {
-                            const base64 = typeof reader.result === 'string' ? reader.result : '';
-                            if (!base64) return;
-                            const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
-                            quill.insertEmbed(range.index, 'image', base64, 'user');
-                            quill.setSelection(range.index + 1);
-                        };
-                        reader.onerror = () => {
-                            pushNotification('error', 'Não foi possível carregar a imagem.');
+
+                        reader.onload = (e) => {
+                            image.onload = () => {
+                                let { width, height } = image;
+
+                                if (width > height) {
+                                    if (width > MAX_WIDTH) {
+                                        height = Math.round((height * MAX_WIDTH) / width);
+                                        width = MAX_WIDTH;
+                                    }
+                                } else if (height > MAX_HEIGHT) {
+                                    width = Math.round((width * MAX_HEIGHT) / height);
+                                    height = MAX_HEIGHT;
+                                }
+
+                                const canvas = document.createElement('canvas');
+                                canvas.width = width;
+                                canvas.height = height;
+                                const ctx = canvas.getContext('2d');
+                                ctx.drawImage(image, 0, 0, width, height);
+
+                                const resizedBase64 = canvas.toDataURL(file.type);
+                                const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
+                                quill.insertEmbed(range.index, 'image', resizedBase64, 'user');
+                                quill.setSelection(range.index + 1);
+                            };
+                            image.src = e.target.result;
                         };
                         reader.readAsDataURL(file);
                     } catch (error) {
@@ -1005,37 +1032,39 @@ const App = {
             });
         };
 
+        const sanitizeRichTextHtml = (html = '') => {
+            if (!html || typeof html !== 'string') return '';
+            // Remove <p><br></p> no final, que o Quill às vezes adiciona
+            return html.replace(/<p><br><\/p>$/, '');
+        };
+
+        const getEditorHtml = (editor) => {
+            if (!editor) return '';
+            return sanitizeRichTextHtml(editor.root.innerHTML);
+        };
+
         const setEditorContent = (editor, html) => {
             if (!editor) return;
             const safeHtml = html || '';
-            editor.clipboard.dangerouslyPasteHTML(safeHtml, 'silent');
+            // Usa a API de Delta do Quill, que é mais segura que 'dangerouslyPasteHTML'
+            const delta = editor.clipboard.convert(safeHtml);
+            editor.setContents(delta, 'silent');
             forceEditorDirection(editor);
         };
 
         const destroyTemplateEditor = () => {
-            if (state.templateEditor && templateEditorChangeHandler) {
-                state.templateEditor.off('text-change', templateEditorChangeHandler);
-            }
-            state.templateEditor = null;
-            state.templateEditorReady = false;
-            templateEditorChangeHandler = null;
+            // Não vamos mais destruir os editores. Apenas desanexar o listener.
+            if (state.templateEditor && templateEditorChangeHandler) state.templateEditor.off('text-change', templateEditorChangeHandler);
+            templateEditorChangeHandler = null; // Limpa a referência para evitar memory leak
         };
 
         const destroyEmailSingleEditor = () => {
-            if (state.emailSingleEditor && emailSingleEditorChangeHandler) {
-                state.emailSingleEditor.off('text-change', emailSingleEditorChangeHandler);
-            }
-            state.emailSingleEditor = null;
-            state.emailSingleEditorReady = false;
+            if (state.emailSingleEditor && emailSingleEditorChangeHandler) state.emailSingleEditor.off('text-change', emailSingleEditorChangeHandler);
             emailSingleEditorChangeHandler = null;
         };
 
         const destroySignatureEditor = () => {
-            if (state.signatureEditor && signatureEditorChangeHandler) {
-                state.signatureEditor.off('text-change', signatureEditorChangeHandler);
-            }
-            state.signatureEditor = null;
-            state.signatureEditorReady = false;
+            if (state.signatureEditor && signatureEditorChangeHandler) state.signatureEditor.off('text-change', signatureEditorChangeHandler);
             signatureEditorChangeHandler = null;
         };
 
@@ -1779,7 +1808,8 @@ const App = {
                 state.emailSingleForm.attachments = [];
                 state.emailBulkForm.templateId = '';
                 state.emailBulkForm.useSignature = true;
-                await Promise.all([loadTemplates(), loadServerConfig(), loadEmailHistory()]);
+                // Carrega TODOS os dados da aplicação antes de ir para o dashboard
+                await loadAll();
                 navigate('main');
             } catch (error) {
                 // already notified
@@ -1827,12 +1857,9 @@ const App = {
             if (state.templateEditorReady) {
                 return;
             }
-            state.templateEditor = await createQuill('#template-editor');
+            state.templateEditor = await createQuill(state.templateEditorRef);
             const initialHtml = sanitizeRichTextHtml(state.templateForm.conteudoHtml || '');
-            if (initialHtml) {
-                const delta = state.templateEditor.clipboard.convert(initialHtml);
-                state.templateEditor.setContents(delta, 'silent');
-            }
+            setEditorContent(state.templateEditor, initialHtml);
             templateEditorChangeHandler = () => {
                 const content = getEditorHtml(state.templateEditor);
                 if (content !== state.templateForm.conteudoHtml) {
@@ -1845,19 +1872,11 @@ const App = {
             forceEditorDirection(state.templateEditor);
         };
 
-        const ensureTemplateEditor = async () => {
-            if (activeSection.value !== 'emailTemplates') {
-                return;
-            }
-            await nextTick();
-            await initTemplateEditor();
-        };
-
         const initEmailSingleEditor = async () => {
             if (state.emailSingleEditorReady) {
                 return;
             }
-            state.emailSingleEditor = await createQuill('#email-single-editor');
+            state.emailSingleEditor = await createQuill(state.emailSingleEditorRef);
             setEditorContent(state.emailSingleEditor, state.emailSingleForm.conteudoHtml);
             emailSingleEditorChangeHandler = () => {
                 state.emailSingleForm.conteudoHtml = state.emailSingleEditor.root.innerHTML;
@@ -1866,33 +1885,17 @@ const App = {
             state.emailSingleEditorReady = true;
         };
 
-        const ensureEmailSingleEditor = async () => {
-            if (activeSection.value !== 'emailSingle') {
-                return;
-            }
-            await nextTick();
-            await initEmailSingleEditor();
-        };
-
         const initSignatureEditor = async () => {
             if (state.signatureEditorReady) {
                 return;
             }
-            state.signatureEditor = await createQuill('#signature-editor');
+            state.signatureEditor = await createQuill(state.signatureEditorRef);
             setEditorContent(state.signatureEditor, state.serverConfig.signatureHtml);
             signatureEditorChangeHandler = () => {
                 state.serverConfig.signatureHtml = state.signatureEditor.root.innerHTML;
             };
             state.signatureEditor.on('text-change', signatureEditorChangeHandler);
             state.signatureEditorReady = true;
-        };
-
-        const ensureSignatureEditor = async () => {
-            if (activeSection.value !== 'settings') {
-                return;
-            }
-            await nextTick();
-            await initSignatureEditor();
         };
 
         const saveTemplate = async () => {
@@ -2343,30 +2346,36 @@ const App = {
         });
 
         watch(activeSection, async (section, previousSection) => {
-            if (previousSection === 'emailTemplates' && section !== 'emailTemplates') {
-                destroyTemplateEditor();
-            }
-            if (previousSection === 'emailSingle' && section !== 'emailSingle') {
-                destroyEmailSingleEditor();
-            }
-            if (previousSection === 'settings' && section !== 'settings') {
-                destroySignatureEditor();
-            }
             if (['emailTemplates', 'emailSingle', 'emailBulk', 'settings'].includes(section) && !state.loggedUser) {
                 ensureLoggedUser();
                 return;
             }
+
+            // A inicialização agora é feita pelo watch no ref do template,
+            // e os editores não são mais destruídos.
+            // Apenas garantimos que o conteúdo correto seja carregado ao entrar na seção.
+            if (section === 'emailTemplates' && state.templateEditor) {
+                setEditorContent(state.templateEditor, state.templateForm.conteudoHtml || '');
+            } else if (section === 'settings' && state.signatureEditor) {
+                setEditorContent(state.signatureEditor, state.serverConfig.signatureHtml || '');
+            }
+
             if (section === 'emailTemplates') {
-                await ensureTemplateEditor();
+                // A inicialização agora é feita pelo watch no ref do template
             }
             if (section === 'emailSingle') {
-                await ensureEmailSingleEditor();
+                // A inicialização agora é feita pelo watch no ref do template
             }
             if (section === 'settings') {
-                await ensureSignatureEditor();
+                // A inicialização agora é feita pelo watch no ref do template
             }
             if (section === 'mapping') {
-                await nextTick(); await initMapIfNeeded(); await loadCompanies();
+                // Garante que o DOM está pronto antes de tentar inicializar o mapa
+                await nextTick();
+                await initMapIfNeeded();
+                // Carrega as empresas para o dropdown
+                // Apenas carrega se não tiverem sido carregadas ainda
+                if (!state.companies.length) await loadCompanies();
             }
         });
 
@@ -2378,11 +2387,22 @@ const App = {
 
         onBeforeUnmount(() => {
             window.removeEventListener('hashchange', syncRoute);
-            clearSessionTimer();
-            destroyTemplateEditor();
-            destroyEmailSingleEditor();
-            destroySignatureEditor();
         });
+
+        // Nova abordagem: usar refs de template para inicializar os editores
+        watch(() => state.templateEditorRef, (el) => {
+            if (el && activeSection.value === 'emailTemplates') initTemplateEditor();
+        });
+
+        watch(() => state.emailSingleEditorRef, (el) => {
+            if (el && activeSection.value === 'emailSingle') initEmailSingleEditor();
+        });
+
+        watch(() => state.signatureEditorRef, (el) => {
+            if (el && activeSection.value === 'settings') initSignatureEditor();
+        });
+
+
 
         // Helper: esperar elemento aparecer no DOM
         const waitForElement = (selector, { timeout = 4000, interval = 50 } = {}) => {
@@ -2409,10 +2429,11 @@ const App = {
 
         function iconFor(kind) {
             if (state.iconCache.has(kind)) return state.iconCache.get(kind);
+            // Marcador azul para empresa, vermelho para prestadores
             const url = {
                 empresa: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-                logistica_reversa: '/assets/icons/logistica.png',
-                transporte_residuo: '/assets/icons/residuo.png'
+                logistica_reversa: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                transporte_residuo: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png'
             }[kind] || 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
             const ic = L.icon({
                 iconUrl: url, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [0, -28],
@@ -2424,11 +2445,15 @@ const App = {
 
         const initMapIfNeeded = async () => {
             try {
-                if (state.mapRef) return;
+                // Se a referência do mapa existe e o contêiner ainda está no DOM, não faz nada.
+                if (state.mapRef && state.mapRef.getContainer()) return;
+
                 await nextTick(); // aguarda render Vue
                 const el = await waitForElement('#leaflet-map', { timeout: 5000 });
-                el.innerHTML = ''; // limpa se reuso de container
-                state.mapRef = L.map(el, { zoomControl: true }).setView([-15.79, -47.88], 4);
+                el.innerHTML = ''; // Garante que o container está limpo antes de recriar
+
+                // Cria a nova instância do mapa
+                state.mapRef = L.map('leaflet-map', { zoomControl: true }).setView([-15.79, -47.88], 4);
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
@@ -2450,39 +2475,63 @@ const App = {
             if (!state.selectedCompanyId) {
                 console.warn('[Map] selecione uma empresa'); return;
             }
-            try {
-                // 1) sempre geocodifica a empresa antes de buscar (atualiza coords automaticamente)
-                await apiClient.post(`/api/companies/${state.selectedCompanyId}/geocode?force=true`);
+            state.loading = true; // Ativa o loading
+            // ... (a lógica de showNearby foi integrada em executeNearbySearch, mas a função pode ser necessária em algum lugar)
+        };
 
-                // 2) busca próximos com limite (o back ainda capará em 5)
+        // Nova função centralizada para executar a busca completa
+        const executeNearbySearch = async () => {
+            if (!state.selectedCompanyId) {
+                console.warn('[Map] selecione uma empresa');
+                pushNotification('warning', t('mapping.selectCompany'));
+                return;
+            }
+            state.loading = true; // Ativa o loading
+            state.nearby = null; // Limpa resultados antigos da tela
+            try {
+                // 1. Garante que a empresa tem coordenadas antes de continuar.
+                const geocodedCompany = await apiClient.post(`/api/companies/${state.selectedCompanyId}/geocode?force=true`, {});
+                if (!geocodedCompany || geocodedCompany.lat == null || geocodedCompany.lng == null) {
+                    pushNotification('warning', 'Empresa não possui coordenadas válidas para a busca.');
+                    clearMapLayers();
+                    upsertCompanyMarker(geocodedCompany);
+                    return;
+                }
+
+                // 2. Chama o endpoint para importar os 5 melhores resultados do Google para o seu banco de dados.
+                const keyword = state.providerType || 'transporte de resíduo'; // Usa o tipo selecionado ou um padrão.
+                try {
+                    const importResult = await apiClient.post(`/api/map/import-from-google?lat=${geocodedCompany.lat}&lng=${geocodedCompany.lng}&keyword=${keyword}&radius=10000`, {});
+                    if (importResult && importResult.message) {
+                        // Notifica o usuário sobre a importação, mas de forma sutil.
+                        console.log('[Map] Importação do Google:', importResult.message);
+                    }
+                } catch (importError) {
+                    console.error('[Map] Falha na etapa de importação do Google, continuando com dados locais.', importError);
+                    // Não interrompe o fluxo, apenas loga o erro. A busca local ainda pode funcionar.
+                }
+
+                // 3. Agora, busca os prestadores do SEU banco de dados (incluindo os que acabaram de ser importados).
                 const data = await apiGet(endpoints.mapNearby, {
                     companyId: state.selectedCompanyId,
                     tipo: state.providerType || '',
-                    limit: 5
+                    limit: 5,
                 });
+
                 state.nearby = data;
 
-                // 3) marcador da empresa
-                const c = data.company;
-                upsertCompanyMarker({ id: c.id, lat: c.lat, lng: c.lng, nome: c.nome });
-
-                // 4) limpar prestadores anteriores
+                // 4. Limpa marcadores de prestadores antigos do mapa.
                 for (const [k, layer] of state.mapLayers.entries()) {
                     if (k.startsWith('prov:')) {
                         try { layer.remove(); } catch { }
                         state.mapLayers.delete(k);
                     }
                 }
-                // 5) limpar prestadores company
-                for (const [k, m] of state.mapLayers.entries()) {
-                if (k.startsWith('company:')) {
-                    try { m.remove(); } catch {}
-                    state.mapLayers.delete(k);
-                }
-                }
 
+                // 5. Adiciona o marcador da empresa principal.
+                upsertCompanyMarker(data.company);
 
-                // 5) adicionar prestadores (nome, telefone, site)
+                // 6. Adiciona os marcadores dos prestadores encontrados no seu banco.
                 for (const p of data.prestadores) {
                     const siteHtml = p.site ? `<br><a href="${p.site}" target="_blank" rel="noopener">site</a>` : '';
                     const telHtml = p.telefone ? `<br>tel: ${p.telefone}` : '';
@@ -2491,32 +2540,54 @@ const App = {
                     m.addTo(state.mapRef);
                     state.mapLayers.set(`prov:${p.id}`, m);
                 }
+
             } catch (err) {
-                try {
-                    const text = await err.response?.text?.();
-                    console.error('[Map] showNearby', err.status || '', text || err);
-                } catch {
-                    if (err.status === 422) {
-                        pushNotification('warning', 'Endereço não encontrado. Marque manualmente no mapa.');
-                        state.showManualGeoModal = true;
-                    } else {
-                        console.error('[Map] showNearby', err);
-                    }
-                }
+                const text = await err.response?.text?.();
+                console.error('[Map] executeNearbySearch Error:', err.status || '', text || err);
+                pushNotification('error', text || 'Falha ao buscar prestadores próximos.');
+                clearMapLayers();
+            } finally {
+                state.loading = false; // Desativa o loading
             }
         };
 
+        // Apenas geocodifica e foca na empresa selecionada no mapa
+        const focusOnCompany = async (companyId) => {
+            if (!companyId) return;
+            state.loading = true;
+            state.nearby = null; // Limpa a lista de prestadores
+            clearMapLayers(); // Limpa todos os marcadores
+            try {
+                // 1. Garante que a empresa tem coordenadas.
+                const geocodedCompany = await apiClient.post(`/api/companies/${companyId}/geocode?force=true`, {});
+
+                // 2. Atualiza o marcador da empresa no mapa.
+                upsertCompanyMarker(geocodedCompany);
+
+                // 3. Se não tiver coordenadas, notifica o usuário.
+                if (!geocodedCompany || geocodedCompany.lat == null || geocodedCompany.lng == null) {
+                    pushNotification('warning', 'Endereço não encontrado');
+                }
+            } catch (err) {
+                pushNotification('error', 'Falha ao localizar a empresa.');
+            } finally {
+                state.loading = false;
+            }
+        };
 
         // cria/atualiza o marcador da empresa selecionada e centraliza o mapa
         const upsertCompanyMarker = (company) => {
             if (!company || !state.mapRef) return;
-            const key = `company:${company.id}`;
-            // remove o antigo se existir
-            const old = state.mapLayers.get(key);
-            if (old) {
-                try { old.remove(); } catch { }
-                state.mapLayers.delete(key);
+            // Remove TODOS os marcadores de empresa existentes antes de adicionar o novo.
+            for (const [k, m] of state.mapLayers.entries()) {
+                if (k.startsWith('company:')) {
+                    try { m.remove(); } catch {}
+                    state.mapLayers.delete(k);
+                }
             }
+            if (company.lat == null || company.lng == null) return; // Não adiciona marcador sem coordenadas
+
+            const key = `company:${company.id}`;
             const marker = L.marker([company.lat, company.lng], { icon: iconFor('empresa') })
                 .bindPopup(`<b>${company.nomeEmpresa || company.nomeFantasia || company.nome || 'Empresa'}</b>`);
             marker.addTo(state.mapRef);
@@ -2527,28 +2598,32 @@ const App = {
         // quando usuário troca a seleção, focamos e (opcional) buscamos próximos
         watch(() => state.selectedCompanyId, async (id) => {
             if (!id) return;
-            // procura a empresa no array já carregado
-            const company = state.companies.find(c => c.id === id);
-            if (company && company.lat != null && company.lng != null) {
-                upsertCompanyMarker(company);
-                // opcional: já puxa próximos automaticamente
-                await showNearby();
-            } else {
-                console.warn('[Map] empresa sem lat/lng — geocodifique antes');
+            await focusOnCompany(id); // Apenas localiza a empresa no mapa
+        });
+
+        watch(activeSection, (newSection, oldSection) => {
+            if (oldSection === 'mapping' && state.mapRef) {
+                state.mapRef.remove();
+                state.mapRef = null;
+                // Limpa os dados de nearby e marcadores ao sair da seção
+                state.nearby = null;
+                clearMapLayers();
             }
         });
 
-        watch(() => state.currentSection, async (id) => {
-           if (prev === 'mapping' && mapRef.value) {
-                mapRef.value.remove();
-                mapRef.value = null;
-            } else {
-                console.warn('[Map] saindo da seção de mapa');
+        const focusOnProvider = (provider) => {
+            try {
+            if (!provider || !state.mapRef) return;
+            const key = `prov:${provider.id}`;
+            const marker = state.mapLayers.get(key);
+            if (marker) {
+                state.mapRef.setView([provider.lat, provider.lng], 17); // Zoom mais próximo
+                marker.openPopup();
             }
-        });
-
-
-
+            }catch (err) {
+                console.error('[Map] Buscar Prestador de servicço', err);
+            }
+        };
 
         return {
             sections,
@@ -2638,10 +2713,14 @@ const App = {
             logoutUser,
             apiGet,
             iconFor,
+            setTemplateEditorRef: (el) => { state.templateEditorRef = el; },
+            setEmailSingleEditorRef: (el) => { state.emailSingleEditorRef = el; },
+            setSignatureEditorRef: (el) => { state.signatureEditorRef = el; },
             initMapIfNeeded,
-            showNearby,
+            executeNearbySearch,
             loadCompanies,
-            clearMapLayers
+            clearMapLayers,
+            focusOnProvider
         };
     },
     template: `
@@ -3314,7 +3393,7 @@ const App = {
                     </div>
 
                     <div v-else-if="activeSection === 'emailTemplates'">
-                        <div class="card">
+                        <div class="card" v-show="activeSection === 'emailTemplates'">
                             <h2>{{ t('templates.title') }}</h2>
                             <form @submit.prevent="saveTemplate">
                                 <label>{{ t('templates.name') }}
@@ -3325,7 +3404,7 @@ const App = {
                                 </label>
                                 <label>{{ t('templates.content') }}</label>
                                 <div class="rich-editor">
-                                    <div id="template-editor"></div>
+                                    <div id="template-editor" :ref="setTemplateEditorRef"></div>
                                 </div>
                                 <textarea class="visually-hidden" v-model="state.templateForm.conteudoHtml" aria-hidden="true"></textarea>
                                 <label class="checkbox-field">
@@ -3365,7 +3444,7 @@ const App = {
                     </div>
 
                     <div v-else-if="activeSection === 'emailSingle'" class="grid">
-                        <div class="card">
+                        <div class="card" v-show="activeSection === 'emailSingle'">
                             <h2>{{ t('email.single.title') }}</h2>
                             <p>{{ t('email.single.description') }}</p>
                             <form @submit.prevent="sendIndividualEmail">
@@ -3382,7 +3461,7 @@ const App = {
                                 </label>
                                 <label>{{ t('email.content') }}</label>
                                 <div class="rich-editor">
-                                    <div id="email-single-editor"></div>
+                                    <div id="email-single-editor" :ref="setEmailSingleEditorRef"></div>
                                 </div>
                                 <textarea class="visually-hidden" v-model="state.emailSingleForm.conteudoHtml" aria-hidden="true"></textarea>
                                 <label class="checkbox-field">
@@ -3491,7 +3570,7 @@ const App = {
                                 </div>
                             </form>
                         </div>
-                        <div class="card">
+                        <div class="card" v-show="activeSection === 'settings'">
                             <h2>{{ t('settings.emailServerTitle') }}</h2>
                             <form @submit.prevent="saveServerConfig">
                                 <label>{{ t('settings.smtpHost') }}
@@ -3529,7 +3608,7 @@ const App = {
                                 </label>
                                 <label>{{ t('settings.signatureLabel') }}</label>
                                 <div class="rich-editor">
-                                    <div id="signature-editor"></div>
+                                    <div id="signature-editor" :ref="setSignatureEditorRef"></div>
                                 </div>
                                 <textarea class="visually-hidden" v-model="state.serverConfig.signatureHtml" aria-hidden="true"></textarea>
                                 <p class="helper-text">{{ t('settings.signatureHint') }}</p>
@@ -3539,43 +3618,44 @@ const App = {
                             </form>
                         </div>
                     </div>
-                    <div v-else-if="activeSection === 'mapping'" class="grid gap-3" style="grid-template-columns: 1fr 340px;">
-                    <div>
-                        <div class="mb-2 flex gap-2">
-                        <label>{{ t('mapping.selectCompany') }}
-                            <select v-model="state.selectedCompanyId" class="border p-2">
-                                <option value="" disabled>Selecione a empresa</option>
-                                <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
-                            </select>
-                        </label>
-                        <label>{{ t('mapping.typeAll') }}
-                            <select v-model="state.providerType" class="border p-2">
-                                <option value="">Parceiro</option>
-                                <option value="logistica_reversa">Logística reversa</option>
-                                <option value="transporte_residuo">Transporte de resíduo</option>
-                            </select>
-                        </label>
-                        <button class="primary" @click="showNearby">Consultar</button>
+                    <div v-else-if="activeSection === 'mapping'" class="grid gap-3" style="grid-template-columns: 1fr 380px;">
+                        <div class="card relative p-0" style="overflow: hidden;">
+                            <div id="leaflet-map" style="height: 70vh; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;"></div>
+                            <div class="card absolute top-3 left-1/2 -translate-x-1/2 z-[1000] w-96">
+                                <h3>Controles</h3>
+                                <label class="mt-2">{{ t('mapping.selectCompany') }}
+                                    <select v-model="state.selectedCompanyId">
+                                        <option value="" disabled>{{ t('common.select') }}</option>
+                                        <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
+                                    </select>
+                                </label>
+                                <label class="mt-2">{{ t('mapping.typeAll') }}
+                                    <select v-model="state.providerType" @change="executeNearbySearch">
+                                        <option value="">Todos</option>
+                                        <option value="logistica_reversa">Logística reversa</option>
+                                        <option value="transporte_residuo">Transporte de resíduo</option>
+                                    </select>
+                                </label>
+                                <button class="primary mt-2 w-full" @click="executeNearbySearch" :disabled="!state.selectedCompanyId">{{ t('mapping.findNearby') }}</button>
+                            </div>
                         </div>
-                        <div id="leaflet-map" style="height: 75vh; border-radius: 8px; overflow: hidden;"></div>
-                    </div>
-
-                    <aside class="border rounded p-3 overflow-auto" style="max-height: 75vh;">
-                        <h3 class="font-bold mb-2">Mapa (Empresas & Prestadores)</h3>
-                        <ul class="space-y-2">
-                            <li v-if="!state.nearby || !state.nearby.prestadores?.length" class="text-sm opacity-70">
-                                Nenhuma marcação para exibir.
-                            </li>
-                            <li v-for="p in state.nearby?.prestadores || []" :key="p.id" class="border rounded p-2">
-                                <div class="font-medium">{{ p.nome }}</div>
-                                <div class="text-xs opacity-70">
-                                    {{ p.tipo }} — {{ p.distanceKm.toFixed(2) }} km
-                                    <span v-if="p.telefone"> — {{ p.telefone }}</span>
-                                    <span v-if="p.site"> — <a :href="p.site" target="_blank" rel="noopener">site</a></span>
-                                </div>
-                            </li>
-                        </ul>
-                    </aside>
+                        <aside class="card" style="max-height: calc(70vh + 2px); overflow-y: auto;">
+                            <h3>{{ t('mapping.title') }}</h3>
+                            <div v-if="!state.nearby || !state.nearby.prestadores?.length" class="p-4 text-center opacity-70">
+                                <p>Nenhum prestador encontrado.</p>
+                                <small>Selecione uma empresa para começar.</small>
+                            </div>
+                            <ul v-else class="space-y-3 mt-4">
+                                <li v-for="p in state.nearby.prestadores" :key="p.id" @click="focusOnProvider(p)" class="p-3 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100">
+                                    <strong class="font-semibold">{{ p.nome }}</strong>
+                                    <div class="text-sm opacity-80 capitalize">{{ p.tipo.replace('_', ' ') }}</div>
+                                    <div class="text-xs opacity-70 mt-1">
+                                        <span v-if="p.telefone">Tel: {{ p.telefone }}</span>
+                                        <a v-if="p.site" :href="p.site" target="_blank" rel="noopener" class="ml-2 text-blue-600 hover:underline">Visitar site</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </aside>
                     </div>
                 </section>
             </div>
