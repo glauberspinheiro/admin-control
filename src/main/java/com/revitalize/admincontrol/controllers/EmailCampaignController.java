@@ -3,97 +3,75 @@ package com.revitalize.admincontrol.controllers;
 import com.revitalize.admincontrol.dto.EmailSendRequestDto;
 import com.revitalize.admincontrol.models.AdmUsuarioModel;
 import com.revitalize.admincontrol.models.EmailJobModel;
-import com.revitalize.admincontrol.models.EmailServerConfigModel;
-import com.revitalize.admincontrol.models.EmailTemplateModel;
-import com.revitalize.admincontrol.models.enums.EmailJobStatus;
-import com.revitalize.admincontrol.repository.AdmUsuarioRepository;
+import com.revitalize.admincontrol.security.UserAccessService;
+import com.revitalize.admincontrol.services.AdmUsuarioService;
 import com.revitalize.admincontrol.services.EmailCampaignService;
 import com.revitalize.admincontrol.services.EmailServerConfigService;
 import com.revitalize.admincontrol.services.EmailTemplateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/email/campaigns")
 public class EmailCampaignController {
 
     private final EmailCampaignService emailCampaignService;
     private final EmailTemplateService emailTemplateService;
     private final EmailServerConfigService emailServerConfigService;
-    private final AdmUsuarioRepository admUsuarioRepository;
+    private final AdmUsuarioService admUsuarioService;
+    private final UserAccessService userAccessService;
 
     public EmailCampaignController(EmailCampaignService emailCampaignService,
                                    EmailTemplateService emailTemplateService,
                                    EmailServerConfigService emailServerConfigService,
-                                   AdmUsuarioRepository admUsuarioRepository) {
+                                   AdmUsuarioService admUsuarioService,
+                                   UserAccessService userAccessService) {
         this.emailCampaignService = emailCampaignService;
         this.emailTemplateService = emailTemplateService;
         this.emailServerConfigService = emailServerConfigService;
-        this.admUsuarioRepository = admUsuarioRepository;
+        this.admUsuarioService = admUsuarioService;
+        this.userAccessService = userAccessService;
     }
 
     @GetMapping("/history/{userId}")
-    public ResponseEntity<List<EmailJobModel>> history(@PathVariable("userId") UUID userId) {
-        return ResponseEntity.ok(emailCampaignService.findByUsuario(userId));
+    public ResponseEntity<List<EmailJobModel>> history(@PathVariable("userId") UUID userId,
+                                                       @AuthenticationPrincipal UserDetails principal) {
+        AdmUsuarioModel requester = userAccessService.requireCurrentUser(principal);
+        UUID targetUserId = userAccessService.resolveTargetUserId(requester, userId);
+        return ResponseEntity.ok(emailCampaignService.findByUsuario(targetUserId));
     }
 
     @PostMapping("/send")
-    public ResponseEntity<?> send(@RequestBody @Valid EmailSendRequestDto dto) {
-        AdmUsuarioModel usuario = admUsuarioRepository.findById(dto.getUsuarioId())
-                .orElse(null);
-        if (usuario == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
-        }
-
-        EmailServerConfigModel config = emailServerConfigService.findByUsuarioId(usuario.getId())
-                .orElse(null);
-        if (config == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Configuração de servidor de e-mail não encontrada para o usuário");
-        }
-
-        EmailTemplateModel template = null;
-        if (dto.getTemplateId() != null) {
-            template = emailTemplateService.findById(dto.getTemplateId()).orElse(null);
-            if (template == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Template informado não encontrado");
-            }
-        }
-
-        String preview = dto.getConteudoHtml() == null ? "" : dto.getConteudoHtml().replaceAll("<[^>]*>", "").trim();
-        if (preview.length() > 120) {
-            preview = preview.substring(0, 120);
-        }
-
-        EmailJobModel job = emailCampaignService.registerJob(
-                usuario,
-                template,
-                dto.getAssunto(),
-                preview,
-                dto.getDestinatarios());
-
-        boolean incluirAssinatura = dto.getIncluirAssinatura() == null || dto.getIncluirAssinatura();
-
+    public ResponseEntity<?> send(@RequestBody @Valid EmailSendRequestDto dto,
+                                  @AuthenticationPrincipal UserDetails principal) {
         try {
-            emailCampaignService.sendEmails(
-                    config,
-                    dto.getAssunto(),
-                    dto.getConteudoHtml(),
-                    dto.getDestinatarios(),
-                    dto.getPersonalizacoes(),
-                    dto.getAnexos(),
-                    incluirAssinatura);
-            emailCampaignService.updateJobStatus(job, EmailJobStatus.ENVIADO);
-            return ResponseEntity.ok(job);
-        } catch (RuntimeException ex) {
-            emailCampaignService.updateJobStatus(job, EmailJobStatus.FALHOU);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Falha ao enviar e-mails: " + ex.getMessage());
+            AdmUsuarioModel requester = userAccessService.requireCurrentUser(principal);
+            UUID targetUserId = userAccessService.resolveTargetUserId(requester, dto.getUsuarioId());
+            AdmUsuarioModel usuario = admUsuarioService.findById(targetUserId)
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+            
+            // Delega toda a lógica para o serviço
+            EmailJobModel job = emailCampaignService.scheduleCampaign(dto, usuario);
+            
+            // Retorna 202 Accepted para indicar que a requisição foi aceita
+            // e está sendo processada em background.
+            return ResponseEntity.accepted().body(job);
+            
+        } catch (RuntimeException ex) { // Idealmente capturar exceções mais específicas
+            // Trata erros de validação que acontecem antes do processamento assíncrono
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
 }

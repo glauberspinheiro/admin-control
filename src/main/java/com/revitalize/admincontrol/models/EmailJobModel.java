@@ -38,13 +38,19 @@ public class EmailJobModel {
     @Column(nullable = false, length = 30)
     private EmailJobStatus status = EmailJobStatus.PENDENTE;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "dt_cadastro", nullable = false, updatable = false)
+    private LocalDateTime dtCadastro;
+
+    @Column(name = "dt_alteracao_cadastro")
+    private LocalDateTime dtAlteracaoCadastro;
 
     @PrePersist
     public void onCreate() {
-        this.createdAt = LocalDateTime.now();
+        this.dtCadastro = LocalDateTime.now();
     }
+
+    @PreUpdate
+    public void onUpdate() { this.dtAlteracaoCadastro = LocalDateTime.now(); }
 
     public UUID getId() {
         return id;
@@ -98,7 +104,15 @@ public class EmailJobModel {
         this.status = status;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getDtCadastro() {
+        return dtCadastro;
+    }
+
+    public void setDtCadastro(LocalDateTime dtCadastro) {
+        this.dtCadastro = dtCadastro;
+    }
+
+    public LocalDateTime getDtAlteracaoCadastro() {
+        return dtAlteracaoCadastro;
     }
 }

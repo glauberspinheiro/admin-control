@@ -3,8 +3,8 @@ package com.revitalize.admincontrol.services;
 import com.revitalize.admincontrol.models.AdmProdutoModel;
 import com.revitalize.admincontrol.repository.AdmProdutoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

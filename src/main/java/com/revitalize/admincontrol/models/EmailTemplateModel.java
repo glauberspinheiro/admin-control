@@ -31,21 +31,21 @@ public class EmailTemplateModel {
     @Column(name = "usar_assinatura", nullable = false)
     private boolean usarAssinatura = true;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "dt_cadastro", nullable = false, updatable = false)
+    private LocalDateTime dtCadastro;
 
-    @Column(name = "updated_at", nullable = false)
-    private LocalDateTime updatedAt;
+    @Column(name = "dt_alteracao_cadastro")
+    private LocalDateTime dtAlteracaoCadastro;
 
     @PrePersist
     public void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.dtCadastro = LocalDateTime.now();
+        this.dtAlteracaoCadastro = LocalDateTime.now();
     }
 
     @PreUpdate
     public void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
+        this.dtAlteracaoCadastro = LocalDateTime.now();
     }
 
     public UUID getId() {
@@ -92,11 +92,11 @@ public class EmailTemplateModel {
         this.usarAssinatura = usarAssinatura;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getDtCadastro() {
+        return dtCadastro;
     }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+    public LocalDateTime getDtAlteracaoCadastro() {
+        return dtAlteracaoCadastro;
     }
 }

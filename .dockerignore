@@ -1,0 +1,10 @@
+.git
+.gitignore
+.mvn
+Dockerfile
+docker-compose.yml
+docker-compose.prod.yml
+src/main/resources/docker-compose.yml
+target
+**/target
+.vscode

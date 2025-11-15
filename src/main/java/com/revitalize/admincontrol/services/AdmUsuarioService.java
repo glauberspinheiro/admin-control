@@ -5,8 +5,8 @@ import com.revitalize.admincontrol.repository.AdmUsuarioRepository;
 import com.revitalize.admincontrol.security.EnvironmentAccess;
 import com.revitalize.admincontrol.security.UserRole;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;

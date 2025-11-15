@@ -6,7 +6,6 @@ import java.util.UUID;
 
 public class EmailServerConfigDto {
 
-    @NotNull
     private UUID usuarioId;
     @NotBlank
     private String smtpHost;
@@ -14,7 +13,6 @@ public class EmailServerConfigDto {
     private Integer smtpPort;
     @NotBlank
     private String smtpUsername;
-    @NotBlank
     private String smtpPassword;
     @NotBlank
     private String smtpProtocol;
@@ -25,6 +23,7 @@ public class EmailServerConfigDto {
     private boolean useSsl;
     private boolean useStartTls = true;
     private String signatureHtml;
+    private boolean passwordSet;
 
     public UUID getUsuarioId() {
         return usuarioId;
@@ -128,5 +127,13 @@ public class EmailServerConfigDto {
 
     public void setSignatureHtml(String signatureHtml) {
         this.signatureHtml = signatureHtml;
+    }
+
+    public boolean isPasswordSet() {
+        return passwordSet;
+    }
+
+    public void setPasswordSet(boolean passwordSet) {
+        this.passwordSet = passwordSet;
     }
 }

@@ -1,12 +1,10 @@
 package com.revitalize.admincontrol.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 public class EmailTemplateDto {
 
-    @NotNull
     private UUID usuarioId;
     @NotBlank
     private String nome;

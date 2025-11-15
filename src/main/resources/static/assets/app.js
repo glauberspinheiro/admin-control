@@ -229,6 +229,7 @@ const translations = {
         'common.loading': 'Carregando...',
         'common.yes': 'Sim',
         'common.no': 'Não',
+        'common.refresh': 'Atualizar',
         'status.active': 'Ativo',
         'status.inactive': 'Inativo',
         'feedback.userSaved': 'Usuário salvo com sucesso.',
@@ -257,7 +258,55 @@ const translations = {
         'mapping.title': 'Empresas & Prestadores',
         'mapping.selectCompany': 'Selecione a empresa',
         'mapping.typeAll': 'Todos os tipos',
-        'mapping.findNearby': 'Buscar próximos'
+        'mapping.typeFilter': 'Tipo de prestador',
+        'mapping.findNearby': 'Buscar próximos',
+        'mapping.emptyProviders': 'Nenhum prestador encontrado.',
+        'mapping.controls': 'Controles de consulta',
+        'mapping.hint': 'Escolha uma empresa e busque fornecedores em um raio de 10 km.',
+        'nav.condicionantes': 'Condicionantes',
+        'condicionantes.summaryTitle': 'Visão geral das condicionantes',
+        'condicionantes.summaryDescription': 'Acompanhe a situação das obrigações cadastradas.',
+        'condicionantes.metric.total': 'Total cadastradas',
+        'condicionantes.metric.active': 'Ativas',
+        'condicionantes.metric.late': 'Atrasadas',
+        'condicionantes.tableTitle': 'Condicionantes registradas',
+        'condicionantes.tableEmpty': 'Nenhuma condicionante cadastrada.',
+        'condicionantes.tableHeader.titulo': 'Título',
+        'condicionantes.tableHeader.empresa': 'Empresa',
+        'condicionantes.tableHeader.status': 'Status',
+        'condicionantes.tableHeader.prioridade': 'Prioridade',
+        'condicionantes.tableHeader.vencimento': 'Vencimento',
+        'condicionantes.formTitle': 'Nova condicionante',
+        'condicionantes.fieldEmpresa': 'Empresa',
+        'condicionantes.fieldLicenca': 'Licença / Empreendimento',
+        'condicionantes.fieldTitulo': 'Título',
+        'condicionantes.fieldDescricao': 'Descrição',
+        'condicionantes.fieldStatus': 'Status',
+        'condicionantes.fieldPrioridade': 'Prioridade',
+        'condicionantes.fieldVencimento': 'Vencimento',
+        'condicionantes.fieldResponsavel': 'E-mail do responsável',
+        'condicionantes.fieldTags': 'Tags (opcional)',
+        'condicionantes.save': 'Salvar condicionante',
+        'condicionantes.status.PLANEJADA': 'Planejada',
+        'condicionantes.status.EM_ANDAMENTO': 'Em andamento',
+        'condicionantes.status.ATRASADA': 'Atrasada',
+        'condicionantes.status.CONCLUIDA': 'Concluída',
+        'condicionantes.priority.BAIXA': 'Baixa',
+        'condicionantes.priority.MEDIA': 'Média',
+        'condicionantes.priority.ALTA': 'Alta',
+        'condicionantes.priority.CRITICA': 'Crítica',
+        'condicionantes.tab.overview': 'Visão geral',
+        'condicionantes.tab.form': 'Cadastro',
+        'condicionantes.tab.byCompany': 'Por empresa',
+        'condicionantes.filterLicenca': 'Licença / Empreendimento',
+        'condicionantes.filterClear': 'Limpar filtro',
+        'condicionantes.byCompanyTitle': 'Condicionantes por empresa',
+        'condicionantes.byCompanySubtitle': 'Selecione a empresa e o empreendimento para navegar pelas obrigações.',
+        'condicionantes.byCompany.empty': 'Nenhuma condicionante para os filtros selecionados.',
+        'condicionantes.validation.company': 'Selecione uma empresa para prosseguir.',
+        'condicionantes.validation.status': 'Selecione um status válido.',
+        'condicionantes.validation.priority': 'Selecione uma prioridade válida.',
+        'condicionantes.validation.title': 'Informe o título da condicionante.'
     },
     'en-US': {
         'nav.dashboard': 'Overview',
@@ -473,6 +522,7 @@ const translations = {
         'common.loading': 'Loading...',
         'common.yes': 'Yes',
         'common.no': 'No',
+        'common.refresh': 'Refresh',
         'status.active': 'Active',
         'status.inactive': 'Inactive',
         'feedback.userSaved': 'User saved successfully.',
@@ -501,7 +551,55 @@ const translations = {
         'mapping.title': 'Companies And Providers',
         'mapping.selectCompany': 'Select a company',
         'mapping.typeAll': 'All Types',
-        'mapping.findNearby': 'Find Nearby'
+        'mapping.typeFilter': 'Provider type',
+        'mapping.findNearby': 'Find Nearby',
+        'mapping.emptyProviders': 'No providers within the selected radius.',
+        'mapping.controls': 'Controls',
+        'mapping.hint': 'Select a company and fetch providers within a 10 km radius.',
+        'nav.condicionantes': 'Requirements',
+        'condicionantes.summaryTitle': 'Condicionantes overview',
+        'condicionantes.summaryDescription': 'Monitor deadlines and risk level.',
+        'condicionantes.metric.total': 'Total',
+        'condicionantes.metric.active': 'In progress',
+        'condicionantes.metric.late': 'Late',
+        'condicionantes.tableTitle': 'Registered condicionantes',
+        'condicionantes.tableEmpty': 'No condicionantes registered yet.',
+        'condicionantes.tableHeader.titulo': 'Title',
+        'condicionantes.tableHeader.empresa': 'Company',
+        'condicionantes.tableHeader.status': 'Status',
+        'condicionantes.tableHeader.prioridade': 'Priority',
+        'condicionantes.tableHeader.vencimento': 'Due date',
+        'condicionantes.formTitle': 'Create condicionante',
+        'condicionantes.fieldEmpresa': 'Company',
+        'condicionantes.fieldLicenca': 'License / Site',
+        'condicionantes.fieldTitulo': 'Title',
+        'condicionantes.fieldDescricao': 'Description',
+        'condicionantes.fieldStatus': 'Status',
+        'condicionantes.fieldPrioridade': 'Priority',
+        'condicionantes.fieldVencimento': 'Due date',
+        'condicionantes.fieldResponsavel': 'Owner email',
+        'condicionantes.fieldTags': 'Tags (optional)',
+        'condicionantes.save': 'Save condicionante',
+        'condicionantes.status.PLANEJADA': 'Planned',
+        'condicionantes.status.EM_ANDAMENTO': 'In progress',
+        'condicionantes.status.ATRASADA': 'Late',
+        'condicionantes.status.CONCLUIDA': 'Completed',
+        'condicionantes.priority.BAIXA': 'Low',
+        'condicionantes.priority.MEDIA': 'Medium',
+        'condicionantes.priority.ALTA': 'High',
+        'condicionantes.priority.CRITICA': 'Critical',
+        'condicionantes.tab.overview': 'Overview',
+        'condicionantes.tab.form': 'Form',
+        'condicionantes.tab.byCompany': 'By company',
+        'condicionantes.filterLicenca': 'License / Site',
+        'condicionantes.filterClear': 'Clear filters',
+        'condicionantes.byCompanyTitle': 'Condicionantes by company',
+        'condicionantes.byCompanySubtitle': 'Pick a company and site to inspect open requirements.',
+        'condicionantes.byCompany.empty': 'No condicionantes match the selected filters.',
+        'condicionantes.validation.company': 'Select a company before saving.',
+        'condicionantes.validation.status': 'Pick a valid status.',
+        'condicionantes.validation.priority': 'Pick a valid priority.',
+        'condicionantes.validation.title': 'Enter the condicionante title.'
     }
 };
 
@@ -516,6 +614,7 @@ const sections = [
     { id: 'emailTemplates', labelKey: 'nav.emailTemplates' },
     { id: 'emailSingle', labelKey: 'nav.emailSingle' },
     { id: 'emailBulk', labelKey: 'nav.emailBulk' },
+    { id: 'condicionantes', labelKey: 'nav.condicionantes' },
     { id: 'settings', labelKey: 'nav.settings' }
 ];
 
@@ -524,6 +623,12 @@ const companyTabs = [
     { id: 'address', labelKey: 'companies.tabs.address' },
     { id: 'activities', labelKey: 'companies.tabs.activities' },
     { id: 'partners', labelKey: 'companies.tabs.partners' }
+];
+
+const condicionanteSubViews = [
+    { id: 'overview', labelKey: 'condicionantes.tab.overview' },
+    { id: 'form', labelKey: 'condicionantes.tab.form' },
+    { id: 'byCompany', labelKey: 'condicionantes.tab.byCompany' }
 ];
 
 const quickMetricVisuals = [
@@ -546,8 +651,27 @@ const endpoints = {
     kanbanBoards: '/api/kanban/boards',
     kanbanColumns: '/api/kanban/columns',
     kanbanCards: '/api/kanban/cards',
-    mapNearby: '/api/map/nearby'
+    mapNearby: '/api/map/nearby',
+    condicionantes: '/api/condicionantes',
+    condicionanteDashboard: '/api/condicionantes/dashboard'
 };
+
+const condicionanteStatuses = [
+    { value: 'PLANEJADA', labelKey: 'condicionantes.status.PLANEJADA' },
+    { value: 'EM_ANDAMENTO', labelKey: 'condicionantes.status.EM_ANDAMENTO' },
+    { value: 'ATRASADA', labelKey: 'condicionantes.status.ATRASADA' },
+    { value: 'CONCLUIDA', labelKey: 'condicionantes.status.CONCLUIDA' }
+];
+
+const condicionantePrioridades = [
+    { value: 'BAIXA', labelKey: 'condicionantes.priority.BAIXA' },
+    { value: 'MEDIA', labelKey: 'condicionantes.priority.MEDIA' },
+    { value: 'ALTA', labelKey: 'condicionantes.priority.ALTA' },
+    { value: 'CRITICA', labelKey: 'condicionantes.priority.CRITICA' }
+];
+
+const condicionanteStatusSet = new Set(condicionanteStatuses.map((item) => item.value));
+const condicionantePrioridadeSet = new Set(condicionantePrioridades.map((item) => item.value));
 
 const SESSION_KEY = 'revitalizeSession';
 const SESSION_DURATION_MS = 30 * 60 * 1000;
@@ -665,6 +789,17 @@ const formatCnpj = (value = '') => {
 };
 
 const stripHtml = (html = '') => html.replace(/<[^>]*>/g, '').trim();
+
+const formatCompanyAddress = (company = {}) => {
+    const parts = [
+        company.logradouro,
+        company.numero,
+        company.bairro,
+        company.municipio,
+        company.uf
+    ].filter(Boolean);
+    return parts.join(', ');
+};
 
 const companyFormTemplate = `
     <div class="company-tabs" role="tablist">
@@ -802,6 +937,27 @@ const formatFileSize = (bytes = 0) => {
     return `${value.toFixed(exponent === 0 ? 0 : 1)} ${units[exponent]}`;
 };
 
+const formatShortDate = (value) => {
+    if (!value) return '-';
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) {
+        return '-';
+    }
+    return parsed.toLocaleDateString();
+};
+
+const emptyCondicionanteForm = () => ({
+    empresaId: '',
+    licencaId: '',
+    titulo: '',
+    descricao: '',
+    status: 'PLANEJADA',
+    prioridade: 'MEDIA',
+    vencimento: '',
+    responsavelEmail: '',
+    tags: ''
+});
+
 const resolveRoute = () => {
     const hash = window.location.hash.replace(/^#/, '');
     if (hash === '/login') return 'login';
@@ -813,6 +969,7 @@ const App = {
     setup() {
         const currentRoute = ref(resolveRoute());
         const activeSection = ref('dashboard');
+        const condicionanteSubView = ref('overview');
         const state = reactive({
             notifications: [],
             loading: false,
@@ -864,15 +1021,22 @@ const App = {
             emailHistoryPage: 1,
             userMenuOpen: false,
             mapRef: null,
-            templateEditorRef: null,
-            emailSingleEditorRef: null,
-            signatureEditorRef: null,
             mapLayers: new Map(),
             companies: [],
             selectedCompanyId: '',
             providerType: '',
             iconCache: new Map(),
-            nearby: null
+            nearby: null,
+            condicionantes: [],
+            condicionanteDashboard: null,
+            condicionanteLoading: false,
+            condicionanteForm: emptyCondicionanteForm(),
+            condicionanteLicencas: [],
+            condicionanteFiltro: {
+                empresaId: '',
+                licencaId: ''
+            },
+            condicionanteFiltroLicencas: []
         });
 
         const latestCompanies = computed(() => {
@@ -887,6 +1051,13 @@ const App = {
             return [...state.companies]
                 .sort((a, b) => resolveTime(b) - resolveTime(a))
                 .slice(0, 10);
+        });
+
+        const selectedCompany = computed(() => {
+            if (!state.selectedCompanyId) {
+                return null;
+            }
+            return state.companies.find((company) => company.id === state.selectedCompanyId) || null;
         });
 
         const activeKanbanBoard = computed(() => state.kanbanBoards.find((board) => board.id === state.kanbanActiveBoardId) || null);
@@ -914,7 +1085,7 @@ const App = {
                 return 'Erro ao remover.';
             }
             if (message.includes('login') || message.includes('autent')) return 'Erro de autenticação.';
-            return rawMessage || 'Algo deu errado. Endereço não encontrado.';
+            return 'Algo deu errado. Tente novamente.';
         };
 
         const pushNotification = (type, message, options = {}) => {
@@ -984,42 +1155,18 @@ const App = {
                 input.setAttribute('accept', 'image/*');
                 input.addEventListener('change', async () => {
                     const file = input.files?.[0];
-                    if (!file || !file.type.startsWith('image/')) return;
-
+                    if (!file) return;
                     try {
-                        // Redimensiona a imagem antes de inserir para evitar erros do Quill com imagens grandes.
-                        const MAX_WIDTH = 800;
-                        const MAX_HEIGHT = 800;
-
-                        const image = new Image();
                         const reader = new FileReader();
-
-                        reader.onload = (e) => {
-                            image.onload = () => {
-                                let { width, height } = image;
-
-                                if (width > height) {
-                                    if (width > MAX_WIDTH) {
-                                        height = Math.round((height * MAX_WIDTH) / width);
-                                        width = MAX_WIDTH;
-                                    }
-                                } else if (height > MAX_HEIGHT) {
-                                    width = Math.round((width * MAX_HEIGHT) / height);
-                                    height = MAX_HEIGHT;
-                                }
-
-                                const canvas = document.createElement('canvas');
-                                canvas.width = width;
-                                canvas.height = height;
-                                const ctx = canvas.getContext('2d');
-                                ctx.drawImage(image, 0, 0, width, height);
-
-                                const resizedBase64 = canvas.toDataURL(file.type);
-                                const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
-                                quill.insertEmbed(range.index, 'image', resizedBase64, 'user');
-                                quill.setSelection(range.index + 1);
-                            };
-                            image.src = e.target.result;
+                        reader.onload = () => {
+                            const base64 = typeof reader.result === 'string' ? reader.result : '';
+                            if (!base64) return;
+                            const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
+                            quill.insertEmbed(range.index, 'image', base64, 'user');
+                            quill.setSelection(range.index + 1);
+                        };
+                        reader.onerror = () => {
+                            pushNotification('error', 'Não foi possível carregar a imagem.');
                         };
                         reader.readAsDataURL(file);
                     } catch (error) {
@@ -1032,39 +1179,37 @@ const App = {
             });
         };
 
-        const sanitizeRichTextHtml = (html = '') => {
-            if (!html || typeof html !== 'string') return '';
-            // Remove <p><br></p> no final, que o Quill às vezes adiciona
-            return html.replace(/<p><br><\/p>$/, '');
-        };
-
-        const getEditorHtml = (editor) => {
-            if (!editor) return '';
-            return sanitizeRichTextHtml(editor.root.innerHTML);
-        };
-
         const setEditorContent = (editor, html) => {
             if (!editor) return;
             const safeHtml = html || '';
-            // Usa a API de Delta do Quill, que é mais segura que 'dangerouslyPasteHTML'
-            const delta = editor.clipboard.convert(safeHtml);
-            editor.setContents(delta, 'silent');
+            editor.clipboard.dangerouslyPasteHTML(safeHtml, 'silent');
             forceEditorDirection(editor);
         };
 
         const destroyTemplateEditor = () => {
-            // Não vamos mais destruir os editores. Apenas desanexar o listener.
-            if (state.templateEditor && templateEditorChangeHandler) state.templateEditor.off('text-change', templateEditorChangeHandler);
-            templateEditorChangeHandler = null; // Limpa a referência para evitar memory leak
+            if (state.templateEditor && templateEditorChangeHandler) {
+                state.templateEditor.off('text-change', templateEditorChangeHandler);
+            }
+            state.templateEditor = null;
+            state.templateEditorReady = false;
+            templateEditorChangeHandler = null;
         };
 
         const destroyEmailSingleEditor = () => {
-            if (state.emailSingleEditor && emailSingleEditorChangeHandler) state.emailSingleEditor.off('text-change', emailSingleEditorChangeHandler);
+            if (state.emailSingleEditor && emailSingleEditorChangeHandler) {
+                state.emailSingleEditor.off('text-change', emailSingleEditorChangeHandler);
+            }
+            state.emailSingleEditor = null;
+            state.emailSingleEditorReady = false;
             emailSingleEditorChangeHandler = null;
         };
 
         const destroySignatureEditor = () => {
-            if (state.signatureEditor && signatureEditorChangeHandler) state.signatureEditor.off('text-change', signatureEditorChangeHandler);
+            if (state.signatureEditor && signatureEditorChangeHandler) {
+                state.signatureEditor.off('text-change', signatureEditorChangeHandler);
+            }
+            state.signatureEditor = null;
+            state.signatureEditorReady = false;
             signatureEditorChangeHandler = null;
         };
 
@@ -1390,6 +1535,9 @@ const App = {
         };
 
         const loadAll = async () => {
+            if (!state.loggedUser) {
+                return;
+            }
             try {
                 state.loading = true;
                 await Promise.all([
@@ -1403,13 +1551,102 @@ const App = {
                     await loadKanbanSnapshot(state.kanbanActiveBoardId);
                 }
                 if (state.loggedUser) {
-                    await Promise.all([loadTemplates(), loadServerConfig(), loadEmailHistory()]);
+                    await Promise.all([
+                        loadTemplates(),
+                        loadServerConfig(),
+                        loadEmailHistory(),
+                        loadCondicionantes(),
+                        loadCondicionanteDashboard()
+                    ]);
                 }
             } catch (error) {
                 handleError(error);
             } finally {
                 state.loading = false;
             }
+        };
+
+        const loadCondicionantes = async () => {
+            if (!state.loggedUser) return;
+            state.condicionanteLoading = true;
+            try {
+                const data = await apiClient.get(endpoints.condicionantes);
+                state.condicionantes = Array.isArray(data) ? data : [];
+            } catch (error) {
+                handleError(error);
+            } finally {
+                state.condicionanteLoading = false;
+            }
+        };
+
+        const fetchCondicionanteLicencas = async (empresaId) => {
+            if (!empresaId) {
+                return [];
+            }
+            try {
+                const data = await apiClient.get(`/api/licencas?empresaId=${empresaId}`);
+                return Array.isArray(data) ? data : [];
+            } catch (error) {
+                handleError(error);
+                return [];
+            }
+        };
+
+        const loadCondicionanteDashboard = async () => {
+            if (!state.loggedUser) return;
+            try {
+                state.condicionanteDashboard = await apiClient.get(endpoints.condicionanteDashboard);
+            } catch (error) {
+                handleError(error);
+            }
+        };
+
+        const resetCondicionanteForm = () => {
+            Object.assign(state.condicionanteForm, emptyCondicionanteForm());
+            state.condicionanteLicencas = [];
+        };
+
+        const clearCondicionanteFilters = () => {
+            state.condicionanteFiltro.empresaId = '';
+            state.condicionanteFiltro.licencaId = '';
+            state.condicionanteFiltroLicencas = [];
+        };
+
+        const saveCondicionante = async () => {
+            if (!ensureLoggedUser()) return;
+            const payload = {
+                empresaId: state.condicionanteForm.empresaId,
+                licencaId: state.condicionanteForm.licencaId || null,
+                titulo: state.condicionanteForm.titulo,
+                descricao: state.condicionanteForm.descricao,
+                prioridade: state.condicionanteForm.prioridade,
+                status: state.condicionanteForm.status,
+                vencimento: state.condicionanteForm.vencimento || null,
+                responsavelEmail: state.condicionanteForm.responsavelEmail || null,
+                tags: state.condicionanteForm.tags
+            };
+            if (!payload.empresaId) {
+                pushNotification('warning', translate('condicionantes.validation.company'));
+                return;
+            }
+            if (!payload.titulo?.trim()) {
+                pushNotification('warning', translate('condicionantes.validation.title'));
+                return;
+            }
+            if (!condicionanteStatusSet.has(payload.status)) {
+                pushNotification('warning', translate('condicionantes.validation.status'));
+                return;
+            }
+            if (!condicionantePrioridadeSet.has(payload.prioridade)) {
+                pushNotification('warning', translate('condicionantes.validation.priority'));
+                return;
+            }
+            await perform(async () => {
+                await apiClient.post(endpoints.condicionantes, payload);
+            }, 'condicionantes.save');
+            resetCondicionanteForm();
+            await loadCondicionantes();
+            await loadCondicionanteDashboard();
         };
 
         const ensureLoggedUser = () => {
@@ -1808,7 +2045,6 @@ const App = {
                 state.emailSingleForm.attachments = [];
                 state.emailBulkForm.templateId = '';
                 state.emailBulkForm.useSignature = true;
-                // Carrega TODOS os dados da aplicação antes de ir para o dashboard
                 await loadAll();
                 navigate('main');
             } catch (error) {
@@ -1857,11 +2093,14 @@ const App = {
             if (state.templateEditorReady) {
                 return;
             }
-            state.templateEditor = await createQuill(state.templateEditorRef);
-            const initialHtml = sanitizeRichTextHtml(state.templateForm.conteudoHtml || '');
-            setEditorContent(state.templateEditor, initialHtml);
+            state.templateEditor = await createQuill('#template-editor');
+            const initialHtml = state.templateForm.conteudoHtml || '';
+            if (initialHtml) {
+                const delta = state.templateEditor.clipboard.convert(initialHtml);
+                state.templateEditor.setContents(delta, 'silent');
+            }
             templateEditorChangeHandler = () => {
-                const content = getEditorHtml(state.templateEditor);
+                const content = state.templateEditor.root.innerHTML;
                 if (content !== state.templateForm.conteudoHtml) {
                     state.templateForm.conteudoHtml = content;
                 }
@@ -1872,11 +2111,19 @@ const App = {
             forceEditorDirection(state.templateEditor);
         };
 
+        const ensureTemplateEditor = async () => {
+            if (activeSection.value !== 'emailTemplates') {
+                return;
+            }
+            await nextTick();
+            await initTemplateEditor();
+        };
+
         const initEmailSingleEditor = async () => {
             if (state.emailSingleEditorReady) {
                 return;
             }
-            state.emailSingleEditor = await createQuill(state.emailSingleEditorRef);
+            state.emailSingleEditor = await createQuill('#email-single-editor');
             setEditorContent(state.emailSingleEditor, state.emailSingleForm.conteudoHtml);
             emailSingleEditorChangeHandler = () => {
                 state.emailSingleForm.conteudoHtml = state.emailSingleEditor.root.innerHTML;
@@ -1885,17 +2132,33 @@ const App = {
             state.emailSingleEditorReady = true;
         };
 
+        const ensureEmailSingleEditor = async () => {
+            if (activeSection.value !== 'emailSingle') {
+                return;
+            }
+            await nextTick();
+            await initEmailSingleEditor();
+        };
+
         const initSignatureEditor = async () => {
             if (state.signatureEditorReady) {
                 return;
             }
-            state.signatureEditor = await createQuill(state.signatureEditorRef);
+            state.signatureEditor = await createQuill('#signature-editor');
             setEditorContent(state.signatureEditor, state.serverConfig.signatureHtml);
             signatureEditorChangeHandler = () => {
                 state.serverConfig.signatureHtml = state.signatureEditor.root.innerHTML;
             };
             state.signatureEditor.on('text-change', signatureEditorChangeHandler);
             state.signatureEditorReady = true;
+        };
+
+        const ensureSignatureEditor = async () => {
+            if (activeSection.value !== 'settings') {
+                return;
+            }
+            await nextTick();
+            await initSignatureEditor();
         };
 
         const saveTemplate = async () => {
@@ -2303,6 +2566,77 @@ const App = {
             return state.emailHistory.slice(start, start + EMAIL_HISTORY_PAGE_SIZE);
         });
 
+        const condicionanteSummary = computed(() => {
+            const dashboard = state.condicionanteDashboard || {};
+            return [
+                { id: 'total', labelKey: 'condicionantes.metric.total', value: dashboard.totalCondicionantes ?? 0 },
+                { id: 'active', labelKey: 'condicionantes.metric.active', value: dashboard.totalEmDia ?? 0 },
+                { id: 'late', labelKey: 'condicionantes.metric.late', value: dashboard.totalAtrasadas ?? 0 }
+            ];
+        });
+
+        const condicionantesFiltradas = computed(() => state.condicionantes.filter((cond) => {
+            const filtroEmpresa = state.condicionanteFiltro.empresaId;
+            const filtroLicenca = state.condicionanteFiltro.licencaId;
+            const matchesEmpresa = !filtroEmpresa || cond.empresaId === filtroEmpresa;
+            const matchesLicenca = !filtroLicenca || (cond.licencaId || '') === filtroLicenca;
+            return matchesEmpresa && matchesLicenca;
+        }));
+
+        const condicionantesAgrupadas = computed(() => {
+            const grupos = new Map();
+            state.condicionantes.forEach((cond) => {
+                const empresaId = cond.empresaId || 'sem_empresa';
+                const empresaNome = cond.empresaNome
+                    || cond.empresa?.nomeEmpresa
+                    || cond.empresa?.nomeFantasia
+                    || cond.empresa?.nome
+                    || 'Empresa não informada';
+                if (!grupos.has(empresaId)) {
+                    grupos.set(empresaId, {
+                        id: empresaId,
+                        nome: empresaNome,
+                        licencas: new Map()
+                    });
+                }
+                const empresa = grupos.get(empresaId);
+                const licencaId = cond.licencaId || 'sem_licenca';
+                const licencaNome = cond.licencaNumero
+                    || cond.licenca?.numero
+                    || cond.licenca?.descricao
+                    || 'Sem licença vinculada';
+                if (!empresa.licencas.has(licencaId)) {
+                    empresa.licencas.set(licencaId, {
+                        id: licencaId,
+                        nome: licencaNome,
+                        condicionantes: []
+                    });
+                }
+                empresa.licencas.get(licencaId).condicionantes.push(cond);
+            });
+            return Array.from(grupos.values()).map((empresa) => {
+                const licencasArr = Array.from(empresa.licencas.values());
+                return {
+                    id: empresa.id,
+                    nome: empresa.nome,
+                    licencas: licencasArr,
+                    total: licencasArr.reduce((sum, licenca) => sum + licenca.condicionantes.length, 0)
+                };
+            });
+        });
+
+        const condicionantesPorEmpresaFiltradas = computed(() => {
+            const empresaFiltro = state.condicionanteFiltro.empresaId;
+            const licencaFiltro = state.condicionanteFiltro.licencaId;
+            return condicionantesAgrupadas.value
+                .filter((empresa) => !empresaFiltro || empresa.id === empresaFiltro)
+                .map((empresa) => ({
+                    ...empresa,
+                    licencas: empresa.licencas.filter((licenca) => !licencaFiltro || licenca.id === licencaFiltro)
+                }))
+                .filter((empresa) => empresa.licencas.length > 0);
+        });
+
         const applyTheme = (theme) => {
             document.body.dataset.theme = theme;
         };
@@ -2346,36 +2680,44 @@ const App = {
         });
 
         watch(activeSection, async (section, previousSection) => {
+            if (previousSection === 'emailTemplates' && section !== 'emailTemplates') {
+                destroyTemplateEditor();
+            }
+            if (previousSection === 'emailSingle' && section !== 'emailSingle') {
+                destroyEmailSingleEditor();
+            }
+            if (previousSection === 'settings' && section !== 'settings') {
+                destroySignatureEditor();
+            }
             if (['emailTemplates', 'emailSingle', 'emailBulk', 'settings'].includes(section) && !state.loggedUser) {
                 ensureLoggedUser();
                 return;
             }
-
-            // A inicialização agora é feita pelo watch no ref do template,
-            // e os editores não são mais destruídos.
-            // Apenas garantimos que o conteúdo correto seja carregado ao entrar na seção.
-            if (section === 'emailTemplates' && state.templateEditor) {
-                setEditorContent(state.templateEditor, state.templateForm.conteudoHtml || '');
-            } else if (section === 'settings' && state.signatureEditor) {
-                setEditorContent(state.signatureEditor, state.serverConfig.signatureHtml || '');
-            }
-
             if (section === 'emailTemplates') {
-                // A inicialização agora é feita pelo watch no ref do template
+                await ensureTemplateEditor();
             }
             if (section === 'emailSingle') {
-                // A inicialização agora é feita pelo watch no ref do template
+                await ensureEmailSingleEditor();
             }
             if (section === 'settings') {
-                // A inicialização agora é feita pelo watch no ref do template
+                await ensureSignatureEditor();
             }
             if (section === 'mapping') {
-                // Garante que o DOM está pronto antes de tentar inicializar o mapa
                 await nextTick();
                 await initMapIfNeeded();
-                // Carrega as empresas para o dropdown
-                // Apenas carrega se não tiverem sido carregadas ainda
-                if (!state.companies.length) await loadCompanies();
+                await loadCompanies();
+                if (state.selectedCompanyId) {
+                    await showNearby();
+                }
+            } else if (previousSection === 'mapping' && state.mapRef) {
+                state.mapRef.remove();
+                state.mapRef = null;
+                clearMapLayers();
+                state.nearby = null;
+            }
+
+            if (section === 'condicionantes') {
+                await Promise.all([loadCondicionantes(), loadCondicionanteDashboard()]);
             }
         });
 
@@ -2387,22 +2729,11 @@ const App = {
 
         onBeforeUnmount(() => {
             window.removeEventListener('hashchange', syncRoute);
+            clearSessionTimer();
+            destroyTemplateEditor();
+            destroyEmailSingleEditor();
+            destroySignatureEditor();
         });
-
-        // Nova abordagem: usar refs de template para inicializar os editores
-        watch(() => state.templateEditorRef, (el) => {
-            if (el && activeSection.value === 'emailTemplates') initTemplateEditor();
-        });
-
-        watch(() => state.emailSingleEditorRef, (el) => {
-            if (el && activeSection.value === 'emailSingle') initEmailSingleEditor();
-        });
-
-        watch(() => state.signatureEditorRef, (el) => {
-            if (el && activeSection.value === 'settings') initSignatureEditor();
-        });
-
-
 
         // Helper: esperar elemento aparecer no DOM
         const waitForElement = (selector, { timeout = 4000, interval = 50 } = {}) => {
@@ -2429,11 +2760,10 @@ const App = {
 
         function iconFor(kind) {
             if (state.iconCache.has(kind)) return state.iconCache.get(kind);
-            // Marcador azul para empresa, vermelho para prestadores
             const url = {
                 empresa: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-                logistica_reversa: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-                transporte_residuo: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png'
+                logistica_reversa: '/assets/icons/logistica.png',
+                transporte_residuo: '/assets/icons/residuo.png'
             }[kind] || 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
             const ic = L.icon({
                 iconUrl: url, iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [0, -28],
@@ -2445,15 +2775,11 @@ const App = {
 
         const initMapIfNeeded = async () => {
             try {
-                // Se a referência do mapa existe e o contêiner ainda está no DOM, não faz nada.
-                if (state.mapRef && state.mapRef.getContainer()) return;
-
+                if (state.mapRef) return;
                 await nextTick(); // aguarda render Vue
                 const el = await waitForElement('#leaflet-map', { timeout: 5000 });
-                el.innerHTML = ''; // Garante que o container está limpo antes de recriar
-
-                // Cria a nova instância do mapa
-                state.mapRef = L.map('leaflet-map', { zoomControl: true }).setView([-15.79, -47.88], 4);
+                el.innerHTML = ''; // limpa se reuso de container
+                state.mapRef = L.map(el, { zoomControl: true }).setView([-15.79, -47.88], 4);
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     maxZoom: 19,
@@ -2475,63 +2801,38 @@ const App = {
             if (!state.selectedCompanyId) {
                 console.warn('[Map] selecione uma empresa'); return;
             }
-            state.loading = true; // Ativa o loading
-            // ... (a lógica de showNearby foi integrada em executeNearbySearch, mas a função pode ser necessária em algum lugar)
-        };
-
-        // Nova função centralizada para executar a busca completa
-        const executeNearbySearch = async () => {
-            if (!state.selectedCompanyId) {
-                console.warn('[Map] selecione uma empresa');
-                pushNotification('warning', t('mapping.selectCompany'));
-                return;
-            }
-            state.loading = true; // Ativa o loading
-            state.nearby = null; // Limpa resultados antigos da tela
             try {
-                // 1. Garante que a empresa tem coordenadas antes de continuar.
-                const geocodedCompany = await apiClient.post(`/api/companies/${state.selectedCompanyId}/geocode?force=true`, {});
-                if (!geocodedCompany || geocodedCompany.lat == null || geocodedCompany.lng == null) {
-                    pushNotification('warning', 'Empresa não possui coordenadas válidas para a busca.');
-                    clearMapLayers();
-                    upsertCompanyMarker(geocodedCompany);
-                    return;
-                }
+                // 1) sempre geocodifica a empresa antes de buscar (atualiza coords automaticamente)
+                await apiClient.post(`/api/companies/${state.selectedCompanyId}/geocode?force=true`);
 
-                // 2. Chama o endpoint para importar os 5 melhores resultados do Google para o seu banco de dados.
-                const keyword = state.providerType || 'transporte de resíduo'; // Usa o tipo selecionado ou um padrão.
-                try {
-                    const importResult = await apiClient.post(`/api/map/import-from-google?lat=${geocodedCompany.lat}&lng=${geocodedCompany.lng}&keyword=${keyword}&radius=10000`, {});
-                    if (importResult && importResult.message) {
-                        // Notifica o usuário sobre a importação, mas de forma sutil.
-                        console.log('[Map] Importação do Google:', importResult.message);
-                    }
-                } catch (importError) {
-                    console.error('[Map] Falha na etapa de importação do Google, continuando com dados locais.', importError);
-                    // Não interrompe o fluxo, apenas loga o erro. A busca local ainda pode funcionar.
-                }
-
-                // 3. Agora, busca os prestadores do SEU banco de dados (incluindo os que acabaram de ser importados).
+                // 2) busca próximos com limite (o back ainda capará em 5)
                 const data = await apiGet(endpoints.mapNearby, {
                     companyId: state.selectedCompanyId,
                     tipo: state.providerType || '',
-                    limit: 5,
+                    limit: 5
                 });
-
                 state.nearby = data;
 
-                // 4. Limpa marcadores de prestadores antigos do mapa.
+                // 3) limpar prestadores anteriores
                 for (const [k, layer] of state.mapLayers.entries()) {
                     if (k.startsWith('prov:')) {
                         try { layer.remove(); } catch { }
                         state.mapLayers.delete(k);
                     }
                 }
+                // 4) limpar marcador da empresa anterior
+                for (const [k, m] of state.mapLayers.entries()) {
+                    if (k.startsWith('company:')) {
+                        try { m.remove(); } catch {}
+                        state.mapLayers.delete(k);
+                    }
+                }
 
-                // 5. Adiciona o marcador da empresa principal.
-                upsertCompanyMarker(data.company);
+                // 5) marcador da empresa atual
+                const c = data.company;
+                upsertCompanyMarker({ id: c.id, lat: c.lat, lng: c.lng, nome: c.nome });
 
-                // 6. Adiciona os marcadores dos prestadores encontrados no seu banco.
+                // 6) adicionar prestadores (nome, telefone, site)
                 for (const p of data.prestadores) {
                     const siteHtml = p.site ? `<br><a href="${p.site}" target="_blank" rel="noopener">site</a>` : '';
                     const telHtml = p.telefone ? `<br>tel: ${p.telefone}` : '';
@@ -2540,54 +2841,46 @@ const App = {
                     m.addTo(state.mapRef);
                     state.mapLayers.set(`prov:${p.id}`, m);
                 }
-
             } catch (err) {
-                const text = await err.response?.text?.();
-                console.error('[Map] executeNearbySearch Error:', err.status || '', text || err);
-                pushNotification('error', text || 'Falha ao buscar prestadores próximos.');
-                clearMapLayers();
-            } finally {
-                state.loading = false; // Desativa o loading
-            }
-        };
-
-        // Apenas geocodifica e foca na empresa selecionada no mapa
-        const focusOnCompany = async (companyId) => {
-            if (!companyId) return;
-            state.loading = true;
-            state.nearby = null; // Limpa a lista de prestadores
-            clearMapLayers(); // Limpa todos os marcadores
-            try {
-                // 1. Garante que a empresa tem coordenadas.
-                const geocodedCompany = await apiClient.post(`/api/companies/${companyId}/geocode?force=true`, {});
-
-                // 2. Atualiza o marcador da empresa no mapa.
-                upsertCompanyMarker(geocodedCompany);
-
-                // 3. Se não tiver coordenadas, notifica o usuário.
-                if (!geocodedCompany || geocodedCompany.lat == null || geocodedCompany.lng == null) {
-                    pushNotification('warning', 'Endereço não encontrado');
+                try {
+                    const text = await err.response?.text?.();
+                    console.error('[Map] showNearby', err.status || '', text || err);
+                } catch {
+                    if (err.status === 422) {
+                        pushNotification('warning', 'Endereço não encontrado. Marque manualmente no mapa.');
+                        state.showManualGeoModal = true;
+                    } else {
+                        console.error('[Map] showNearby', err);
+                    }
                 }
-            } catch (err) {
-                pushNotification('error', 'Falha ao localizar a empresa.');
-            } finally {
-                state.loading = false;
             }
         };
+
+        const focusOnProvider = (provider) => {
+            if (!provider || !state.mapRef) {
+                return;
+            }
+            const key = `prov:${provider.id}`;
+            const marker = state.mapLayers.get(key);
+            if (marker) {
+                state.mapRef.setView([provider.lat, provider.lng], 16);
+                marker.openPopup();
+            } else {
+                state.mapRef.setView([provider.lat, provider.lng], 15);
+            }
+        };
+
 
         // cria/atualiza o marcador da empresa selecionada e centraliza o mapa
         const upsertCompanyMarker = (company) => {
             if (!company || !state.mapRef) return;
-            // Remove TODOS os marcadores de empresa existentes antes de adicionar o novo.
-            for (const [k, m] of state.mapLayers.entries()) {
-                if (k.startsWith('company:')) {
-                    try { m.remove(); } catch {}
-                    state.mapLayers.delete(k);
-                }
-            }
-            if (company.lat == null || company.lng == null) return; // Não adiciona marcador sem coordenadas
-
             const key = `company:${company.id}`;
+            // remove o antigo se existir
+            const old = state.mapLayers.get(key);
+            if (old) {
+                try { old.remove(); } catch { }
+                state.mapLayers.delete(key);
+            }
             const marker = L.marker([company.lat, company.lng], { icon: iconFor('empresa') })
                 .bindPopup(`<b>${company.nomeEmpresa || company.nomeFantasia || company.nome || 'Empresa'}</b>`);
             marker.addTo(state.mapRef);
@@ -2597,49 +2890,51 @@ const App = {
 
         // quando usuário troca a seleção, focamos e (opcional) buscamos próximos
         watch(() => state.selectedCompanyId, async (id) => {
-            if (!id) return;
-            await focusOnCompany(id); // Apenas localiza a empresa no mapa
-        });
-
-        watch(activeSection, (newSection, oldSection) => {
-            if (oldSection === 'mapping' && state.mapRef) {
-                state.mapRef.remove();
-                state.mapRef = null;
-                // Limpa os dados de nearby e marcadores ao sair da seção
+            if (!id) {
                 state.nearby = null;
                 clearMapLayers();
+                return;
             }
+            await showNearby();
         });
 
-        const focusOnProvider = (provider) => {
-            try {
-            if (!provider || !state.mapRef) return;
-            const key = `prov:${provider.id}`;
-            const marker = state.mapLayers.get(key);
-            if (marker) {
-                state.mapRef.setView([provider.lat, provider.lng], 17); // Zoom mais próximo
-                marker.openPopup();
-            }
-            }catch (err) {
-                console.error('[Map] Buscar Prestador de servicço', err);
-            }
-        };
+        watch(() => state.condicionanteForm.empresaId, async (empresaId) => {
+            state.condicionanteForm.licencaId = '';
+            state.condicionanteLicencas = empresaId
+                ? await fetchCondicionanteLicencas(empresaId)
+                : [];
+        });
+
+        watch(() => state.condicionanteFiltro.empresaId, async (empresaId) => {
+            state.condicionanteFiltro.licencaId = '';
+            state.condicionanteFiltroLicencas = empresaId
+                ? await fetchCondicionanteLicencas(empresaId)
+                : [];
+        });
 
         return {
             sections,
             companyTabs,
+            condicionanteSubViews,
             currentRoute,
             activeSection,
+            condicionanteSubView,
             state,
             statistics,
             latestCompanies,
+            selectedCompany,
             activeKanbanBoard,
             kanbanColumns,
             bulkPreviewRows,
             bulkRenderedTemplate,
             paginatedEmailHistory,
             emailHistoryTotalPages,
+            condicionanteSummary,
+            condicionantesFiltradas,
+            condicionantesPorEmpresaFiltradas,
             formatCnpj,
+            formatCompanyAddress,
+            formatShortDate,
             t: translate,
             setSection: (id) => {
                 if (activeSection.value === id) return;
@@ -2713,14 +3008,16 @@ const App = {
             logoutUser,
             apiGet,
             iconFor,
-            setTemplateEditorRef: (el) => { state.templateEditorRef = el; },
-            setEmailSingleEditorRef: (el) => { state.emailSingleEditorRef = el; },
-            setSignatureEditorRef: (el) => { state.signatureEditorRef = el; },
             initMapIfNeeded,
-            executeNearbySearch,
+            showNearby,
             loadCompanies,
             clearMapLayers,
-            focusOnProvider
+            focusOnProvider,
+            loadCondicionantes,
+            loadCondicionanteDashboard,
+            saveCondicionante,
+            resetCondicionanteForm,
+            clearCondicionanteFilters
         };
     },
     template: `
@@ -2811,23 +3108,40 @@ const App = {
                         </nav>
                         <section>
                             <div v-if="activeSection === 'dashboard'">
-                                <div class="card quick-metrics-card">
-                                    <div class="card-header">
-                                        <div>
-                                            <h2>{{ t('dashboard.metricsTitle') }}</h2>
-                                            <p class="card-subtitle">{{ t('dashboard.metricsDescription') }}</p>
+                            <div class="card quick-metrics-card">
+                                <div class="card-header">
+                                    <div>
+                                        <h2>{{ t('dashboard.metricsTitle') }}</h2>
+                                        <p class="card-subtitle">{{ t('dashboard.metricsDescription') }}</p>
                                         </div>
-                                    </div>
-                                    <div class="stat-grid">
-                                        <article class="stat-card" v-for="metric in quickMetrics" :key="metric.id" :class="metric.className">
-                                            <span class="stat-label">{{ t(metric.labelKey) }}</span>
-                                            <span class="stat-value">{{ metric.value }}</span>
-                                        </article>
-                                    </div>
                                 </div>
-                                <div class="card" v-if="state.emailHistory.length">
-                                    <h2>{{ t('email.history') }}</h2>
-                                    <table>
+                                <div class="stat-grid">
+                                    <article class="stat-card" v-for="metric in quickMetrics" :key="metric.id" :class="metric.className">
+                                        <span class="stat-label">{{ t(metric.labelKey) }}</span>
+                                        <span class="stat-value">{{ metric.value }}</span>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div>
+                                        <h2>{{ t('condicionantes.summaryTitle') }}</h2>
+                                        <p class="card-subtitle">{{ t('condicionantes.summaryDescription') }}</p>
+                                    </div>
+                                    <button class="ghost" type="button" @click="() => { loadCondicionantes(); loadCondicionanteDashboard(); }">
+                                        {{ t('common.refresh') }}
+                                    </button>
+                                </div>
+                                <div class="stat-grid">
+                                    <article class="stat-card" v-for="metric in condicionanteSummary" :key="metric.id">
+                                        <span class="stat-label">{{ t(metric.labelKey) }}</span>
+                                        <span class="stat-value">{{ metric.value }}</span>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="card" v-if="state.emailHistory.length">
+                                <h2>{{ t('email.history') }}</h2>
+                                <table>
                                         <thead>
                                             <tr>
                                                 <th>{{ t('email.subject') }}</th>
@@ -3393,7 +3707,7 @@ const App = {
                     </div>
 
                     <div v-else-if="activeSection === 'emailTemplates'">
-                        <div class="card" v-show="activeSection === 'emailTemplates'">
+                        <div class="card">
                             <h2>{{ t('templates.title') }}</h2>
                             <form @submit.prevent="saveTemplate">
                                 <label>{{ t('templates.name') }}
@@ -3404,7 +3718,7 @@ const App = {
                                 </label>
                                 <label>{{ t('templates.content') }}</label>
                                 <div class="rich-editor">
-                                    <div id="template-editor" :ref="setTemplateEditorRef"></div>
+                                    <div id="template-editor"></div>
                                 </div>
                                 <textarea class="visually-hidden" v-model="state.templateForm.conteudoHtml" aria-hidden="true"></textarea>
                                 <label class="checkbox-field">
@@ -3444,7 +3758,7 @@ const App = {
                     </div>
 
                     <div v-else-if="activeSection === 'emailSingle'" class="grid">
-                        <div class="card" v-show="activeSection === 'emailSingle'">
+                        <div class="card">
                             <h2>{{ t('email.single.title') }}</h2>
                             <p>{{ t('email.single.description') }}</p>
                             <form @submit.prevent="sendIndividualEmail">
@@ -3461,7 +3775,7 @@ const App = {
                                 </label>
                                 <label>{{ t('email.content') }}</label>
                                 <div class="rich-editor">
-                                    <div id="email-single-editor" :ref="setEmailSingleEditorRef"></div>
+                                    <div id="email-single-editor"></div>
                                 </div>
                                 <textarea class="visually-hidden" v-model="state.emailSingleForm.conteudoHtml" aria-hidden="true"></textarea>
                                 <label class="checkbox-field">
@@ -3570,7 +3884,7 @@ const App = {
                                 </div>
                             </form>
                         </div>
-                        <div class="card" v-show="activeSection === 'settings'">
+                        <div class="card">
                             <h2>{{ t('settings.emailServerTitle') }}</h2>
                             <form @submit.prevent="saveServerConfig">
                                 <label>{{ t('settings.smtpHost') }}
@@ -3608,7 +3922,7 @@ const App = {
                                 </label>
                                 <label>{{ t('settings.signatureLabel') }}</label>
                                 <div class="rich-editor">
-                                    <div id="signature-editor" :ref="setSignatureEditorRef"></div>
+                                    <div id="signature-editor"></div>
                                 </div>
                                 <textarea class="visually-hidden" v-model="state.serverConfig.signatureHtml" aria-hidden="true"></textarea>
                                 <p class="helper-text">{{ t('settings.signatureHint') }}</p>
@@ -3618,39 +3932,300 @@ const App = {
                             </form>
                         </div>
                     </div>
-                    <div v-else-if="activeSection === 'mapping'" class="grid gap-3" style="grid-template-columns: 1fr 380px;">
-                        <div class="card relative p-0" style="overflow: hidden;">
-                         <div class="card absolute top-3 left-1/2 -translate-x-1/2 z-[1000] w-96">
-                                <h3>Controles</h3>
-                                <label class="mt-2">{{ t('mapping.selectCompany') }}
-                                    <select v-model="state.selectedCompanyId">
-                                        <option value="" disabled>{{ t('common.select') }}</option>
-                                        <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
-                                    </select>
-                                </label>
-                                <label class="mt-2">{{ t('mapping.typeAll') }}
-                                    <select v-model="state.providerType" @change="executeNearbySearch">
-                                        <option value="">Todos</option>
-                                        <option value="logistica_reversa">Logística reversa</option>
-                                        <option value="transporte_residuo">Transporte de resíduo</option>
-                                    </select>
-                                </label>
-                            </div>
-                            <div id="leaflet-map" style="height: 70vh; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;"></div>                           
+
+                    <div v-else-if="activeSection === 'condicionantes'" class="condicionante-section">
+                        <div class="condicionante-tabs" role="tablist">
+                            <button
+                                v-for="tab in condicionanteSubViews"
+                                :key="tab.id"
+                                type="button"
+                                class="pill-tab"
+                                :class="{ active: condicionanteSubView === tab.id }"
+                                @click="condicionanteSubView = tab.id"
+                            >
+                                {{ t(tab.labelKey) }}
+                            </button>
                         </div>
-                        <aside class="card" style="max-height: calc(70vh + 2px); overflow-y: auto;">
-                            <h3>{{ t('mapping.title') }}</h3>
-                            <div v-if="!state.nearby || !state.nearby.prestadores?.length" class="p-4 text-center opacity-70">
-                                <p>Nenhum prestador encontrado.</p>
-                                <small>Selecione uma empresa para começar.</small>
+
+                        <div v-if="condicionanteSubView === 'form'" class="card">
+                            <div class="card-header">
+                                <div>
+                                    <h2>{{ t('condicionantes.formTitle') }}</h2>
+                                </div>
                             </div>
-                            <ul v-else class="space-y-3 mt-4">
-                                <li v-for="p in state.nearby.prestadores" :key="p.id" @click="focusOnProvider(p)" class="p-3 border rounded-md bg-gray-50 cursor-pointer hover:bg-gray-100">
-                                    <strong class="font-semibold">{{ p.nome }}</strong>
-                                    <div class="text-sm opacity-80 capitalize">{{ p.tipo.replace('_', ' ') }}</div>
-                                    <div class="text-xs opacity-70 mt-1">
+                            <form class="form-grid" @submit.prevent="saveCondicionante">
+                                <label>{{ t('condicionantes.fieldEmpresa') }}
+                                    <select v-model="state.condicionanteForm.empresaId" required>
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="c in state.companies" :key="c.id" :value="c.id">
+                                            {{ c.nomeEmpresa || c.nomeFantasia || c.nome }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>{{ t('condicionantes.fieldLicenca') }}
+                                    <select v-model="state.condicionanteForm.licencaId" :disabled="!state.condicionanteLicencas.length">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="lic in state.condicionanteLicencas" :key="lic.id" :value="lic.id">
+                                            {{ lic.numero || lic.nome }} · {{ lic.tipo || lic.orgaoEmissor }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>{{ t('condicionantes.fieldTitulo') }}
+                                    <input v-model="state.condicionanteForm.titulo" required />
+                                </label>
+                                <label>{{ t('condicionantes.fieldDescricao') }}
+                                    <textarea rows="3" v-model="state.condicionanteForm.descricao"></textarea>
+                                </label>
+                                <label>{{ t('condicionantes.fieldStatus') }}
+                                    <select v-model="state.condicionanteForm.status">
+                                        <option v-for="status in condicionanteStatuses" :key="status.value" :value="status.value">
+                                            {{ t(status.labelKey) }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>{{ t('condicionantes.fieldPrioridade') }}
+                                    <select v-model="state.condicionanteForm.prioridade">
+                                        <option v-for="prio in condicionantePrioridades" :key="prio.value" :value="prio.value">
+                                            {{ t(prio.labelKey) }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>{{ t('condicionantes.fieldVencimento') }}
+                                    <input type="date" v-model="state.condicionanteForm.vencimento" />
+                                </label>
+                                <label>{{ t('condicionantes.fieldResponsavel') }}
+                                    <input type="email" v-model="state.condicionanteForm.responsavelEmail" />
+                                </label>
+                                <label>{{ t('condicionantes.fieldTags') }}
+                                    <input v-model="state.condicionanteForm.tags" />
+                                </label>
+                                <div class="action-buttons">
+                                    <button class="primary" type="submit">{{ t('condicionantes.save') }}</button>
+                                    <button class="secondary" type="button" @click="resetCondicionanteForm">{{ t('common.clear') }}</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div v-else-if="condicionanteSubView === 'overview'" class="card">
+                            <div class="card-header">
+                                <div>
+                                    <h2>{{ t('condicionantes.tableTitle') }}</h2>
+                                </div>
+                                <button class="ghost" type="button" @click="() => { loadCondicionantes(); loadCondicionanteDashboard(); }">
+                                    {{ t('common.refresh') }}
+                                </button>
+                            </div>
+                            <div class="condicionante-filter-grid">
+                                <label>
+                                    <span>{{ t('condicionantes.fieldEmpresa') }}</span>
+                                    <select v-model="state.condicionanteFiltro.empresaId">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="c in state.companies" :key="c.id" :value="c.id">
+                                            {{ c.nomeEmpresa || c.nomeFantasia || c.nome }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>
+                                    <span>{{ t('condicionantes.filterLicenca') }}</span>
+                                    <select v-model="state.condicionanteFiltro.licencaId" :disabled="!state.condicionanteFiltroLicencas.length">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="lic in state.condicionanteFiltroLicencas" :key="lic.id" :value="lic.id">
+                                            {{ lic.numero || lic.nome }} · {{ lic.tipo || lic.orgaoEmissor }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <button
+                                    class="ghost"
+                                    type="button"
+                                    :disabled="!state.condicionanteFiltro.empresaId && !state.condicionanteFiltro.licencaId"
+                                    @click="clearCondicionanteFilters"
+                                >
+                                    {{ t('condicionantes.filterClear') }}
+                                </button>
+                            </div>
+                            <p v-if="state.condicionanteLoading" class="helper-text">{{ t('common.loading') }}</p>
+                            <div class="table-wrapper" v-else>
+                                <table v-if="condicionantesFiltradas.length">
+                                    <thead>
+                                        <tr>
+                                            <th>{{ t('condicionantes.tableHeader.titulo') }}</th>
+                                            <th>{{ t('condicionantes.tableHeader.empresa') }}</th>
+                                            <th>{{ t('condicionantes.tableHeader.status') }}</th>
+                                            <th>{{ t('condicionantes.tableHeader.prioridade') }}</th>
+                                            <th>{{ t('condicionantes.tableHeader.vencimento') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="cond in condicionantesFiltradas" :key="cond.id">
+                                            <td>
+                                                <strong>{{ cond.titulo }}</strong>
+                                                <p class="table-subtitle" v-if="cond.licencaNumero">{{ cond.licencaNumero }}</p>
+                                            </td>
+                                            <td>{{ cond.empresaNome || cond.empresa?.nomeEmpresa || '-' }}</td>
+                                            <td>{{ t('condicionantes.status.' + (cond.status || '')) }}</td>
+                                            <td>{{ t('condicionantes.priority.' + (cond.prioridade || '')) }}</td>
+                                            <td>{{ formatShortDate(cond.vencimento) }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p v-else class="mapping-empty">{{ t('condicionantes.tableEmpty') }}</p>
+                            </div>
+                        </div>
+
+                        <div v-else class="card condicionante-by-company">
+                            <div class="card-header">
+                                <div>
+                                    <h2>{{ t('condicionantes.byCompanyTitle') }}</h2>
+                                    <p class="card-subtitle">{{ t('condicionantes.byCompanySubtitle') }}</p>
+                                </div>
+                                <button class="ghost" type="button" @click="() => { loadCondicionantes(); loadCondicionanteDashboard(); }">
+                                    {{ t('common.refresh') }}
+                                </button>
+                            </div>
+                            <div class="condicionante-filter-grid">
+                                <label>
+                                    <span>{{ t('condicionantes.fieldEmpresa') }}</span>
+                                    <select v-model="state.condicionanteFiltro.empresaId">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="c in state.companies" :key="c.id" :value="c.id">
+                                            {{ c.nomeEmpresa || c.nomeFantasia || c.nome }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <label>
+                                    <span>{{ t('condicionantes.filterLicenca') }}</span>
+                                    <select v-model="state.condicionanteFiltro.licencaId" :disabled="!state.condicionanteFiltroLicencas.length">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="lic in state.condicionanteFiltroLicencas" :key="lic.id" :value="lic.id">
+                                            {{ lic.numero || lic.nome }} · {{ lic.tipo || lic.orgaoEmissor }}
+                                        </option>
+                                    </select>
+                                </label>
+                                <button
+                                    class="ghost"
+                                    type="button"
+                                    :disabled="!state.condicionanteFiltro.empresaId && !state.condicionanteFiltro.licencaId"
+                                    @click="clearCondicionanteFilters"
+                                >
+                                    {{ t('condicionantes.filterClear') }}
+                                </button>
+                            </div>
+
+                            <p v-if="state.condicionanteLoading" class="helper-text">{{ t('common.loading') }}</p>
+                            <div v-else>
+                                <p v-if="!condicionantesPorEmpresaFiltradas.length" class="mapping-empty">
+                                    {{ t('condicionantes.byCompany.empty') }}
+                                </p>
+                                <div v-else class="condicionante-company-groups">
+                                    <article v-for="empresa in condicionantesPorEmpresaFiltradas" :key="empresa.id" class="condicionante-company-group">
+                                        <header class="condicionante-company-header">
+                                            <div>
+                                                <h3>{{ empresa.nome }}</h3>
+                                                <p class="table-subtitle">{{ empresa.total }} x {{ t('nav.condicionantes') }}</p>
+                                            </div>
+                                        </header>
+                                        <div class="condicionante-license-grid">
+                                            <section
+                                                v-for="licenca in empresa.licencas"
+                                                :key="licenca.id"
+                                                class="condicionante-license-card"
+                                            >
+                                                <div class="condicionante-license-card__header">
+                                                    <div>
+                                                        <strong>{{ licenca.nome }}</strong>
+                                                        <p class="table-subtitle">{{ licenca.condicionantes.length }} x {{ t('nav.condicionantes') }}</p>
+                                                    </div>
+                                                </div>
+                                                <ul class="condicionante-license-card__list">
+                                                    <li v-for="cond in licenca.condicionantes" :key="cond.id">
+                                                        <div>
+                                                            <strong>{{ cond.titulo }}</strong>
+                                                            <p class="table-subtitle">{{ t('condicionantes.status.' + (cond.status || '')) }}</p>
+                                                        </div>
+                                                        <div class="condicionante-license-card__meta">
+                                                            <span>{{ formatShortDate(cond.vencimento) }}</span>
+                                                            <span>{{ t('condicionantes.priority.' + (cond.prioridade || '')) }}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </section>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-else-if="activeSection === 'mapping'" class="mapping-layout">
+                        <div class="mapping-map card">
+                            <div id="leaflet-map" class="mapping-map__canvas" role="region" aria-label="Mapa das empresas e prestadores"></div>
+                        </div>
+
+                        <aside class="mapping-panel card">
+                            <div>
+                                <h3>{{ t('mapping.controls') }}</h3>
+                                <div class="mapping-controls" aria-label="{{ t('mapping.controls') }}">
+                                    <label>
+                                        <span>{{ t('mapping.selectCompany') }}</span>
+                                        <select v-model="state.selectedCompanyId" :disabled="!state.companies.length">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="c in state.companies" :key="c.id" :value="c.id">
+                                                {{ c.nomeEmpresa || c.nomeFantasia || c.nome }}
+                                            </option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('mapping.typeFilter') }}</span>
+                                        <select v-model="state.providerType" :disabled="!state.selectedCompanyId">
+                                            <option value="">{{ t('mapping.typeAll') }}</option>
+                                            <option value="logistica_reversa">Logística reversa</option>
+                                            <option value="transporte_residuo">Transporte de resíduo</option>
+                                        </select>
+                                    </label>
+                                    <button class="primary" type="button" :disabled="!state.selectedCompanyId" @click="showNearby">
+                                        {{ t('mapping.findNearby') }}
+                                    </button>
+                                </div>
+                                <p class="mapping-hint">{{ t('mapping.hint') }}</p>
+                            </div>
+
+                            <div class="mapping-company-card" v-if="selectedCompany">
+                                <strong>{{ selectedCompany.nomeEmpresa || selectedCompany.nomeFantasia || selectedCompany.nome }}</strong>
+                                <p>{{ formatCompanyAddress(selectedCompany) }}</p>
+                                <p class="mapping-company__contact">
+                                    <span v-if="selectedCompany.telefone">{{ selectedCompany.telefone }}</span>
+                                    <span v-if="selectedCompany.email">{{ selectedCompany.email }}</span>
+                                </p>
+                            </div>
+
+                            <div class="mapping-panel__header">
+                                <div>
+                                    <h3>{{ t('mapping.title') }}</h3>
+                                    <p class="card-subtitle" v-if="state.nearby?.company">
+                                        {{ state.nearby.company.nome }} · {{ state.nearby.company.municipio || state.nearby.company.uf }}
+                                    </p>
+                                </div>
+                                <span class="mapping-counter" v-if="state.nearby?.prestadores">
+                                    {{ state.nearby.prestadores.length }}/5
+                                </span>
+                            </div>
+                            <p class="mapping-empty" v-if="!state.nearby || !state.nearby.prestadores?.length">
+                                {{ t('mapping.emptyProviders') }}
+                            </p>
+                            <ul class="mapping-list" v-else>
+                                <li v-for="p in state.nearby.prestadores" :key="p.id" class="mapping-list__item" @click="focusOnProvider(p)">
+                                    <div class="mapping-provider__title">
+                                        <strong>{{ p.nome }}</strong>
+                                        <span>{{ p.distanceKm.toFixed(1) }} km</span>
+                                    </div>
+                                    <div class="mapping-provider__meta">
+                                        {{ p.tipo.replace('_', ' ') }}
+                                    </div>
+                                    <div class="mapping-provider__contact">
                                         <span v-if="p.telefone">Tel: {{ p.telefone }}</span>
-                                        <a v-if="p.site" :href="p.site" target="_blank" rel="noopener" class="ml-2 text-blue-600 hover:underline">Visitar site</a>
+                                        <a v-if="p.site" :href="p.site" target="_blank" rel="noopener">
+                                            Visitar site
+                                        </a>
                                     </div>
                                 </li>
                             </ul>

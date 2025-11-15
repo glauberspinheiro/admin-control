@@ -9,8 +9,8 @@ import com.revitalize.admincontrol.repository.KanbanCardRepository;
 import com.revitalize.admincontrol.repository.KanbanColumnRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -87,16 +87,21 @@ public class KanbanService {
     }
 
     @Transactional
+    public Optional<KanbanCardModel> updateAndFetchCard(KanbanCardModel card) {
+        if (card.getId() == null) {
+            throw new IllegalArgumentException("O ID do card não pode ser nulo para atualização.");
+        }
+        KanbanCardModel saved = saveCard(card);
+        return findCardById(saved.getId());
+    }
+
+    @Transactional
     public void deleteCard(UUID id) {
         cardRepository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
     public KanbanSnapshotDto buildSnapshot(UUID boardId) {
-        return buildSnapshotInternal(boardId);
-    }
-
-    @Transactional
-    protected KanbanSnapshotDto buildSnapshotInternal(UUID boardId) {
         KanbanBoardModel board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new IllegalArgumentException("Quadro não encontrado"));
         List<KanbanColumnModel> columns = columnRepository.findByBoardIdOrderBySortOrderAsc(boardId);

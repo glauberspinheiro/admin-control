@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Revitalize</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" />
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control</title>
+    <!-- Adiciona o ícone na aba do navegador -->
+    <link rel="icon" type="image/png" href="/img/logo-revitalize.png">
+    <link rel="stylesheet" href="/assets/style.css">
+    <script>
+        // Redireciona para a rota correta se o hash estiver vazio
+        if (!window.location.hash) {
+            window.location.hash = '/';
+        }
+    </script>
 </head>
 <body>
-<div id="app"></div>
-<script type="module" src="/assets/app.js"></script>
+    <div id="app"></div>
+    <script type="module" src="/assets/app.js"></script>
 </body>
 </html>

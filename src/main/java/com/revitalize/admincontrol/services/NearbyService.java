@@ -21,16 +21,19 @@ public class NearbyService {
     private final AdmEmpresaGeoRepository empresaRepo;
     private final PrestadorRepository prestadorRepo;
     private final GeocodingService geocodingService;
+    private final PrestadorImportService prestadorImportService;
 
     public NearbyService(AdmEmpresaGeoRepository empresaRepo,
                          PrestadorRepository prestadorRepo,
-                         GeocodingService geocodingService) {
+                         GeocodingService geocodingService,
+                         PrestadorImportService prestadorImportService) {
         this.empresaRepo = empresaRepo;
         this.prestadorRepo = prestadorRepo;
         this.geocodingService = geocodingService;
+        this.prestadorImportService = prestadorImportService;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public NearbyDTO findNearest(UUID companyId, String tipo, Integer limit) {
         // 1) Carrega empresa
         AdmEmpresaModel c = empresaRepo.findById(companyId)
@@ -50,16 +53,20 @@ public class NearbyService {
             throw new IllegalStateException("Empresa sem lat/lng (geocodificação indisponível).");
         }
 
-        // 3) Limite máximo = 5
+        // 3) Limite máximo = 5 com raio de 10 km
+        final double radiusKm = 10.0;
         int lim = (limit == null || limit <= 0) ? 5 : Math.min(limit, 5);
 
-        // 4) Janela preliminar
-        double delta = 0.75;
+        // 4) Janela preliminar reduzida para diminuir carga na consulta
+        double delta = Math.max(radiusKm / 111.0, 0.1); // ~1 grau = 111 km
 
-        // 5) Busca nativa por proximidade (lista já ordenada por distância)
-        List<PrestadorModel> list = prestadorRepo.findNearest(c.getLat(), c.getLng(), tipo, delta, lim);
+        // 5) Sincroniza prestadores online antes de consultar o banco
+        prestadorImportService.syncProviders(c.getLat(), c.getLng(), tipo, (int) Math.round(radiusKm * 1000), lim);
 
-        // 6) Monta DTO
+        // 6) Busca nativa por proximidade (lista já ordenada por distância)
+        List<PrestadorModel> list = prestadorRepo.findNearest(c.getLat(), c.getLng(), tipo, delta, radiusKm, lim);
+
+        // 7) Monta DTO
         List<NearbyDTO.PrestadorMin> out = new ArrayList<>(list.size());
         for (PrestadorModel p : list) {
             double dist = haversine(c.getLat(), c.getLng(), p.getLat(), p.getLng());

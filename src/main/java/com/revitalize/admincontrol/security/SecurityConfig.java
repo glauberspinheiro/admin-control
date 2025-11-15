@@ -1,5 +1,6 @@
 package com.revitalize.admincontrol.security;
 
+import com.revitalize.admincontrol.config.CorsProperties;
 import com.revitalize.admincontrol.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,12 @@ import java.util.List;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
+    private final CorsProperties corsProperties;
+
+    public SecurityConfig(CorsProperties corsProperties) {
+        this.corsProperties = corsProperties;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
                                                    TokenAuthenticationFilter tokenAuthenticationFilter) throws Exception {
@@ -42,6 +49,7 @@ public class SecurityConfig {
             .authorizeRequests()
                 .antMatchers("/assets/**", "/", "/index.html", "/webhook/**").permitAll()
                 .antMatchers("/api/auth/login").permitAll()
+                .antMatchers("/actuator/health", "/actuator/health/**", "/actuator/info").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
             .and()
@@ -53,7 +61,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOriginPatterns(List.of("*"));
+        List<String> allowedOrigins = corsProperties.getAllowedOrigins();
+        if (allowedOrigins.stream().anyMatch(origin -> "*".equals(origin))) {
+            cfg.setAllowedOriginPatterns(List.of("*"));
+        } else {
+            cfg.setAllowedOrigins(allowedOrigins);
+        }
         cfg.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         cfg.setAllowedHeaders(List.of("Authorization","Content-Type","Accept","X-Requested-With","Origin"));
         cfg.setExposedHeaders(List.of("Location","Authorization","Content-Type"));
