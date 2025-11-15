@@ -5,12 +5,9 @@ import com.revitalize.admincontrol.dto.KanbanCardDto;
 import com.revitalize.admincontrol.dto.KanbanColumnDto;
 import com.revitalize.admincontrol.dto.KanbanMoveCardDto;
 import com.revitalize.admincontrol.dto.KanbanSnapshotDto;
-import com.revitalize.admincontrol.models.AdmEmpresaModel;
-import com.revitalize.admincontrol.models.AdmUsuarioModel;
 import com.revitalize.admincontrol.models.KanbanBoardModel;
 import com.revitalize.admincontrol.models.KanbanCardModel;
 import com.revitalize.admincontrol.models.KanbanColumnModel;
-import com.revitalize.admincontrol.services.AdmEmpresaService;
 import com.revitalize.admincontrol.services.AdmUsuarioService;
 import com.revitalize.admincontrol.services.KanbanService;
 import org.springframework.beans.BeanUtils;
@@ -39,14 +36,11 @@ public class KanbanController {
     private static final ZoneId SAO_PAULO = ZoneId.of("-03:00");
     private final KanbanService kanbanService;
     private final AdmUsuarioService admUsuarioService;
-    private final AdmEmpresaService admEmpresaService;
 
     public KanbanController(KanbanService kanbanService,
-                            AdmUsuarioService admUsuarioService,
-                            AdmEmpresaService admEmpresaService) {
+                            AdmUsuarioService admUsuarioService) {
         this.kanbanService = kanbanService;
         this.admUsuarioService = admUsuarioService;
-        this.admEmpresaService = admEmpresaService;
     }
 
     @GetMapping("/boards")
@@ -226,21 +220,6 @@ public class KanbanController {
         model.setDueDate(dto.getDueDate());
         model.setMetadata(dto.getMetadata());
         model.setSortOrder(dto.getSortOrder() == null ? 0 : dto.getSortOrder());
-        model.setResponsavel(resolveUsuario(dto.getResponsavelId()));
-        model.setEmpresa(resolveEmpresa(dto.getEmpresaId()));
     }
 
-    private AdmUsuarioModel resolveUsuario(UUID id) {
-        if (id == null) {
-            return null;
-        }
-        return admUsuarioService.findById(id).orElse(null);
-    }
-
-    private AdmEmpresaModel resolveEmpresa(UUID id) {
-        if (id == null) {
-            return null;
-        }
-        return admEmpresaService.findById(id).orElse(null);
-    }
 }

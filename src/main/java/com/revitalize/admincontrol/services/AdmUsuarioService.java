@@ -27,15 +27,17 @@ public class AdmUsuarioService {
         return admUsuarioRepository.save(admUsuarioModel);
     }
 
-    public List<AdmUsuarioModel>findAll(){
-
-        return (List<AdmUsuarioModel>)admUsuarioRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<AdmUsuarioModel> findAll(){
+        return (List<AdmUsuarioModel>) admUsuarioRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Optional<AdmUsuarioModel> findById(UUID id) {
         return admUsuarioRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     public Optional<AdmUsuarioModel> findByEmail(String email) {
         return admUsuarioRepository.findByEmail(email);
     }

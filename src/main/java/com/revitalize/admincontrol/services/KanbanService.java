@@ -87,15 +87,6 @@ public class KanbanService {
     }
 
     @Transactional
-    public Optional<KanbanCardModel> updateAndFetchCard(KanbanCardModel card) {
-        if (card.getId() == null) {
-            throw new IllegalArgumentException("O ID do card não pode ser nulo para atualização.");
-        }
-        KanbanCardModel saved = saveCard(card);
-        return findCardById(saved.getId());
-    }
-
-    @Transactional
     public void deleteCard(UUID id) {
         cardRepository.deleteById(id);
     }
