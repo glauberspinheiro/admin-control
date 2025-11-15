@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/companies")
 public class GeocodingController {
     private static final Logger log = LoggerFactory.getLogger(GeocodingController.class);

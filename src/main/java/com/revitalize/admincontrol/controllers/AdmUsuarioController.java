@@ -9,7 +9,6 @@ import com.revitalize.admincontrol.services.PasswordService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,14 +23,16 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/users")
 public class AdmUsuarioController {
 
@@ -46,14 +47,19 @@ public class AdmUsuarioController {
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
-    public ResponseEntity<List<AdmUsuarioModel>> getAll() {
-        return ResponseEntity.ok(admUsuarioService.findAll());
+    public ResponseEntity<List<AdmUsuarioResponse>> getAll() {
+        List<AdmUsuarioResponse> users = admUsuarioService.findAll()
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
-    public ResponseEntity<AdmUsuarioModel> getOne(@PathVariable("id") UUID id) {
+    public ResponseEntity<AdmUsuarioResponse> getOne(@PathVariable("id") UUID id) {
         return admUsuarioService.findById(id)
+                .map(this::toResponse)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -142,5 +148,103 @@ public class AdmUsuarioController {
             return current;
         }
         return EnumSet.copyOf(requested);
+    }
+
+    private AdmUsuarioResponse toResponse(AdmUsuarioModel model) {
+        AdmUsuarioResponse response = new AdmUsuarioResponse();
+        response.setId(model.getId());
+        response.setCpf(model.getCpf());
+        response.setNome(model.getNome());
+        response.setEmail(model.getEmail());
+        response.setRole(model.getRole());
+        response.setEnvironments(model.getAllowedEnvironments());
+        response.setActive(model.isActive());
+        response.setDtCadastro(model.getDt_cadastro());
+        response.setDtAlteracao(model.getDt_alteracao_cadastro());
+        return response;
+    }
+
+    public static class AdmUsuarioResponse {
+        private UUID id;
+        private String cpf;
+        private String nome;
+        private String email;
+        private UserRole role;
+        private Set<EnvironmentAccess> environments;
+        private boolean active;
+        private LocalDateTime dtCadastro;
+        private LocalDateTime dtAlteracao;
+
+        public UUID getId() {
+            return id;
+        }
+
+        public void setId(UUID id) {
+            this.id = id;
+        }
+
+        public String getCpf() {
+            return cpf;
+        }
+
+        public void setCpf(String cpf) {
+            this.cpf = cpf;
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public void setNome(String nome) {
+            this.nome = nome;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public UserRole getRole() {
+            return role;
+        }
+
+        public void setRole(UserRole role) {
+            this.role = role;
+        }
+
+        public Set<EnvironmentAccess> getEnvironments() {
+            return environments;
+        }
+
+        public void setEnvironments(Set<EnvironmentAccess> environments) {
+            this.environments = environments;
+        }
+
+        public boolean isActive() {
+            return active;
+        }
+
+        public void setActive(boolean active) {
+            this.active = active;
+        }
+
+        public LocalDateTime getDtCadastro() {
+            return dtCadastro;
+        }
+
+        public void setDtCadastro(LocalDateTime dtCadastro) {
+            this.dtCadastro = dtCadastro;
+        }
+
+        public LocalDateTime getDtAlteracao() {
+            return dtAlteracao;
+        }
+
+        public void setDtAlteracao(LocalDateTime dtAlteracao) {
+            this.dtAlteracao = dtAlteracao;
+        }
     }
 }

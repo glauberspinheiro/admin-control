@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/map/nearby")
 public class NearbyController {
     private static final Logger log = LoggerFactory.getLogger(NearbyController.class);

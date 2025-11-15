@@ -5,18 +5,14 @@ import com.revitalize.admincontrol.dto.KanbanCardDto;
 import com.revitalize.admincontrol.dto.KanbanColumnDto;
 import com.revitalize.admincontrol.dto.KanbanMoveCardDto;
 import com.revitalize.admincontrol.dto.KanbanSnapshotDto;
-import com.revitalize.admincontrol.models.AdmEmpresaModel;
-import com.revitalize.admincontrol.models.AdmUsuarioModel;
 import com.revitalize.admincontrol.models.KanbanBoardModel;
 import com.revitalize.admincontrol.models.KanbanCardModel;
 import com.revitalize.admincontrol.models.KanbanColumnModel;
-import com.revitalize.admincontrol.services.AdmEmpresaService;
 import com.revitalize.admincontrol.services.AdmUsuarioService;
 import com.revitalize.admincontrol.services.KanbanService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,27 +23,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/api/kanban")
 public class KanbanController {
 
     private static final ZoneId SAO_PAULO = ZoneId.of("-03:00");
     private final KanbanService kanbanService;
     private final AdmUsuarioService admUsuarioService;
-    private final AdmEmpresaService admEmpresaService;
 
     public KanbanController(KanbanService kanbanService,
-                            AdmUsuarioService admUsuarioService,
-                            AdmEmpresaService admEmpresaService) {
+                            AdmUsuarioService admUsuarioService) {
         this.kanbanService = kanbanService;
         this.admUsuarioService = admUsuarioService;
-        this.admEmpresaService = admEmpresaService;
     }
 
     @GetMapping("/boards")
@@ -147,10 +140,12 @@ public class KanbanController {
             return ResponseEntity.badRequest().body("BoardId não corresponde ao quadro da coluna.");
         }
         var card = new KanbanCardModel();
-        applyCard(dto, card, board, columnOpt.get());
+        KanbanColumnModel column = columnOpt.get();
+        applyCard(dto, card, board, column);
         card.setDt_cadastro(LocalDateTime.now(SAO_PAULO));
         card.setDt_alteracao_cadastro(LocalDateTime.now(SAO_PAULO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(kanbanService.saveCard(card));
+        KanbanCardModel saved = kanbanService.saveCard(card);
+        return ResponseEntity.created(URI.create(String.format("/api/kanban/cards/%s", saved.getId()))).build();
     }
 
     @PutMapping("/cards/{cardId}")
@@ -164,9 +159,11 @@ public class KanbanController {
                     if (columnOpt.isEmpty()) {
                         return ResponseEntity.badRequest().body("Coluna não encontrada.");
                     }
-                    applyCard(dto, existing, existing.getBoard(), columnOpt.get());
+                    KanbanColumnModel column = columnOpt.get();
+                    applyCard(dto, existing, existing.getBoard(), column);
                     existing.setDt_alteracao_cadastro(LocalDateTime.now(SAO_PAULO));
-                    return ResponseEntity.ok(kanbanService.saveCard(existing));
+                    kanbanService.saveCard(existing);
+                    return ResponseEntity.noContent().build();
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -198,7 +195,8 @@ public class KanbanController {
             card.setSortOrder(dto.getTargetIndex());
         }
         card.setDt_alteracao_cadastro(LocalDateTime.now(SAO_PAULO));
-        return ResponseEntity.ok(kanbanService.saveCard(card));
+        kanbanService.saveCard(card);
+        return ResponseEntity.noContent().build();
     }
 
     private void applyColumn(KanbanColumnDto dto, KanbanColumnModel model, KanbanBoardModel board) {
@@ -222,21 +220,6 @@ public class KanbanController {
         model.setDueDate(dto.getDueDate());
         model.setMetadata(dto.getMetadata());
         model.setSortOrder(dto.getSortOrder() == null ? 0 : dto.getSortOrder());
-        model.setResponsavel(resolveUsuario(dto.getResponsavelId()));
-        model.setEmpresa(resolveEmpresa(dto.getEmpresaId()));
     }
 
-    private AdmUsuarioModel resolveUsuario(UUID id) {
-        if (id == null) {
-            return null;
-        }
-        return admUsuarioService.findById(id).orElse(null);
-    }
-
-    private AdmEmpresaModel resolveEmpresa(UUID id) {
-        if (id == null) {
-            return null;
-        }
-        return admEmpresaService.findById(id).orElse(null);
-    }
 }

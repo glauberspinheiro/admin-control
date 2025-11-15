@@ -229,6 +229,7 @@ const translations = {
         'common.loading': 'Carregando...',
         'common.yes': 'Sim',
         'common.no': 'Não',
+        'common.refresh': 'Atualizar',
         'status.active': 'Ativo',
         'status.inactive': 'Inativo',
         'feedback.userSaved': 'Usuário salvo com sucesso.',
@@ -257,7 +258,144 @@ const translations = {
         'mapping.title': 'Empresas & Prestadores',
         'mapping.selectCompany': 'Selecione a empresa',
         'mapping.typeAll': 'Todos os tipos',
-        'mapping.findNearby': 'Buscar próximos'
+        'mapping.typeFilter': 'Tipo de prestador',
+        'mapping.findNearby': 'Buscar próximos',
+        'mapping.emptyProviders': 'Nenhum prestador encontrado.',
+        'mapping.controls': 'Controles de consulta',
+        'mapping.hint': 'Escolha uma empresa e busque fornecedores em um raio de 10 km.',
+        'nav.condicionantes': 'Condicionantes',
+        'condicionantes.summaryTitle': 'Visão geral das condicionantes',
+        'condicionantes.summaryDescription': 'Acompanhe a situação das obrigações cadastradas.',
+        'condicionantes.metric.total': 'Total cadastradas',
+        'condicionantes.metric.active': 'Ativas',
+        'condicionantes.metric.late': 'Atrasadas',
+        'condicionantes.tableTitle': 'Condicionantes registradas',
+        'condicionantes.tableEmpty': 'Nenhuma condicionante cadastrada.',
+        'condicionantes.tableHeader.titulo': 'Título',
+        'condicionantes.tableHeader.empresa': 'Empresa',
+        'condicionantes.tableHeader.status': 'Status',
+        'condicionantes.tableHeader.prioridade': 'Prioridade',
+        'condicionantes.tableHeader.vencimento': 'Vencimento',
+        'condicionantes.formTitle': 'Nova condicionante',
+        'condicionantes.fieldEmpresa': 'Empresa',
+        'condicionantes.fieldLicenca': 'Licença / Empreendimento',
+        'condicionantes.fieldTitulo': 'Título',
+        'condicionantes.fieldDescricao': 'Descrição',
+        'condicionantes.fieldStatus': 'Status',
+        'condicionantes.fieldPrioridade': 'Prioridade',
+        'condicionantes.fieldVencimento': 'Vencimento',
+        'condicionantes.fieldResponsavel': 'E-mail do responsável',
+        'condicionantes.fieldTags': 'Tags (opcional)',
+        'condicionantes.save': 'Salvar condicionante',
+        'condicionantes.status.PLANEJADA': 'Planejada',
+        'condicionantes.status.EM_ANDAMENTO': 'Em andamento',
+        'condicionantes.status.ATRASADA': 'Atrasada',
+        'condicionantes.status.CONCLUIDA': 'Concluída',
+        'condicionantes.priority.BAIXA': 'Baixa',
+        'condicionantes.priority.MEDIA': 'Média',
+        'condicionantes.priority.ALTA': 'Alta',
+        'condicionantes.priority.CRITICA': 'Crítica',
+        'condicionantes.tab.overview': 'Visão geral',
+        'condicionantes.tab.form': 'Cadastro',
+        'condicionantes.tab.byCompany': 'Por empresa',
+        'condicionantes.filterLicenca': 'Licença / Empreendimento',
+        'condicionantes.filterClear': 'Limpar filtro',
+        'condicionantes.byCompanyTitle': 'Condicionantes por empresa',
+        'condicionantes.byCompanySubtitle': 'Selecione a empresa e o empreendimento para navegar pelas obrigações.',
+        'condicionantes.byCompany.empty': 'Nenhuma condicionante para os filtros selecionados.',
+        'condicionantes.validation.company': 'Selecione uma empresa para prosseguir.',
+        'condicionantes.validation.status': 'Selecione um status válido.',
+        'condicionantes.validation.priority': 'Selecione uma prioridade válida.',
+        'condicionantes.validation.title': 'Informe o título da condicionante.',
+        'nav.licencas': 'Licenças',
+        'licencas.title': 'Visão geral de licenças',
+        'licencas.filters.responsavel': 'Responsável',
+        'licencas.filters.empresa': 'Empresa',
+        'licencas.filters.empreendimento': 'Empreendimento',
+        'licencas.filters.tipo': 'Tipo',
+        'licencas.filters.situacao': 'Situação',
+        'licencas.filters.situacao.expired': 'Prazo expirado',
+        'licencas.filters.situacao.near': 'Prazo próximo',
+        'licencas.filters.situacao.far': 'Prazo distante',
+        'licencas.filters.situacao.none': 'Sem prazo',
+        'licencas.filters.search': 'Buscar…',
+        'licencas.filters.clear': 'Limpar filtros',
+        'licencas.filters.periodoEntrega': 'Período de entrega',
+        'licencas.filters.periodoInterna': 'Período data interna',
+        'licencas.actions.tipos': 'Tipos',
+        'licencas.actions.atividades': 'Atividades',
+        'licencas.actions.novo': '+ Novo',
+        'licencas.actions.voltarLista': 'Voltar para lista',
+        'licencas.table.numero': 'Número',
+        'licencas.table.empresa': 'Empresa',
+        'licencas.table.empreendimento': 'Empreendimento',
+        'licencas.table.orgao': 'Órgão',
+        'licencas.table.tipo': 'Tipo',
+        'licencas.table.atividade': 'Atividade',
+        'licencas.table.responsavel': 'Responsável',
+        'licencas.table.validade': 'Validade',
+        'licencas.table.protocolo': 'Protocolar',
+        'licencas.table.prazos': 'Prazos',
+        'licencas.table.acoes': 'Ações',
+        'licencas.table.empty': 'Nenhuma licença encontrada.',
+        'licencas.pagination.perPage': 'Itens por página',
+        'licencas.pagination.prev': 'Anterior',
+        'licencas.pagination.next': 'Próxima',
+        'licencas.cond.title': 'Condicionantes',
+        'licencas.cond.filters.tipoCond': 'Tipo de condicionante',
+        'licencas.cond.filters.situacao.expired': 'Prazo expirado',
+        'licencas.cond.filters.situacao.near': 'Prazo próximo',
+        'licencas.cond.table.condicionante': 'Condicionante',
+        'licencas.cond.table.licenca': 'Licença',
+        'licencas.cond.table.tipoLicenca': 'Tipo da licença',
+        'licencas.cond.table.proximaEntrega': 'Próxima entrega',
+        'licencas.cond.table.proximaInterna': 'Próxima data interna',
+        'licencas.cond.table.empty': 'Nenhuma condicionante encontrada.',
+        'licencas.tipos.title': 'Tipos de licença',
+        'licencas.atividades.title': 'Atividades licenciáveis',
+        'licencas.modal.title': 'Como deseja iniciar?',
+        'licencas.modal.blank': 'Licença em branco',
+        'licencas.modal.fromPdf': 'A partir do PDF',
+        'licencas.modal.fromPdfHint': 'Importe dados automaticamente lendo o arquivo.',
+        'licencas.form.title': 'Cadastro de licença',
+        'licencas.form.tabs.cadastro': 'Cadastro',
+        'licencas.form.tabs.condicionantes': 'Condicionantes da licença',
+        'licencas.form.field.empresa': 'Empresa',
+        'licencas.form.field.empreendimento': 'Empreendimento',
+        'licencas.form.field.tipo': 'Tipo',
+        'licencas.form.field.observacoesTipo': 'Observações do tipo',
+        'licencas.form.field.numero': 'Número',
+        'licencas.form.field.numeroProcesso': 'Número do processo',
+        'licencas.form.field.orgao': 'Órgão',
+        'licencas.form.field.atividades': 'Atividades',
+        'licencas.form.field.tipoProcesso': 'Tipo de processo',
+        'licencas.form.field.licencaAnterior': 'Licença anterior',
+        'licencas.form.field.protocolo': 'Protocolos',
+        'licencas.form.field.dataEmissao': 'Data de emissão',
+        'licencas.form.field.dataValidade': 'Validade',
+        'licencas.form.field.responsavel': 'Responsável',
+        'licencas.form.field.diasProtocolo': 'Protocolo (dias antes)',
+        'licencas.form.field.dataInicioAlerta': 'Data início alerta',
+        'licencas.form.field.descricao': 'Descrição',
+        'licencas.form.field.cond.nome': 'Nome',
+        'licencas.form.field.cond.responsavel': 'Responsável',
+        'licencas.form.field.cond.tipoCond': 'Tipo de condicionante',
+        'licencas.form.field.cond.padronizada': 'Condicionante padrão',
+        'licencas.form.field.cond.descricao': 'Descrição',
+        'licencas.form.field.cond.dataEntrega': 'Data de entrega',
+        'licencas.form.field.cond.dataInterna': 'Data interna',
+        'licencas.form.field.cond.periodicidade': 'Periodicidade',
+        'licencas.form.field.cond.upload': 'Documentos',
+        'licencas.form.button.addCond': 'Nova condicionante',
+        'licencas.form.button.removeCond': 'Remover condicionante',
+        'licencas.tipos.form.name': 'Nome do tipo',
+        'licencas.tipos.form.code': 'Código',
+        'licencas.atividades.form.name': 'Nome da atividade',
+        'licencas.atividades.form.desc': 'Descrição da atividade',
+        'licencas.feedback.tipoSaved': 'Tipo de licença salvo.',
+        'licencas.feedback.atividadeSaved': 'Atividade salva.',
+        'licencas.feedback.tipoDeleted': 'Tipo de licença removido.',
+        'licencas.feedback.atividadeDeleted': 'Atividade removida.'
     },
     'en-US': {
         'nav.dashboard': 'Overview',
@@ -473,6 +611,7 @@ const translations = {
         'common.loading': 'Loading...',
         'common.yes': 'Yes',
         'common.no': 'No',
+        'common.refresh': 'Refresh',
         'status.active': 'Active',
         'status.inactive': 'Inactive',
         'feedback.userSaved': 'User saved successfully.',
@@ -501,7 +640,144 @@ const translations = {
         'mapping.title': 'Companies And Providers',
         'mapping.selectCompany': 'Select a company',
         'mapping.typeAll': 'All Types',
-        'mapping.findNearby': 'Find Nearby'
+        'mapping.typeFilter': 'Provider type',
+        'mapping.findNearby': 'Find Nearby',
+        'mapping.emptyProviders': 'No providers within the selected radius.',
+        'mapping.controls': 'Controls',
+        'mapping.hint': 'Select a company and fetch providers within a 10 km radius.',
+        'nav.condicionantes': 'Requirements',
+        'condicionantes.summaryTitle': 'Condicionantes overview',
+        'condicionantes.summaryDescription': 'Monitor deadlines and risk level.',
+        'condicionantes.metric.total': 'Total',
+        'condicionantes.metric.active': 'In progress',
+        'condicionantes.metric.late': 'Late',
+        'condicionantes.tableTitle': 'Registered condicionantes',
+        'condicionantes.tableEmpty': 'No condicionantes registered yet.',
+        'condicionantes.tableHeader.titulo': 'Title',
+        'condicionantes.tableHeader.empresa': 'Company',
+        'condicionantes.tableHeader.status': 'Status',
+        'condicionantes.tableHeader.prioridade': 'Priority',
+        'condicionantes.tableHeader.vencimento': 'Due date',
+        'condicionantes.formTitle': 'Create condicionante',
+        'condicionantes.fieldEmpresa': 'Company',
+        'condicionantes.fieldLicenca': 'License / Site',
+        'condicionantes.fieldTitulo': 'Title',
+        'condicionantes.fieldDescricao': 'Description',
+        'condicionantes.fieldStatus': 'Status',
+        'condicionantes.fieldPrioridade': 'Priority',
+        'condicionantes.fieldVencimento': 'Due date',
+        'condicionantes.fieldResponsavel': 'Owner email',
+        'condicionantes.fieldTags': 'Tags (optional)',
+        'condicionantes.save': 'Save condicionante',
+        'condicionantes.status.PLANEJADA': 'Planned',
+        'condicionantes.status.EM_ANDAMENTO': 'In progress',
+        'condicionantes.status.ATRASADA': 'Late',
+        'condicionantes.status.CONCLUIDA': 'Completed',
+        'condicionantes.priority.BAIXA': 'Low',
+        'condicionantes.priority.MEDIA': 'Medium',
+        'condicionantes.priority.ALTA': 'High',
+        'condicionantes.priority.CRITICA': 'Critical',
+        'condicionantes.tab.overview': 'Overview',
+        'condicionantes.tab.form': 'Form',
+        'condicionantes.tab.byCompany': 'By company',
+        'condicionantes.filterLicenca': 'License / Site',
+        'condicionantes.filterClear': 'Clear filters',
+        'condicionantes.byCompanyTitle': 'Condicionantes by company',
+        'condicionantes.byCompanySubtitle': 'Pick a company and site to inspect open requirements.',
+        'condicionantes.byCompany.empty': 'No condicionantes match the selected filters.',
+        'condicionantes.validation.company': 'Select a company before saving.',
+        'condicionantes.validation.status': 'Pick a valid status.',
+        'condicionantes.validation.priority': 'Pick a valid priority.',
+        'condicionantes.validation.title': 'Enter the condicionante title.',
+        'nav.licencas': 'Licenses',
+        'licencas.title': 'License overview',
+        'licencas.filters.responsavel': 'Owner',
+        'licencas.filters.empresa': 'Company',
+        'licencas.filters.empreendimento': 'Site',
+        'licencas.filters.tipo': 'Type',
+        'licencas.filters.situacao': 'Status',
+        'licencas.filters.situacao.expired': 'Expired',
+        'licencas.filters.situacao.near': 'Due soon',
+        'licencas.filters.situacao.far': 'Far due date',
+        'licencas.filters.situacao.none': 'No due date',
+        'licencas.filters.search': 'Search…',
+        'licencas.filters.clear': 'Clear filters',
+        'licencas.filters.periodoEntrega': 'Delivery window',
+        'licencas.filters.periodoInterna': 'Internal window',
+        'licencas.actions.tipos': 'Types',
+        'licencas.actions.atividades': 'Activities',
+        'licencas.actions.novo': '+ New',
+        'licencas.actions.voltarLista': 'Back to list',
+        'licencas.table.numero': 'Number',
+        'licencas.table.empresa': 'Company',
+        'licencas.table.empreendimento': 'Site',
+        'licencas.table.orgao': 'Agency',
+        'licencas.table.tipo': 'Type',
+        'licencas.table.atividade': 'Activity',
+        'licencas.table.responsavel': 'Owner',
+        'licencas.table.validade': 'Valid until',
+        'licencas.table.protocolo': 'Protocol',
+        'licencas.table.prazos': 'Deadlines',
+        'licencas.table.acoes': 'Actions',
+        'licencas.table.empty': 'No licenses found.',
+        'licencas.pagination.perPage': 'Items per page',
+        'licencas.pagination.prev': 'Previous',
+        'licencas.pagination.next': 'Next',
+        'licencas.cond.title': 'License condicionantes',
+        'licencas.cond.filters.tipoCond': 'Condicionante type',
+        'licencas.cond.filters.situacao.expired': 'Expired',
+        'licencas.cond.filters.situacao.near': 'Due soon',
+        'licencas.cond.table.condicionante': 'Condicionante',
+        'licencas.cond.table.licenca': 'License',
+        'licencas.cond.table.tipoLicenca': 'License type',
+        'licencas.cond.table.proximaEntrega': 'Next delivery',
+        'licencas.cond.table.proximaInterna': 'Next internal date',
+        'licencas.cond.table.empty': 'No condicionantes match your filters.',
+        'licencas.tipos.title': 'License types',
+        'licencas.atividades.title': 'Licensed activities',
+        'licencas.modal.title': 'How do you want to start?',
+        'licencas.modal.blank': 'Blank license',
+        'licencas.modal.fromPdf': 'From PDF',
+        'licencas.modal.fromPdfHint': 'Extract data automatically from a PDF file.',
+        'licencas.form.title': 'License form',
+        'licencas.form.tabs.cadastro': 'Form',
+        'licencas.form.tabs.condicionantes': 'License condicionantes',
+        'licencas.form.field.empresa': 'Company',
+        'licencas.form.field.empreendimento': 'Site',
+        'licencas.form.field.tipo': 'Type',
+        'licencas.form.field.observacoesTipo': 'Type notes',
+        'licencas.form.field.numero': 'Number',
+        'licencas.form.field.numeroProcesso': 'Process number',
+        'licencas.form.field.orgao': 'Agency',
+        'licencas.form.field.atividades': 'Activities',
+        'licencas.form.field.tipoProcesso': 'Process type',
+        'licencas.form.field.licencaAnterior': 'Previous license',
+        'licencas.form.field.protocolo': 'Protocols',
+        'licencas.form.field.dataEmissao': 'Issued at',
+        'licencas.form.field.dataValidade': 'Valid until',
+        'licencas.form.field.responsavel': 'Owner',
+        'licencas.form.field.diasProtocolo': 'Protocol (days before)',
+        'licencas.form.field.dataInicioAlerta': 'Alert start date',
+        'licencas.form.field.descricao': 'Description',
+        'licencas.form.field.cond.nome': 'Name',
+        'licencas.form.field.cond.responsavel': 'Owner',
+        'licencas.form.field.cond.tipoCond': 'Condicionante type',
+        'licencas.form.field.cond.padronizada': 'Template',
+        'licencas.form.field.cond.descricao': 'Description',
+        'licencas.form.field.cond.dataEntrega': 'Delivery date',
+        'licencas.form.field.cond.dataInterna': 'Internal date',
+        'licencas.form.field.cond.periodicidade': 'Frequency',
+        'licencas.form.field.cond.upload': 'Documents',
+        'licencas.form.button.addCond': 'New condicionante',
+        'licencas.form.button.removeCond': 'Remove condicionante',
+        'licencas.tipos.form.name': 'License type name',
+        'licencas.tipos.form.code': 'Code',
+        'licencas.atividades.form.name': 'Activity name',
+        'licencas.atividades.form.desc': 'Activity description',
+        'licencas.feedback.tipoSaved': 'License type saved.',
+        'licencas.feedback.atividadeSaved': 'Activity saved.',
+        'licencas.feedback.tipoDeleted': 'License type removed.',
+        'licencas.feedback.atividadeDeleted': 'Activity removed.'
     }
 };
 
@@ -516,6 +792,7 @@ const sections = [
     { id: 'emailTemplates', labelKey: 'nav.emailTemplates' },
     { id: 'emailSingle', labelKey: 'nav.emailSingle' },
     { id: 'emailBulk', labelKey: 'nav.emailBulk' },
+    { id: 'licencas', labelKey: 'nav.licencas' },
     { id: 'settings', labelKey: 'nav.settings' }
 ];
 
@@ -524,6 +801,19 @@ const companyTabs = [
     { id: 'address', labelKey: 'companies.tabs.address' },
     { id: 'activities', labelKey: 'companies.tabs.activities' },
     { id: 'partners', labelKey: 'companies.tabs.partners' }
+];
+
+const condicionanteSubViews = [
+    { id: 'overview', labelKey: 'condicionantes.tab.overview' },
+    { id: 'form', labelKey: 'condicionantes.tab.form' },
+    { id: 'byCompany', labelKey: 'condicionantes.tab.byCompany' }
+];
+
+const licencaTabs = [
+    { id: 'lista', labelKey: 'licencas.title' },
+    { id: 'condicionantes', labelKey: 'licencas.cond.title' },
+    { id: 'tipos', labelKey: 'licencas.tipos.title' },
+    { id: 'atividades', labelKey: 'licencas.atividades.title' }
 ];
 
 const quickMetricVisuals = [
@@ -546,8 +836,54 @@ const endpoints = {
     kanbanBoards: '/api/kanban/boards',
     kanbanColumns: '/api/kanban/columns',
     kanbanCards: '/api/kanban/cards',
-    mapNearby: '/api/map/nearby'
+    mapNearby: '/api/map/nearby',
+    condicionantes: '/api/condicionantes',
+    condicionanteDashboard: '/api/condicionantes/dashboard',
+    licencas: '/api/licencas',
+    licencaCatalogos: '/api/licencas/catalogos',
+    licencaTipos: '/api/licencas/tipos',
+    licencaAtividades: '/api/licencas/atividades'
 };
+
+const condicionanteStatuses = [
+    { value: 'PLANEJADA', labelKey: 'condicionantes.status.PLANEJADA' },
+    { value: 'EM_ANDAMENTO', labelKey: 'condicionantes.status.EM_ANDAMENTO' },
+    { value: 'ATRASADA', labelKey: 'condicionantes.status.ATRASADA' },
+    { value: 'CONCLUIDA', labelKey: 'condicionantes.status.CONCLUIDA' }
+];
+
+const condicionantePrioridades = [
+    { value: 'BAIXA', labelKey: 'condicionantes.priority.BAIXA' },
+    { value: 'MEDIA', labelKey: 'condicionantes.priority.MEDIA' },
+    { value: 'ALTA', labelKey: 'condicionantes.priority.ALTA' },
+    { value: 'CRITICA', labelKey: 'condicionantes.priority.CRITICA' }
+];
+
+const condicionanteStatusSet = new Set(condicionanteStatuses.map((item) => item.value));
+const condicionantePrioridadeSet = new Set(condicionantePrioridades.map((item) => item.value));
+
+const licencaSituacaoChips = [
+    { id: 'expired', value: 'PRAZO_EXPIRADO', labelKey: 'licencas.filters.situacao.expired', tone: 'danger' },
+    { id: 'near', value: 'PRAZO_PROXIMO', labelKey: 'licencas.filters.situacao.near', tone: 'warning' },
+    { id: 'far', value: 'PRAZO_DISTANTE', labelKey: 'licencas.filters.situacao.far', tone: 'info' },
+    { id: 'none', value: 'SEM_PRAZO', labelKey: 'licencas.filters.situacao.none', tone: 'muted' }
+];
+
+const condicionanteSituacaoChips = [
+    { id: 'expired', value: 'PRAZO_EXPIRADO', labelKey: 'licencas.cond.filters.situacao.expired' },
+    { id: 'near', value: 'PRAZO_PROXIMO', labelKey: 'licencas.cond.filters.situacao.near' }
+];
+
+const licencaPeriodicidades = [
+    'MENSAL',
+    'BIMESTRAL',
+    'TRIMESTRAL',
+    'QUADRIMESTRAL',
+    'SEMESTRAL',
+    'ANUAL',
+    'EMISSAO_LICENCA',
+    'RECORRENTE'
+];
 
 const SESSION_KEY = 'revitalizeSession';
 const SESSION_DURATION_MS = 30 * 60 * 1000;
@@ -665,6 +1001,17 @@ const formatCnpj = (value = '') => {
 };
 
 const stripHtml = (html = '') => html.replace(/<[^>]*>/g, '').trim();
+
+const formatCompanyAddress = (company = {}) => {
+    const parts = [
+        company.logradouro,
+        company.numero,
+        company.bairro,
+        company.municipio,
+        company.uf
+    ].filter(Boolean);
+    return parts.join(', ');
+};
 
 const companyFormTemplate = `
     <div class="company-tabs" role="tablist">
@@ -802,6 +1149,163 @@ const formatFileSize = (bytes = 0) => {
     return `${value.toFixed(exponent === 0 ? 0 : 1)} ${units[exponent]}`;
 };
 
+const formatShortDate = (value) => {
+    if (!value) return '-';
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) {
+        return '-';
+    }
+    return parsed.toLocaleDateString();
+};
+
+const emptyCondicionanteForm = () => ({
+    empresaId: '',
+    licencaId: '',
+    titulo: '',
+    descricao: '',
+    status: 'PLANEJADA',
+    prioridade: 'MEDIA',
+    vencimento: '',
+    responsavelEmail: '',
+    tags: ''
+});
+
+const defaultLicencaFilters = () => ({
+    responsaveis: [],
+    empresaId: '',
+    empreendimentoId: '',
+    tipos: [],
+    situacoes: [],
+    search: '',
+    periodoEntregaInicio: '',
+    periodoEntregaFim: '',
+    periodoInternaInicio: '',
+    periodoInternaFim: ''
+});
+
+const defaultCondicionanteAdvancedFilters = () => ({
+    responsavelId: '',
+    tipoLicencaId: '',
+    empresaId: '',
+    empreendimentoId: '',
+    tipoCondicionanteId: '',
+    situacoes: [],
+    periodoEntregaInicio: '',
+    periodoEntregaFim: '',
+    periodoInternaInicio: '',
+    periodoInternaFim: ''
+});
+
+const defaultPagination = () => ({
+    page: 1,
+    perPage: 10
+});
+
+const emptyLicencaCondicionante = () => ({
+    id: null,
+    tempId: createRandomId(),
+    nome: '',
+    responsavelId: '',
+    tipoCondicionanteId: '',
+    condicionantePadraoId: '',
+    descricao: '',
+    dataEntrega: '',
+    dataInterna: '',
+    periodicidade: '',
+    documentos: [],
+    alertaDiasEntrega: 0,
+    alertaDiasInterna: 0
+});
+
+const emptyLicencaForm = () => ({
+    id: null,
+    empresaId: '',
+    empreendimentoId: '',
+    tipoLicencaId: '',
+    observacoesTipo: '',
+    numero: '',
+    numeroProcesso: '',
+    orgaoAmbientalId: '',
+    atividadesIds: [],
+    tipoProcesso: '',
+    licencaAnteriorId: '',
+    protocolos: [],
+    dataEmissao: '',
+    dataValidade: '',
+    responsavelId: '',
+    diasProtocolo: 0,
+    dataInicioAlerta: '',
+    descricao: '',
+    condicionantes: [emptyLicencaCondicionante()]
+});
+
+const mockLicencas = () => ([
+    {
+        id: createRandomId(),
+        numero: 'LO 45/2024',
+        empresaNome: 'Revitalize Ambiental',
+        empreendimentoNome: 'Unidade Norte',
+        orgaoEmissor: 'SEMA',
+        tipo: 'Licença de Operação',
+        atividades: ['Gerenciamento de resíduos'],
+        responsavelNome: 'Amanda Ribeiro',
+        dataValidade: '2025-08-10',
+        protocoloSugestao: '120 dias',
+        prazoTag: 'PRAZO_PROXIMO'
+    },
+    {
+        id: createRandomId(),
+        numero: 'LP 08/2023',
+        empresaNome: 'Eco Indústria',
+        empreendimentoNome: 'Planta Leste',
+        orgaoEmissor: 'IBAMA',
+        tipo: 'Licença Prévia',
+        atividades: ['Extração mineral'],
+        responsavelNome: 'Henrique Lopes',
+        dataValidade: '2026-01-01',
+        protocoloSugestao: '180 dias',
+        prazoTag: 'PRAZO_DISTANTE'
+    },
+    {
+        id: createRandomId(),
+        numero: 'LI 12/2020',
+        empresaNome: 'Bio Energia',
+        empreendimentoNome: 'Parque Solar Azul',
+        orgaoEmissor: 'Secretaria Municipal',
+        tipo: 'Licença de Instalação',
+        atividades: ['Geração solar'],
+        responsavelNome: 'Laura Martins',
+        dataValidade: '2023-03-01',
+        protocoloSugestao: '90 dias',
+        prazoTag: 'PRAZO_EXPIRADO'
+    }
+]);
+
+const mockCatalog = () => ({
+    responsaveis: [
+        { id: 'resp-1', nome: 'Amanda Ribeiro' },
+        { id: 'resp-2', nome: 'Henrique Lopes' },
+        { id: 'resp-3', nome: 'Laura Martins' }
+    ],
+    empresas: [
+        { id: 'emp-1', nome: 'Revitalize Ambiental' },
+        { id: 'emp-2', nome: 'Eco Indústria' }
+    ],
+    empreendimentos: [
+        { id: 'empd-1', nome: 'Unidade Norte', empresaId: 'emp-1' },
+        { id: 'empd-2', nome: 'Planta Leste', empresaId: 'emp-2' }
+    ],
+    tipos: [
+        { id: 'tipo-1', codigo: 'LO', nome: 'Licença de Operação' },
+        { id: 'tipo-2', codigo: 'LP', nome: 'Licença Prévia' },
+        { id: 'tipo-3', codigo: 'LI', nome: 'Licença de Instalação' }
+    ],
+    atividades: [
+        { id: 'atv-1', nome: 'Gerenciamento de resíduos' },
+        { id: 'atv-2', nome: 'Extração mineral' }
+    ]
+});
+
 const resolveRoute = () => {
     const hash = window.location.hash.replace(/^#/, '');
     if (hash === '/login') return 'login';
@@ -813,6 +1317,9 @@ const App = {
     setup() {
         const currentRoute = ref(resolveRoute());
         const activeSection = ref('dashboard');
+        const licencaActiveTab = ref('lista');
+        const licencaFormTab = ref('cadastro');
+        const condicionanteSubView = ref('overview');
         const state = reactive({
             notifications: [],
             loading: false,
@@ -848,28 +1355,46 @@ const App = {
             productForm: emptyProduct(),
             templates: [],
             templateForm: { id: null, nome: '', assunto: '', conteudoHtml: '', usarAssinatura: true },
-            templateEditor: null,
-            templateEditorReady: false,
-            emailSingleEditor: null,
-            emailSingleEditorReady: false,
             serverConfig: defaultServerConfig(),
             emailSingleForm: emptyEmailSingleForm(),
             emailBulkForm: emptyEmailBulkForm(),
             bulkRecipientsPreview: [],
             bulkFileRows: [],
             bulkAvailableVariables: [],
-            signatureEditor: null,
-            signatureEditorReady: false,
             emailHistory: [],
             emailHistoryPage: 1,
             userMenuOpen: false,
             mapRef: null,
             mapLayers: new Map(),
-            companies: [],
             selectedCompanyId: '',
             providerType: '',
             iconCache: new Map(),
-            nearby: null
+            nearby: null,
+            condicionantes: [],
+            condicionanteDashboard: null,
+            condicionanteLoading: false,
+            condicionanteForm: emptyCondicionanteForm(),
+            condicionanteLicencas: [],
+            condicionanteFiltro: {
+                empresaId: '',
+                licencaId: ''
+            },
+            condicionanteFiltroLicencas: [],
+            licencas: [],
+            licencasLoading: false,
+            licencaFilters: defaultLicencaFilters(),
+            condicionanteAdvancedFilters: defaultCondicionanteAdvancedFilters(),
+            licencasPagination: defaultPagination(),
+            licencaForm: emptyLicencaForm(),
+            licencaModalOpen: false,
+            licencaFormSaving: false,
+            licencaResponsaveis: [],
+            licencaTipos: [],
+            licencaAtividades: [],
+            licencaEmpreendimentos: [],
+            licencaCatalogLoading: false,
+            licencaTipoForm: { id: null, nome: '', codigo: '' },
+            licencaAtividadeForm: { id: null, nome: '', descricao: '' }
         });
 
         const latestCompanies = computed(() => {
@@ -884,6 +1409,13 @@ const App = {
             return [...state.companies]
                 .sort((a, b) => resolveTime(b) - resolveTime(a))
                 .slice(0, 10);
+        });
+
+        const selectedCompany = computed(() => {
+            if (!state.selectedCompanyId) {
+                return null;
+            }
+            return state.companies.find((company) => company.id === state.selectedCompanyId) || null;
         });
 
         const activeKanbanBoard = computed(() => state.kanbanBoards.find((board) => board.id === state.kanbanActiveBoardId) || null);
@@ -935,109 +1467,6 @@ const App = {
         };
 
         let sessionIntervalId = null;
-        let quillConstructor = null;
-        let templateEditorChangeHandler = null;
-        let emailSingleEditorChangeHandler = null;
-        let signatureEditorChangeHandler = null;
-
-        const loadQuill = async () => {
-            if (!quillConstructor) {
-                const module = await import('https://cdn.jsdelivr.net/npm/quill@1.3.7/+esm');
-                quillConstructor = module.default;
-            }
-            return quillConstructor;
-        };
-
-        const forceEditorDirection = (quill) => {
-            if (!quill) return;
-            const root = quill.root;
-            root.setAttribute('dir', 'ltr');
-            root.style.direction = 'ltr';
-            root.style.unicodeBidi = 'plaintext';
-            root.style.textAlign = 'left';
-        };
-
-        const createQuill = async (selector, placeholder = '') => {
-            const Quill = await loadQuill();
-            const quill = new Quill(selector, {
-                theme: 'snow',
-                placeholder,
-                modules: {
-                    toolbar: quillToolbarOptions
-                },
-                formats: quillFormats
-            });
-            addImageUploadHandler(quill);
-            forceEditorDirection(quill);
-            return quill;
-        };
-
-        const addImageUploadHandler = (quill) => {
-            const toolbar = quill.getModule('toolbar');
-            if (!toolbar) return;
-            toolbar.addHandler('image', () => {
-                const input = document.createElement('input');
-                input.setAttribute('type', 'file');
-                input.setAttribute('accept', 'image/*');
-                input.addEventListener('change', async () => {
-                    const file = input.files?.[0];
-                    if (!file) return;
-                    try {
-                        const reader = new FileReader();
-                        reader.onload = () => {
-                            const base64 = typeof reader.result === 'string' ? reader.result : '';
-                            if (!base64) return;
-                            const range = quill.getSelection(true) || { index: quill.getLength(), length: 0 };
-                            quill.insertEmbed(range.index, 'image', base64, 'user');
-                            quill.setSelection(range.index + 1);
-                        };
-                        reader.onerror = () => {
-                            pushNotification('error', 'Não foi possível carregar a imagem.');
-                        };
-                        reader.readAsDataURL(file);
-                    } catch (error) {
-                        pushNotification('error', 'Não foi possível carregar a imagem.', { details: error });
-                    } finally {
-                        input.value = '';
-                    }
-                }, { once: true });
-                input.click();
-            });
-        };
-
-        const setEditorContent = (editor, html) => {
-            if (!editor) return;
-            const safeHtml = html || '';
-            editor.clipboard.dangerouslyPasteHTML(safeHtml, 'silent');
-            forceEditorDirection(editor);
-        };
-
-        const destroyTemplateEditor = () => {
-            if (state.templateEditor && templateEditorChangeHandler) {
-                state.templateEditor.off('text-change', templateEditorChangeHandler);
-            }
-            state.templateEditor = null;
-            state.templateEditorReady = false;
-            templateEditorChangeHandler = null;
-        };
-
-        const destroyEmailSingleEditor = () => {
-            if (state.emailSingleEditor && emailSingleEditorChangeHandler) {
-                state.emailSingleEditor.off('text-change', emailSingleEditorChangeHandler);
-            }
-            state.emailSingleEditor = null;
-            state.emailSingleEditorReady = false;
-            emailSingleEditorChangeHandler = null;
-        };
-
-        const destroySignatureEditor = () => {
-            if (state.signatureEditor && signatureEditorChangeHandler) {
-                state.signatureEditor.off('text-change', signatureEditorChangeHandler);
-            }
-            state.signatureEditor = null;
-            state.signatureEditorReady = false;
-            signatureEditorChangeHandler = null;
-        };
 
         const readSessionPayload = () => {
             if (typeof window === 'undefined' || !window.localStorage) {
@@ -1093,15 +1522,6 @@ const App = {
             state.emailSingleForm.attachments = [];
             Object.assign(state.emailBulkForm, emptyEmailBulkForm());
             Object.assign(state.templateForm, { id: null, nome: '', assunto: '', conteudoHtml: '', usarAssinatura: true });
-            if (state.templateEditor) {
-                setEditorContent(state.templateEditor, '');
-            }
-            if (state.emailSingleEditor) {
-                setEditorContent(state.emailSingleEditor, '');
-            }
-            destroyTemplateEditor();
-            destroyEmailSingleEditor();
-            destroySignatureEditor();
             activeSection.value = 'dashboard';
             if (notify) {
                 pushNotification('warning', translate('session.expired'));
@@ -1323,17 +1743,11 @@ const App = {
                     data.signatureHtml = data.signatureHtml || '';
                 }
                 Object.assign(state.serverConfig, data);
-                if (state.signatureEditor) {
-                    setEditorContent(state.signatureEditor, state.serverConfig.signatureHtml);
-                }
             } else {
                 Object.assign(state.serverConfig, {
                     ...defaultServerConfig(),
                     usuarioId: state.loggedUser.id
                 });
-                if (state.signatureEditor) {
-                    setEditorContent(state.signatureEditor, state.serverConfig.signatureHtml);
-                }
             }
         };
 
@@ -1361,6 +1775,9 @@ const App = {
         };
 
         const loadAll = async () => {
+            if (!state.loggedUser) {
+                return;
+            }
             try {
                 state.loading = true;
                 await Promise.all([
@@ -1374,13 +1791,306 @@ const App = {
                     await loadKanbanSnapshot(state.kanbanActiveBoardId);
                 }
                 if (state.loggedUser) {
-                    await Promise.all([loadTemplates(), loadServerConfig(), loadEmailHistory()]);
+                    await Promise.all([
+                        loadTemplates(),
+                        loadServerConfig(),
+                        loadEmailHistory(),
+                        loadCondicionantes(),
+                        loadCondicionanteDashboard(),
+                        loadLicencas(),
+                        loadLicencaCatalogs()
+                    ]);
                 }
             } catch (error) {
                 handleError(error);
             } finally {
                 state.loading = false;
             }
+        };
+
+        const loadCondicionantes = async () => {
+            if (!state.loggedUser) return;
+            state.condicionanteLoading = true;
+            try {
+                const data = await apiClient.get(endpoints.condicionantes);
+                state.condicionantes = Array.isArray(data) ? data : [];
+            } catch (error) {
+                handleError(error);
+            } finally {
+                state.condicionanteLoading = false;
+            }
+        };
+
+        const fetchCondicionanteLicencas = async (empresaId) => {
+            if (!empresaId) {
+                return [];
+            }
+            try {
+                const data = await apiClient.get(`/api/licencas?empresaId=${empresaId}`);
+                return Array.isArray(data) ? data : [];
+            } catch (error) {
+                handleError(error);
+                return [];
+            }
+        };
+
+        const loadCondicionanteDashboard = async () => {
+            if (!state.loggedUser) return;
+            try {
+                state.condicionanteDashboard = await apiClient.get(endpoints.condicionanteDashboard);
+            } catch (error) {
+                handleError(error);
+            }
+        };
+
+        const resetCondicionanteForm = () => {
+            Object.assign(state.condicionanteForm, emptyCondicionanteForm());
+            state.condicionanteLicencas = [];
+        };
+
+        const clearCondicionanteFilters = () => {
+            state.condicionanteFiltro.empresaId = '';
+            state.condicionanteFiltro.licencaId = '';
+            state.condicionanteFiltroLicencas = [];
+        };
+
+        const loadLicencaCatalogs = async () => {
+            state.licencaCatalogLoading = true;
+            const fallback = mockCatalog();
+            try {
+                const [baseCatalog, tipos, atividades] = await Promise.all([
+                    apiClient.get(endpoints.licencaCatalogos).catch(() => null),
+                    apiClient.get(endpoints.licencaTipos).catch(() => null),
+                    apiClient.get(endpoints.licencaAtividades).catch(() => null)
+                ]);
+                state.licencaResponsaveis = baseCatalog?.responsaveis ?? fallback.responsaveis;
+                state.licencaEmpreendimentos = baseCatalog?.empreendimentos ?? fallback.empreendimentos;
+                state.licencaTipos = Array.isArray(tipos) && tipos.length ? tipos : fallback.tipos;
+                state.licencaAtividades = Array.isArray(atividades) && atividades.length ? atividades : fallback.atividades;
+            } catch (error) {
+                console.warn('[Licenças] Catálogo indisponível, usando exemplos', error);
+                state.licencaResponsaveis = fallback.responsaveis;
+                state.licencaEmpreendimentos = fallback.empreendimentos;
+                state.licencaTipos = fallback.tipos;
+                state.licencaAtividades = fallback.atividades;
+            } finally {
+                state.licencaCatalogLoading = false;
+            }
+        };
+
+        const loadLicencas = async () => {
+            state.licencasLoading = true;
+            try {
+                const response = await apiClient.get(endpoints.licencas);
+                state.licencas = Array.isArray(response) ? response : (response?.content ?? mockLicencas());
+            } catch (error) {
+                console.warn('[Licenças] Falha na carga, usando exemplos', error);
+                state.licencas = mockLicencas();
+            } finally {
+                state.licencasLoading = false;
+            }
+        };
+
+        const clearLicencaFilters = () => {
+            Object.assign(state.licencaFilters, defaultLicencaFilters());
+            state.licencasPagination.page = 1;
+        };
+
+        const toggleSituacaoFilter = (targetList, value) => {
+            const index = targetList.indexOf(value);
+            if (index >= 0) targetList.splice(index, 1);
+            else targetList.push(value);
+        };
+
+        const changeLicencaPerPage = (event) => {
+            state.licencasPagination.perPage = Number(event.target.value) || 10;
+            state.licencasPagination.page = 1;
+        };
+
+        const changeLicencaPage = (step) => {
+            const totalPages = Math.max(1, Math.ceil(filteredLicencas.value.length / state.licencasPagination.perPage));
+            state.licencasPagination.page = Math.min(Math.max(1, state.licencasPagination.page + step), totalPages);
+        };
+
+        const openLicencaModal = () => {
+            state.licencaModalOpen = true;
+        };
+
+        const closeLicencaModal = () => {
+            state.licencaModalOpen = false;
+        };
+
+        const startBlankLicenca = () => {
+            state.licencaForm = emptyLicencaForm();
+            licencaFormTab.value = 'cadastro';
+            closeLicencaModal();
+            activeSection.value = 'licencaForm';
+        };
+
+        const startPdfLicenca = () => {
+            startBlankLicenca();
+            pushNotification('info', 'Importação via PDF em desenvolvimento.');
+        };
+
+        const hideLicencaForm = () => {
+            state.licencaForm = emptyLicencaForm();
+            activeSection.value = 'licencas';
+        };
+
+        const addLicencaCondicionante = () => {
+            state.licencaForm.condicionantes.push(emptyLicencaCondicionante());
+        };
+
+        const removeLicencaCondicionante = (tempId) => {
+            if (state.licencaForm.condicionantes.length === 1) return;
+            state.licencaForm.condicionantes = state.licencaForm.condicionantes.filter((cond) => cond.tempId !== tempId);
+        };
+
+        const handleLicencaDocumentUpload = (event, cond) => {
+            const files = Array.from(event.target.files || []);
+            cond.documentos.push(...files.map((file) => ({
+                id: createRandomId(),
+                nome: file.name,
+                sizeLabel: formatFileSize(file.size)
+            })));
+            event.target.value = '';
+        };
+
+        const removeLicencaDocumento = (cond, docId) => {
+            cond.documentos = cond.documentos.filter((doc) => doc.id !== docId);
+        };
+
+        const saveLicenca = async () => {
+            state.licencaFormSaving = true;
+            try {
+                await perform(async () => {
+                    await apiClient.post(endpoints.licencas, state.licencaForm);
+                }, 'licencas.actions.novo');
+                pushNotification('success', 'Licença salva.');
+                hideLicencaForm();
+                await loadLicencas();
+            } catch (error) {
+                console.error('[Licenças] erro ao salvar', error);
+            } finally {
+                state.licencaFormSaving = false;
+            }
+        };
+
+        const resetLicencaTipoForm = () => {
+            state.licencaTipoForm = { id: null, nome: '', codigo: '' };
+        };
+
+        const saveLicencaTipo = async () => {
+            if (!state.licencaTipoForm.nome.trim()) {
+                pushNotification('warning', 'Informe o nome do tipo.');
+                return;
+            }
+            const payload = {
+                nome: state.licencaTipoForm.nome,
+                codigo: state.licencaTipoForm.codigo || null
+            };
+            await perform(async () => {
+                if (state.licencaTipoForm.id) {
+                    await apiClient.put(`${endpoints.licencaTipos}/${state.licencaTipoForm.id}`, payload);
+                } else {
+                    await apiClient.post(endpoints.licencaTipos, payload);
+                }
+            }, 'licencas.feedback.tipoSaved');
+            resetLicencaTipoForm();
+            await loadLicencaCatalogs();
+        };
+
+        const editLicencaTipo = (tipo) => {
+            state.licencaTipoForm = {
+                id: tipo.id,
+                nome: tipo.nome || '',
+                codigo: tipo.codigo || ''
+            };
+        };
+
+        const deleteLicencaTipo = async (id) => {
+            if (!id) return;
+            await perform(async () => {
+                await apiClient.delete(`${endpoints.licencaTipos}/${id}`);
+            }, 'licencas.feedback.tipoDeleted');
+            await loadLicencaCatalogs();
+        };
+
+        const resetLicencaAtividadeForm = () => {
+            state.licencaAtividadeForm = { id: null, nome: '', descricao: '' };
+        };
+
+        const saveLicencaAtividade = async () => {
+            if (!state.licencaAtividadeForm.nome.trim()) {
+                pushNotification('warning', 'Informe o nome da atividade.');
+                return;
+            }
+            const payload = {
+                nome: state.licencaAtividadeForm.nome,
+                descricao: state.licencaAtividadeForm.descricao || null
+            };
+            await perform(async () => {
+                if (state.licencaAtividadeForm.id) {
+                    await apiClient.put(`${endpoints.licencaAtividades}/${state.licencaAtividadeForm.id}`, payload);
+                } else {
+                    await apiClient.post(endpoints.licencaAtividades, payload);
+                }
+            }, 'licencas.feedback.atividadeSaved');
+            resetLicencaAtividadeForm();
+            await loadLicencaCatalogs();
+        };
+
+        const editLicencaAtividade = (atividade) => {
+            state.licencaAtividadeForm = {
+                id: atividade.id,
+                nome: atividade.nome || '',
+                descricao: atividade.descricao || ''
+            };
+        };
+
+        const deleteLicencaAtividade = async (id) => {
+            if (!id) return;
+            await perform(async () => {
+                await apiClient.delete(`${endpoints.licencaAtividades}/${id}`);
+            }, 'licencas.feedback.atividadeDeleted');
+            await loadLicencaCatalogs();
+        };
+
+        const saveCondicionante = async () => {
+            if (!ensureLoggedUser()) return;
+            const payload = {
+                empresaId: state.condicionanteForm.empresaId,
+                licencaId: state.condicionanteForm.licencaId || null,
+                titulo: state.condicionanteForm.titulo,
+                descricao: state.condicionanteForm.descricao,
+                prioridade: state.condicionanteForm.prioridade,
+                status: state.condicionanteForm.status,
+                vencimento: state.condicionanteForm.vencimento || null,
+                responsavelEmail: state.condicionanteForm.responsavelEmail || null,
+                tags: state.condicionanteForm.tags
+            };
+            if (!payload.empresaId) {
+                pushNotification('warning', translate('condicionantes.validation.company'));
+                return;
+            }
+            if (!payload.titulo?.trim()) {
+                pushNotification('warning', translate('condicionantes.validation.title'));
+                return;
+            }
+            if (!condicionanteStatusSet.has(payload.status)) {
+                pushNotification('warning', translate('condicionantes.validation.status'));
+                return;
+            }
+            if (!condicionantePrioridadeSet.has(payload.prioridade)) {
+                pushNotification('warning', translate('condicionantes.validation.priority'));
+                return;
+            }
+            await perform(async () => {
+                await apiClient.post(endpoints.condicionantes, payload);
+            }, 'condicionantes.save');
+            resetCondicionanteForm();
+            await loadCondicionantes();
+            await loadCondicionanteDashboard();
         };
 
         const ensureLoggedUser = () => {
@@ -1779,7 +2489,7 @@ const App = {
                 state.emailSingleForm.attachments = [];
                 state.emailBulkForm.templateId = '';
                 state.emailBulkForm.useSignature = true;
-                await Promise.all([loadTemplates(), loadServerConfig(), loadEmailHistory()]);
+                await loadAll();
                 navigate('main');
             } catch (error) {
                 // already notified
@@ -1815,84 +2525,9 @@ const App = {
         const saveServerConfig = async () => {
             if (!ensureLoggedUser()) return;
             state.serverConfig.usuarioId = state.loggedUser.id;
-            if (state.signatureEditor) {
-                state.serverConfig.signatureHtml = state.signatureEditor.root.innerHTML;
-            }
             await perform(async () => {
                 await apiClient.post(endpoints.serverConfig, state.serverConfig);
             }, 'feedback.serverConfigSaved');
-        };
-
-        const initTemplateEditor = async () => {
-            if (state.templateEditorReady) {
-                return;
-            }
-            state.templateEditor = await createQuill('#template-editor');
-            const initialHtml = sanitizeRichTextHtml(state.templateForm.conteudoHtml || '');
-            if (initialHtml) {
-                const delta = state.templateEditor.clipboard.convert(initialHtml);
-                state.templateEditor.setContents(delta, 'silent');
-            }
-            templateEditorChangeHandler = () => {
-                const content = getEditorHtml(state.templateEditor);
-                if (content !== state.templateForm.conteudoHtml) {
-                    state.templateForm.conteudoHtml = content;
-                }
-            };
-            state.templateEditor.on('text-change', templateEditorChangeHandler);
-            state.templateEditorReady = true;
-            await nextTick();
-            forceEditorDirection(state.templateEditor);
-        };
-
-        const ensureTemplateEditor = async () => {
-            if (activeSection.value !== 'emailTemplates') {
-                return;
-            }
-            await nextTick();
-            await initTemplateEditor();
-        };
-
-        const initEmailSingleEditor = async () => {
-            if (state.emailSingleEditorReady) {
-                return;
-            }
-            state.emailSingleEditor = await createQuill('#email-single-editor');
-            setEditorContent(state.emailSingleEditor, state.emailSingleForm.conteudoHtml);
-            emailSingleEditorChangeHandler = () => {
-                state.emailSingleForm.conteudoHtml = state.emailSingleEditor.root.innerHTML;
-            };
-            state.emailSingleEditor.on('text-change', emailSingleEditorChangeHandler);
-            state.emailSingleEditorReady = true;
-        };
-
-        const ensureEmailSingleEditor = async () => {
-            if (activeSection.value !== 'emailSingle') {
-                return;
-            }
-            await nextTick();
-            await initEmailSingleEditor();
-        };
-
-        const initSignatureEditor = async () => {
-            if (state.signatureEditorReady) {
-                return;
-            }
-            state.signatureEditor = await createQuill('#signature-editor');
-            setEditorContent(state.signatureEditor, state.serverConfig.signatureHtml);
-            signatureEditorChangeHandler = () => {
-                state.serverConfig.signatureHtml = state.signatureEditor.root.innerHTML;
-            };
-            state.signatureEditor.on('text-change', signatureEditorChangeHandler);
-            state.signatureEditorReady = true;
-        };
-
-        const ensureSignatureEditor = async () => {
-            if (activeSection.value !== 'settings') {
-                return;
-            }
-            await nextTick();
-            await initSignatureEditor();
         };
 
         const saveTemplate = async () => {
@@ -1904,9 +2539,6 @@ const App = {
             await perform(async () => {
                 await request;
                 Object.assign(state.templateForm, { id: null, nome: '', assunto: '', conteudoHtml: '', usarAssinatura: true });
-                if (state.templateEditor) {
-                    setEditorContent(state.templateEditor, '');
-                }
                 await loadTemplates();
             }, 'feedback.templateSaved');
         };
@@ -1919,9 +2551,6 @@ const App = {
                 conteudoHtml: template.conteudoHtml,
                 usarAssinatura: template.usarAssinatura ?? true
             });
-            if (state.templateEditor) {
-                setEditorContent(state.templateEditor, template.conteudoHtml || '');
-            }
         };
 
         const deleteTemplate = async (id) => {
@@ -1939,7 +2568,6 @@ const App = {
                 state.emailSingleForm.assunto = selected.assunto;
             }
             state.emailSingleForm.useSignature = selected?.usarAssinatura ?? true;
-            setEditorContent(state.emailSingleEditor, html);
         };
 
         const handleEmailBulkTemplateChange = () => {
@@ -1961,12 +2589,7 @@ const App = {
 
         const sendIndividualEmail = async () => {
             if (!ensureLoggedUser()) return;
-            if (state.emailSingleEditor) {
-                state.emailSingleForm.conteudoHtml = state.emailSingleEditor.root.innerHTML;
-            }
-            const plainContent = state.emailSingleEditor
-                ? state.emailSingleEditor.getText().trim()
-                : stripHtml(state.emailSingleForm.conteudoHtml);
+            const plainContent = stripHtml(state.emailSingleForm.conteudoHtml || '').trim();
             if (!plainContent) {
                 pushNotification('warning', 'Preencha o conteúdo do e-mail.');
                 return;
@@ -2194,9 +2817,6 @@ const App = {
                 product: () => Object.assign(state.productForm, emptyProduct()),
                 template: () => {
                     Object.assign(state.templateForm, { id: null, nome: '', assunto: '', conteudoHtml: '', usarAssinatura: true });
-                    if (state.templateEditor) {
-                        setEditorContent(state.templateEditor, '');
-                    }
                 }
             };
             strategies[formName]?.();
@@ -2207,9 +2827,6 @@ const App = {
             Object.assign(state.loginForm, { email: '', senha: '' });
             Object.assign(state.recoverForm, { email: '' });
             Object.assign(state.emailSingleForm, emptyEmailSingleForm());
-            if (state.emailSingleEditor) {
-                setEditorContent(state.emailSingleEditor, '');
-            }
             Object.assign(state.emailBulkForm, emptyEmailBulkForm());
             clearBulkImport();
             state.showKanbanCardModal = false;
@@ -2300,6 +2917,122 @@ const App = {
             return state.emailHistory.slice(start, start + EMAIL_HISTORY_PAGE_SIZE);
         });
 
+        const condicionanteSummary = computed(() => {
+            const dashboard = state.condicionanteDashboard || {};
+            return [
+                { id: 'total', labelKey: 'condicionantes.metric.total', value: dashboard.totalCondicionantes ?? 0 },
+                { id: 'active', labelKey: 'condicionantes.metric.active', value: dashboard.totalEmDia ?? 0 },
+                { id: 'late', labelKey: 'condicionantes.metric.late', value: dashboard.totalAtrasadas ?? 0 }
+            ];
+        });
+
+        const condicionantesFiltradas = computed(() => state.condicionantes.filter((cond) => {
+            const filtroEmpresa = state.condicionanteFiltro.empresaId;
+            const filtroLicenca = state.condicionanteFiltro.licencaId;
+            const matchesEmpresa = !filtroEmpresa || cond.empresaId === filtroEmpresa;
+            const matchesLicenca = !filtroLicenca || (cond.licencaId || '') === filtroLicenca;
+            return matchesEmpresa && matchesLicenca;
+        }));
+
+        const filteredLicencas = computed(() => {
+            const filtros = state.licencaFilters;
+            const texto = filtros.search.trim().toLowerCase();
+            return state.licencas.filter((lic) => {
+                const responsavelMatch = !filtros.responsaveis.length
+                    || filtros.responsaveis.includes(lic.responsavelId)
+                    || filtros.responsaveis.includes(lic.responsavelNome);
+                const empresaMatch = !filtros.empresaId || lic.empresaId === filtros.empresaId;
+                const empreendimentoMatch = !filtros.empreendimentoId || lic.empreendimentoId === filtros.empreendimentoId;
+                const tipoMatch = !filtros.tipos.length
+                    || filtros.tipos.includes(lic.tipo)
+                    || filtros.tipos.includes(lic.tipoLicencaId);
+                const situacaoMatch = !filtros.situacoes.length
+                    || filtros.situacoes.includes(lic.prazoTag)
+                    || filtros.situacoes.includes(lic.situacao);
+                const textMatch = !texto || [
+                    lic.numero,
+                    lic.empresaNome,
+                    lic.empreendimentoNome,
+                    lic.orgaoEmissor,
+                    lic.tipo,
+                    lic.responsavelNome
+                ].some((value) => (value || '').toLowerCase().includes(texto));
+                return responsavelMatch && empresaMatch && empreendimentoMatch && tipoMatch && situacaoMatch && textMatch;
+            });
+        });
+
+        const paginatedLicencas = computed(() => {
+            const start = (state.licencasPagination.page - 1) * state.licencasPagination.perPage;
+            return filteredLicencas.value.slice(start, start + state.licencasPagination.perPage);
+        });
+
+        const condicionantesAgrupadas = computed(() => {
+            const grupos = new Map();
+            state.condicionantes.forEach((cond) => {
+                const empresaId = cond.empresaId || 'sem_empresa';
+                const empresaNome = cond.empresaNome
+                    || cond.empresa?.nomeEmpresa
+                    || cond.empresa?.nomeFantasia
+                    || cond.empresa?.nome
+                    || 'Empresa não informada';
+                if (!grupos.has(empresaId)) {
+                    grupos.set(empresaId, {
+                        id: empresaId,
+                        nome: empresaNome,
+                        licencas: new Map()
+                    });
+                }
+                const empresa = grupos.get(empresaId);
+                const licencaId = cond.licencaId || 'sem_licenca';
+                const licencaNome = cond.licencaNumero
+                    || cond.licenca?.numero
+                    || cond.licenca?.descricao
+                    || 'Sem licença vinculada';
+                if (!empresa.licencas.has(licencaId)) {
+                    empresa.licencas.set(licencaId, {
+                        id: licencaId,
+                        nome: licencaNome,
+                        condicionantes: []
+                    });
+                }
+                empresa.licencas.get(licencaId).condicionantes.push(cond);
+            });
+            return Array.from(grupos.values()).map((empresa) => {
+                const licencasArr = Array.from(empresa.licencas.values());
+                return {
+                    id: empresa.id,
+                    nome: empresa.nome,
+                    licencas: licencasArr,
+                    total: licencasArr.reduce((sum, licenca) => sum + licenca.condicionantes.length, 0)
+                };
+            });
+        });
+
+        const condicionantesPorEmpresaFiltradas = computed(() => {
+            const empresaFiltro = state.condicionanteFiltro.empresaId;
+            const licencaFiltro = state.condicionanteFiltro.licencaId;
+            return condicionantesAgrupadas.value
+                .filter((empresa) => !empresaFiltro || empresa.id === empresaFiltro)
+                .map((empresa) => ({
+                    ...empresa,
+                    licencas: empresa.licencas.filter((licenca) => !licencaFiltro || licenca.id === licencaFiltro)
+                }))
+                .filter((empresa) => empresa.licencas.length > 0);
+        });
+
+        const condicionantesAdvancedList = computed(() => {
+            const filtros = state.condicionanteAdvancedFilters;
+            return state.condicionantes.filter((cond) => {
+                const responsavelMatch = !filtros.responsavelId || cond.responsavelId === filtros.responsavelId;
+                const tipoLicencaMatch = !filtros.tipoLicencaId || cond.tipoLicencaId === filtros.tipoLicencaId;
+                const empresaMatch = !filtros.empresaId || cond.empresaId === filtros.empresaId;
+                const empreendimentoMatch = !filtros.empreendimentoId || cond.empreendimentoId === filtros.empreendimentoId;
+                const tipoCondMatch = !filtros.tipoCondicionanteId || cond.tipoCondicionanteId === filtros.tipoCondicionanteId;
+                const situacaoMatch = !filtros.situacoes.length || filtros.situacoes.includes(cond.situacao);
+                return responsavelMatch && tipoLicencaMatch && empresaMatch && empreendimentoMatch && tipoCondMatch && situacaoMatch;
+            });
+        });
+
         const applyTheme = (theme) => {
             document.body.dataset.theme = theme;
         };
@@ -2343,30 +3076,26 @@ const App = {
         });
 
         watch(activeSection, async (section, previousSection) => {
-            if (previousSection === 'emailTemplates' && section !== 'emailTemplates') {
-                destroyTemplateEditor();
-            }
-            if (previousSection === 'emailSingle' && section !== 'emailSingle') {
-                destroyEmailSingleEditor();
-            }
-            if (previousSection === 'settings' && section !== 'settings') {
-                destroySignatureEditor();
-            }
             if (['emailTemplates', 'emailSingle', 'emailBulk', 'settings'].includes(section) && !state.loggedUser) {
                 ensureLoggedUser();
                 return;
             }
-            if (section === 'emailTemplates') {
-                await ensureTemplateEditor();
-            }
-            if (section === 'emailSingle') {
-                await ensureEmailSingleEditor();
-            }
-            if (section === 'settings') {
-                await ensureSignatureEditor();
-            }
             if (section === 'mapping') {
-                await nextTick(); await initMapIfNeeded(); await loadCompanies();
+                await nextTick();
+                await initMapIfNeeded();
+                await loadCompanies();
+                if (state.selectedCompanyId) {
+                    await showNearby();
+                }
+            } else if (previousSection === 'mapping' && state.mapRef) {
+                state.mapRef.remove();
+                state.mapRef = null;
+                clearMapLayers();
+                state.nearby = null;
+            }
+
+            if (section === 'condicionantes') {
+                await Promise.all([loadCondicionantes(), loadCondicionanteDashboard()]);
             }
         });
 
@@ -2462,27 +3191,26 @@ const App = {
                 });
                 state.nearby = data;
 
-                // 3) marcador da empresa
-                const c = data.company;
-                upsertCompanyMarker({ id: c.id, lat: c.lat, lng: c.lng, nome: c.nome });
-
-                // 4) limpar prestadores anteriores
+                // 3) limpar prestadores anteriores
                 for (const [k, layer] of state.mapLayers.entries()) {
                     if (k.startsWith('prov:')) {
                         try { layer.remove(); } catch { }
                         state.mapLayers.delete(k);
                     }
                 }
-                // 5) limpar prestadores company
+                // 4) limpar marcador da empresa anterior
                 for (const [k, m] of state.mapLayers.entries()) {
-                if (k.startsWith('company:')) {
-                    try { m.remove(); } catch {}
-                    state.mapLayers.delete(k);
-                }
+                    if (k.startsWith('company:')) {
+                        try { m.remove(); } catch {}
+                        state.mapLayers.delete(k);
+                    }
                 }
 
+                // 5) marcador da empresa atual
+                const c = data.company;
+                upsertCompanyMarker({ id: c.id, lat: c.lat, lng: c.lng, nome: c.nome });
 
-                // 5) adicionar prestadores (nome, telefone, site)
+                // 6) adicionar prestadores (nome, telefone, site)
                 for (const p of data.prestadores) {
                     const siteHtml = p.site ? `<br><a href="${p.site}" target="_blank" rel="noopener">site</a>` : '';
                     const telHtml = p.telefone ? `<br>tel: ${p.telefone}` : '';
@@ -2506,6 +3234,20 @@ const App = {
             }
         };
 
+        const focusOnProvider = (provider) => {
+            if (!provider || !state.mapRef) {
+                return;
+            }
+            const key = `prov:${provider.id}`;
+            const marker = state.mapLayers.get(key);
+            if (marker) {
+                state.mapRef.setView([provider.lat, provider.lng], 16);
+                marker.openPopup();
+            } else {
+                state.mapRef.setView([provider.lat, provider.lng], 15);
+            }
+        };
+
 
         // cria/atualiza o marcador da empresa selecionada e centraliza o mapa
         const upsertCompanyMarker = (company) => {
@@ -2526,45 +3268,64 @@ const App = {
 
         // quando usuário troca a seleção, focamos e (opcional) buscamos próximos
         watch(() => state.selectedCompanyId, async (id) => {
-            if (!id) return;
-            // procura a empresa no array já carregado
-            const company = state.companies.find(c => c.id === id);
-            if (company && company.lat != null && company.lng != null) {
-                upsertCompanyMarker(company);
-                // opcional: já puxa próximos automaticamente
-                await showNearby();
-            } else {
-                console.warn('[Map] empresa sem lat/lng — geocodifique antes');
+            if (!id) {
+                state.nearby = null;
+                clearMapLayers();
+                return;
             }
+            await showNearby();
         });
 
-        watch(() => state.currentSection, async (id) => {
-           if (prev === 'mapping' && mapRef.value) {
-                mapRef.value.remove();
-                mapRef.value = null;
-            } else {
-                console.warn('[Map] saindo da seção de mapa');
-            }
+        watch(() => state.condicionanteForm.empresaId, async (empresaId) => {
+            state.condicionanteForm.licencaId = '';
+            state.condicionanteLicencas = empresaId
+                ? await fetchCondicionanteLicencas(empresaId)
+                : [];
         });
 
+        watch(() => state.condicionanteFiltro.empresaId, async (empresaId) => {
+            state.condicionanteFiltro.licencaId = '';
+            state.condicionanteFiltroLicencas = empresaId
+                ? await fetchCondicionanteLicencas(empresaId)
+                : [];
+        });
 
-
+        watch(() => JSON.stringify(state.licencaFilters), () => {
+            state.licencasPagination.page = 1;
+        });
 
         return {
             sections,
             companyTabs,
+            condicionanteSubViews,
+            licencaTabs,
             currentRoute,
             activeSection,
+            condicionanteSubView,
+            licencaActiveTab,
+            licencaFormTab,
             state,
             statistics,
             latestCompanies,
+            selectedCompany,
             activeKanbanBoard,
             kanbanColumns,
             bulkPreviewRows,
             bulkRenderedTemplate,
             paginatedEmailHistory,
             emailHistoryTotalPages,
+            condicionanteSummary,
+            condicionantesFiltradas,
+            condicionantesPorEmpresaFiltradas,
+            filteredLicencas,
+            paginatedLicencas,
+            condicionantesAdvancedList,
+            licencaSituacaoChips,
+            condicionanteSituacaoChips,
+            licencaPeriodicidades,
             formatCnpj,
+            formatCompanyAddress,
+            formatShortDate,
             t: translate,
             setSection: (id) => {
                 if (activeSection.value === id) return;
@@ -2641,7 +3402,37 @@ const App = {
             initMapIfNeeded,
             showNearby,
             loadCompanies,
-            clearMapLayers
+            clearMapLayers,
+            focusOnProvider,
+            loadCondicionantes,
+            loadCondicionanteDashboard,
+            saveCondicionante,
+            resetCondicionanteForm,
+            clearCondicionanteFilters,
+            loadLicencas,
+            loadLicencaCatalogs,
+            clearLicencaFilters,
+            toggleSituacaoFilter,
+            changeLicencaPage,
+            changeLicencaPerPage,
+            openLicencaModal,
+            closeLicencaModal,
+            startBlankLicenca,
+            startPdfLicenca,
+            hideLicencaForm,
+            addLicencaCondicionante,
+            removeLicencaCondicionante,
+            handleLicencaDocumentUpload,
+            removeLicencaDocumento,
+            saveLicenca,
+            saveLicencaTipo,
+            editLicencaTipo,
+            deleteLicencaTipo,
+            resetLicencaTipoForm,
+            saveLicencaAtividade,
+            editLicencaAtividade,
+            deleteLicencaAtividade,
+            resetLicencaAtividadeForm
         };
     },
     template: `
@@ -2732,23 +3523,40 @@ const App = {
                         </nav>
                         <section>
                             <div v-if="activeSection === 'dashboard'">
-                                <div class="card quick-metrics-card">
-                                    <div class="card-header">
-                                        <div>
-                                            <h2>{{ t('dashboard.metricsTitle') }}</h2>
-                                            <p class="card-subtitle">{{ t('dashboard.metricsDescription') }}</p>
+                            <div class="card quick-metrics-card">
+                                <div class="card-header">
+                                    <div>
+                                        <h2>{{ t('dashboard.metricsTitle') }}</h2>
+                                        <p class="card-subtitle">{{ t('dashboard.metricsDescription') }}</p>
                                         </div>
-                                    </div>
-                                    <div class="stat-grid">
-                                        <article class="stat-card" v-for="metric in quickMetrics" :key="metric.id" :class="metric.className">
-                                            <span class="stat-label">{{ t(metric.labelKey) }}</span>
-                                            <span class="stat-value">{{ metric.value }}</span>
-                                        </article>
-                                    </div>
                                 </div>
-                                <div class="card" v-if="state.emailHistory.length">
-                                    <h2>{{ t('email.history') }}</h2>
-                                    <table>
+                                <div class="stat-grid">
+                                    <article class="stat-card" v-for="metric in quickMetrics" :key="metric.id" :class="metric.className">
+                                        <span class="stat-label">{{ t(metric.labelKey) }}</span>
+                                        <span class="stat-value">{{ metric.value }}</span>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div>
+                                        <h2>{{ t('condicionantes.summaryTitle') }}</h2>
+                                        <p class="card-subtitle">{{ t('condicionantes.summaryDescription') }}</p>
+                                    </div>
+                                    <button class="ghost" type="button" @click="() => { loadCondicionantes(); loadCondicionanteDashboard(); }">
+                                        {{ t('common.refresh') }}
+                                    </button>
+                                </div>
+                                <div class="stat-grid">
+                                    <article class="stat-card" v-for="metric in condicionanteSummary" :key="metric.id">
+                                        <span class="stat-label">{{ t(metric.labelKey) }}</span>
+                                        <span class="stat-value">{{ metric.value }}</span>
+                                    </article>
+                                </div>
+                            </div>
+                            <div class="card" v-if="state.emailHistory.length">
+                                <h2>{{ t('email.history') }}</h2>
+                                <table>
                                         <thead>
                                             <tr>
                                                 <th>{{ t('email.subject') }}</th>
@@ -3323,11 +4131,9 @@ const App = {
                                 <label>{{ t('templates.subject') }}
                                     <input v-model="state.templateForm.assunto" required />
                                 </label>
-                                <label>{{ t('templates.content') }}</label>
-                                <div class="rich-editor">
-                                    <div id="template-editor"></div>
-                                </div>
-                                <textarea class="visually-hidden" v-model="state.templateForm.conteudoHtml" aria-hidden="true"></textarea>
+                                <label>{{ t('templates.content') }}
+                                    <textarea rows="10" v-model="state.templateForm.conteudoHtml"></textarea>
+                                </label>
                                 <label class="checkbox-field">
                                     <input type="checkbox" v-model="state.templateForm.usarAssinatura" />
                                     {{ t('email.signature') }}
@@ -3380,11 +4186,9 @@ const App = {
                                 <label>{{ t('email.subject') }}
                                     <input v-model="state.emailSingleForm.assunto" required />
                                 </label>
-                                <label>{{ t('email.content') }}</label>
-                                <div class="rich-editor">
-                                    <div id="email-single-editor"></div>
-                                </div>
-                                <textarea class="visually-hidden" v-model="state.emailSingleForm.conteudoHtml" aria-hidden="true"></textarea>
+                                <label>{{ t('email.content') }}
+                                    <textarea rows="10" v-model="state.emailSingleForm.conteudoHtml"></textarea>
+                                </label>
                                 <label class="checkbox-field">
                                     <input type="checkbox" v-model="state.emailSingleForm.useSignature" />
                                     {{ t('email.signature') }}
@@ -3527,11 +4331,9 @@ const App = {
                                 <label>
                                     <input type="checkbox" v-model="state.serverConfig.useStartTls" /> {{ t('settings.useStartTls') }}
                                 </label>
-                                <label>{{ t('settings.signatureLabel') }}</label>
-                                <div class="rich-editor">
-                                    <div id="signature-editor"></div>
-                                </div>
-                                <textarea class="visually-hidden" v-model="state.serverConfig.signatureHtml" aria-hidden="true"></textarea>
+                                <label>{{ t('settings.signatureLabel') }}
+                                    <textarea rows="6" v-model="state.serverConfig.signatureHtml"></textarea>
+                                </label>
                                 <p class="helper-text">{{ t('settings.signatureHint') }}</p>
                                 <div class="action-buttons">
                                     <button class="primary" type="submit">{{ t('settings.save') }}</button>
@@ -3539,43 +4341,685 @@ const App = {
                             </form>
                         </div>
                     </div>
-                    <div v-else-if="activeSection === 'mapping'" class="grid gap-3" style="grid-template-columns: 1fr 340px;">
-                    <div>
-                        <div class="mb-2 flex gap-2">
-                        <label>{{ t('mapping.selectCompany') }}
-                            <select v-model="state.selectedCompanyId" class="border p-2">
-                                <option value="" disabled>Selecione a empresa</option>
-                                <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
-                            </select>
-                        </label>
-                        <label>{{ t('mapping.typeAll') }}
-                            <select v-model="state.providerType" class="border p-2">
-                                <option value="">Parceiro</option>
-                                <option value="logistica_reversa">Logística reversa</option>
-                                <option value="transporte_residuo">Transporte de resíduo</option>
-                            </select>
-                        </label>
-                        <button class="primary" @click="showNearby">Consultar</button>
+
+                    <div v-else-if="activeSection === 'licencas'" class="licenca-section">
+                        <div class="licenca-tabs" role="tablist">
+                            <div class="licenca-tabs__buttons">
+                                <button
+                                    v-for="tab in licencaTabs"
+                                    :key="tab.id"
+                                    type="button"
+                                    class="pill-tab"
+                                    :class="{ active: licencaActiveTab === tab.id }"
+                                    @click="licencaActiveTab = tab.id"
+                                >
+                                    {{ t(tab.labelKey) }}
+                                </button>
+                            </div>
+                            <div class="licenca-tabs__actions">
+                                <button class="ghost" type="button" @click="loadLicencas">{{ t('common.refresh') }}</button>
+                                <button class="primary" type="button" @click="openLicencaModal">{{ t('licencas.actions.novo') }}</button>
+                            </div>
                         </div>
-                        <div id="leaflet-map" style="height: 75vh; border-radius: 8px; overflow: hidden;"></div>
+
+                        <div v-if="licencaActiveTab === 'lista'" class="licenca-pane">
+                            <div class="card licenca-filter-card">
+                                <div class="licenca-filter-grid">
+                                    <label>
+                                        <span>{{ t('licencas.filters.responsavel') }}</span>
+                                        <select v-model="state.licencaFilters.responsaveis" multiple>
+                                            <option v-for="resp in state.licencaResponsaveis" :key="resp.id" :value="resp.id">{{ resp.nome }}</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.filters.empresa') }}</span>
+                                        <select v-model="state.licencaFilters.empresaId">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.filters.empreendimento') }}</span>
+                                        <select v-model="state.licencaFilters.empreendimentoId">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="empd in state.licencaEmpreendimentos" :key="empd.id" :value="empd.id">{{ empd.nome }}</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.filters.tipo') }}</span>
+                                        <select v-model="state.licencaFilters.tipos" multiple>
+                                            <option v-for="tipo in state.licencaTipos" :key="tipo.id" :value="tipo.id">{{ tipo.codigo ? tipo.codigo + ' · ' : '' }}{{ tipo.nome }}</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="licenca-period-grid">
+                                    <label>
+                                        <span>{{ t('licencas.filters.periodoEntrega') }}</span>
+                                        <div class="period-range">
+                                            <input type="date" v-model="state.licencaFilters.periodoEntregaInicio" />
+                                            <input type="date" v-model="state.licencaFilters.periodoEntregaFim" />
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.filters.periodoInterna') }}</span>
+                                        <div class="period-range">
+                                            <input type="date" v-model="state.licencaFilters.periodoInternaInicio" />
+                                            <input type="date" v-model="state.licencaFilters.periodoInternaFim" />
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="licenca-chip-row">
+                                    <span>{{ t('licencas.filters.situacao') }}</span>
+                                    <button
+                                        v-for="chip in licencaSituacaoChips"
+                                        :key="chip.id"
+                                        type="button"
+                                        class="chip-button"
+                                        :class="['chip--' + chip.tone, { 'chip--active': state.licencaFilters.situacoes.includes(chip.value) }]"
+                                        @click="toggleSituacaoFilter(state.licencaFilters.situacoes, chip.value)"
+                                    >
+                                        {{ t(chip.labelKey) }}
+                                    </button>
+                                    <div class="spacer"></div>
+                                    <input class="search-input" type="search" :placeholder="t('licencas.filters.search')" v-model="state.licencaFilters.search" />
+                                    <button class="ghost" type="button" @click="clearLicencaFilters">{{ t('licencas.filters.clear') }}</button>
+                                </div>
+                            </div>
+
+                            <div class="card licenca-table-card">
+                                <div class="card-header">
+                                    <div>
+                                        <h2>{{ t('licencas.title') }}</h2>
+                                        <p class="card-subtitle">{{ filteredLicencas.length }} {{ t('nav.licencas') }}</p>
+                                    </div>
+                                </div>
+                                <div class="table-wrapper">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{{ t('licencas.table.numero') }}</th>
+                                                <th>{{ t('licencas.table.empresa') }}</th>
+                                                <th>{{ t('licencas.table.empreendimento') }}</th>
+                                                <th>{{ t('licencas.table.orgao') }}</th>
+                                                <th>{{ t('licencas.table.tipo') }}</th>
+                                                <th>{{ t('licencas.table.atividade') }}</th>
+                                                <th>{{ t('licencas.table.responsavel') }}</th>
+                                                <th>{{ t('licencas.table.validade') }}</th>
+                                                <th>{{ t('licencas.table.prazos') }}</th>
+                                                <th>{{ t('licencas.table.acoes') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="lic in paginatedLicencas" :key="lic.id">
+                                                <td>
+                                                    <strong>{{ lic.numero }}</strong>
+                                                    <p class="table-subtitle" v-if="lic.numeroProcesso">{{ lic.numeroProcesso }}</p>
+                                                </td>
+                                                <td>{{ lic.empresaNome || '-' }}</td>
+                                                <td>{{ lic.empreendimentoNome || '-' }}</td>
+                                                <td>{{ lic.orgaoEmissor || '-' }}</td>
+                                                <td>{{ lic.tipo }}</td>
+                                                <td>{{ lic.atividades?.join(', ') || '-' }}</td>
+                                                <td>{{ lic.responsavelNome || '-' }}</td>
+                                                <td>{{ formatShortDate(lic.dataValidade) }}</td>
+                                                <td>
+                                                    <span class="deadline-pill" :class="'deadline-pill--' + (lic.prazoTag || 'muted')">
+                                                        {{ lic.prazoTag || '—' }}
+                                                    </span>
+                                                </td>
+                                                <td class="table-actions">
+                                                    <button class="secondary" type="button">{{ t('common.edit') }}</button>
+                                                    <button class="ghost" type="button">{{ t('common.delete') }}</button>
+                                                </td>
+                                            </tr>
+                                            <tr v-if="!paginatedLicencas.length">
+                                                <td :colspan="10" class="empty-cell">{{ t('licencas.table.empty') }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pagination-bar">
+                                    <label>
+                                        {{ t('licencas.pagination.perPage') }}
+                                        <select :value="state.licencasPagination.perPage" @change="changeLicencaPerPage">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                        </select>
+                                    </label>
+                                    <div class="pagination-controls">
+                                        <button class="secondary" type="button" @click="changeLicencaPage(-1)" :disabled="state.licencasPagination.page === 1">{{ t('licencas.pagination.prev') }}</button>
+                                        <span>{{ state.licencasPagination.page }}</span>
+                                        <button
+                                            class="secondary"
+                                            type="button"
+                                            @click="changeLicencaPage(1)"
+                                            :disabled="state.licencasPagination.page * state.licencasPagination.perPage >= filteredLicencas.length"
+                                        >
+                                            {{ t('licencas.pagination.next') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div v-else-if="licencaActiveTab === 'condicionantes'" class="card licenca-cond-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2>{{ t('licencas.cond.title') }}</h2>
+                                    <p class="card-subtitle">{{ condicionantesAdvancedList.length }} {{ t('nav.condicionantes') }}</p>
+                                </div>
+                            </div>
+                            <div class="condicionante-tabs" role="tablist">
+                                <button
+                                    v-for="tab in condicionanteSubViews"
+                                    :key="tab.id"
+                                    class="pill-tab"
+                                    type="button"
+                                    :class="{ active: condicionanteSubView === tab.id }"
+                                    @click="condicionanteSubView = tab.id"
+                                >
+                                    {{ t(tab.labelKey) }}
+                                </button>
+                            </div>
+                            <div v-if="condicionanteSubView === 'overview'">
+                                <div class="condicionante-filter-grid">
+                                    <label>
+                                        <span>{{ t('licencas.filters.responsavel') }}</span>
+                                        <select v-model="state.condicionanteAdvancedFilters.responsavelId">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="resp in state.licencaResponsaveis" :key="resp.id" :value="resp.id">{{ resp.nome }}</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.filters.tipo') }}</span>
+                                        <select v-model="state.condicionanteAdvancedFilters.tipoLicencaId">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="tipo in state.licencaTipos" :key="tipo.id" :value="tipo.id">{{ tipo.nome }}</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.filters.empresa') }}</span>
+                                        <select v-model="state.condicionanteAdvancedFilters.empresaId">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.cond.filters.tipoCond') }}</span>
+                                        <input v-model="state.condicionanteAdvancedFilters.tipoCondicionanteId" />
+                                    </label>
+                                </div>
+                                <div class="licenca-period-grid">
+                                    <label>
+                                        <span>{{ t('licencas.filters.periodoEntrega') }}</span>
+                                        <div class="period-range">
+                                            <input type="date" v-model="state.condicionanteAdvancedFilters.periodoEntregaInicio" />
+                                            <input type="date" v-model="state.condicionanteAdvancedFilters.periodoEntregaFim" />
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.filters.periodoInterna') }}</span>
+                                        <div class="period-range">
+                                            <input type="date" v-model="state.condicionanteAdvancedFilters.periodoInternaInicio" />
+                                            <input type="date" v-model="state.condicionanteAdvancedFilters.periodoInternaFim" />
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="licenca-chip-row">
+                                    <span>{{ t('licencas.filters.situacao') }}</span>
+                                    <button
+                                        v-for="chip in condicionanteSituacaoChips"
+                                        :key="chip.id"
+                                        class="chip-button"
+                                        type="button"
+                                        :class="{ 'chip--active': state.condicionanteAdvancedFilters.situacoes.includes(chip.value) }"
+                                        @click="toggleSituacaoFilter(state.condicionanteAdvancedFilters.situacoes, chip.value)"
+                                    >
+                                        {{ t(chip.labelKey) }}
+                                    </button>
+                                </div>
+                                <div class="table-wrapper">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{{ t('licencas.cond.table.condicionante') }}</th>
+                                                <th>{{ t('licencas.cond.table.licenca') }}</th>
+                                                <th>{{ t('licencas.cond.table.tipoLicenca') }}</th>
+                                                <th>{{ t('licencas.cond.table.proximaEntrega') }}</th>
+                                                <th>{{ t('licencas.cond.table.proximaInterna') }}</th>
+                                                <th>{{ t('common.actions') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="cond in condicionantesAdvancedList" :key="cond.id">
+                                                <td>{{ cond.nome || cond.titulo }}</td>
+                                                <td>{{ cond.licencaNumero }}</td>
+                                                <td>{{ cond.licencaTipo }}</td>
+                                                <td>{{ formatShortDate(cond.dataEntrega) }}</td>
+                                                <td>{{ formatShortDate(cond.dataInterna) }}</td>
+                                                <td><button class="secondary" type="button">{{ t('common.edit') }}</button></td>
+                                            </tr>
+                                            <tr v-if="!condicionantesAdvancedList.length">
+                                                <td :colspan="6" class="empty-cell">{{ t('licencas.cond.table.empty') }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div v-else-if="condicionanteSubView === 'form'">
+                                <form class="form-grid" @submit.prevent="saveCondicionante">
+                                    <label>{{ t('condicionantes.fieldEmpresa') }}
+                                        <select v-model="state.condicionanteForm.empresaId">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
+                                        </select>
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldLicenca') }}
+                                        <select v-model="state.condicionanteForm.licencaId" :disabled="!state.condicionanteLicencas.length">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="lic in state.condicionanteLicencas" :key="lic.id" :value="lic.id">
+                                                {{ lic.numero }} · {{ lic.tipo || lic.orgaoEmissor }}
+                                            </option>
+                                        </select>
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldTitulo') }}
+                                        <input v-model="state.condicionanteForm.titulo" required />
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldDescricao') }}
+                                        <textarea rows="3" v-model="state.condicionanteForm.descricao"></textarea>
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldStatus') }}
+                                        <select v-model="state.condicionanteForm.status">
+                                            <option v-for="status in condicionanteStatuses" :key="status.value" :value="status.value">{{ t(status.labelKey) }}</option>
+                                        </select>
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldPrioridade') }}
+                                        <select v-model="state.condicionanteForm.prioridade">
+                                            <option v-for="prio in condicionantePrioridades" :key="prio.value" :value="prio.value">{{ t(prio.labelKey) }}</option>
+                                        </select>
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldVencimento') }}
+                                        <input type="date" v-model="state.condicionanteForm.vencimento" />
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldResponsavel') }}
+                                        <input type="email" v-model="state.condicionanteForm.responsavelEmail" />
+                                    </label>
+                                    <label>{{ t('condicionantes.fieldTags') }}
+                                        <input v-model="state.condicionanteForm.tags" />
+                                    </label>
+                                    <div class="action-buttons">
+                                        <button class="primary" type="submit">{{ t('condicionantes.save') }}</button>
+                                        <button class="secondary" type="button" @click="resetCondicionanteForm">{{ t('common.clear') }}</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div v-else class="condicionante-company-groups">
+                                <article v-for="empresa in condicionantesPorEmpresaFiltradas" :key="empresa.id" class="condicionante-company-group">
+                                    <header class="condicionante-company-header">
+                                        <div>
+                                            <h3>{{ empresa.nome }}</h3>
+                                            <p class="table-subtitle">{{ empresa.total }} × {{ t('nav.condicionantes') }}</p>
+                                        </div>
+                                    </header>
+                                    <div class="condicionante-license-grid">
+                                        <section v-for="licenca in empresa.licencas" :key="licenca.id" class="condicionante-license-card">
+                                            <div class="condicionante-license-card__header">
+                                                <strong>{{ licenca.nome }}</strong>
+                                                <p class="table-subtitle">{{ licenca.condicionantes.length }} itens</p>
+                                            </div>
+                                            <ul class="condicionante-license-card__list">
+                                                <li v-for="cond in licenca.condicionantes" :key="cond.id">
+                                                    <div>
+                                                        <strong>{{ cond.titulo }}</strong>
+                                                        <p class="table-subtitle">{{ t('condicionantes.status.' + (cond.status || '')) }}</p>
+                                                    </div>
+                                                    <div class="condicionante-license-card__meta">
+                                                        <span>{{ formatShortDate(cond.vencimento) }}</span>
+                                                        <span>{{ t('condicionantes.priority.' + (cond.prioridade || '')) }}</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+
+                        <div v-else-if="licencaActiveTab === 'tipos'" class="card licenca-manage-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2>{{ t('licencas.tipos.title') }}</h2>
+                                </div>
+                            </div>
+                            <form class="licenca-manage-form" @submit.prevent="saveLicencaTipo">
+                                <div class="licenca-manage-grid">
+                                    <label>
+                                        <span>{{ t('licencas.tipos.form.name') }}</span>
+                                        <input v-model="state.licencaTipoForm.nome" required />
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.tipos.form.code') }}</span>
+                                        <input v-model="state.licencaTipoForm.codigo" />
+                                    </label>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="primary" type="submit">{{ t('common.save') }}</button>
+                                    <button class="ghost" type="button" @click="resetLicencaTipoForm">{{ t('common.clear') }}</button>
+                                </div>
+                            </form>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{ t('licencas.table.tipo') }}</th>
+                                            <th>{{ t('common.actions') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(tipo, index) in state.licencaTipos" :key="tipo.id || index">
+                                            <td>{{ index + 1 }}</td>
+                                            <td>{{ tipo.nome }}</td>
+                                            <td class="table-actions">
+                                                <button class="secondary" type="button" @click="editLicencaTipo(tipo)">{{ t('common.edit') }}</button>
+                                                <button class="ghost" type="button" @click="deleteLicencaTipo(tipo.id)">{{ t('common.delete') }}</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div v-else class="card licenca-manage-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2>{{ t('licencas.atividades.title') }}</h2>
+                                </div>
+                            </div>
+                            <form class="licenca-manage-form" @submit.prevent="saveLicencaAtividade">
+                                <div class="licenca-manage-grid">
+                                    <label>
+                                        <span>{{ t('licencas.atividades.form.name') }}</span>
+                                        <input v-model="state.licencaAtividadeForm.nome" required />
+                                    </label>
+                                    <label>
+                                        <span>{{ t('licencas.atividades.form.desc') }}</span>
+                                        <textarea rows="2" v-model="state.licencaAtividadeForm.descricao"></textarea>
+                                    </label>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="primary" type="submit">{{ t('common.save') }}</button>
+                                    <button class="ghost" type="button" @click="resetLicencaAtividadeForm">{{ t('common.clear') }}</button>
+                                </div>
+                            </form>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{ t('licencas.table.atividade') }}</th>
+                                            <th>{{ t('common.actions') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(atividade, index) in state.licencaAtividades" :key="atividade.id || index">
+                                            <td>{{ index + 1 }}</td>
+                                            <td>{{ atividade.nome }}</td>
+                                            <td class="table-actions">
+                                                <button class="secondary" type="button" @click="editLicencaAtividade(atividade)">{{ t('common.edit') }}</button>
+                                                <button class="ghost" type="button" @click="deleteLicencaAtividade(atividade.id)">{{ t('common.delete') }}</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div v-if="state.licencaModalOpen" class="modal-overlay">
+                            <div class="modal-card">
+                                <div class="modal-card__header">
+                                    <h3>{{ t('licencas.modal.title') }}</h3>
+                                    <button class="ghost" type="button" @click="closeLicencaModal">×</button>
+                                </div>
+                                <div class="modal-options">
+                                    <button type="button" class="modal-option" @click="startBlankLicenca">
+                                        <span class="modal-option__icon">＋</span>
+                                        <span>{{ t('licencas.modal.blank') }}</span>
+                                    </button>
+                                    <button type="button" class="modal-option" @click="startPdfLicenca">
+                                        <span class="modal-option__icon">✨</span>
+                                        <span>{{ t('licencas.modal.fromPdf') }}</span>
+                                        <small>{{ t('licencas.modal.fromPdfHint') }}</small>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <aside class="border rounded p-3 overflow-auto" style="max-height: 75vh;">
-                        <h3 class="font-bold mb-2">Mapa (Empresas & Prestadores)</h3>
-                        <ul class="space-y-2">
-                            <li v-if="!state.nearby || !state.nearby.prestadores?.length" class="text-sm opacity-70">
-                                Nenhuma marcação para exibir.
-                            </li>
-                            <li v-for="p in state.nearby?.prestadores || []" :key="p.id" class="border rounded p-2">
-                                <div class="font-medium">{{ p.nome }}</div>
-                                <div class="text-xs opacity-70">
-                                    {{ p.tipo }} — {{ p.distanceKm.toFixed(2) }} km
-                                    <span v-if="p.telefone"> — {{ p.telefone }}</span>
-                                    <span v-if="p.site"> — <a :href="p.site" target="_blank" rel="noopener">site</a></span>
+                    <div v-else-if="activeSection === 'mapping'" class="mapping-layout">
+                        <div class="mapping-map card">
+                            <div id="leaflet-map" class="mapping-map__canvas" role="region" aria-label="Mapa das empresas e prestadores"></div>
+                        </div>
+
+                        <aside class="mapping-panel card">
+                            <div>
+                                <h3>{{ t('mapping.controls') }}</h3>
+                                <div class="mapping-controls" aria-label="{{ t('mapping.controls') }}">
+                                    <label>
+                                        <span>{{ t('mapping.selectCompany') }}</span>
+                                        <select v-model="state.selectedCompanyId" :disabled="!state.companies.length">
+                                            <option value="">{{ t('common.select') }}</option>
+                                            <option v-for="c in state.companies" :key="c.id" :value="c.id">
+                                                {{ c.nomeEmpresa || c.nomeFantasia || c.nome }}
+                                            </option>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        <span>{{ t('mapping.typeFilter') }}</span>
+                                        <select v-model="state.providerType" :disabled="!state.selectedCompanyId">
+                                            <option value="">{{ t('mapping.typeAll') }}</option>
+                                            <option value="logistica_reversa">Logística reversa</option>
+                                            <option value="transporte_residuo">Transporte de resíduo</option>
+                                        </select>
+                                    </label>
+                                    <button class="primary" type="button" :disabled="!state.selectedCompanyId" @click="showNearby">
+                                        {{ t('mapping.findNearby') }}
+                                    </button>
                                 </div>
-                            </li>
-                        </ul>
-                    </aside>
+                                <p class="mapping-hint">{{ t('mapping.hint') }}</p>
+                            </div>
+
+                            <div class="mapping-company-card" v-if="selectedCompany">
+                                <strong>{{ selectedCompany.nomeEmpresa || selectedCompany.nomeFantasia || selectedCompany.nome }}</strong>
+                                <p>{{ formatCompanyAddress(selectedCompany) }}</p>
+                                <p class="mapping-company__contact">
+                                    <span v-if="selectedCompany.telefone">{{ selectedCompany.telefone }}</span>
+                                    <span v-if="selectedCompany.email">{{ selectedCompany.email }}</span>
+                                </p>
+                            </div>
+
+                            <div class="mapping-panel__header">
+                                <div>
+                                    <h3>{{ t('mapping.title') }}</h3>
+                                    <p class="card-subtitle" v-if="state.nearby?.company">
+                                        {{ state.nearby.company.nome }} · {{ state.nearby.company.municipio || state.nearby.company.uf }}
+                                    </p>
+                                </div>
+                                <span class="mapping-counter" v-if="state.nearby?.prestadores">
+                                    {{ state.nearby.prestadores.length }}/5
+                                </span>
+                            </div>
+                            <p class="mapping-empty" v-if="!state.nearby || !state.nearby.prestadores?.length">
+                                {{ t('mapping.emptyProviders') }}
+                            </p>
+                            <ul class="mapping-list" v-else>
+                                <li v-for="p in state.nearby.prestadores" :key="p.id" class="mapping-list__item" @click="focusOnProvider(p)">
+                                    <div class="mapping-provider__title">
+                                        <strong>{{ p.nome }}</strong>
+                                        <span>{{ p.distanceKm.toFixed(1) }} km</span>
+                                    </div>
+                                    <div class="mapping-provider__meta">
+                                        {{ p.tipo.replace('_', ' ') }}
+                                    </div>
+                                    <div class="mapping-provider__contact">
+                                        <span v-if="p.telefone">Tel: {{ p.telefone }}</span>
+                                        <a v-if="p.site" :href="p.site" target="_blank" rel="noopener">
+                                            Visitar site
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </aside>
+                    </div>
+
+                    <div v-else-if="activeSection === 'licencaForm'" class="licenca-form-page">
+                        <div class="card licenca-form-card">
+                            <div class="card-header">
+                                <div>
+                                    <h2>{{ t('licencas.form.title') }}</h2>
+                                </div>
+                                <button class="ghost" type="button" @click="hideLicencaForm">{{ t('licencas.actions.voltarLista') }}</button>
+                            </div>
+                            <div class="licenca-form-tabs">
+                                <button type="button" class="pill-tab" :class="{ active: licencaFormTab === 'cadastro' }" @click="licencaFormTab = 'cadastro'">
+                                    {{ t('licencas.form.tabs.cadastro') }}
+                                </button>
+                                <button type="button" class="pill-tab" :class="{ active: licencaFormTab === 'condicionantes' }" @click="licencaFormTab = 'condicionantes'">
+                                    {{ t('licencas.form.tabs.condicionantes') }}
+                                </button>
+                            </div>
+                            <div v-if="licencaFormTab === 'cadastro'" class="form-grid">
+                                <label>{{ t('licencas.form.field.empresa') }}
+                                    <select v-model="state.licencaForm.empresaId">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="c in state.companies" :key="c.id" :value="c.id">{{ c.nomeEmpresa || c.nomeFantasia || c.nome }}</option>
+                                    </select>
+                                </label>
+                                <label>{{ t('licencas.form.field.empreendimento') }}
+                                    <select v-model="state.licencaForm.empreendimentoId">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="empd in state.licencaEmpreendimentos" :key="empd.id" :value="empd.id">{{ empd.nome }}</option>
+                                    </select>
+                                </label>
+                                <label>{{ t('licencas.form.field.tipo') }}
+                                    <select v-model="state.licencaForm.tipoLicencaId">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="tipo in state.licencaTipos" :key="tipo.id" :value="tipo.id">{{ tipo.nome }}</option>
+                                    </select>
+                                </label>
+                                <label>{{ t('licencas.form.field.observacoesTipo') }}
+                                    <textarea rows="2" v-model="state.licencaForm.observacoesTipo"></textarea>
+                                </label>
+                                <label>{{ t('licencas.form.field.numero') }}
+                                    <input v-model="state.licencaForm.numero" />
+                                </label>
+                                <label>{{ t('licencas.form.field.numeroProcesso') }}
+                                    <input v-model="state.licencaForm.numeroProcesso" />
+                                </label>
+                                <label>{{ t('licencas.form.field.orgao') }}
+                                    <input v-model="state.licencaForm.orgaoAmbientalId" />
+                                </label>
+                                <label>{{ t('licencas.form.field.atividades') }}
+                                    <select v-model="state.licencaForm.atividadesIds" multiple>
+                                        <option v-for="atividade in state.licencaAtividades" :key="atividade.id" :value="atividade.id">{{ atividade.nome }}</option>
+                                    </select>
+                                </label>
+                                <label>{{ t('licencas.form.field.tipoProcesso') }}
+                                    <input v-model="state.licencaForm.tipoProcesso" />
+                                </label>
+                                <label>{{ t('licencas.form.field.licencaAnterior') }}
+                                    <input v-model="state.licencaForm.licencaAnteriorId" />
+                                </label>
+                                <label>{{ t('licencas.form.field.dataEmissao') }}
+                                    <input type="date" v-model="state.licencaForm.dataEmissao" />
+                                </label>
+                                <label>{{ t('licencas.form.field.dataValidade') }}
+                                    <input type="date" v-model="state.licencaForm.dataValidade" />
+                                </label>
+                                <label>{{ t('licencas.form.field.responsavel') }}
+                                    <select v-model="state.licencaForm.responsavelId">
+                                        <option value="">{{ t('common.select') }}</option>
+                                        <option v-for="resp in state.licencaResponsaveis" :key="resp.id" :value="resp.id">{{ resp.nome }}</option>
+                                    </select>
+                                </label>
+                                <label>{{ t('licencas.form.field.diasProtocolo') }}
+                                    <input type="number" v-model.number="state.licencaForm.diasProtocolo" />
+                                </label>
+                        <label>{{ t('licencas.form.field.dataInicioAlerta') }}
+                                    <input type="date" v-model="state.licencaForm.dataInicioAlerta" />
+                                </label>
+                                <label class="full-width">{{ t('licencas.form.field.descricao') }}
+                                    <textarea rows="4" v-model="state.licencaForm.descricao"></textarea>
+                                </label>
+                            </div>
+                            <div v-else class="licenca-cond-list">
+                                <div class="licenca-cond-card" v-for="cond in state.licencaForm.condicionantes" :key="cond.tempId">
+                                    <div class="licenca-cond-card__header">
+                                        <strong>{{ cond.nome || t('licencas.form.field.cond.nome') }}</strong>
+                                        <button class="ghost" type="button" @click="removeLicencaCondicionante(cond.tempId)">{{ t('licencas.form.button.removeCond') }}</button>
+                                    </div>
+                                    <div class="form-grid">
+                                        <label>{{ t('licencas.form.field.cond.nome') }}
+                                            <input v-model="cond.nome" />
+                                        </label>
+                                        <label>{{ t('licencas.form.field.cond.responsavel') }}
+                                            <select v-model="cond.responsavelId">
+                                                <option value="">{{ t('common.select') }}</option>
+                                                <option v-for="resp in state.licencaResponsaveis" :key="resp.id" :value="resp.id">{{ resp.nome }}</option>
+                                            </select>
+                                        </label>
+                                        <label>{{ t('licencas.form.field.cond.tipoCond') }}
+                                            <input v-model="cond.tipoCondicionanteId" />
+                                        </label>
+                                        <label>{{ t('licencas.form.field.cond.padronizada') }}
+                                            <input v-model="cond.condicionantePadraoId" />
+                                        </label>
+                                        <label>{{ t('licencas.form.field.cond.dataEntrega') }}
+                                            <input type="date" v-model="cond.dataEntrega" />
+                                        </label>
+                                        <label>{{ t('licencas.form.field.cond.dataInterna') }}
+                                            <input type="date" v-model="cond.dataInterna" />
+                                        </label>
+                                        <label class="full-width">{{ t('licencas.form.field.cond.descricao') }}
+                                            <textarea rows="3" v-model="cond.descricao"></textarea>
+                                        </label>
+                                    </div>
+                                    <div class="periodicity-buttons">
+                                        <span>{{ t('licencas.form.field.cond.periodicidade') }}</span>
+                                        <button
+                                            v-for="freq in licencaPeriodicidades"
+                                            :key="freq"
+                                            type="button"
+                                            class="chip-button"
+                                            :class="{ 'chip--active': cond.periodicidade === freq }"
+                                            @click="cond.periodicidade = freq"
+                                        >
+                                            {{ freq }}
+                                        </button>
+                                    </div>
+                                    <div class="upload-area">
+                                        <p>{{ t('licencas.form.field.cond.upload') }}</p>
+                                        <label class="upload-drop">
+                                            <input type="file" multiple @change="(event) => handleLicencaDocumentUpload(event, cond)" />
+                                            <span>{{ t('common.select') }}</span>
+                                        </label>
+                                        <ul class="attachments-list" v-if="cond.documentos.length">
+                                            <li v-for="doc in cond.documentos" :key="doc.id">
+                                                {{ doc.nome }} ({{ doc.sizeLabel }})
+                                                <button type="button" class="ghost" @click="removeLicencaDocumento(cond, doc.id)">×</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button class="secondary" type="button" @click="addLicencaCondicionante">{{ t('licencas.form.button.addCond') }}</button>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="primary" type="button" :disabled="state.licencaFormSaving" @click="saveLicenca">{{ t('common.save') }}</button>
+                                <button class="ghost" type="button" @click="hideLicencaForm">{{ t('common.cancel') }}</button>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

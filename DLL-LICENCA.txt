@@ -1,0 +1,266 @@
+-- ============================
+-- TIPOS ENUM
+-- ============================
+
+CREATE TYPE status_licenca_enum AS ENUM (
+    'EM_PREPARACAO',
+    'VIGENTE',
+    'EM_RENOVACAO',
+    'FINALIZADO'
+);
+
+CREATE TYPE situacao_condicionante_enum AS ENUM (
+    'EM_DIA',
+    'PRAZO_PROXIMO',
+    'PRAZO_EXPIRADO',
+    'SEM_PRAZO'
+);
+
+CREATE TYPE periodicidade_tipo_enum AS ENUM (
+    'UNICA',
+    'MENSAL',
+    'BIMESTRAL',
+    'TRIMESTRAL',
+    'QUADRIMESTRAL',
+    'SEMESTRAL',
+    'ANUAL',
+    'EMISSAO_LICENCA',
+    'DATA_INTERNA',
+    'RECORRENTE'
+);
+
+CREATE TYPE unidade_tempo_enum AS ENUM (
+    'DIA',
+    'MES',
+    'ANO'
+);
+
+-- ============================
+-- TABELAS DE CADASTRO BÁSICO
+-- ============================
+
+CREATE TABLE empresa (
+    id              BIGSERIAL PRIMARY KEY,
+    razao_social    VARCHAR(255) NOT NULL,
+    nome_fantasia   VARCHAR(255),
+    cnpj            VARCHAR(20),
+    municipio       VARCHAR(120),
+    uf              CHAR(2),
+    endereco        VARCHAR(255),
+    ativo           BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE orgao_ambiental (
+    id          BIGSERIAL PRIMARY KEY,
+    nome        VARCHAR(255) NOT NULL,
+    esfera      VARCHAR(50),         -- municipal, estadual, federal
+    uf          CHAR(2),
+    municipio   VARCHAR(120),
+    contato     VARCHAR(255),
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE responsavel (
+    id          BIGSERIAL PRIMARY KEY,
+    nome        VARCHAR(255) NOT NULL,
+    email       VARCHAR(255),
+    telefone    VARCHAR(50),
+    tipo        VARCHAR(50),        -- interno, externo etc.
+    ativo       BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE tipo_licenca (
+    id          BIGSERIAL PRIMARY KEY,
+    codigo      VARCHAR(20),        -- LO, LC, LP...
+    nome        VARCHAR(255) NOT NULL,
+    descricao   TEXT,
+    ativo       BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE atividade (
+    id          BIGSERIAL PRIMARY KEY,
+    nome        VARCHAR(255) NOT NULL,
+    descricao   TEXT,
+    cnae        VARCHAR(20),
+    ativo       BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE empreendimento (
+    id              BIGSERIAL PRIMARY KEY,
+    empresa_id      BIGINT NOT NULL REFERENCES empresa(id),
+    nome            VARCHAR(255) NOT NULL,
+    descricao       TEXT,
+    municipio       VARCHAR(120),
+    uf              CHAR(2),
+    endereco        VARCHAR(255),
+    ativo           BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- ============================
+-- LICENÇAS
+-- ============================
+
+CREATE TABLE licenca (
+    id                      BIGSERIAL PRIMARY KEY,
+    empresa_id              BIGINT NOT NULL REFERENCES empresa(id),
+    empreendimento_id       BIGINT REFERENCES empreendimento(id),
+    tipo_licenca_id         BIGINT NOT NULL REFERENCES tipo_licenca(id),
+    orgao_ambiental_id      BIGINT REFERENCES orgao_ambiental(id),
+
+    numero                  VARCHAR(50) NOT NULL, -- ex 17/2022
+    numero_processo         VARCHAR(100),
+    tipo_processo           VARCHAR(100),
+    observacoes_tipo        TEXT,
+
+    licenca_anterior_id     BIGINT REFERENCES licenca(id),
+
+    data_emissao            DATE,
+    data_validade           DATE,
+    responsavel_id          BIGINT REFERENCES responsavel(id),
+
+    dias_alerta_renovacao   INTEGER,   -- ex 180
+    dias_alerta_protocolo   INTEGER,   -- ex 120
+    data_inicio_alerta      DATE,
+
+    status                  status_licenca_enum NOT NULL DEFAULT 'EM_PREPARACAO',
+
+    descricao               TEXT,
+
+    created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at              TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- Relação N:N Licença x Atividade
+CREATE TABLE licenca_atividade (
+    licenca_id      BIGINT NOT NULL REFERENCES licenca(id) ON DELETE CASCADE,
+    atividade_id    BIGINT NOT NULL REFERENCES atividade(id),
+    PRIMARY KEY (licenca_id, atividade_id)
+);
+
+-- Protocolos vinculados à licença (opcional)
+CREATE TABLE protocolo (
+    id              BIGSERIAL PRIMARY KEY,
+    licenca_id      BIGINT NOT NULL REFERENCES licenca(id) ON DELETE CASCADE,
+    numero          VARCHAR(100),
+    data            DATE,
+    descricao       TEXT,
+    tipo            VARCHAR(50), -- entrada, renovação etc.
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+-- ============================
+-- CONDICIONANTES
+-- ============================
+
+CREATE TABLE tipo_condicionante (
+    id          BIGSERIAL PRIMARY KEY,
+    nome        VARCHAR(255) NOT NULL,
+    descricao   TEXT,
+    ativo       BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE condicionante_padrao (
+    id                      BIGSERIAL PRIMARY KEY,
+    tipo_condicionante_id   BIGINT NOT NULL REFERENCES tipo_condicionante(id),
+    titulo                  VARCHAR(255) NOT NULL,
+    descricao               TEXT,
+    periodicidade_tipo      periodicidade_tipo_enum NOT NULL,
+    dias_alerta_entrega     INTEGER,
+    dias_alerta_data_interna INTEGER,
+    ativo                   BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at              TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE condicionante (
+    id                          BIGSERIAL PRIMARY KEY,
+    licenca_id                  BIGINT NOT NULL REFERENCES licenca(id) ON DELETE CASCADE,
+    nome                        VARCHAR(255) NOT NULL,
+    responsavel_id              BIGINT REFERENCES responsavel(id),
+    tipo_condicionante_id       BIGINT REFERENCES tipo_condicionante(id),
+    condicionante_padrao_id     BIGINT REFERENCES condicionante_padrao(id),
+
+    descricao                   TEXT,
+
+    data_entrega                DATE,   -- próxima entrega
+    data_interna                DATE,   -- próxima data interna
+
+    dias_alerta_entrega         INTEGER,
+    dias_alerta_data_interna    INTEGER,
+
+    situacao                    situacao_condicionante_enum,
+
+    cumprida                    BOOLEAN NOT NULL DEFAULT FALSE,
+    aprovada                    BOOLEAN NOT NULL DEFAULT FALSE,
+
+    observacoes                 TEXT,
+    is_recorrente               BOOLEAN NOT NULL DEFAULT FALSE,
+
+    created_at                  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at                  TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE condicionante_periodicidade (
+    id                  BIGSERIAL PRIMARY KEY,
+    condicionante_id    BIGINT NOT NULL REFERENCES condicionante(id) ON DELETE CASCADE,
+    tipo                periodicidade_tipo_enum NOT NULL,
+    intervalo           INTEGER,              -- para recorrente genérico (ex: a cada 2 meses)
+    unidade             unidade_tempo_enum,   -- DIA, MES, ANO
+    data_base           DATE,
+    proxima_ocorrencia  DATE,
+    ativo               BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE condicionante_documento (
+    id                      BIGSERIAL PRIMARY KEY,
+    condicionante_id        BIGINT NOT NULL REFERENCES condicionante(id) ON DELETE CASCADE,
+    nome_arquivo_original   VARCHAR(255) NOT NULL,
+    caminho_arquivo         VARCHAR(500) NOT NULL,
+    tipo_mime               VARCHAR(100),
+    tamanho_bytes           BIGINT,
+    upload_por_usuario_id   BIGINT,          -- referencie tabela de usuários se existir
+    data_upload             TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    observacoes             TEXT
+);
+
+-- ============================
+-- ÍNDICES PARA FILTROS DAS TELAS
+-- ============================
+
+-- Licenças
+CREATE INDEX idx_licenca_empresa          ON licenca (empresa_id);
+CREATE INDEX idx_licenca_empreendimento   ON licenca (empreendimento_id);
+CREATE INDEX idx_licenca_tipo_licenca     ON licenca (tipo_licenca_id);
+CREATE INDEX idx_licenca_orgao            ON licenca (orgao_ambiental_id);
+CREATE INDEX idx_licenca_responsavel      ON licenca (responsavel_id);
+CREATE INDEX idx_licenca_data_validade    ON licenca (data_validade);
+CREATE INDEX idx_licenca_status           ON licenca (status);
+
+-- Condicionantes
+CREATE INDEX idx_condicionante_licenca        ON condicionante (licenca_id);
+CREATE INDEX idx_condicionante_responsavel    ON condicionante (responsavel_id);
+CREATE INDEX idx_condicionante_situacao       ON condicionante (situacao);
+CREATE INDEX idx_condicionante_data_entrega   ON condicionante (data_entrega);
+CREATE INDEX idx_condicionante_data_interna   ON condicionante (data_interna);
+
+-- Atividades x Licença
+CREATE INDEX idx_licenca_atividade_atividade  ON licenca_atividade (atividade_id);
+
+-- Documentos
+CREATE INDEX idx_condicionante_documento_cond ON condicionante_documento (condicionante_id);

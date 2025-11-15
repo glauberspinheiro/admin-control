@@ -5,8 +5,8 @@ import com.revitalize.admincontrol.repository.AdmUsuarioRepository;
 import com.revitalize.admincontrol.security.EnvironmentAccess;
 import com.revitalize.admincontrol.security.UserRole;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
@@ -27,15 +27,17 @@ public class AdmUsuarioService {
         return admUsuarioRepository.save(admUsuarioModel);
     }
 
-    public List<AdmUsuarioModel>findAll(){
-
-        return (List<AdmUsuarioModel>)admUsuarioRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<AdmUsuarioModel> findAll(){
+        return (List<AdmUsuarioModel>) admUsuarioRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Optional<AdmUsuarioModel> findById(UUID id) {
         return admUsuarioRepository.findById(id);
     }
 
+    @Transactional(readOnly = true)
     public Optional<AdmUsuarioModel> findByEmail(String email) {
         return admUsuarioRepository.findByEmail(email);
     }

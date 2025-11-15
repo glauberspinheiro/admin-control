@@ -3,6 +3,7 @@ package com.revitalize.admincontrol.services;
 import com.revitalize.admincontrol.models.AdmEmpresaModel;
 import com.revitalize.admincontrol.repository.AdmEmpresaGeoRepository;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,7 @@ public class GeocodingService {
 
     @Transactional
     public Optional<AdmEmpresaModel> geocodeAndSave(UUID companyId, boolean force) {
+        @SuppressWarnings("null")
         Optional<AdmEmpresaModel> opt = repo.findById(companyId);
         if (opt.isEmpty()) return Optional.empty();
 
@@ -74,6 +76,7 @@ public class GeocodingService {
         return Optional.of(emp);
     }
 
+    @SuppressWarnings("null")
     @Transactional
     public Optional<AdmEmpresaModel> updateCoords(UUID companyId, Double lat, Double lng) {
         var opt = repo.findById(companyId);
@@ -88,7 +91,7 @@ public class GeocodingService {
 
     @Transactional
     public int geocodeMissing(int limit, long delayMs) {
-        var page = repo.findByLatIsNullOrLngIsNull(org.springframework.data.domain.PageRequest.of(0, Math.max(1, limit)));
+        var page = repo.findByLatIsNullOrLngIsNull(PageRequest.of(0, Math.max(1, limit)));
         int count = 0;
         for (AdmEmpresaModel emp : page.getContent()) {
             try {
@@ -104,6 +107,7 @@ public class GeocodingService {
         return count;
     }
 
+    @SuppressWarnings("null")
     private Map<String,Object> queryNominatim(String query) {
         URI uri = UriComponentsBuilder.fromHttpUrl(NOMINATIM)
                 .queryParam("format", "json")
@@ -115,7 +119,7 @@ public class GeocodingService {
                 .encode()
                 .toUri();
 
-        HttpHeaders headers = new HttpHeaders();
+        org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
         headers.set("User-Agent", USER_AGENT);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<Void> req = new HttpEntity<>(headers);

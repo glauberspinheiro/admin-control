@@ -1,36 +1,43 @@
-DO $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'tb_usuario' AND column_name = 'cpf' AND is_nullable = 'NO') THEN
-        NULL;
-    END IF;
-END $$;
+CREATE TABLE IF NOT EXISTS tb_usuario (
+    id UUID PRIMARY KEY,
+    cpf VARCHAR(11),
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(120) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'OPERATOR',
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    dt_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    dt_alteracao_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
+);
 
-ALTER TABLE tb_usuario ALTER COLUMN cpf DROP NOT NULL;
+CREATE UNIQUE INDEX IF NOT EXISTS uq_tb_usuario_email ON tb_usuario(email);
 
-DO $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'uq_tb_usuario_email') THEN
-        ALTER TABLE tb_usuario ADD CONSTRAINT uq_tb_usuario_email UNIQUE (email);
-    END IF;
-END $$;
+CREATE TABLE IF NOT EXISTS tb_usuario_environments (
+    usuario_id UUID NOT NULL REFERENCES tb_usuario(id) ON DELETE CASCADE,
+    environment VARCHAR(20) NOT NULL,
+    PRIMARY KEY (usuario_id, environment)
+);
+
+CREATE TABLE IF NOT EXISTS tb_access_token (
+    id UUID PRIMARY KEY,
+    usuario_id UUID NOT NULL REFERENCES tb_usuario(id) ON DELETE CASCADE,
+    token VARCHAR(120) NOT NULL UNIQUE,
+    type VARCHAR(20) NOT NULL,
+    environment VARCHAR(20) NOT NULL,
+    permanent BOOLEAN NOT NULL DEFAULT FALSE,
+    expires_at TIMESTAMP WITHOUT TIME ZONE,
+    revoked BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    label VARCHAR(255)
+);
 
 CREATE TABLE IF NOT EXISTS tb_user_preference (
     id UUID PRIMARY KEY,
     usuario_id UUID NOT NULL UNIQUE REFERENCES tb_usuario(id) ON DELETE CASCADE,
     theme VARCHAR(32) NOT NULL DEFAULT 'bluelight',
     language VARCHAR(10) NOT NULL DEFAULT 'pt-BR',
-    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
-    updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS tb_email_template (
-    id UUID PRIMARY KEY,
-    usuario_id UUID NOT NULL REFERENCES tb_usuario(id) ON DELETE CASCADE,
-    nome VARCHAR(120) NOT NULL,
-    assunto VARCHAR(200) NOT NULL,
-    conteudo_html TEXT NOT NULL,
-    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
-    updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
+    dt_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    dt_alteracao_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS tb_email_server_config (
@@ -47,8 +54,20 @@ CREATE TABLE IF NOT EXISTS tb_email_server_config (
     imap_port INTEGER,
     use_ssl BOOLEAN NOT NULL DEFAULT FALSE,
     use_starttls BOOLEAN NOT NULL DEFAULT TRUE,
-    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW(),
-    updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
+    signature_html TEXT,
+    dt_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    dt_alteracao_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS tb_email_template (
+    id UUID PRIMARY KEY,
+    usuario_id UUID NOT NULL REFERENCES tb_usuario(id) ON DELETE CASCADE,
+    nome VARCHAR(120) NOT NULL,
+    assunto VARCHAR(200) NOT NULL,
+    conteudo_html TEXT NOT NULL,
+    usar_assinatura BOOLEAN NOT NULL DEFAULT TRUE,
+    dt_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    dt_alteracao_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS tb_email_job (
@@ -59,5 +78,6 @@ CREATE TABLE IF NOT EXISTS tb_email_job (
     mensagem_preview TEXT,
     destinatarios TEXT NOT NULL,
     status VARCHAR(30) NOT NULL,
-    created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
+    dt_cadastro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+    dt_alteracao_cadastro TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
 );

@@ -1,22 +1,26 @@
 package com.revitalize.admincontrol.services;
 
 import com.revitalize.admincontrol.dto.EmailAttachmentDto;
+import com.revitalize.admincontrol.dto.EmailSendRequestDto;
 import com.revitalize.admincontrol.dto.EmailPersonalizationDto;
 import com.revitalize.admincontrol.models.AdmUsuarioModel;
 import com.revitalize.admincontrol.models.EmailJobModel;
 import com.revitalize.admincontrol.models.EmailServerConfigModel;
 import com.revitalize.admincontrol.models.EmailTemplateModel;
 import com.revitalize.admincontrol.models.enums.EmailJobStatus;
+import com.revitalize.admincontrol.repository.AdmUsuarioRepository;
 import com.revitalize.admincontrol.repository.EmailJobRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.util.ByteArrayDataSource;
-import javax.transaction.Transactional;
 import java.text.Normalizer;
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
@@ -38,10 +42,16 @@ public class EmailCampaignService {
             Pattern.CASE_INSENSITIVE);
 
     private final EmailJobRepository emailJobRepository;
+    private final EmailServerConfigService emailServerConfigService;
+    private final EmailTemplateService emailTemplateService;
     private static final Logger logger = LoggerFactory.getLogger(EmailCampaignService.class);
 
-    public EmailCampaignService(EmailJobRepository emailJobRepository) {
+    public EmailCampaignService(EmailJobRepository emailJobRepository,
+                                EmailServerConfigService emailServerConfigService,
+                                EmailTemplateService emailTemplateService) {
         this.emailJobRepository = emailJobRepository;
+        this.emailServerConfigService = emailServerConfigService;
+        this.emailTemplateService = emailTemplateService;
     }
 
     public List<EmailJobModel> findByUsuario(UUID usuarioId) {
@@ -53,21 +63,66 @@ public class EmailCampaignService {
                                      EmailTemplateModel template,
                                      String subject,
                                      String preview,
-                                     List<String> recipients) {
+                                     List<String> recipients, EmailJobStatus status) {
         EmailJobModel job = new EmailJobModel();
         job.setUsuario(usuario);
         job.setTemplate(template);
         job.setAssunto(subject);
         job.setMensagemPreview(preview);
         job.setDestinatarios(String.join(",", recipients));
-        job.setStatus(EmailJobStatus.PENDENTE);
+        job.setStatus(status);
         return emailJobRepository.save(job);
     }
 
     @Transactional
-    public void updateJobStatus(EmailJobModel job, EmailJobStatus status) {
-        job.setStatus(status);
-        emailJobRepository.save(job);
+    public void updateJobStatusInNewTransaction(UUID jobId, EmailJobStatus status) {
+        emailJobRepository.findById(jobId).ifPresent(job -> {
+            job.setStatus(status);
+            emailJobRepository.save(job);
+        });
+    }
+
+    @Async
+    public void processCampaign(UUID jobId, EmailSendRequestDto dto, EmailServerConfigModel config) {
+        try {
+            boolean incluirAssinatura = dto.getIncluirAssinatura() == null || dto.getIncluirAssinatura();
+
+            sendEmails(
+                    config,
+                    dto.getAssunto(),
+                    dto.getConteudoHtml(),
+                    dto.getDestinatarios(),
+                    dto.getPersonalizacoes(),
+                    dto.getAnexos(),
+                    incluirAssinatura);
+
+            updateJobStatusInNewTransaction(jobId, EmailJobStatus.ENVIADO);
+
+        } catch (Exception ex) {
+            logger.error("Falha ao processar campanha de e-mail {}", jobId, ex);
+            updateJobStatusInNewTransaction(jobId, EmailJobStatus.FALHOU);
+        }
+    }
+
+    @Transactional
+    public EmailJobModel scheduleCampaign(EmailSendRequestDto dto, AdmUsuarioModel usuario) {
+        EmailServerConfigModel config = emailServerConfigService.findByUsuarioId(usuario.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Configuração de servidor de e-mail não encontrada para o usuário"));
+
+        EmailTemplateModel template = null;
+        if (dto.getTemplateId() != null) {
+            template = emailTemplateService.findById(dto.getTemplateId())
+                    .orElseThrow(() -> new EntityNotFoundException("Template informado não encontrado"));
+        }
+
+        String preview = dto.getConteudoHtml() == null ? "" : dto.getConteudoHtml().replaceAll("<[^>]*>", "").trim();
+        if (preview.length() > 120) {
+            preview = preview.substring(0, 120);
+        }
+
+        EmailJobModel job = registerJob(usuario, template, dto.getAssunto(), preview, dto.getDestinatarios(), EmailJobStatus.PROCESSANDO);
+        processCampaign(job.getId(), dto, config);
+        return job;
     }
 
     public void sendEmails(EmailServerConfigModel config,
